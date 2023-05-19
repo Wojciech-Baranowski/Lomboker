@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker;
+package com.simmondobber.lomboker.lombokize;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,5 +21,4 @@ public class LombokizeController {
     public ResponseEntity<String> lombokize(@RequestBody String classCode) {
         return new ResponseEntity<>(this.lombokizeService.lombokize(classCode), HttpStatus.OK);
     }
-
 }

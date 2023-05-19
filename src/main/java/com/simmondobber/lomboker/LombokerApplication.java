@@ -9,5 +9,4 @@ public class LombokerApplication {
     public static void main(String[] args) {
         SpringApplication.run(LombokerApplication.class, args);
     }
-
 }
