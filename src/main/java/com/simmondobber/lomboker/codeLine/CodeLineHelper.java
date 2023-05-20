@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CodeLineHelper {
@@ -19,10 +20,9 @@ public class CodeLineHelper {
 
     public String mapClassFieldsToClassCode(List<ClassField> classFields) {
         SetterFactory setterFactory = new SetterFactory();
-        List<String> classFieldsNames = classFields.stream()
+        return classFields.stream()
                 .map(setterFactory::createSetterCode)
-                .toList();
-        return String.join("\n", classFieldsNames);
+                .collect(Collectors.joining("\n"));
     }
 
     public List<ClassField> filterAndMapCodeLinesToClassFields(List<CodeLine> codeLines) {
