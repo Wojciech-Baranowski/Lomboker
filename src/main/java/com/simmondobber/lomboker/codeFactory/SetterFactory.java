@@ -6,34 +6,32 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 
-import static com.simmondobber.lomboker.Keywords.PUBLIC;
-import static com.simmondobber.lomboker.Keywords.VOID;
+import static com.simmondobber.lomboker.Keywords.*;
 
 public class SetterFactory {
 
     private static final String BOOLEAN_GETTER_PREFIX = "is";
     private static final String SETTER_PREFIX = "set";
-    private static final String INDENTATION = "\t";
 
     public String createSetterCode(ClassField classField) {
         return createSetterHead(classField) + createSetterBody(classField) + createClosingBracketLine(classField);
     }
 
     private String createSetterHead(ClassField classField) {
-        String indentation = INDENTATION.repeat(classField.getNesting());
+        String indentation = getIndentation(classField.getNesting());
         String type = classField.getFieldType();
         return StringUtils.join(indentation, PUBLIC.getKeyword(), " ", VOID.getKeyword(), " ", getMethodName(classField), "(", type, " ", getArgumentName(classField), ") {\n");
     }
 
     private String createSetterBody(ClassField classField) {
-        String indentation = INDENTATION.repeat(classField.getNesting() + 1);
+        String indentation = getIndentation(classField.getNesting() + 1);
         String name = classField.getFieldName();
         String argumentName = getArgumentName(classField);
-        return StringUtils.join(indentation, name, " = ", argumentName, ";\n");
+        return StringUtils.join(indentation, THIS.getKeyword(), ".", name, " = ", argumentName, ";\n");
     }
 
     private String createClosingBracketLine(ClassField classField) {
-        String indentation = INDENTATION.repeat(classField.getNesting());
+        String indentation = getIndentation(classField.getNesting());
         return StringUtils.join(indentation, "}\n");
     }
 
@@ -68,5 +66,9 @@ public class SetterFactory {
 
     private boolean isFieldNameStartingFromSingleSmallLetter(String fieldName) {
         return fieldName.matches("[a-z][A-Z].*");
+    }
+
+    private String getIndentation(int nesting) {
+        return " ".repeat(nesting * 4);
     }
 }
