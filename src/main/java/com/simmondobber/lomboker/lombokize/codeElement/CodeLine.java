@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public class CodeLine {
 
-    protected final String line;
-    protected final int nestingLevel;
+    private final String line;
+    private final int nestingLevel;
 
     public CodeLine(String line) {
         this.line = line;

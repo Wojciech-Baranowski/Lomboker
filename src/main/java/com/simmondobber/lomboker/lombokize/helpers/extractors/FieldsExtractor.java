@@ -38,14 +38,14 @@ public class FieldsExtractor {
                 .toList();
     }
 
-    private boolean isClassFieldNonStatic(CodeLine classField) {
-        return !classField.getLine().contains(" " + STATIC.getKeyword() + " ");
-    }
-
     private List<ClassField> createClassFieldsFromCodeLines(List<CodeLine> codeLines) {
         return codeLines.stream()
                 .map(CodeLine::getLine)
                 .map(this.classFieldFactory::createClassField)
                 .toList();
+    }
+
+    private boolean isClassFieldNonStatic(CodeLine classField) {
+        return !classField.getLine().contains(" " + STATIC.getKeyword() + " ");
     }
 }
