@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.codeLine;
+package com.simmondobber.lomboker.codeElement;
 
 import lombok.Getter;
 

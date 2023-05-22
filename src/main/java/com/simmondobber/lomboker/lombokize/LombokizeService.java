@@ -1,7 +1,8 @@
 package com.simmondobber.lomboker.lombokize;
 
-import com.simmondobber.lomboker.codeLine.ClassField;
-import com.simmondobber.lomboker.codeLine.CodeLine;
+import com.simmondobber.lomboker.codeElement.ClassField;
+import com.simmondobber.lomboker.codeElement.ClassMethod;
+import com.simmondobber.lomboker.codeElement.CodeLine;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import static com.simmondobber.lomboker.Keywords.STATIC;
 
@@ -17,32 +17,36 @@ import static com.simmondobber.lomboker.Keywords.STATIC;
 public class LombokizeService {
 
     public String lombokize(String classCode) {
-        String classCodeWithStandardWhitespaces = getClassCodeWithStandardWhitespaces(classCode);
-        List<CodeLine> classCodeLines = mapClassCodeToCodeLines(classCodeWithStandardWhitespaces);
-        List<ClassField> classFields = filterAndMapCodeLinesToClassFields(classCodeLines);
-        List<String> gettersAndSetters = mapClassFieldsToGettersAndSetters(classFields);
-        return getClassCodeWithoutGettersAndSetters(classCode, gettersAndSetters);
+        classCode = standardizeClassCodeWhitespaces(classCode);
+        List<ClassMethod> gettersAndSettersContainedByClass = getGettersAndSetterContainedByClass(classCode);
+        classCode = deleteGettersAndSettersFromClassCode(classCode, gettersAndSettersContainedByClass);
+        classCode = addLombokAnnotationsToClassCode(classCode, gettersAndSettersContainedByClass);
+        return classCode;
     }
 
-    private String getClassCodeWithoutGettersAndSetters(String classCode, List<String> gettersAndSetters) {
-        List<String> gettersAndSettersWithNewlinePrefix = appendNewlinePrefixToGettersAndSetters(gettersAndSetters);
-        String[] gettersAndSettersAsArray = getGettersAndSettersAsArray(gettersAndSettersWithNewlinePrefix);
-        String[] emptyStringsArray = createArrayOfEmptyStringsOfGivenLength(gettersAndSetters.size());
-        return StringUtils.replaceEach(classCode, gettersAndSettersAsArray, emptyStringsArray);
+    private String standardizeClassCodeWhitespaces(String classCode) {
+        return classCode.replaceAll("\t", "    ");
     }
 
-    private int countGeneratedMethodsContainedInClassCode(Collection<String> methods, String classCode) {
-        return (int) methods.stream()
-                .filter(classCode::contains)
-                .count();
+    private List<ClassMethod> getGettersAndSetterContainedByClass(String classCode) {
+        List<ClassMethod> gettersAndSetters = getGettersAndSettersBasedOnClassFieldsInClassCode(classCode);
+        return gettersAndSetters.stream()
+                .filter(method -> classCode.contains(method.getMethodCode()))
+                .toList();
     }
 
-    private Integer getCodeLineNumber(List<CodeLine> classCodeLines, String codeLine) {
-        return IntStream.range(0, classCodeLines.size())
-                .boxed()
-                .filter(i -> codeLine.equals(classCodeLines.get(i).getLine()))
-                .findFirst()
-                .orElse(null);
+    private List<ClassMethod> getGettersAndSettersBasedOnClassFieldsInClassCode(String classCode) {
+        List<ClassField> classFields = getClassFieldsFromClassCode(classCode);
+        return classFields.stream()
+                .map(field -> List.of(field.getCorrespondingGetter(), field.getCorrespondingSetter()))
+                .flatMap(Collection::stream)
+                .toList();
+    }
+
+    private List<ClassField> getClassFieldsFromClassCode(String classCode) {
+        List<CodeLine> classCodeLines = mapClassCodeToCodeLines(classCode);
+        List<CodeLine> classFieldsCodeLines = filterNonStaticClassFieldsFromCodeLines(classCodeLines);
+        return createClassFieldsFromCodeLines(classFieldsCodeLines);
     }
 
     private List<CodeLine> mapClassCodeToCodeLines(String classCode) {
@@ -52,18 +56,6 @@ public class LombokizeService {
                 .toList();
     }
 
-    private List<String> mapClassFieldsToGettersAndSetters(List<ClassField> classFields) {
-        return classFields.stream()
-                .map(field -> List.of(field.getGetter(), field.getSetter()))
-                .flatMap(Collection::stream)
-                .toList();
-    }
-
-    private List<ClassField> filterAndMapCodeLinesToClassFields(List<CodeLine> codeLines) {
-        List<CodeLine> classFieldsCodeLines = filterNonStaticClassFieldsFromCodeLines(codeLines);
-        return createClassFieldsFromCodeLines(classFieldsCodeLines);
-    }
-
     private List<CodeLine> filterNonStaticClassFieldsFromCodeLines(List<CodeLine> codeLines) {
         return codeLines.stream()
                 .filter(CodeLine::isClassField)
@@ -71,19 +63,13 @@ public class LombokizeService {
                 .toList();
     }
 
+    private boolean isClassFieldNonStatic(CodeLine classField) {
+        return !classField.getLine().contains(" " + STATIC.getKeyword() + " ");
+    }
+
     private List<ClassField> createClassFieldsFromCodeLines(List<CodeLine> codeLines) {
         return getCodeLinesAsStrings(codeLines).stream()
                 .map(ClassField::new)
-                .toList();
-    }
-
-    private String[] createArrayOfEmptyStringsOfGivenLength(int length) {
-        return Collections.nCopies(length, "").toArray(new String[0]);
-    }
-
-    private List<String> appendNewlinePrefixToGettersAndSetters(List<String> gettersAndSetters) {
-        return gettersAndSetters.stream()
-                .map(method -> "\n" + method)
                 .toList();
     }
 
@@ -93,15 +79,39 @@ public class LombokizeService {
                 .toList();
     }
 
-    private String getClassCodeWithStandardWhitespaces(String classCode) {
-        return classCode.replaceAll("\t", "    ");
+    private String deleteGettersAndSettersFromClassCode(String classCode, List<ClassMethod> gettersAndSetters) {
+        List<String> gettersAndSettersCodeWithNewlinePrefix = mapGettersAndSettersToCodesWithNewlinePrefix(gettersAndSetters);
+        String[] gettersAndSettersAsArray = getGettersAndSettersCodeAsArray(gettersAndSettersCodeWithNewlinePrefix);
+        String[] emptyStringsArray = createArrayOfEmptyStringsOfGivenLength(gettersAndSetters.size());
+        return StringUtils.replaceEach(classCode, gettersAndSettersAsArray, emptyStringsArray);
     }
 
-    private String[] getGettersAndSettersAsArray(List<String> gettersAndSetters) {
-        return gettersAndSetters.toArray(new String[0]);
+    private List<String> mapGettersAndSettersToCodesWithNewlinePrefix(List<ClassMethod> gettersAndSetters) {
+        return gettersAndSetters.stream()
+                .map(ClassMethod::getMethodCode)
+                .map(method -> "\n" + method)
+                .toList();
     }
 
-    private boolean isClassFieldNonStatic(CodeLine classField) {
-        return !classField.getLine().contains(" " + STATIC.getKeyword() + " ");
+    private String[] getGettersAndSettersCodeAsArray(List<String> gettersAndSettersCode) {
+        return gettersAndSettersCode.toArray(new String[0]);
+    }
+
+    private String[] createArrayOfEmptyStringsOfGivenLength(int length) {
+        return Collections.nCopies(length, "").toArray(new String[0]);
+    }
+
+    private String addLombokAnnotationsToClassCode(String classCode, List<ClassMethod> gettersAndSetters) {
+        for (ClassMethod method : gettersAndSetters) {
+            classCode = addMethodAnnotationToClassCode(classCode, method);
+        }
+        return classCode;
+    }
+
+    private String addMethodAnnotationToClassCode(String classCode, ClassMethod method) {
+        int indexOfClassFieldInClassCode = classCode.indexOf(method.getCorrespondingField().getLine());
+        String firstPartOfClassCode = classCode.substring(0, indexOfClassFieldInClassCode);
+        String secondPartOfClassCode = classCode.substring(indexOfClassFieldInClassCode);
+        return StringUtils.join(firstPartOfClassCode, "    ", method.getMethodType().getAnnotation(), "\n", secondPartOfClassCode);
     }
 }

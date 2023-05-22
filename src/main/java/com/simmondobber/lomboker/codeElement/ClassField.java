@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.codeLine;
+package com.simmondobber.lomboker.codeElement;
 
 import com.simmondobber.lomboker.codeFactory.GetterFactory;
 import com.simmondobber.lomboker.codeFactory.SetterFactory;
@@ -14,27 +14,15 @@ public class ClassField extends CodeLine {
 
     private final String fieldName;
     private final String fieldType;
-    private final String getter;
-    private final String setter;
-    private final boolean isBoolean;
-    private final boolean hasDefaultDeclaration;
+    private final ClassMethod correspondingGetter;
+    private final ClassMethod correspondingSetter;
 
     public ClassField(String text) {
         super(text);
-        this.isBoolean = isClassFieldContainingBooleanKeyword();
-        this.hasDefaultDeclaration = isHasClassFieldDefaultDeclaration();
         this.fieldName = getClassFieldName();
         this.fieldType = getClassFieldType();
-        this.getter = getterFactory.createGetterCode(this);
-        this.setter = setterFactory.createSetterCode(this);
-    }
-
-    private boolean isClassFieldContainingBooleanKeyword() {
-        return this.line.contains(" " + BOOLEAN.getKeyword() + " ");
-    }
-
-    private boolean isHasClassFieldDefaultDeclaration() {
-        return this.line.contains("=");
+        this.correspondingGetter = getterFactory.createGetter(this);
+        this.correspondingSetter = setterFactory.createSetter(this);
     }
 
     private String getClassFieldName() {
@@ -53,5 +41,9 @@ public class ClassField extends CodeLine {
     private String getCodeLineTrimmedOnNameEnd() {
         int delimiterCharacterIndex = (this.line.indexOf('=') != -1 ? this.line.indexOf('=') : this.line.indexOf(';'));
         return this.line.substring(0, delimiterCharacterIndex).trim();
+    }
+
+    public boolean isBoolean() {
+        return this.fieldType.equals(BOOLEAN.getKeyword());
     }
 }

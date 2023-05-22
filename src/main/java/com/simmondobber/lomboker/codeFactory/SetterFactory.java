@@ -1,7 +1,9 @@
 package com.simmondobber.lomboker.codeFactory;
 
 import com.simmondobber.lomboker.Keywords;
-import com.simmondobber.lomboker.codeLine.ClassField;
+import com.simmondobber.lomboker.codeElement.ClassField;
+import com.simmondobber.lomboker.codeElement.ClassMethod;
+import com.simmondobber.lomboker.codeElement.MethodType;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -13,7 +15,12 @@ public class SetterFactory {
     private static final String BOOLEAN_GETTER_PREFIX = "is";
     private static final String SETTER_PREFIX = "set";
 
-    public String createSetterCode(ClassField classField) {
+    public ClassMethod createSetter(ClassField classField) {
+        String setterCode = createSetterCode(classField);
+        return new ClassMethod(setterCode, classField, MethodType.SETTER);
+    }
+
+    private String createSetterCode(ClassField classField) {
         return createSetterHead(classField) + createSetterBody(classField) + createClosingBracketLine(classField);
     }
 

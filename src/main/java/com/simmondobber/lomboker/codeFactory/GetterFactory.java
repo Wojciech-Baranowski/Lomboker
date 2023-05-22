@@ -1,6 +1,8 @@
 package com.simmondobber.lomboker.codeFactory;
 
-import com.simmondobber.lomboker.codeLine.ClassField;
+import com.simmondobber.lomboker.codeElement.ClassField;
+import com.simmondobber.lomboker.codeElement.ClassMethod;
+import com.simmondobber.lomboker.codeElement.MethodType;
 import org.apache.commons.lang3.StringUtils;
 
 import static com.simmondobber.lomboker.Keywords.*;
@@ -10,7 +12,12 @@ public class GetterFactory {
     private static final String GETTER_PREFIX = "get";
     private static final String BOOLEAN_GETTER_PREFIX = "is";
 
-    public String createGetterCode(ClassField classField) {
+    public ClassMethod createGetter(ClassField classField) {
+        String getterCode = createGetterCode(classField);
+        return new ClassMethod(getterCode, classField, MethodType.GETTER);
+    }
+
+    private String createGetterCode(ClassField classField) {
         return createGetterHead(classField) + createGetterBody(classField) + createClosingBracketLine(classField);
     }
 
