@@ -18,13 +18,13 @@ public class LombokizeService {
         this.methodsExtractor = new MethodsExtractor();
     }
 
-    private String standardizeClassCodeWhitespaces(String classCode) {
-        return classCode.replaceAll("\t", "    ");
-    }
-
     public String lombokize(String classCode) {
         classCode = standardizeClassCodeWhitespaces(classCode);
         List<ClassMethod> gettersAndSetters = this.methodsExtractor.getGettersAndSetterContainedByClass(classCode);
         return this.boilerplateCleaner.clearClassCodeFromBoilerPlate(classCode, gettersAndSetters);
+    }
+
+    private String standardizeClassCodeWhitespaces(String classCode) {
+        return classCode.replaceAll("\t", "    ");
     }
 }
