@@ -1,11 +1,11 @@
-package com.simmondobber.lomboker.codeFactory;
+package com.simmondobber.lomboker.lombokize.helpers.factories;
 
-import com.simmondobber.lomboker.codeElement.ClassField;
-import com.simmondobber.lomboker.codeElement.ClassMethod;
-import com.simmondobber.lomboker.codeElement.MethodType;
+import com.simmondobber.lomboker.lombokize.codeElement.ClassField;
+import com.simmondobber.lomboker.lombokize.codeElement.ClassMethod;
+import com.simmondobber.lomboker.lombokize.codeElement.MethodType;
 import org.apache.commons.lang3.StringUtils;
 
-import static com.simmondobber.lomboker.Keywords.*;
+import static com.simmondobber.lomboker.common.Keywords.*;
 
 public class GetterFactory {
 
@@ -14,7 +14,7 @@ public class GetterFactory {
 
     public ClassMethod createGetter(ClassField classField) {
         String getterCode = createGetterCode(classField);
-        return new ClassMethod(getterCode, classField, MethodType.GETTER);
+        return new ClassMethod(getterCode, classField.getLine(), MethodType.GETTER);
     }
 
     private String createGetterCode(ClassField classField) {
@@ -40,7 +40,7 @@ public class GetterFactory {
 
     private String getMethodName(ClassField classField) {
         String name = classField.getFieldName();
-        String prefix = (classField.isBoolean() ? isFieldNameStartingFromIs(name) ? "" : BOOLEAN_GETTER_PREFIX : GETTER_PREFIX);
+        String prefix = (classField.isBooleanType() ? isFieldNameStartingFromIs(name) ? "" : BOOLEAN_GETTER_PREFIX : GETTER_PREFIX);
         return prefix + ((isFieldNameStartingFromSingleSmallLetter(name) || isFieldNameStartingFromIs(name)) ? name : StringUtils.capitalize(name));
     }
 

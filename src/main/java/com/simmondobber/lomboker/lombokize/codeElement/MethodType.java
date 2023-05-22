@@ -1,9 +1,10 @@
-package com.simmondobber.lomboker.codeElement;
+package com.simmondobber.lomboker.lombokize.codeElement;
 
 import lombok.Getter;
 
 @Getter
 public enum MethodType {
+
     GETTER("@Getter"),
     SETTER("@Setter");
 

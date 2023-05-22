@@ -1,14 +1,14 @@
-package com.simmondobber.lomboker.codeFactory;
+package com.simmondobber.lomboker.lombokize.helpers.factories;
 
-import com.simmondobber.lomboker.Keywords;
-import com.simmondobber.lomboker.codeElement.ClassField;
-import com.simmondobber.lomboker.codeElement.ClassMethod;
-import com.simmondobber.lomboker.codeElement.MethodType;
+import com.simmondobber.lomboker.common.Keywords;
+import com.simmondobber.lomboker.lombokize.codeElement.ClassField;
+import com.simmondobber.lomboker.lombokize.codeElement.ClassMethod;
+import com.simmondobber.lomboker.lombokize.codeElement.MethodType;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 
-import static com.simmondobber.lomboker.Keywords.*;
+import static com.simmondobber.lomboker.common.Keywords.*;
 
 public class SetterFactory {
 
@@ -17,7 +17,7 @@ public class SetterFactory {
 
     public ClassMethod createSetter(ClassField classField) {
         String setterCode = createSetterCode(classField);
-        return new ClassMethod(setterCode, classField, MethodType.SETTER);
+        return new ClassMethod(setterCode, classField.getLine(), MethodType.SETTER);
     }
 
     private String createSetterCode(ClassField classField) {
@@ -49,7 +49,7 @@ public class SetterFactory {
 
     private String getArgumentName(ClassField classField) {
         String name = classField.getFieldName();
-        return (classField.isBoolean() && isFieldNameStartingFromIs(name)) ? getBooleanIsArgumentName(name) : name;
+        return (classField.isBooleanType() && isFieldNameStartingFromIs(name)) ? getBooleanIsArgumentName(name) : name;
     }
 
     private String getBooleanIsArgumentName(String name) {
@@ -64,7 +64,7 @@ public class SetterFactory {
     }
 
     private boolean isFieldBooleanStartingFromIs(ClassField classField) {
-        return classField.isBoolean() && isFieldNameStartingFromIs(classField.getFieldName());
+        return classField.isBooleanType() && isFieldNameStartingFromIs(classField.getFieldName());
     }
 
     private boolean isFieldNameStartingFromIs(String fieldName) {

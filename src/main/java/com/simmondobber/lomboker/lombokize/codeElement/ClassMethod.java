@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.codeElement;
+package com.simmondobber.lomboker.lombokize.codeElement;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,6 @@ import lombok.Setter;
 public class ClassMethod {
 
     private String methodCode;
-    private ClassField correspondingField;
+    private String correspondingFieldCode;
     private MethodType methodType;
 }
