@@ -36,5 +36,4 @@ public class LombokizeService {
     private String standardizeClassCodeWhitespaces(String classCode) {
         return classCode.replaceAll("\t", "    ");
     }
-
 }
