@@ -1,0 +1,153 @@
+form {
+    background-color: #e3e3e3;
+    height: 85%;
+    display: flex;
+}
+
+h1 {
+    font-family: "DejaVu Sans", serif;
+    margin: 0;
+    font-size: 9vmin;
+}
+
+h2 {
+    font-family: "DejaVu Sans", serif;
+    margin: 0 0 0 4vmin;
+    font-size: 3vmin;
+}
+
+h3 {
+    font-family: "DejaVu Sans", serif;
+    margin: 0 0 2vmin 2vmin;
+    font-size: 2vmin;
+}
+
+input {
+    height: 0;
+    width: 0;
+}
+
+.button {
+    display: block;
+    position: relative;
+    padding-left: 5vmin;
+    padding-top: 0.3vmin;
+    user-select: none;
+    font-size: 2vmin;
+}
+
+.checkmark {
+    border-radius: 0.4vmin;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3vmin;
+    width: 3vmin;
+    background-color: #9F7D4B;
+}
+
+.button input:checked ~ .checkmark {
+    background-color: #9F7D4B;
+}
+
+.button:hover input ~ .checkmark {
+    background-color: #8F6E48;
+}
+
+.button input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkmark:after {
+    content: 'x';
+    display: none;
+}
+
+.button .checkmark:after {
+    margin-left: 0.7vmin;
+    margin-top: -0.4vmin;
+    font-size: 3vmin;
+    color: black;
+}
+
+.submitButton {
+    font-weight: bold;
+    border-radius: 0.4vmin;
+    margin-top: 5vmin;
+    background: #9F7D4B;
+    color: black;
+    height: 5vmin;
+    width: 15vmin;
+    font-size: 2vmin;
+    border: none;
+}
+
+.submitButton:hover {
+    background: #8F6E48;
+}
+
+textarea {
+    font-size: 1.5vmin;
+    background-color: #CE9C52;
+    height: 75vmin;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 2vmin;
+    border-radius: 1vmin;
+    padding: 2vmin;
+}
+
+#options {
+    background-color: #CE9C52;
+    height: 74.5vmin;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 2vmin;
+    border-radius: 1vmin;
+    padding: 2vmin;
+}
+
+#page {
+    background-color: #000000;
+    height: 100%;
+}
+
+#title {
+    background-color: #F5D76A;
+    height: 10vmin;
+}
+
+#optionsBack {
+    background-color: #9F7D4B;
+    height: 100%;
+    width: 24%;
+    box-sizing: border-box;
+    padding: 1%;
+}
+
+#codeToLombokizeBack {
+    background-color: #9F7D4B;
+    height: 100%;
+    width: 38%;
+    box-sizing: border-box;
+    padding: 1%;
+}
+
+#lombokizedCodeBack {
+    background-color: #9F7D4B;
+    height: 100%;
+    width: 38%;
+    box-sizing: border-box;
+    padding: 1%;
+}
+
+#footer {
+    background-color: #9F7D4B;
+    height: 5.5vmin;
+    box-sizing: border-box;
+    padding: 0.5% 1.3% 0.5% 0.5%;
+    display: flex;
+    justify-content: right;
+    font-size: 1.5vmin;
+}
+
