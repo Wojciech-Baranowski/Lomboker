@@ -11,21 +11,20 @@
             <div id="options">
                 <label class="button">
                     Force annotation above the class
-                    <input id="forcedAnnotations" type="checkbox"/>
+                    <input [(ngModel)]="forceAnnotations" type="checkbox" name="forceAnnotations"/>
                     <span class="checkmark"></span>
                 </label>
-                <input id="submit" class="submitButton" type="submit" value="LOMBOKIZE!">
+                <input (click)="lombokize()" class="submitButton" type="submit" value="LOMBOKIZE!" name="submit">
             </div>
-
         </div>
         <div id="codeToLombokizeBack">
             <h2>Code to lombokize:</h2>
-            <textarea>
+            <textarea [(ngModel)]="codeToLombokize" name="codeToLombokize">
             </textarea>
         </div>
         <div id="lombokizedCodeBack">
             <h2>Lombokized code:</h2>
-            <textarea>
+            <textarea [(ngModel)]="lombokizedCode" name="lombokizedCode">
             </textarea>
         </div>
     </form>

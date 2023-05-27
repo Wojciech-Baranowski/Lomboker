@@ -1,5 +1,7 @@
 package com.simmondobber.lomboker.lombokize;
 
+import com.simmondobber.lomboker.lombokize.transportObjects.CodeToLombokizeTO;
+import com.simmondobber.lomboker.lombokize.transportObjects.LombokizedCodeTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +18,7 @@ public class LombokizeController {
     }
 
     @PostMapping("/lombokize")
-    public String lombokize(@RequestBody String classCode) {
-        return this.lombokizeService.lombokize(classCode);
+    public LombokizedCodeTO lombokize(@RequestBody CodeToLombokizeTO codeToLombokizeTO) {
+        return this.lombokizeService.lombokize(codeToLombokizeTO);
     }
 }
