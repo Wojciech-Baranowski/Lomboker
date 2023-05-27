@@ -9,6 +9,18 @@
         <div id="optionsBack">
             <h2>Options:</h2>
             <div id="options">
+                <h3>Indentations:</h3>
+                <label class="button">
+                    space
+                    <input [(ngModel)]="indentType" id="space" type="radio" name="indents" [value]="0"/>
+                    <span class="checkmark"></span>
+                </label>
+                <label class="button">
+                    tabulator
+                    <input [(ngModel)]="indentType" id="tab" type="radio" name="indents" [value]="1"/>
+                    <span class="checkmark"></span>
+                </label>
+                <h3>Annotations:</h3>
                 <label class="button">
                     Force annotation above the class
                     <input [(ngModel)]="forceAnnotations" type="checkbox" name="forceAnnotations"/>

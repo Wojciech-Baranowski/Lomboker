@@ -1,6 +1,7 @@
 package com.simmondobber.lomboker.lombokize.helpers;
 
 import com.simmondobber.lomboker.lombokize.codeElement.ClassMethod;
+import com.simmondobber.lomboker.lombokize.helpers.extractors.MethodsExtractor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
@@ -8,7 +9,14 @@ import java.util.List;
 
 public class BoilerplateCleaner {
 
-    public String clearClassCodeFromBoilerPlate(String classCode, List<ClassMethod> gettersAndSetters) {
+    private final MethodsExtractor methodsExtractor;
+
+    public BoilerplateCleaner() {
+        this.methodsExtractor = new MethodsExtractor();
+    }
+
+    public String clearClassCodeFromBoilerplate(String classCode) {
+        List<ClassMethod> gettersAndSetters = this.methodsExtractor.getGettersAndSetterContainedByClass(classCode);
         classCode = deleteGettersAndSettersFromClassCode(classCode, gettersAndSetters);
         classCode = addMethodAnnotationsToClassCode(classCode, gettersAndSetters);
         return classCode;

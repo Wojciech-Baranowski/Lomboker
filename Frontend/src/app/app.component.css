@@ -34,6 +34,8 @@ input {
     padding-top: 0.3vmin;
     user-select: none;
     font-size: 2vmin;
+    margin-bottom: 2vmin;
+    margin-left: 3vmin;
 }
 
 .checkmark {
@@ -71,9 +73,10 @@ input {
 }
 
 .submitButton {
+    display: block;
     font-weight: bold;
     border-radius: 0.4vmin;
-    margin-top: 5vmin;
+    margin: 10vmin auto 0;
     background: #9F7D4B;
     color: black;
     height: 5vmin;
@@ -95,6 +98,7 @@ textarea {
     margin-top: 2vmin;
     border-radius: 1vmin;
     padding: 2vmin;
+    white-space: nowrap;
 }
 
 #options {

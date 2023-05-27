@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker;
+package com.simmondobber.lomboker.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
