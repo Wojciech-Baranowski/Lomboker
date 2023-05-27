@@ -11,16 +11,18 @@ import {LombokizedCodeTO} from "./transportObjects/LombokizedCodeTO";
 export class AppComponent implements OnInit {
 
     private LOMBOKIZE_URL = 'http://localhost:8080/lombokize';
-    forceAnnotations: boolean;
-    indentType: number
     codeToLombokize: string;
     lombokizedCode: string;
+    indentType: number;
+    globalGetter: boolean;
+    globalSetter: boolean;
 
     constructor(private http: HttpClient) {
-        this.forceAnnotations = false;
-        this.indentType = 0;
         this.codeToLombokize = "";
         this.lombokizedCode = "";
+        this.indentType = 0;
+        this.globalGetter = false;
+        this.globalSetter = false;
     }
 
     ngOnInit(): void {
@@ -28,7 +30,7 @@ export class AppComponent implements OnInit {
     }
 
     lombokize(): void {
-        let lombokizeTO: CodeToLombokizeTO = new CodeToLombokizeTO(this.codeToLombokize, this.forceAnnotations, this.indentType);
+        let lombokizeTO: CodeToLombokizeTO = new CodeToLombokizeTO(this.codeToLombokize, this.indentType, this.globalGetter, this.globalSetter);
         this.http.post<LombokizedCodeTO>(this.LOMBOKIZE_URL, lombokizeTO).subscribe((lombokizedCodeTO: LombokizedCodeTO) => {
             this.lombokizedCode = lombokizedCodeTO.lombokizedCode;
         }, (error) => {

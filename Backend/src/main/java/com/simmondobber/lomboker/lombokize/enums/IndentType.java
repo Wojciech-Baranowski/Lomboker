@@ -8,9 +8,9 @@ public enum IndentType {
     SPACE("    "),
     TABULATOR("\t");
 
-    private final String symbol;
+    private final String indent;
 
     IndentType(String symbol) {
-        this.symbol = symbol;
+        this.indent = symbol;
     }
 }

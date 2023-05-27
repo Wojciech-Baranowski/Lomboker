@@ -1,12 +1,15 @@
+import {AnnotationsConfig} from "./AnnotationsConfig";
+
 export class CodeToLombokizeTO {
 
     codeToLombokize: string;
-    forceAnnotations: boolean;
     indentType: number
+    annotationsConfig: AnnotationsConfig;
 
-    constructor(codeToLombokize: string, forceAnnotations: boolean, indents: number) {
+
+    constructor(codeToLombokize: string, indentType: number, globalGetter: boolean, globalSetter: boolean) {
         this.codeToLombokize = codeToLombokize;
-        this.forceAnnotations = forceAnnotations;
-        this.indentType = indents;
+        this.indentType = indentType;
+        this.annotationsConfig = new AnnotationsConfig(globalGetter, globalSetter);
     }
 }

@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class LombokizedCodeTO {
+public class AnnotationsConfig {
 
-    private String lombokizedCode;
+    private boolean globalGetter;
+    private boolean globalSetter;
 }

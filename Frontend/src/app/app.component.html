@@ -12,18 +12,23 @@
                 <h3>Indentations:</h3>
                 <label class="button">
                     space
-                    <input [(ngModel)]="indentType" id="space" type="radio" name="indents" [value]="0"/>
+                    <input [(ngModel)]="indentType" type="radio" name="indents" [value]="0"/>
                     <span class="checkmark"></span>
                 </label>
                 <label class="button">
                     tabulator
-                    <input [(ngModel)]="indentType" id="tab" type="radio" name="indents" [value]="1"/>
+                    <input [(ngModel)]="indentType" type="radio" name="indents" [value]="1"/>
                     <span class="checkmark"></span>
                 </label>
-                <h3>Annotations:</h3>
+                <h3>Global annotations:</h3>
                 <label class="button">
-                    Force annotation above the class
-                    <input [(ngModel)]="forceAnnotations" type="checkbox" name="forceAnnotations"/>
+                    getter
+                    <input [(ngModel)]="globalGetter" type="checkbox" name="globalGetter"/>
+                    <span class="checkmark"></span>
+                </label>
+                <label class="button">
+                    setter
+                    <input [(ngModel)]="globalSetter" type="checkbox" name="globalSetter"/>
                     <span class="checkmark"></span>
                 </label>
                 <input (click)="lombokize()" class="submitButton" type="submit" value="LOMBOKIZE!" name="submit">

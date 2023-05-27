@@ -1,6 +1,5 @@
 package com.simmondobber.lomboker.lombokize;
 
-import com.simmondobber.lomboker.lombokize.enums.IndentType;
 import com.simmondobber.lomboker.lombokize.helpers.BoilerplateCleaner;
 import com.simmondobber.lomboker.lombokize.helpers.formatters.ClassCodeFormatter;
 import com.simmondobber.lomboker.lombokize.transportObjects.CodeToLombokizeTO;
@@ -20,10 +19,9 @@ public class LombokizeService {
 
     public LombokizedCodeTO lombokize(CodeToLombokizeTO codeToLombokizeTO) {
         String classCode = codeToLombokizeTO.getCodeToLombokize();
-        IndentType indentType = codeToLombokizeTO.getIndentType();
-        classCode = this.classCodeFormatter.formatClassCodeIndentsToSpaces(classCode, indentType);
-        classCode = this.boilerplateCleaner.clearClassCodeFromBoilerplate(classCode);
-        classCode = this.classCodeFormatter.formatClassCodeIndentsFromSpaces(classCode, indentType);
+        classCode = this.classCodeFormatter.formatClassCodeIndentsToSpaces(classCode, codeToLombokizeTO.getIndentType());
+        classCode = this.boilerplateCleaner.clearClassCodeFromBoilerplate(classCode, codeToLombokizeTO.getAnnotationsConfig());
+        classCode = this.classCodeFormatter.formatClassCodeIndentsFromSpaces(classCode, codeToLombokizeTO.getIndentType());
         return new LombokizedCodeTO(classCode);
     }
 }
