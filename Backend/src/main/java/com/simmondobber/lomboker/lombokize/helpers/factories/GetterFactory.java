@@ -12,13 +12,13 @@ public class GetterFactory {
     private static final String GETTER_PREFIX = "get";
     private static final String BOOLEAN_GETTER_PREFIX = "is";
 
-    public ClassMethod createGetter(ClassField classField) {
-        String getterCode = createGetterCode(classField);
+    public ClassMethod createGetter(ClassField classField, boolean thisPrefix) {
+        String getterCode = createGetterCode(classField, thisPrefix);
         return new ClassMethod(getterCode, classField.getLine(), MethodType.GETTER);
     }
 
-    private String createGetterCode(ClassField classField) {
-        return createGetterHead(classField) + createGetterBody(classField) + createClosingBracketLine(classField);
+    private String createGetterCode(ClassField classField, boolean thisPrefix) {
+        return createGetterHead(classField) + createGetterBody(classField, thisPrefix) + createClosingBracketLine(classField);
     }
 
     private String createGetterHead(ClassField classField) {
@@ -27,10 +27,11 @@ public class GetterFactory {
         return StringUtils.join(indentation, PUBLIC.getKeyword(), " ", type, " ", getMethodName(classField), "() {\n");
     }
 
-    private String createGetterBody(ClassField classField) {
+    private String createGetterBody(ClassField classField, boolean thisPrefix) {
         String indentation = getIndentation(classField.getNesting() + 1);
         String name = classField.getFieldName();
-        return StringUtils.join(indentation, RETURN.getKeyword(), " ", THIS.getKeyword(), ".", name, ";\n");
+        String prefix = thisPrefix ? THIS.getKeyword() + "." : "";
+        return StringUtils.join(indentation, RETURN.getKeyword(), " ", prefix, name, ";\n");
     }
 
     private String createClosingBracketLine(ClassField classField) {

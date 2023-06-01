@@ -20,7 +20,7 @@ public class LombokizeService {
     public LombokizedCodeTO lombokize(CodeToLombokizeTO codeToLombokizeTO) {
         String classCode = codeToLombokizeTO.getCodeToLombokize();
         classCode = this.classCodeFormatter.standardizeClassIndents(classCode, codeToLombokizeTO.getIndentType());
-        classCode = this.boilerplateCleaner.clearClassCodeFromBoilerplate(classCode, codeToLombokizeTO.getAnnotationsConfig());
+        classCode = this.boilerplateCleaner.clearClassCodeFromBoilerplate(classCode, codeToLombokizeTO.isThisPrefix(), codeToLombokizeTO.getAnnotationsConfig());
         classCode = this.classCodeFormatter.formatClassCodeIndentsBack(classCode, codeToLombokizeTO.getIndentType());
         return new LombokizedCodeTO(classCode);
     }

@@ -24,8 +24,8 @@ public class BoilerplateCleaner {
         this.annotationFactory = new AnnotationFactory();
     }
 
-    public String clearClassCodeFromBoilerplate(String classCode, AnnotationsConfig annotationsConfig) {
-        List<ClassMethod> gettersAndSetters = this.methodsExtractor.getGettersAndSettersContainedByClass(classCode);
+    public String clearClassCodeFromBoilerplate(String classCode, boolean thisPrefix, AnnotationsConfig annotationsConfig) {
+        List<ClassMethod> gettersAndSetters = this.methodsExtractor.getGettersAndSettersContainedByClass(classCode, thisPrefix);
         classCode = deleteGettersAndSettersFromClassCode(classCode, gettersAndSetters);
         classCode = addMethodAnnotationsToClassCode(classCode, gettersAndSetters);
         classCode = deleteRedundantAnnotationsFromClassCode(classCode, annotationsConfig);

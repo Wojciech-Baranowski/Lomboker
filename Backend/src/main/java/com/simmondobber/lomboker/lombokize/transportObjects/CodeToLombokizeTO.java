@@ -12,5 +12,6 @@ public class CodeToLombokizeTO {
 
     private String codeToLombokize;
     private IndentType indentType;
+    private boolean thisPrefix;
     private AnnotationsConfig AnnotationsConfig;
 }

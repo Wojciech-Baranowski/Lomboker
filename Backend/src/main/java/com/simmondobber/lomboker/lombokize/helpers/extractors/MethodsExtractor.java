@@ -20,23 +20,23 @@ public class MethodsExtractor {
         this.setterFactory = new SetterFactory();
     }
 
-    public List<ClassMethod> getGettersAndSettersContainedByClass(String classCode) {
-        List<ClassMethod> gettersAndSetters = getGettersAndSettersBasedOnClassFieldsInClassCode(classCode);
+    public List<ClassMethod> getGettersAndSettersContainedByClass(String classCode, boolean thisPrefix) {
+        List<ClassMethod> gettersAndSetters = getGettersAndSettersBasedOnClassFieldsInClassCode(classCode, thisPrefix);
         return gettersAndSetters.stream()
                 .filter(method -> classCode.contains(method.getMethodCode()))
                 .toList();
     }
 
-    private List<ClassMethod> getGettersAndSettersBasedOnClassFieldsInClassCode(String classCode) {
+    private List<ClassMethod> getGettersAndSettersBasedOnClassFieldsInClassCode(String classCode, boolean thisPrefix) {
         List<ClassField> classFields = this.fieldsExtractor.getClassFieldsFromClassCode(classCode);
         return classFields.stream()
-                .map(this::getGetterAndSetterForClassField)
+                .map(field -> getGetterAndSetterForClassField(field, thisPrefix))
                 .flatMap(Collection::stream)
                 .toList();
     }
 
-    private List<ClassMethod> getGetterAndSetterForClassField(ClassField classField) {
-        ClassMethod getter = this.getterFactory.createGetter(classField);
+    private List<ClassMethod> getGetterAndSetterForClassField(ClassField classField, boolean thisPrefix) {
+        ClassMethod getter = this.getterFactory.createGetter(classField, thisPrefix);
         ClassMethod setter = this.setterFactory.createSetter(classField);
         return List.of(getter, setter);
     }

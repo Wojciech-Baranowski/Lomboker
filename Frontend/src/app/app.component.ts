@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
     codeToLombokize: string;
     lombokizedCode: string;
     indentType: number;
+    thisPrefix: boolean;
     globalGetter: boolean;
     globalSetter: boolean;
 
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
         this.codeToLombokize = "";
         this.lombokizedCode = "";
         this.indentType = 0;
+        this.thisPrefix = false;
         this.globalGetter = false;
         this.globalSetter = false;
     }
@@ -30,7 +32,7 @@ export class AppComponent implements OnInit {
     }
 
     lombokize(): void {
-        let lombokizeTO: CodeToLombokizeTO = new CodeToLombokizeTO(this.codeToLombokize, this.indentType, this.globalGetter, this.globalSetter);
+        let lombokizeTO: CodeToLombokizeTO = new CodeToLombokizeTO(this.codeToLombokize, this.indentType, this.thisPrefix, this.globalGetter, this.globalSetter);
         this.http.post<LombokizedCodeTO>(this.LOMBOKIZE_URL, lombokizeTO).subscribe((lombokizedCodeTO: LombokizedCodeTO) => {
             this.lombokizedCode = lombokizedCodeTO.lombokizedCode;
         }, (error) => {
