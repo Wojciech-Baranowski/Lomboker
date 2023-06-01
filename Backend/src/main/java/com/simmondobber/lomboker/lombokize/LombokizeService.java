@@ -19,9 +19,9 @@ public class LombokizeService {
 
     public LombokizedCodeTO lombokize(CodeToLombokizeTO codeToLombokizeTO) {
         String classCode = codeToLombokizeTO.getCodeToLombokize();
-        classCode = this.classCodeFormatter.formatClassCodeIndentsToSpaces(classCode, codeToLombokizeTO.getIndentType());
+        classCode = this.classCodeFormatter.standardizeClassIndents(classCode, codeToLombokizeTO.getIndentType());
         classCode = this.boilerplateCleaner.clearClassCodeFromBoilerplate(classCode, codeToLombokizeTO.getAnnotationsConfig());
-        classCode = this.classCodeFormatter.formatClassCodeIndentsFromSpaces(classCode, codeToLombokizeTO.getIndentType());
+        classCode = this.classCodeFormatter.formatClassCodeIndentsBack(classCode, codeToLombokizeTO.getIndentType());
         return new LombokizedCodeTO(classCode);
     }
 }

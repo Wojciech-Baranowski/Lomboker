@@ -8,20 +8,19 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 public class ClassExtractor {
 
-    private final AnnotationExtractor annotationExtractor;
-
-    public ClassExtractor() {
-        this.annotationExtractor = new AnnotationExtractor();
-    }
-
     public ClassHeader getMostOuterClassHeaderFromClassCode(String classCode) {
         CodeLine mostOuterClassHeaderCodeLine = getMostOuterClassHeaderCodeLine(classCode);
-        Set<String> mostOuterClassAnnotations = this.annotationExtractor.getAnnotationsAboveCodeLine(classCode, mostOuterClassHeaderCodeLine);
-        return new ClassHeader(mostOuterClassHeaderCodeLine, mostOuterClassAnnotations);
+        return new ClassHeader(mostOuterClassHeaderCodeLine, classCode);
+    }
+
+    private CodeLine getMostOuterClassHeaderCodeLine(String classCode) {
+        List<CodeLine> classCodeLinesContainingClassKeyword = getClassCodeLinesContainingClassKeyword(classCode);
+        return classCodeLinesContainingClassKeyword.stream()
+                .min(Comparator.comparing(CodeLine::getNestingLevel))
+                .orElse(new CodeLine(""));
     }
 
     private List<CodeLine> getClassCodeLinesContainingClassKeyword(String classCode) {
@@ -41,12 +40,5 @@ public class ClassExtractor {
     private boolean isCodeLineContainingClassKeyword(CodeLine codeLine) {
         String separateClassKeyword = " " + Keywords.CLASS.getKeyword() + " ";
         return codeLine.getLine().contains(separateClassKeyword);
-    }
-
-    private CodeLine getMostOuterClassHeaderCodeLine(String classCode) {
-        List<CodeLine> classCodeLinesContainingClassKeyword = getClassCodeLinesContainingClassKeyword(classCode);
-        return classCodeLinesContainingClassKeyword.stream()
-                .min(Comparator.comparing(CodeLine::getNestingLevel))
-                .orElse(new CodeLine(""));
     }
 }
