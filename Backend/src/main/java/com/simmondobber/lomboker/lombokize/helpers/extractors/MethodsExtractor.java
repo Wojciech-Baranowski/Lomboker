@@ -20,7 +20,7 @@ public class MethodsExtractor {
         this.setterFactory = new SetterFactory();
     }
 
-    public List<ClassMethod> getGettersAndSetterContainedByClass(String classCode) {
+    public List<ClassMethod> getGettersAndSettersContainedByClass(String classCode) {
         List<ClassMethod> gettersAndSetters = getGettersAndSettersBasedOnClassFieldsInClassCode(classCode);
         return gettersAndSetters.stream()
                 .filter(method -> classCode.contains(method.getMethodCode()))

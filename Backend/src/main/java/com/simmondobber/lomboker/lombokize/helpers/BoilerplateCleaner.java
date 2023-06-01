@@ -1,7 +1,7 @@
 package com.simmondobber.lomboker.lombokize.helpers;
 
+import com.simmondobber.lomboker.lombokize.codeElement.ClassHeader;
 import com.simmondobber.lomboker.lombokize.codeElement.ClassMethod;
-import com.simmondobber.lomboker.lombokize.codeElement.CodeLine;
 import com.simmondobber.lomboker.lombokize.enums.Annotations;
 import com.simmondobber.lomboker.lombokize.helpers.extractors.ClassExtractor;
 import com.simmondobber.lomboker.lombokize.helpers.extractors.MethodsExtractor;
@@ -25,7 +25,7 @@ public class BoilerplateCleaner {
     }
 
     public String clearClassCodeFromBoilerplate(String classCode, AnnotationsConfig annotationsConfig) {
-        List<ClassMethod> gettersAndSetters = this.methodsExtractor.getGettersAndSetterContainedByClass(classCode);
+        List<ClassMethod> gettersAndSetters = this.methodsExtractor.getGettersAndSettersContainedByClass(classCode);
         classCode = deleteGettersAndSettersFromClassCode(classCode, gettersAndSetters);
         classCode = addMethodAnnotationsToClassCode(classCode, gettersAndSetters);
         classCode = deleteRedundantAnnotationsFromClassCode(classCode, annotationsConfig);
@@ -70,16 +70,12 @@ public class BoilerplateCleaner {
     }
 
     private String addGlobalAnnotationsToClassCode(String classCode, AnnotationsConfig annotationsConfig) {
-        int classHeaderIndex = getClassHeaderIndex(classCode);
-        String annotations = this.annotationFactory.createAnnotations(annotationsConfig);
+        ClassHeader classHeader = this.classExtractor.getMostOuterClassHeaderFromClassCode(classCode);
+        int classHeaderIndex = classCode.indexOf(classHeader.getHeaderLine());
+        String annotations = this.annotationFactory.createAnnotations(annotationsConfig, classHeader.getClassAnnotations());
         String firstPartOfClassCode = classCode.substring(0, classHeaderIndex);
         String secondPartOfClassCode = classCode.substring(classHeaderIndex);
         return StringUtils.join(firstPartOfClassCode, annotations, secondPartOfClassCode);
-    }
-
-    private int getClassHeaderIndex(String classCode) {
-        CodeLine classHeader = this.classExtractor.getMostOuterClassHeaderFromClassCode(classCode);
-        return classCode.indexOf(classHeader.getLine());
     }
 
     private String deleteRedundantAnnotationsFromClassCode(String classCode, AnnotationsConfig annotationsConfig) {
