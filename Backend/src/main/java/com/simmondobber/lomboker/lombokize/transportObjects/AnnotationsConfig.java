@@ -9,6 +9,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AnnotationsConfig {
 
-    private boolean globalGetter;
-    private boolean globalSetter;
+    private boolean getter;
+    private boolean setter;
+    private boolean noArgsConstructor;
+    private boolean allArgsConstructor;
+    private boolean builder;
+    private boolean superBuilder;
+    private boolean toBuilder;
+    private boolean toString;
+    private boolean callSuper;
 }

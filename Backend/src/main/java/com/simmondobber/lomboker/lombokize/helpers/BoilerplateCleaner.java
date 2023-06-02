@@ -2,7 +2,8 @@ package com.simmondobber.lomboker.lombokize.helpers;
 
 import com.simmondobber.lomboker.lombokize.codeElement.ClassHeader;
 import com.simmondobber.lomboker.lombokize.codeElement.ClassMethod;
-import com.simmondobber.lomboker.lombokize.enums.Annotations;
+import com.simmondobber.lomboker.lombokize.enums.Annotation;
+import com.simmondobber.lomboker.lombokize.helpers.extractors.AnnotationExtractor;
 import com.simmondobber.lomboker.lombokize.helpers.extractors.ClassExtractor;
 import com.simmondobber.lomboker.lombokize.helpers.extractors.MethodsExtractor;
 import com.simmondobber.lomboker.lombokize.helpers.factories.AnnotationFactory;
@@ -11,17 +12,20 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class BoilerplateCleaner {
 
     private final MethodsExtractor methodsExtractor;
     private final ClassExtractor classExtractor;
     private final AnnotationFactory annotationFactory;
+    private final AnnotationExtractor annotationExtractor;
 
     public BoilerplateCleaner() {
         this.methodsExtractor = new MethodsExtractor();
         this.classExtractor = new ClassExtractor();
         this.annotationFactory = new AnnotationFactory();
+        this.annotationExtractor = new AnnotationExtractor();
     }
 
     public String clearClassCodeFromBoilerplate(String classCode, boolean thisPrefix, AnnotationsConfig annotationsConfig) {
@@ -72,27 +76,28 @@ public class BoilerplateCleaner {
     private String addGlobalAnnotationsToClassCode(String classCode, AnnotationsConfig annotationsConfig) {
         ClassHeader classHeader = this.classExtractor.getMostOuterClassHeaderFromClassCode(classCode);
         int classHeaderIndex = classCode.indexOf(classHeader.getHeaderLine());
-        String annotations = this.annotationFactory.createAnnotations(annotationsConfig, classHeader.getClassAnnotations());
+        Set<Annotation> excludedAnnotations = this.annotationExtractor.getAllAnnotationsDisjointWithGivenAnnotationSet(classHeader.getClassAnnotations());
+        String annotations = this.annotationFactory.createAnnotations(annotationsConfig, excludedAnnotations);
         String firstPartOfClassCode = classCode.substring(0, classHeaderIndex);
         String secondPartOfClassCode = classCode.substring(classHeaderIndex);
         return StringUtils.join(firstPartOfClassCode, annotations, secondPartOfClassCode);
     }
 
     private String deleteRedundantAnnotationsFromClassCode(String classCode, AnnotationsConfig annotationsConfig) {
-        if (annotationsConfig.isGlobalGetter()) {
+        if (annotationsConfig.isGetter()) {
             classCode = classCode.replaceAll(getGetterKeywordWithNewLineAndIndentPrefix(), "");
         }
-        if (annotationsConfig.isGlobalSetter()) {
+        if (annotationsConfig.isSetter()) {
             classCode = classCode.replaceAll(getSetterKeywordWithNewLineAndIndentPrefix(), "");
         }
         return classCode;
     }
 
     private String getGetterKeywordWithNewLineAndIndentPrefix() {
-        return "\n    " + Annotations.GETTER.getKeyword();
+        return "\n    " + Annotation.GETTER.getKeyword();
     }
 
     private String getSetterKeywordWithNewLineAndIndentPrefix() {
-        return "\n    " + Annotations.SETTER.getKeyword();
+        return "\n    " + Annotation.SETTER.getKeyword();
     }
 }

@@ -8,10 +8,10 @@ export class CodeToLombokizeTO {
     annotationsConfig: AnnotationsConfig;
 
 
-    constructor(codeToLombokize: string, indentType: number, thisPrefix: boolean, globalGetter: boolean, globalSetter: boolean) {
+    constructor(codeToLombokize: string, indentType: number, thisPrefix: boolean, annotationsConfig: AnnotationsConfig) {
         this.codeToLombokize = codeToLombokize;
         this.indentType = indentType;
         this.thisPrefix = thisPrefix;
-        this.annotationsConfig = new AnnotationsConfig(globalGetter, globalSetter);
+        this.annotationsConfig = annotationsConfig;
     }
 }
