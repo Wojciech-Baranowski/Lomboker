@@ -3,8 +3,8 @@ package com.simmondobber.lomboker.lombokize.helpers.extractors.methodExtractor;
 import com.simmondobber.lomboker.lombokize.classElements.Field;
 import com.simmondobber.lomboker.lombokize.classElements.Method;
 import com.simmondobber.lomboker.lombokize.helpers.extractors.fieldExtractor.FieldExtractor;
-import com.simmondobber.lomboker.lombokize.helpers.factories.GetterFactory;
-import com.simmondobber.lomboker.lombokize.helpers.factories.SetterFactory;
+import com.simmondobber.lomboker.lombokize.helpers.factories.lombokCompatibleFactories.GetterFactory;
+import com.simmondobber.lomboker.lombokize.helpers.factories.lombokCompatibleFactories.SetterFactory;
 
 import java.util.Collection;
 import java.util.List;

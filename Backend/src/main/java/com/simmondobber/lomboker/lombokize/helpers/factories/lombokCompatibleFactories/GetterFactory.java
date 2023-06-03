@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.helpers.factories;
+package com.simmondobber.lomboker.lombokize.helpers.factories.lombokCompatibleFactories;
 
 import com.simmondobber.lomboker.lombokize.classElements.Field;
 import com.simmondobber.lomboker.lombokize.classElements.Method;
@@ -42,15 +42,11 @@ public class GetterFactory {
     private String getMethodName(Field field) {
         String name = field.getFieldName();
         String prefix = (field.isBooleanType() ? isFieldNameStartingFromIs(name) ? "" : BOOLEAN_GETTER_PREFIX : GETTER_PREFIX);
-        return prefix + ((isFieldNameStartingFromSingleSmallLetter(name) || isFieldNameStartingFromIs(name)) ? name : StringUtils.capitalize(name));
+        return prefix + (isFieldNameStartingFromIs(name) ? name : StringUtils.capitalize(name));
     }
 
     private boolean isFieldNameStartingFromIs(String fieldName) {
         return fieldName.split("[A-Z]")[0].equals(BOOLEAN_GETTER_PREFIX);
-    }
-
-    private boolean isFieldNameStartingFromSingleSmallLetter(String fieldName) {
-        return fieldName.matches("[a-z][A-Z].*");
     }
 
     private String getIndentation(int nesting) {

@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.helpers.factories;
+package com.simmondobber.lomboker.lombokize.helpers.factories.intellijCompatibleFactories;
 
 import com.simmondobber.lomboker.common.Keywords;
 import com.simmondobber.lomboker.lombokize.classElements.Field;
