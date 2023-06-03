@@ -11,8 +11,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class LombokizeExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(BlankClassCodeException.class)
-    protected ResponseEntity<Object> handleConflict(BlankClassCodeException e, WebRequest request) {
+    @ExceptionHandler(LombokizeException.class)
+    protected ResponseEntity<Object> handleConflict(LombokizeException e, WebRequest request) {
         return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 }
