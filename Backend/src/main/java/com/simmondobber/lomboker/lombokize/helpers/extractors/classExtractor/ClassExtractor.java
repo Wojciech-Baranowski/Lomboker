@@ -1,6 +1,6 @@
 package com.simmondobber.lomboker.lombokize.helpers.extractors.classExtractor;
 
-import com.simmondobber.lomboker.lombokize.classElements.Header;
+import com.simmondobber.lomboker.lombokize.classElements.CodeLine;
 import com.simmondobber.lomboker.lombokize.helpers.formatters.CodeFormatter;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class ClassExtractor {
 
     private List<Integer> getClassStartIndices(String code) {
         return this.classHeaderExtractor.getOuterClassHeaders(code).stream()
-                .map(Header::getLine)
+                .map(CodeLine::getLine)
                 .map(code::indexOf)
                 .toList();
     }

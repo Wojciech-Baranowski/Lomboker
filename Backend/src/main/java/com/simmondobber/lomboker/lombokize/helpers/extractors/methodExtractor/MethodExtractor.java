@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.helpers.extractors;
+package com.simmondobber.lomboker.lombokize.helpers.extractors.methodExtractor;
 
 import com.simmondobber.lomboker.lombokize.classElements.Field;
 import com.simmondobber.lomboker.lombokize.classElements.Method;

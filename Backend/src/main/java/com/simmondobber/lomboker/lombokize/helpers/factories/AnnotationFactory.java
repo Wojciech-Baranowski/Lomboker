@@ -3,62 +3,32 @@ package com.simmondobber.lomboker.lombokize.helpers.factories;
 import com.simmondobber.lomboker.lombokize.enums.Annotation;
 import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 
-import java.util.Set;
-
 public class AnnotationFactory {
 
-    public String createAnnotations(AnnotationsConfig annotationsConfig, Set<Annotation> excludedAnnotations) {
+    public String createGlobalAnnotations(AnnotationsConfig annotationsConfig) {
         StringBuilder annotations = new StringBuilder();
-        if (canAddGlobalGetterAnnotation(annotationsConfig, excludedAnnotations)) {
+        if (annotationsConfig.isGetter()) {
             annotations.append(createGlobalGetter());
         }
-        if (canAddGlobalSetterAnnotation(annotationsConfig, excludedAnnotations)) {
+        if (annotationsConfig.isSetter()) {
             annotations.append(createGlobalSetter());
         }
-        if (canAddNoArgsConstructorAnnotation(annotationsConfig, excludedAnnotations)) {
+        if (annotationsConfig.isNoArgsConstructor()) {
             annotations.append(createNoArgsConstructor());
         }
-        if (canAddAllArgsConstructorAnnotation(annotationsConfig, excludedAnnotations)) {
+        if (annotationsConfig.isAllArgsConstructor()) {
             annotations.append(createAllArgsConstructor());
         }
-        if (canAddBuilderAnnotation(annotationsConfig, excludedAnnotations)) {
+        if (annotationsConfig.isBuilder()) {
             annotations.append(createBuilder(annotationsConfig.isToBuilder()));
         }
-        if (canAddSuperBuilderAnnotation(annotationsConfig, excludedAnnotations)) {
+        if (annotationsConfig.isSuperBuilder()) {
             annotations.append(createSuperBuilder(annotationsConfig.isToBuilder()));
         }
-        if (canAddToStringAnnotation(annotationsConfig, excludedAnnotations)) {
+        if (annotationsConfig.isToString()) {
             annotations.append(createToString(annotationsConfig.isCallSuper()));
         }
         return annotations.toString();
-    }
-
-    private boolean canAddGlobalGetterAnnotation(AnnotationsConfig annotationsConfig, Set<Annotation> excludedAnnotations) {
-        return annotationsConfig.isGetter() && !excludedAnnotations.contains(Annotation.GETTER);
-    }
-
-    private boolean canAddGlobalSetterAnnotation(AnnotationsConfig annotationsConfig, Set<Annotation> excludedAnnotations) {
-        return annotationsConfig.isSetter() && !excludedAnnotations.contains(Annotation.SETTER);
-    }
-
-    private boolean canAddNoArgsConstructorAnnotation(AnnotationsConfig annotationsConfig, Set<Annotation> excludedAnnotations) {
-        return annotationsConfig.isNoArgsConstructor() && !excludedAnnotations.contains(Annotation.NO_ARGS_CONSTRUCTOR);
-    }
-
-    private boolean canAddAllArgsConstructorAnnotation(AnnotationsConfig annotationsConfig, Set<Annotation> excludedAnnotations) {
-        return annotationsConfig.isAllArgsConstructor() && !excludedAnnotations.contains(Annotation.ALL_ARGS_CONSTRUCTOR);
-    }
-
-    private boolean canAddBuilderAnnotation(AnnotationsConfig annotationsConfig, Set<Annotation> excludedAnnotations) {
-        return annotationsConfig.isBuilder() && !excludedAnnotations.contains(Annotation.BUILDER);
-    }
-
-    private boolean canAddSuperBuilderAnnotation(AnnotationsConfig annotationsConfig, Set<Annotation> excludedAnnotations) {
-        return annotationsConfig.isSuperBuilder() && !excludedAnnotations.contains(Annotation.SUPER_BUILDER);
-    }
-
-    private boolean canAddToStringAnnotation(AnnotationsConfig annotationsConfig, Set<Annotation> excludedAnnotations) {
-        return annotationsConfig.isToString() && !excludedAnnotations.contains(Annotation.TO_STRING);
     }
 
     private String createGlobalGetter() {

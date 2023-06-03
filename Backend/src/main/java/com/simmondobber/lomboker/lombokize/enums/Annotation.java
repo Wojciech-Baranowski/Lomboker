@@ -2,8 +2,6 @@ package com.simmondobber.lomboker.lombokize.enums;
 
 import lombok.Getter;
 
-import java.util.Arrays;
-
 @Getter
 public enum Annotation {
 
@@ -22,12 +20,5 @@ public enum Annotation {
 
     Annotation(String symbol) {
         this.symbol = symbol;
-    }
-
-    public static Annotation getBySymbol(String symbol) {
-        return Arrays.stream(values())
-                .filter(annotation -> annotation.getSymbol().equals(symbol))
-                .findFirst()
-                .orElse(null);
     }
 }
