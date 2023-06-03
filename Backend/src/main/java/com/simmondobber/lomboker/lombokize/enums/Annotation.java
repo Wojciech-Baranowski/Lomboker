@@ -2,6 +2,8 @@ package com.simmondobber.lomboker.lombokize.enums;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 public enum Annotation {
 
@@ -16,9 +18,16 @@ public enum Annotation {
     TO_STRING("@ToString"),
     TO_STRING_CALL_SUPER("@ToString(callSuper = true)");
 
-    private final String keyword;
+    private final String symbol;
 
     Annotation(String symbol) {
-        this.keyword = symbol;
+        this.symbol = symbol;
+    }
+
+    public static Annotation getBySymbol(String symbol) {
+        return Arrays.stream(values())
+                .filter(annotation -> annotation.getSymbol().equals(symbol))
+                .findFirst()
+                .orElse(null);
     }
 }

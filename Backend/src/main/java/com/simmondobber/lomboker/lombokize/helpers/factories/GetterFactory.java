@@ -1,8 +1,8 @@
 package com.simmondobber.lomboker.lombokize.helpers.factories;
 
-import com.simmondobber.lomboker.lombokize.codeElement.ClassField;
-import com.simmondobber.lomboker.lombokize.codeElement.ClassMethod;
-import com.simmondobber.lomboker.lombokize.codeElement.MethodType;
+import com.simmondobber.lomboker.lombokize.classElements.Field;
+import com.simmondobber.lomboker.lombokize.classElements.Method;
+import com.simmondobber.lomboker.lombokize.classElements.MethodType;
 import org.apache.commons.lang3.StringUtils;
 
 import static com.simmondobber.lomboker.common.Keywords.*;
@@ -12,36 +12,36 @@ public class GetterFactory {
     private static final String GETTER_PREFIX = "get";
     private static final String BOOLEAN_GETTER_PREFIX = "is";
 
-    public ClassMethod createGetter(ClassField classField, boolean thisPrefix) {
-        String getterCode = createGetterCode(classField, thisPrefix);
-        return new ClassMethod(getterCode, classField.getLine(), MethodType.GETTER);
+    public Method createGetter(Field field, boolean thisPrefix) {
+        String getterCode = createGetterCode(field, thisPrefix);
+        return new Method(getterCode, field.getLine(), MethodType.GETTER);
     }
 
-    private String createGetterCode(ClassField classField, boolean thisPrefix) {
-        return createGetterHead(classField) + createGetterBody(classField, thisPrefix) + createClosingBracketLine(classField);
+    private String createGetterCode(Field field, boolean thisPrefix) {
+        return createGetterHead(field) + createGetterBody(field, thisPrefix) + createClosingBracketLine(field);
     }
 
-    private String createGetterHead(ClassField classField) {
-        String indentation = getIndentation(classField.getNesting());
-        String type = classField.getFieldType();
-        return StringUtils.join(indentation, PUBLIC.getKeyword(), " ", type, " ", getMethodName(classField), "() {\n");
+    private String createGetterHead(Field field) {
+        String indentation = getIndentation(field.getNesting());
+        String type = field.getFieldType();
+        return StringUtils.join(indentation, PUBLIC.getKeyword(), " ", type, " ", getMethodName(field), "() {\n");
     }
 
-    private String createGetterBody(ClassField classField, boolean thisPrefix) {
-        String indentation = getIndentation(classField.getNesting() + 1);
-        String name = classField.getFieldName();
+    private String createGetterBody(Field field, boolean thisPrefix) {
+        String indentation = getIndentation(field.getNesting() + 1);
+        String name = field.getFieldName();
         String prefix = thisPrefix ? THIS.getKeyword() + "." : "";
         return StringUtils.join(indentation, RETURN.getKeyword(), " ", prefix, name, ";\n");
     }
 
-    private String createClosingBracketLine(ClassField classField) {
-        String indentation = getIndentation(classField.getNesting());
+    private String createClosingBracketLine(Field field) {
+        String indentation = getIndentation(field.getNesting());
         return StringUtils.join(indentation, "}\n");
     }
 
-    private String getMethodName(ClassField classField) {
-        String name = classField.getFieldName();
-        String prefix = (classField.isBooleanType() ? isFieldNameStartingFromIs(name) ? "" : BOOLEAN_GETTER_PREFIX : GETTER_PREFIX);
+    private String getMethodName(Field field) {
+        String name = field.getFieldName();
+        String prefix = (field.isBooleanType() ? isFieldNameStartingFromIs(name) ? "" : BOOLEAN_GETTER_PREFIX : GETTER_PREFIX);
         return prefix + ((isFieldNameStartingFromSingleSmallLetter(name) || isFieldNameStartingFromIs(name)) ? name : StringUtils.capitalize(name));
     }
 

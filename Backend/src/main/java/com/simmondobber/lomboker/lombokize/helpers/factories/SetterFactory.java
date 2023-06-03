@@ -1,9 +1,9 @@
 package com.simmondobber.lomboker.lombokize.helpers.factories;
 
 import com.simmondobber.lomboker.common.Keywords;
-import com.simmondobber.lomboker.lombokize.codeElement.ClassField;
-import com.simmondobber.lomboker.lombokize.codeElement.ClassMethod;
-import com.simmondobber.lomboker.lombokize.codeElement.MethodType;
+import com.simmondobber.lomboker.lombokize.classElements.Field;
+import com.simmondobber.lomboker.lombokize.classElements.Method;
+import com.simmondobber.lomboker.lombokize.classElements.MethodType;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -12,49 +12,56 @@ import static com.simmondobber.lomboker.common.Keywords.*;
 
 public class SetterFactory {
 
+    private static final String VOWELS = "AEIOU";
     private static final String BOOLEAN_GETTER_PREFIX = "is";
     private static final String SETTER_PREFIX = "set";
 
-    public ClassMethod createSetter(ClassField classField) {
-        String setterCode = createSetterCode(classField);
-        return new ClassMethod(setterCode, classField.getLine(), MethodType.SETTER);
+    public Method createSetter(Field field) {
+        String setterCode = createSetterCode(field);
+        return new Method(setterCode, field.getLine(), MethodType.SETTER);
     }
 
-    private String createSetterCode(ClassField classField) {
-        return createSetterHead(classField) + createSetterBody(classField) + createClosingBracketLine(classField);
+    private String createSetterCode(Field field) {
+        return createSetterHead(field) + createSetterBody(field) + createClosingBracketLine(field);
     }
 
-    private String createSetterHead(ClassField classField) {
-        String indentation = getIndentation(classField.getNesting());
-        String type = classField.getFieldType();
-        return StringUtils.join(indentation, PUBLIC.getKeyword(), " ", VOID.getKeyword(), " ", getMethodName(classField), "(", type, " ", getArgumentName(classField), ") {\n");
+    private String createSetterHead(Field field) {
+        String indentation = getIndentation(field.getNesting());
+        String type = field.getFieldType();
+        return StringUtils.join(indentation, PUBLIC.getKeyword(), " ", VOID.getKeyword(), " ", getMethodName(field), "(", type, " ", getArgumentName(field), ") {\n");
     }
 
-    private String createSetterBody(ClassField classField) {
-        String indentation = getIndentation(classField.getNesting() + 1);
-        String name = classField.getFieldName();
-        String argumentName = getArgumentName(classField);
+    private String createSetterBody(Field field) {
+        String indentation = getIndentation(field.getNesting() + 1);
+        String name = field.getFieldName();
+        String argumentName = getArgumentName(field);
         return StringUtils.join(indentation, THIS.getKeyword(), ".", name, " = ", argumentName, ";\n");
     }
 
-    private String createClosingBracketLine(ClassField classField) {
-        String indentation = getIndentation(classField.getNesting());
+    private String createClosingBracketLine(Field field) {
+        String indentation = getIndentation(field.getNesting());
         return StringUtils.join(indentation, "}\n");
     }
 
-    private String getMethodName(ClassField classField) {
-        String name = classField.getFieldName();
-        return SETTER_PREFIX + ((isFieldBooleanStartingFromIs(classField)) ? name.substring(2) : isFieldNameStartingFromSingleSmallLetter(name) ? name : StringUtils.capitalize(name));
+    private String getMethodName(Field field) {
+        String name = field.getFieldName();
+        return SETTER_PREFIX + ((isFieldBooleanStartingFromIs(field)) ? name.substring(2) : isFieldNameStartingFromSingleSmallLetter(name) ? name : StringUtils.capitalize(name));
     }
 
-    private String getArgumentName(ClassField classField) {
-        String name = classField.getFieldName();
-        return (classField.isBooleanType() && isFieldNameStartingFromIs(name)) ? getBooleanIsArgumentName(name) : name;
+    private String getArgumentName(Field field) {
+        String name = field.getFieldName();
+        return (field.isBooleanType() && isFieldNameStartingFromIs(name)) ? getBooleanIsArgumentName(name) : name;
     }
 
     private String getBooleanIsArgumentName(String name) {
         name = name.substring(2);
-        return (isFieldNameKeyword(name) ? "a" + name : name.toLowerCase());
+        return (isFieldNameKeyword(name) ? getArgumentForKeywordFieldName(name) : name.toLowerCase());
+    }
+
+    private String getArgumentForKeywordFieldName(String name) {
+        String firstLetterOfName = String.valueOf(name.charAt(0));
+        String prefix = (VOWELS.contains(firstLetterOfName)) ? "an" : "a";
+        return prefix + name;
     }
 
     private boolean isFieldNameKeyword(String fieldName) {
@@ -63,8 +70,8 @@ public class SetterFactory {
                 .anyMatch(kw -> kw.equals(fieldName.toLowerCase()));
     }
 
-    private boolean isFieldBooleanStartingFromIs(ClassField classField) {
-        return classField.isBooleanType() && isFieldNameStartingFromIs(classField.getFieldName());
+    private boolean isFieldBooleanStartingFromIs(Field field) {
+        return field.isBooleanType() && isFieldNameStartingFromIs(field.getFieldName());
     }
 
     private boolean isFieldNameStartingFromIs(String fieldName) {

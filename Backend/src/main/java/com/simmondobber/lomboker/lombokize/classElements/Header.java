@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.codeElement;
+package com.simmondobber.lomboker.lombokize.classElements;
 
 import com.simmondobber.lomboker.lombokize.enums.Annotation;
 import com.simmondobber.lomboker.lombokize.helpers.extractors.AnnotationExtractor;
@@ -6,18 +6,18 @@ import lombok.Getter;
 
 import java.util.Set;
 
-public class ClassHeader {
+public class Header {
 
     private final CodeLine header;
     @Getter
     private final Set<Annotation> classAnnotations;
 
-    public ClassHeader(CodeLine header, String classCode) {
+    public Header(CodeLine header, String classCode) {
         this.header = header;
         this.classAnnotations = new AnnotationExtractor().getAnnotationsAboveCodeLine(classCode, header);
     }
 
-    public String getHeaderLine() {
+    public String getLine() {
         return this.header.getLine();
     }
 

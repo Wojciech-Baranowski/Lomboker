@@ -1,6 +1,6 @@
-package com.simmondobber.lomboker.lombokize.helpers.extractors;
+package com.simmondobber.lomboker.lombokize.helpers.extractors.fieldExtractor;
 
-public class TypeExtractor {
+public class FieldTypeExtractor {
 
     public String extractClassFieldTypeFromCodeLine(String line) {
         String trimmedCodeLine = trimCodeLineAtEndOfName(line);

@@ -1,7 +1,7 @@
-package com.simmondobber.lomboker.lombokize.helpers.extractors;
+package com.simmondobber.lomboker.lombokize.helpers.extractors.fieldExtractor;
 
-import com.simmondobber.lomboker.lombokize.codeElement.ClassField;
-import com.simmondobber.lomboker.lombokize.codeElement.CodeLine;
+import com.simmondobber.lomboker.lombokize.classElements.CodeLine;
+import com.simmondobber.lomboker.lombokize.classElements.Field;
 import com.simmondobber.lomboker.lombokize.helpers.factories.ClassFieldFactory;
 import org.apache.commons.lang3.StringUtils;
 
@@ -10,15 +10,15 @@ import java.util.List;
 
 import static com.simmondobber.lomboker.common.Keywords.STATIC;
 
-public class FieldsExtractor {
+public class FieldExtractor {
 
     private final ClassFieldFactory classFieldFactory;
 
-    public FieldsExtractor() {
+    public FieldExtractor() {
         this.classFieldFactory = new ClassFieldFactory();
     }
 
-    public List<ClassField> getClassFieldsFromClassCode(String classCode) {
+    public List<Field> getClassFieldsFromClassCode(String classCode) {
         List<CodeLine> classCodeLines = mapClassCodeToCodeLines(classCode);
         List<CodeLine> classFieldsCodeLines = filterNonStaticClassFieldsFromCodeLines(classCodeLines);
         return createClassFieldsFromCodeLines(classFieldsCodeLines);
@@ -38,7 +38,7 @@ public class FieldsExtractor {
                 .toList();
     }
 
-    private List<ClassField> createClassFieldsFromCodeLines(List<CodeLine> codeLines) {
+    private List<Field> createClassFieldsFromCodeLines(List<CodeLine> codeLines) {
         return codeLines.stream()
                 .map(CodeLine::getLine)
                 .map(this.classFieldFactory::createClassField)

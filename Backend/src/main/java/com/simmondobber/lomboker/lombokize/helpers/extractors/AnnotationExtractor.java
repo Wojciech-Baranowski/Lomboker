@@ -1,6 +1,6 @@
 package com.simmondobber.lomboker.lombokize.helpers.extractors;
 
-import com.simmondobber.lomboker.lombokize.codeElement.CodeLine;
+import com.simmondobber.lomboker.lombokize.classElements.CodeLine;
 import com.simmondobber.lomboker.lombokize.enums.Annotation;
 
 import java.util.Collections;
@@ -22,14 +22,14 @@ public class AnnotationExtractor {
             String previousLine = getPreviousLine(classCode, currentLineIndex, previousLineIndex);
             currentLineIndex = previousLineIndex;
             previousLineIndex = getPreviousLineIndex(classCode, currentLineIndex);
-            annotations.add(Annotation.valueOf(previousLine));
+            annotations.add(Annotation.getBySymbol(previousLine));
         }
         return annotations;
     }
 
     private boolean isPreviousLineAnnotation(String classCode, int currentLineIndex, int previousLineIndex) {
         String previousLine = getPreviousLine(classCode, currentLineIndex, previousLineIndex);
-        return previousLine.startsWith("@");
+        return Annotation.getBySymbol(previousLine) != null;
     }
 
     private String getPreviousLine(String classCode, int currentLineIndex, int previousLineIndex) {

@@ -1,11 +1,11 @@
-package com.simmondobber.lomboker.lombokize.helpers;
+package com.simmondobber.lomboker.lombokize.helpers.cleaners;
 
-import com.simmondobber.lomboker.lombokize.codeElement.ClassHeader;
-import com.simmondobber.lomboker.lombokize.codeElement.ClassMethod;
+import com.simmondobber.lomboker.lombokize.classElements.Header;
+import com.simmondobber.lomboker.lombokize.classElements.Method;
 import com.simmondobber.lomboker.lombokize.enums.Annotation;
 import com.simmondobber.lomboker.lombokize.helpers.extractors.AnnotationExtractor;
-import com.simmondobber.lomboker.lombokize.helpers.extractors.ClassExtractor;
-import com.simmondobber.lomboker.lombokize.helpers.extractors.MethodsExtractor;
+import com.simmondobber.lomboker.lombokize.helpers.extractors.MethodExtractor;
+import com.simmondobber.lomboker.lombokize.helpers.extractors.classExtractor.ClassHeaderExtractor;
 import com.simmondobber.lomboker.lombokize.helpers.factories.AnnotationFactory;
 import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 import org.apache.commons.lang3.StringUtils;
@@ -16,20 +16,20 @@ import java.util.Set;
 
 public class BoilerplateCleaner {
 
-    private final MethodsExtractor methodsExtractor;
-    private final ClassExtractor classExtractor;
-    private final AnnotationFactory annotationFactory;
+    private final MethodExtractor methodExtractor;
+    private final ClassHeaderExtractor classHeaderExtractor;
     private final AnnotationExtractor annotationExtractor;
+    private final AnnotationFactory annotationFactory;
 
     public BoilerplateCleaner() {
-        this.methodsExtractor = new MethodsExtractor();
-        this.classExtractor = new ClassExtractor();
-        this.annotationFactory = new AnnotationFactory();
+        this.methodExtractor = new MethodExtractor();
+        this.classHeaderExtractor = new ClassHeaderExtractor();
         this.annotationExtractor = new AnnotationExtractor();
+        this.annotationFactory = new AnnotationFactory();
     }
 
-    public String clearClassCodeFromBoilerplate(String classCode, boolean thisPrefix, AnnotationsConfig annotationsConfig) {
-        List<ClassMethod> gettersAndSetters = this.methodsExtractor.getGettersAndSettersContainedByClass(classCode, thisPrefix);
+    public String clearClassCodeFromBoilerplateAndAddChosenAnnotations(String classCode, AnnotationsConfig annotationsConfig, boolean thisPrefix) {
+        List<Method> gettersAndSetters = this.methodExtractor.getGettersAndSettersContainedByClass(classCode, thisPrefix);
         classCode = deleteGettersAndSettersFromClassCode(classCode, gettersAndSetters);
         classCode = addMethodAnnotationsToClassCode(classCode, gettersAndSetters);
         classCode = deleteRedundantAnnotationsFromClassCode(classCode, annotationsConfig);
@@ -37,16 +37,16 @@ public class BoilerplateCleaner {
         return classCode;
     }
 
-    private String deleteGettersAndSettersFromClassCode(String classCode, List<ClassMethod> gettersAndSetters) {
+    private String deleteGettersAndSettersFromClassCode(String classCode, List<Method> gettersAndSetters) {
         List<String> gettersAndSettersCodeWithNewlinePrefix = mapMethodsToCodesWithNewlinePrefix(gettersAndSetters);
         String[] gettersAndSettersAsArray = getMethodsCodeAsArray(gettersAndSettersCodeWithNewlinePrefix);
         String[] emptyStringsArray = createArrayOfEmptyStringsOfGivenLength(gettersAndSetters.size());
         return StringUtils.replaceEach(classCode, gettersAndSettersAsArray, emptyStringsArray);
     }
 
-    private List<String> mapMethodsToCodesWithNewlinePrefix(List<ClassMethod> gettersAndSetters) {
+    private List<String> mapMethodsToCodesWithNewlinePrefix(List<Method> gettersAndSetters) {
         return gettersAndSetters.stream()
-                .map(ClassMethod::getMethodCode)
+                .map(Method::getMethodCode)
                 .map(method -> "\n" + method)
                 .toList();
     }
@@ -59,14 +59,14 @@ public class BoilerplateCleaner {
         return Collections.nCopies(length, "").toArray(new String[0]);
     }
 
-    private String addMethodAnnotationsToClassCode(String classCode, List<ClassMethod> gettersAndSetters) {
-        for (ClassMethod method : gettersAndSetters) {
+    private String addMethodAnnotationsToClassCode(String classCode, List<Method> gettersAndSetters) {
+        for (Method method : gettersAndSetters) {
             classCode = addMethodAnnotationToClassCode(classCode, method);
         }
         return classCode;
     }
 
-    private String addMethodAnnotationToClassCode(String classCode, ClassMethod method) {
+    private String addMethodAnnotationToClassCode(String classCode, Method method) {
         int indexOfClassFieldInClassCode = classCode.indexOf(method.getCorrespondingFieldCode());
         String firstPartOfClassCode = classCode.substring(0, indexOfClassFieldInClassCode);
         String secondPartOfClassCode = classCode.substring(indexOfClassFieldInClassCode);
@@ -74,10 +74,14 @@ public class BoilerplateCleaner {
     }
 
     private String addGlobalAnnotationsToClassCode(String classCode, AnnotationsConfig annotationsConfig) {
-        ClassHeader classHeader = this.classExtractor.getMostOuterClassHeaderFromClassCode(classCode);
-        int classHeaderIndex = classCode.indexOf(classHeader.getHeaderLine());
-        Set<Annotation> excludedAnnotations = this.annotationExtractor.getAllAnnotationsDisjointWithGivenAnnotationSet(classHeader.getClassAnnotations());
+        Header header = this.classHeaderExtractor.getOuterClassHeader(classCode);
+        Set<Annotation> excludedAnnotations = this.annotationExtractor.getAllAnnotationsDisjointWithGivenAnnotationSet(header.getClassAnnotations());
         String annotations = this.annotationFactory.createAnnotations(annotationsConfig, excludedAnnotations);
+        return insertGlobalAnnotations(classCode, annotations, header);
+    }
+
+    private String insertGlobalAnnotations(String classCode, String annotations, Header header) {
+        int classHeaderIndex = classCode.indexOf(header.getLine());
         String firstPartOfClassCode = classCode.substring(0, classHeaderIndex);
         String secondPartOfClassCode = classCode.substring(classHeaderIndex);
         return StringUtils.join(firstPartOfClassCode, annotations, secondPartOfClassCode);
@@ -94,10 +98,10 @@ public class BoilerplateCleaner {
     }
 
     private String getGetterKeywordWithNewLineAndIndentPrefix() {
-        return "\n    " + Annotation.GETTER.getKeyword();
+        return "\n    " + Annotation.GETTER.getSymbol();
     }
 
     private String getSetterKeywordWithNewLineAndIndentPrefix() {
-        return "\n    " + Annotation.SETTER.getKeyword();
+        return "\n    " + Annotation.SETTER.getSymbol();
     }
 }

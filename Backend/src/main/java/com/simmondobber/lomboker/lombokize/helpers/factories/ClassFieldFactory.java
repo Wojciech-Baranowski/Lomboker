@@ -1,24 +1,24 @@
 package com.simmondobber.lomboker.lombokize.helpers.factories;
 
-import com.simmondobber.lomboker.lombokize.codeElement.ClassField;
-import com.simmondobber.lomboker.lombokize.codeElement.CodeLine;
-import com.simmondobber.lomboker.lombokize.helpers.extractors.NameExtractor;
-import com.simmondobber.lomboker.lombokize.helpers.extractors.TypeExtractor;
+import com.simmondobber.lomboker.lombokize.classElements.CodeLine;
+import com.simmondobber.lomboker.lombokize.classElements.Field;
+import com.simmondobber.lomboker.lombokize.helpers.extractors.fieldExtractor.FieldNameExtractor;
+import com.simmondobber.lomboker.lombokize.helpers.extractors.fieldExtractor.FieldTypeExtractor;
 
 public class ClassFieldFactory {
 
-    private final TypeExtractor typeExtractor;
-    private final NameExtractor nameExtractor;
+    private final FieldTypeExtractor fieldTypeExtractor;
+    private final FieldNameExtractor fieldNameExtractor;
 
     public ClassFieldFactory() {
-        this.typeExtractor = new TypeExtractor();
-        this.nameExtractor = new NameExtractor();
+        this.fieldTypeExtractor = new FieldTypeExtractor();
+        this.fieldNameExtractor = new FieldNameExtractor();
     }
 
-    public ClassField createClassField(String text) {
+    public Field createClassField(String text) {
         CodeLine codeLine = new CodeLine(text);
-        String fieldName = nameExtractor.extractClassFieldNameFromCodeLine(codeLine.getLine());
-        String fieldType = typeExtractor.extractClassFieldTypeFromCodeLine(codeLine.getLine());
-        return new ClassField(fieldName, fieldType, codeLine);
+        String fieldName = fieldNameExtractor.extractClassFieldNameFromCodeLine(codeLine.getLine());
+        String fieldType = fieldTypeExtractor.extractClassFieldTypeFromCodeLine(codeLine.getLine());
+        return new Field(fieldName, fieldType, codeLine);
     }
 }
