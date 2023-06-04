@@ -1,99 +1,100 @@
 <div id="page">
-    <div id="title">
+    <div id="title" [ngClass]="headerBackground">
         <marquee direction="right" behavior="alternate">
             <h1>LOMBOKER</h1>
         </marquee>
     </div>
 
     <form id="lombokizeForm">
-        <div id="optionsBack">
+        <div id="optionsBack" [ngClass]="bodyBackground">
             <h2>Options:</h2>
-            <div id="options">
+            <div id="options" [ngClass]="sectionBackground">
                 <h3>Indentations:</h3>
                 <div style="display: flex">
                     <label class="button">
                         space
-                        <input [(ngModel)]="indentType" type="radio" name="indents" [value]="0"/>
-                        <span class="checkmark"></span>
+                        <input [(ngModel)]="indentType" [value]="0" (click)="setIndentTypeCookieToSpace()" type="radio" name="indents"/>
+                        <span class="checkmark" [ngClass]="buttonBackground"></span>
                     </label>
                     <label class="button">
                         tabulator
-                        <input [(ngModel)]="indentType" type="radio" name="indents" [value]="1"/>
-                        <span class="checkmark"></span>
+                        <input [(ngModel)]="indentType" [value]="1" (click)="setIndentTypeCookieToTabulator()" type="radio" name="indents"/>
+                        <span class="checkmark" [ngClass]="buttonBackground"></span>
                     </label>
                 </div>
                 <h3>Getters structure:</h3>
                 <label class="button">
                     this.
-                    <input [(ngModel)]="thisPrefix" type="checkbox" name="thisPrefix"/>
-                    <span class="checkmark"></span>
+                    <input [(ngModel)]="thisPrefix" (click)="setThisPrefixCookie()" type="checkbox" name="thisPrefix"/>
+                    <span class="checkmark" [ngClass]="buttonBackground"></span>
                 </label>
                 <h3>Global annotations:</h3>
                 <label class="button">
                     Getter
                     <input [(ngModel)]="getter" type="checkbox" name="getter"/>
-                    <span class="checkmark"></span>
+                    <span class="checkmark" [ngClass]="buttonBackground"></span>
                 </label>
                 <label class="button">
                     Setter
                     <input [(ngModel)]="setter" type="checkbox" name="setter"/>
-                    <span class="checkmark"></span>
+                    <span class="checkmark" [ngClass]="buttonBackground"></span>
                 </label>
                 <label class="button">
                     NoArgsConstructor
                     <input [(ngModel)]="noArgsConstructor" type="checkbox" name="noArgsConstructor"/>
-                    <span class="checkmark"></span>
+                    <span class="checkmark" [ngClass]="buttonBackground"></span>
                 </label>
                 <label class="button">
                     AllArgsConstructor
                     <input [(ngModel)]="allArgsConstructor" type="checkbox" name="allArgsConstructor"/>
-                    <span class="checkmark"></span>
+                    <span class="checkmark" [ngClass]="buttonBackground"></span>
                 </label>
                 <div style="display: flex">
                     <label class="button">
                         Builder &nbsp;
                         <input [(ngModel)]="builder" (click)="excludeSuperBuilder()" type="checkbox" name="builder"/>
-                        <span class="checkmark"></span>
+                        <span class="checkmark" [ngClass]="buttonBackground"></span>
                     </label>
                     <label class="button">
                         SuperBuilder
                         <input [(ngModel)]="superBuilder" (click)="excludeBuilder()" type="checkbox" name="superBuilder"/>
-                        <span class="checkmark"></span>
+                        <span class="checkmark" [ngClass]="buttonBackground"></span>
                     </label>
                     <label class="button">
                         toBuilder
                         <input [(ngModel)]="toBuilder" (click)="includeBuilderIfNoneChosen()" type="checkbox" name="toBuilder"/>
-                        <span class="checkmark"></span>
+                        <span class="checkmark" [ngClass]="buttonBackground"></span>
                     </label>
                 </div>
                 <div style="display: flex">
                     <label class="button">
                         ToString
                         <input [(ngModel)]="toString" (click)="excludeCallSuperIfToStringNotChosen()" type="checkbox" name="_toString"/>
-                        <span class="checkmark"></span>
+                        <span class="checkmark" [ngClass]="buttonBackground"></span>
                     </label>
                     <label class="button">
                         callSuper
                         <input [(ngModel)]="callSuper" (click)="includeToStringIfNotChosen()" type="checkbox" name="callSuper"/>
-                        <span class="checkmark"></span>
+                        <span class="checkmark" [ngClass]="buttonBackground"></span>
                     </label>
                 </div>
-                <input (click)="lombokize()" class="submitButton" type="submit" value="LOMBOKIZE!" name="submit">
+                <input (click)="lombokize()" type="submit" value="LOMBOKIZE!" name="submit" class="submitButton" [ngClass]="buttonBackground">
             </div>
         </div>
-        <div id="codeToLombokizeBack">
+        <div id="codeToLombokizeBack" [ngClass]="bodyBackground">
             <h2>Code to lombokize:</h2>
-            <textarea [(ngModel)]="codeToLombokize" name="codeToLombokize">
+            <textarea [(ngModel)]="codeToLombokize" name="codeToLombokize" [ngClass]="sectionBackground">
             </textarea>
         </div>
-        <div id="lombokizedCodeBack">
+        <div id="lombokizedCodeBack" [ngClass]="bodyBackground">
             <h2>Lombokized code:</h2>
-            <textarea [(ngModel)]="lombokizedCode" name="lombokizedCode">
+            <textarea [(ngModel)]="lombokizedCode" name="lombokizedCode" [ngClass]="sectionBackground">
             </textarea>
         </div>
     </form>
 
-    <div id="footer">
-
+    <div id="footer" [ngClass]="bodyBackground">
+        <button (click)="changeBackgroundToCreamCookie()" class="colorButton creamCookieHeaderBackground"></button>
+        <button (click)="changeBackgroundToBlue()" class="colorButton blueHeaderBackground"></button>
     </div>
 </div>
