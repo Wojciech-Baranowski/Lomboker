@@ -1,17 +1,19 @@
+version: '3.8'
 services:
-    lombokerFrontend:
-        image: simmondobber/lombokerfrontend:lombokerFrontend
-        build:
-            context: .
-            dockerfile:
-                Frontend/Dockerfile
-        ports:
-            - "4200:4200"
+
     lombokerBackend:
-        image: simmondobber/lombokerbackend:lombokerBackend
+        image: simmondobber/lombokerbackend
         build:
-            context: .
+            context: Backend
             dockerfile:
-                Backend/Dockerfile
+                Dockerfile
         ports:
             - "8080:8080"
+    lombokerFrontend:
+        image: simmondobber/lombokerfrontend
+        build:
+            context: Frontend
+            dockerfile:
+                Dockerfile
+        ports:
+            - "4200:4200"
