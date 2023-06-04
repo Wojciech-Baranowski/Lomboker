@@ -92,6 +92,7 @@ textarea {
     margin-top: 2vmin;
     border-radius: 1vmin;
     padding: 2vmin;
+    overflow: auto;
 }
 
 #page {
@@ -107,7 +108,6 @@ textarea {
     width: 24%;
     box-sizing: border-box;
     padding: 1%;
-    overflow: auto;
 }
 
 #codeToLombokizeBack {
