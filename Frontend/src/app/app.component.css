@@ -105,21 +105,21 @@ textarea {
 
 #optionsBack {
     height: 100%;
-    width: 24%;
+    width: 30%;
     box-sizing: border-box;
     padding: 1%;
 }
 
 #codeToLombokizeBack {
     height: 100%;
-    width: 38%;
+    width: 35%;
     box-sizing: border-box;
     padding: 1%;
 }
 
 #lombokizedCodeBack {
     height: 100%;
-    width: 38%;
+    width: 35%;
     box-sizing: border-box;
     padding: 1%;
 }
