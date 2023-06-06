@@ -12,9 +12,29 @@
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="jboss repository" />
+      <option name="name" value="Jboss Maven2 Repository" />
+      <option name="url" value="http://repository.jboss.org/nexus/content/groups/public" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="jboss-deprecated" />
+      <option name="name" value="JBoss Deprecated" />
+      <option name="url" value="http://repository.jboss.org/nexus/content/repositories/deprecated/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="nexus.cui.private" />
+      <option name="name" value="nexus cui" />
+      <option name="url" value="https://nexus.dev.pg.gda.pl/repos/content/groups/private/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="nexus.cui" />
+      <option name="name" value="nexus cui" />
+      <option name="url" value="https://nexus.dev.pg.gda.pl/repos/content/groups/public/" />
     </remote-repository>
   </component>
 </project>

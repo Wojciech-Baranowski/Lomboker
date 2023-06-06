@@ -13,7 +13,7 @@ import {CookieService} from "ngx-cookie-service";
 
 export class AppComponent implements OnInit {
 
-    private LOMBOKIZE_URL: string = 'http://localhost:8080/lombokize';
+    private LOMBOKIZE_URL: string = 'http://localhost:3821/lombokize';
     private backgroundName: string;
 
     headerBackground: string;

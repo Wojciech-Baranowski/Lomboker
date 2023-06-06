@@ -82,7 +82,7 @@ textarea {
     margin-top: 2vmin;
     border-radius: 1vmin;
     padding: 2vmin;
-    white-space: nowrap;
+    white-space: pre;
 }
 
 #options {
@@ -105,21 +105,21 @@ textarea {
 
 #optionsBack {
     height: 100%;
-    width: 30%;
+    width: 38%;
     box-sizing: border-box;
     padding: 1%;
 }
 
 #codeToLombokizeBack {
     height: 100%;
-    width: 35%;
+    width: 31%;
     box-sizing: border-box;
     padding: 1%;
 }
 
 #lombokizedCodeBack {
     height: 100%;
-    width: 35%;
+    width: 31%;
     box-sizing: border-box;
     padding: 1%;
 }
