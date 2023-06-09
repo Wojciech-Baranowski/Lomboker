@@ -3,6 +3,7 @@ package com.simmondobber.lomboker.lombokize.helpers.transformators;
 import com.simmondobber.lomboker.lombokize.enums.IndentType;
 import com.simmondobber.lomboker.lombokize.helpers.cleaners.AnnotationCleaner;
 import com.simmondobber.lomboker.lombokize.helpers.cleaners.BoilerplateCleaner;
+import com.simmondobber.lomboker.lombokize.helpers.cleaners.ImportCleaner;
 import com.simmondobber.lomboker.lombokize.helpers.extractors.classExtractor.ClassExtractor;
 import com.simmondobber.lomboker.lombokize.helpers.formatters.CodeFormatter;
 import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
@@ -12,9 +13,11 @@ import java.util.List;
 
 public class Lombokizer {
 
-    private final BoilerplateCleaner boilerplateCleaner;
+
     private final CodeFormatter codeFormatter;
     private final ClassExtractor classExtractor;
+    private final BoilerplateCleaner boilerplateCleaner;
+    private final ImportCleaner importCleaner;
     private final AnnotationCleaner annotationCleaner;
     private final AnnotationsConfig annotationsConfig;
     private final IndentType indentType;
@@ -22,9 +25,10 @@ public class Lombokizer {
 
 
     public Lombokizer(CodeToLombokizeTO codeToLombokizeTO) {
-        this.boilerplateCleaner = new BoilerplateCleaner();
         this.codeFormatter = new CodeFormatter();
         this.classExtractor = new ClassExtractor();
+        this.boilerplateCleaner = new BoilerplateCleaner();
+        this.importCleaner = new ImportCleaner();
         this.annotationCleaner = new AnnotationCleaner();
         this.annotationsConfig = codeToLombokizeTO.getAnnotationsConfig();
         this.indentType = codeToLombokizeTO.getIndentType();
@@ -35,6 +39,7 @@ public class Lombokizer {
         code = this.codeFormatter.formatIndentsToSpaces(code, this.indentType);
         code = this.codeFormatter.removeBaseIndents(code);
         code = this.annotationCleaner.removeRedundantAnnotations(code, this.annotationsConfig);
+        code = this.importCleaner.addLombokImports(code, this.annotationsConfig);
         code = clearClasses(code, false);
         code = this.codeFormatter.formatSpacesToIndents(code, this.indentType);
         return code;
