@@ -24,6 +24,7 @@ h3 {
 input {
     height: 0;
     width: 0;
+    visibility: hidden;
 }
 
 .button {
@@ -34,7 +35,8 @@ input {
     user-select: none;
     font-size: 2vmin;
     margin-bottom: 2vmin;
-    margin-left: 3vmin;
+    margin-left: 2vmin;
+    margin-right: -2vmin;
 }
 
 .checkmark {
@@ -105,21 +107,21 @@ textarea {
 
 #optionsBack {
     height: 100%;
-    width: 38%;
+    width: 36%;
     box-sizing: border-box;
     padding: 1%;
 }
 
 #codeToLombokizeBack {
     height: 100%;
-    width: 31%;
+    width: 32%;
     box-sizing: border-box;
     padding: 1%;
 }
 
 #lombokizedCodeBack {
     height: 100%;
-    width: 31%;
+    width: 32%;
     box-sizing: border-box;
     padding: 1%;
 }
