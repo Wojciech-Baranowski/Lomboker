@@ -42,6 +42,6 @@ public class ClassExtractor {
     private String stripClassCodeOfOuterClass(String classCode) {
         int secondLineIndex = classCode.indexOf("\n") + 1;
         int secondToLastLineIndex = classCode.lastIndexOf("}\n") + 1;
-        return classCode.substring(secondLineIndex, secondToLastLineIndex);
+        return classCode.substring(secondLineIndex, Math.max(secondToLastLineIndex, secondLineIndex));
     }
 }

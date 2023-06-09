@@ -17,8 +17,9 @@ public class AnnotationCleaner {
     public String removeRedundantAnnotations(String code, AnnotationsConfig annotationsConfig) {
         List<String> annotationsToRemove = getAnnotationsToRemoveKeywords(annotationsConfig);
         return Arrays.stream(code.split("\n"))
+                .map(line -> line + "\n")
                 .map(line -> replaceLineWithEmptyStringIfLineIsAnnotation(line, annotationsToRemove))
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining());
     }
 
     private String replaceLineWithEmptyStringIfLineIsAnnotation(String line, List<String> annotationsToRemove) {

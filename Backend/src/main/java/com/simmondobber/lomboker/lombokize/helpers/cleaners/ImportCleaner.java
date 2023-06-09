@@ -2,6 +2,7 @@ package com.simmondobber.lomboker.lombokize.helpers.cleaners;
 
 import com.simmondobber.lomboker.lombokize.helpers.factories.ImportFactory;
 import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
+import org.apache.commons.lang3.StringUtils;
 
 public class ImportCleaner {
 
@@ -13,8 +14,15 @@ public class ImportCleaner {
     }
 
     public String addLombokImports(String classCode, AnnotationsConfig annotationsConfig) {
-        int lombokerImportsIndexInCode = getLombokerImportsIndexInCode(classCode);
         String imports = this.importFactory.createLombokImports(classCode, annotationsConfig);
+        if(StringUtils.isNotEmpty(imports)) {
+            classCode = mergeImportsIntoClassCode(classCode, imports);
+        }
+        return classCode;
+    }
+
+    private String mergeImportsIntoClassCode(String classCode, String imports) {
+        int lombokerImportsIndexInCode = getLombokerImportsIndexInCode(classCode);
         String partBeforeImports = classCode.substring(0, lombokerImportsIndexInCode);
         String optionalEmptyLineBeforeImports = classCode.charAt(lombokerImportsIndexInCode) == '\n' ? "\n" : "";
         String partAfterImports = classCode.substring(Math.max(lombokerImportsIndexInCode - 1, 0));
