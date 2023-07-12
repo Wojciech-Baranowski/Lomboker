@@ -8,7 +8,7 @@ public class ClassKeyword extends SimpleAstComponent {
 
     public final static List<String> KEYWORDS = List.of("abstract", "sealed", "final", "non-sealed", "public");
 
-    public ClassKeyword(String syntax) {
-        super(syntax);
+    public ClassKeyword(String syntax, String separator) {
+        super(syntax, separator);
     }
 }

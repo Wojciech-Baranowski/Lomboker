@@ -5,7 +5,6 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.complexAstComponents.class_.Class;
 import com.simmondobber.ast.components.complexAstComponents.field.Field;
 import com.simmondobber.ast.components.complexAstComponents.method.Method;
-import com.simmondobber.ast.components.simpleAstComponents.Separator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,18 +12,14 @@ import java.util.List;
 public class ClassContent extends ComplexAstComponent {
 
     private final List<ClassContentComponent> classContentComponents;
-    private final Separator separator;
 
-    public ClassContent(List<ClassContentComponent> classContentComponents, Separator separator) {
+    public ClassContent(List<ClassContentComponent> classContentComponents) {
         this.classContentComponents = classContentComponents;
-        this.separator = separator;
     }
 
     @Override
     public List<AstComponent> getChildAstComponents() {
-        List<AstComponent> components = new ArrayList<>(this.classContentComponents);
-        components.add(this.separator);
-        return components;
+        return new ArrayList<>(this.classContentComponents);
     }
 
     public List<Field> getFields() {

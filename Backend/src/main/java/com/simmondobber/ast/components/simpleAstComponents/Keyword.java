@@ -4,7 +4,7 @@ import com.simmondobber.ast.components.SimpleAstComponent;
 
 public class Keyword extends SimpleAstComponent {
 
-    public Keyword(String syntax) {
-        super(syntax);
+    public Keyword(String syntax, String separator) {
+        super(syntax, separator);
     }
 }

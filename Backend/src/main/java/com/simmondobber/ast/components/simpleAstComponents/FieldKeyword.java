@@ -8,7 +8,7 @@ public class FieldKeyword extends SimpleAstComponent {
 
     public final static List<String> KEYWORDS = List.of("final", "private", "protected", "public", "static", "transient", "volatile");
 
-    public FieldKeyword(String syntax) {
-        super(syntax);
+    public FieldKeyword(String syntax, String separator) {
+        super(syntax, separator);
     }
 }

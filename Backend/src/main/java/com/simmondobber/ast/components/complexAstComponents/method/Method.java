@@ -8,7 +8,6 @@ import com.simmondobber.ast.components.complexAstComponents.type.Type;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.MethodBody;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
-import com.simmondobber.ast.components.simpleAstComponents.Separator;
 
 import java.util.List;
 
@@ -20,20 +19,18 @@ public class Method extends ComplexAstComponent {
     private final Args args;
     private final MethodBody methodBody;
     private final Character semicolon;
-    private final Separator separator;
 
-    public Method(MethodPreamble methodPreamble, Type type, Name name, Args args, MethodBody methodBody, Separator separator) {
+    public Method(MethodPreamble methodPreamble, Type type, Name name, Args args, MethodBody methodBody, Character semicolon) {
         this.methodPreamble = methodPreamble;
         this.type = type;
         this.name = name;
         this.args = args;
         this.methodBody = methodBody;
-        this.semicolon = new Character(";");
-        this.separator = separator;
+        this.semicolon = semicolon;
     }
 
     @Override
     public List<AstComponent> getChildAstComponents() {
-        return List.of(this.methodPreamble, this.type, this.name, this.args, this.methodBody, this.semicolon, this.separator);
+        return List.of(this.methodPreamble, this.type, this.name, this.args, this.methodBody, this.semicolon);
     }
 }

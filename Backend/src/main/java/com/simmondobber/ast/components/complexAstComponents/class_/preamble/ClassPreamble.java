@@ -4,7 +4,6 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.complexAstComponents.annotation.Annotation;
 import com.simmondobber.ast.components.simpleAstComponents.ClassKeyword;
-import com.simmondobber.ast.components.simpleAstComponents.Separator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,18 +11,14 @@ import java.util.List;
 public class ClassPreamble extends ComplexAstComponent {
 
     private final List<ClassPreambleComponent> preambleComponents;
-    private final Separator separator;
 
-    public ClassPreamble(List<ClassPreambleComponent> preambleComponents, Separator separator) {
+    public ClassPreamble(List<ClassPreambleComponent> preambleComponents) {
         this.preambleComponents = preambleComponents;
-        this.separator = separator;
     }
 
     @Override
     public List<AstComponent> getChildAstComponents() {
-        List<AstComponent> components = new ArrayList<>(this.preambleComponents);
-        components.add(this.separator);
-        return components;
+        return new ArrayList<>(this.preambleComponents);
     }
 
     public List<Annotation> getAnnotations() {

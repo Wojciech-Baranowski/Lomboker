@@ -8,7 +8,7 @@ public class ClassTypeKeyword extends SimpleAstComponent {
 
     public final static List<String> KEYWORDS = List.of("class", "interface", "enum", "record", "@interface");
 
-    public ClassTypeKeyword(String syntax) {
-        super(syntax);
+    public ClassTypeKeyword(String syntax, String separator) {
+        super(syntax, separator);
     }
 }
