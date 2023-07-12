@@ -2,27 +2,29 @@ package com.simmondobber.ast.components.complexAstComponents.field.preamble;
 
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
-import com.simmondobber.ast.components.complexAstComponents.generic.Generic;
 import com.simmondobber.ast.components.complexAstComponents.annotation.Annotation;
+import com.simmondobber.ast.components.complexAstComponents.generic.Generic;
 import com.simmondobber.ast.components.simpleAstComponents.FieldKeyword;
-import com.simmondobber.ast.components.simpleAstComponents.Interjection;
+import com.simmondobber.ast.components.simpleAstComponents.Separator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FieldPreamble extends ComplexAstComponent {
 
     private final List<FieldPreambleComponent> preambleComponents;
+    private final Separator separator;
 
-    public FieldPreamble(List<Interjection> interjections, List<FieldPreambleComponent> preambleComponents) {
-        super(interjections);
+    public FieldPreamble(List<FieldPreambleComponent> preambleComponents, Separator separator) {
         this.preambleComponents = preambleComponents;
+        this.separator = separator;
     }
 
     @Override
     public List<AstComponent> getChildAstComponents() {
-        return this.preambleComponents.stream()
-                .map(component -> (AstComponent) component)
-                .toList();
+        List<AstComponent> components = new ArrayList<>(this.preambleComponents);
+        components.add(this.separator);
+        return components;
     }
     
     public List<Annotation> getAnnotations() {

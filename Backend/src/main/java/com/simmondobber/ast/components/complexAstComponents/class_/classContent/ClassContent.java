@@ -5,24 +5,26 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.complexAstComponents.class_.Class;
 import com.simmondobber.ast.components.complexAstComponents.field.Field;
 import com.simmondobber.ast.components.complexAstComponents.method.Method;
-import com.simmondobber.ast.components.simpleAstComponents.Interjection;
+import com.simmondobber.ast.components.simpleAstComponents.Separator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClassContent extends ComplexAstComponent {
 
     private final List<ClassContentComponent> classContentComponents;
+    private final Separator separator;
 
-    public ClassContent(List<Interjection> interjections, List<ClassContentComponent> classContentComponents) {
-        super(interjections);
+    public ClassContent(List<ClassContentComponent> classContentComponents, Separator separator) {
         this.classContentComponents = classContentComponents;
+        this.separator = separator;
     }
 
     @Override
     public List<AstComponent> getChildAstComponents() {
-        return this.classContentComponents.stream()
-                .map(component -> (AstComponent) component)
-                .toList();
+        List<AstComponent> components = new ArrayList<>(this.classContentComponents);
+        components.add(this.separator);
+        return components;
     }
 
     public List<Field> getFields() {
@@ -45,5 +47,4 @@ public class ClassContent extends ComplexAstComponent {
                 .map(component -> (Class) component)
                 .toList();
     }
-
 }

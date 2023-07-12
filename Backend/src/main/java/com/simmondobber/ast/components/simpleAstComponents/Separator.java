@@ -2,9 +2,9 @@ package com.simmondobber.ast.components.simpleAstComponents;
 
 import com.simmondobber.ast.components.SimpleAstComponent;
 
-public class Interjection extends SimpleAstComponent {
+public class Separator extends SimpleAstComponent {
 
-    public Interjection(String syntax) {
+    public Separator(String syntax) {
         super(syntax);
     }
 }

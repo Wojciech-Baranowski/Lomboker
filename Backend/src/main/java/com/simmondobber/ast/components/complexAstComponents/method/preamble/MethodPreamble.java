@@ -4,25 +4,27 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.complexAstComponents.annotation.Annotation;
 import com.simmondobber.ast.components.complexAstComponents.generic.Generic;
-import com.simmondobber.ast.components.simpleAstComponents.Interjection;
 import com.simmondobber.ast.components.simpleAstComponents.MethodKeyword;
+import com.simmondobber.ast.components.simpleAstComponents.Separator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MethodPreamble extends ComplexAstComponent {
 
     private final List<MethodPreambleComponent> preambleComponents;
+    private final Separator separator;
 
-    public MethodPreamble(List<Interjection> interjections, List<MethodPreambleComponent> preambleComponents) {
-        super(interjections);
+    public MethodPreamble(List<MethodPreambleComponent> preambleComponents, Separator separator) {
         this.preambleComponents = preambleComponents;
+        this.separator = separator;
     }
 
     @Override
     public List<AstComponent> getChildAstComponents() {
-        return this.preambleComponents.stream()
-                .map(component -> (AstComponent) component)
-                .toList();
+        List<AstComponent> components = new ArrayList<>(this.preambleComponents);
+        components.add(this.separator);
+        return components;
     }
 
     public List<Annotation> getAnnotations() {
