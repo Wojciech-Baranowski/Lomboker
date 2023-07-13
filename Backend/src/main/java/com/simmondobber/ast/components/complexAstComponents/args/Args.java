@@ -21,6 +21,10 @@ public class Args extends ComplexAstComponent {
 
     @Override
     public List<AstComponent> getChildAstComponents() {
-        return List.of(this.leftBracket, this.listing, this.rightBracket);
+        if (this.listing == null) {
+            return List.of(this.leftBracket, this.rightBracket);
+        } else {
+            return List.of(this.leftBracket, this.listing, this.rightBracket);
+        }
     }
 }

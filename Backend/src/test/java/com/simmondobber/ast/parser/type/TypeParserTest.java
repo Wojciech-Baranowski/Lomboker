@@ -1,7 +1,7 @@
-package com.simmondobber.ast.parser;
+package com.simmondobber.ast.parser.type;
 
 import com.simmondobber.ast.components.complexAstComponents.type.Type;
-import com.simmondobber.ast.parser.complexComponentParser.type.TypeParser;
+import com.simmondobber.ast.parser.Pointer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +10,8 @@ public class TypeParserTest {
     @Test
     public void parser_should_parse_type() {
         //Given
-        String stringToParse = "Entity";
-        String correctlyParsedString = "Entity";
+        String stringToParse = "Entity next";
+        String correctlyParsedString = "Entity ";
         TypeParser typeParser = new TypeParser(new Pointer(stringToParse));
 
         //When

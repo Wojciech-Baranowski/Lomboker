@@ -4,24 +4,30 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
-import com.simmondobber.ast.components.simpleAstComponents.Name;
+import com.simmondobber.ast.components.simpleAstComponents.Path;
 
 import java.util.List;
 
 public class Import extends ComplexAstComponent {
 
-    private final Keyword keyword;
-    private final Name name;
+    private final Keyword importKeyword;
+    private final Keyword staticKeyword;
+    private final Path path;
     private final Character semicolon;
 
-    public Import(Keyword keyword, Name name, Character semicolon) {
-        this.keyword = keyword;
-        this.name = name;
+    public Import(Keyword importKeyword, Keyword staticKeyword, Path path, Character semicolon) {
+        this.importKeyword = importKeyword;
+        this.staticKeyword = staticKeyword;
+        this.path = path;
         this.semicolon = semicolon;
     }
 
     @Override
     protected List<AstComponent> getChildAstComponents() {
-        return List.of(this.keyword, this.name, this.semicolon);
+        if (this.staticKeyword == null) {
+            return List.of(this.importKeyword, this.path, this.semicolon);
+        } else {
+            return List.of(this.importKeyword, this.staticKeyword, this.path, this.semicolon);
+        }
     }
 }

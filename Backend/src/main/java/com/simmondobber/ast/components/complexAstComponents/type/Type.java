@@ -19,6 +19,9 @@ public class Type extends ComplexAstComponent {
 
     @Override
     public List<AstComponent> getChildAstComponents() {
+        if (this.generic == null) {
+            return List.of(this.name);
+        }
         return List.of(this.name, this.generic);
     }
 }

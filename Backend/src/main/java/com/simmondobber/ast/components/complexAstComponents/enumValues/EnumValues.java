@@ -19,6 +19,10 @@ public class EnumValues extends ComplexAstComponent {
 
     @Override
     public List<AstComponent> getChildAstComponents() {
-        return List.of(this.listing, this.semicolon);
+        if (this.semicolon == null) {
+            return List.of(this.listing);
+        } else {
+            return List.of(this.listing, this.semicolon);
+        }
     }
 }

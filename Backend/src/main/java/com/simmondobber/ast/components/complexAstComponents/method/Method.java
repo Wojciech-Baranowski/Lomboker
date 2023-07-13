@@ -31,6 +31,11 @@ public class Method extends ComplexAstComponent {
 
     @Override
     public List<AstComponent> getChildAstComponents() {
+        if (this.methodBody == null) {
+            return List.of(this.methodPreamble, this.type, this.name, this.args, this.semicolon);
+        } else if (this.semicolon == null) {
+            return List.of(this.methodPreamble, this.type, this.name, this.args, this.methodBody);
+        }
         return List.of(this.methodPreamble, this.type, this.name, this.args, this.methodBody, this.semicolon);
     }
 }

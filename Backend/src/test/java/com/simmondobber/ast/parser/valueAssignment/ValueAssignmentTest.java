@@ -1,7 +1,7 @@
-package com.simmondobber.ast.parser;
+package com.simmondobber.ast.parser.valueAssignment;
 
 import com.simmondobber.ast.components.complexAstComponents.valueAssignment.ValueAssignment;
-import com.simmondobber.ast.parser.complexComponentParser.valueAssignment.ValueAssignmentParser;
+import com.simmondobber.ast.parser.Pointer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

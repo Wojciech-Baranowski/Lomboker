@@ -5,6 +5,7 @@ import java.util.Map;
 public class Pointer {
 
     private static final String WORD_REGEX = "[A-Za-z0-9_$]+";
+    private static final String COMPOUND_WORD_REGEX = "[A-Za-z0-9_$.]+";
     private static final String SEPARATOR_REGEX = "[\\s`]+";
     private static final Map<Character, Character> PARENTHESIS = Map.of('(', ')', '{', '}', '<', '>', '[', ']');
 
@@ -16,6 +17,22 @@ public class Pointer {
         this.code = code;
         this.left = 0;
         this.right = 0;
+    }
+
+    public char lookupCharacter() {
+        char character = 0;
+        if (isNotOutOfBounds()) {
+            character = this.code.charAt(this.right);
+        }
+        return character;
+    }
+
+    public String lookupWord() {
+        int pointer = this.right;
+        while (pointer < this.code.length() - 1 && Character.toString(this.code.charAt(pointer)).matches(WORD_REGEX)) {
+            pointer++;
+        }
+        return this.code.substring(this.right, pointer);
     }
 
     public String getCharacter() {
@@ -33,6 +50,12 @@ public class Pointer {
         return getBetween();
     }
 
+    public String getCompoundWord() {
+        cacheIndex();
+        omitCompoundWord();
+        return getBetween();
+    }
+
     public String getSeparator() {
         cacheIndex();
         omitSeparator();
@@ -45,10 +68,20 @@ public class Pointer {
         return getBetween();
     }
 
+    public String getUntil(String stopCharacters) {
+        cacheIndex();
+        omitUntil(stopCharacters, 0);
+        return getBetween();
+    }
+
     public String getInside(char stopCharacter) {
         cacheIndex();
         omitUntil(stopCharacter, 1);
         return getBetween();
+    }
+
+    public String getInsideInclusive(char stopCharacter) {
+        return getInside(stopCharacter) + getCharacter();
     }
 
     public void omitCharacter() {
@@ -57,6 +90,12 @@ public class Pointer {
 
     public void omitWord() {
         while (isNotEnd() && Character.toString(this.code.charAt(this.right)).matches(WORD_REGEX)) {
+            this.right++;
+        }
+    }
+
+    public void omitCompoundWord() {
+        while (isNotEnd() && Character.toString(this.code.charAt(this.right)).matches(COMPOUND_WORD_REGEX)) {
             this.right++;
         }
     }
@@ -73,6 +112,19 @@ public class Pointer {
     public void omitUntil(char stopCharacter, int initialBalance) {
         int balance = initialBalance;
         while (isNotEnd() && (balance != 0 || this.code.charAt(this.right) != stopCharacter)) {
+            this.right++;
+            if (PARENTHESIS.containsKey(this.code.charAt(this.right))) {
+                balance++;
+            }
+            if (PARENTHESIS.containsValue(this.code.charAt(this.right))) {
+                balance--;
+            }
+        }
+    }
+
+    public void omitUntil(String stopCharacters, int initialBalance) {
+        int balance = initialBalance;
+        while (isNotEnd() && (balance != 0 || !stopCharacters.contains(Character.toString(this.code.charAt(this.right))))) {
             this.right++;
             if (PARENTHESIS.containsKey(this.code.charAt(this.right))) {
                 balance++;

@@ -28,6 +28,10 @@ public class Field extends ComplexAstComponent {
 
     @Override
     public List<AstComponent> getChildAstComponents() {
-        return List.of(this.fieldPreamble, this.type, this.name, this.valueAssignment, this.semicolon);
+        if (this.valueAssignment == null) {
+            return List.of(this.fieldPreamble, this.type, this.name, this.semicolon);
+        } else {
+            return List.of(this.fieldPreamble, this.type, this.name, this.valueAssignment, this.semicolon);
+        }
     }
 }

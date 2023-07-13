@@ -1,4 +1,4 @@
-package com.simmondobber.ast.parser.complexComponentParser.args;
+package com.simmondobber.ast.parser.args;
 
 import com.simmondobber.ast.components.complexAstComponents.args.Args;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
@@ -15,7 +15,10 @@ public class ArgsParser extends AstParser {
     @Override
     public Args parse() {
         Character leftBracket = new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
-        Listing listing = new Listing(this.pointer.getInside(')'));
+        Listing listing = null;
+        if (this.pointer.lookupCharacter() != ')') {
+            listing = new Listing(this.pointer.getInside(')'));
+        }
         Character rightBracket = new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
         return new Args(leftBracket, listing, rightBracket);
     }

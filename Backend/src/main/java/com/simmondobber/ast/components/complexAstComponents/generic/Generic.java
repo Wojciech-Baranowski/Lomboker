@@ -2,12 +2,13 @@ package com.simmondobber.ast.components.complexAstComponents.generic;
 
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
+import com.simmondobber.ast.components.complexAstComponents.method.preamble.MethodPreambleComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Extension;
 
 import java.util.List;
 
-public class Generic extends ComplexAstComponent {
+public class Generic extends ComplexAstComponent implements MethodPreambleComponent {
 
     private final Character leftAngle;
     private final Extension extension;

@@ -1,4 +1,4 @@
-package com.simmondobber.ast.parser.complexComponentParser.valueAssignment;
+package com.simmondobber.ast.parser.valueAssignment;
 
 import com.simmondobber.ast.components.complexAstComponents.valueAssignment.ValueAssignment;
 import com.simmondobber.ast.components.simpleAstComponents.Character;

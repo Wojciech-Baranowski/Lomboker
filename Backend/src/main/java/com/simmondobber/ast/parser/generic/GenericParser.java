@@ -1,4 +1,4 @@
-package com.simmondobber.ast.parser.complexComponentParser.generic;
+package com.simmondobber.ast.parser.generic;
 
 import com.simmondobber.ast.components.complexAstComponents.generic.Generic;
 import com.simmondobber.ast.components.simpleAstComponents.Character;

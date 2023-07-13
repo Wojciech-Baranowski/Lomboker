@@ -1,7 +1,7 @@
-package com.simmondobber.ast.parser;
+package com.simmondobber.ast.parser.args;
 
 import com.simmondobber.ast.components.complexAstComponents.args.Args;
-import com.simmondobber.ast.parser.complexComponentParser.args.ArgsParser;
+import com.simmondobber.ast.parser.Pointer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
