@@ -1,7 +1,7 @@
 package com.simmondobber.ast.components.simpleAstComponents;
 
 import com.simmondobber.ast.components.SimpleAstComponent;
-import com.simmondobber.ast.components.complexAstComponents.preamble.PreambleComponent;
+import com.simmondobber.ast.components.complexAstComponents.PreambleComponent;
 
 import java.util.Collection;
 import java.util.List;
