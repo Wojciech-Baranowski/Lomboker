@@ -6,6 +6,7 @@ import com.simmondobber.ast.components.complexAstComponents.Type;
 import com.simmondobber.ast.components.complexAstComponents.ValueAssignment;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
+import com.simmondobber.ast.parser.utils.Pointer;
 
 public class FieldParser extends AstParser {
 

@@ -3,6 +3,7 @@ package com.simmondobber.ast.parser;
 import com.simmondobber.ast.components.complexAstComponents.Generic;
 import com.simmondobber.ast.components.complexAstComponents.Type;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
+import com.simmondobber.ast.parser.utils.Pointer;
 
 public class TypeParser extends AstParser {
 

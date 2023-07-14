@@ -1,4 +1,4 @@
-package com.simmondobber.ast.parser;
+package com.simmondobber.ast.parser.utils;
 
 import java.util.Map;
 

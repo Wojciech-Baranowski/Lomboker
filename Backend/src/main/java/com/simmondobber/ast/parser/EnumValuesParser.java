@@ -3,6 +3,7 @@ package com.simmondobber.ast.parser;
 import com.simmondobber.ast.components.complexAstComponents.EnumValues;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Listing;
+import com.simmondobber.ast.parser.utils.Pointer;
 
 public class EnumValuesParser extends AstParser {
 

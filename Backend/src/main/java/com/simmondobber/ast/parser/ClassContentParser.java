@@ -3,6 +3,7 @@ package com.simmondobber.ast.parser;
 import com.simmondobber.ast.components.complexAstComponents.ClassContent;
 import com.simmondobber.ast.components.complexAstComponents.ClassContentComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
+import com.simmondobber.ast.parser.utils.Pointer;
 
 import java.util.ArrayList;
 import java.util.List;

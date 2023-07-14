@@ -4,6 +4,7 @@ import com.simmondobber.ast.components.complexAstComponents.Package;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
 import com.simmondobber.ast.components.simpleAstComponents.Path;
+import com.simmondobber.ast.parser.utils.Pointer;
 
 public class PackageParser extends AstParser {
 

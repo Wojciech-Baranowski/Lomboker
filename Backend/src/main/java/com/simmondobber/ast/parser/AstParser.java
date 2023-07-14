@@ -1,6 +1,7 @@
 package com.simmondobber.ast.parser;
 
 import com.simmondobber.ast.components.AstComponent;
+import com.simmondobber.ast.parser.utils.Pointer;
 
 public abstract class AstParser {
 

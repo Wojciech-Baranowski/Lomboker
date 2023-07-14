@@ -7,6 +7,7 @@ import com.simmondobber.ast.components.complexAstComponents.Type;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.MethodBody;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
+import com.simmondobber.ast.parser.utils.Pointer;
 
 public class MethodParser extends AstParser {
 

@@ -4,6 +4,7 @@ import com.simmondobber.ast.components.complexAstComponents.ClassBody;
 import com.simmondobber.ast.components.complexAstComponents.ClassContent;
 import com.simmondobber.ast.components.complexAstComponents.EnumValues;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
+import com.simmondobber.ast.parser.utils.Pointer;
 
 public class ClassBodyParser extends AstParser {
 

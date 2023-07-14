@@ -7,6 +7,7 @@ import com.simmondobber.ast.components.complexAstComponents.Preamble;
 import com.simmondobber.ast.components.simpleAstComponents.Extension;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
+import com.simmondobber.ast.parser.utils.Pointer;
 
 import java.util.List;
 

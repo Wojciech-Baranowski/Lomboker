@@ -3,6 +3,7 @@ package com.simmondobber.ast.parser;
 import com.simmondobber.ast.components.complexAstComponents.ValueAssignment;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Value;
+import com.simmondobber.ast.parser.utils.Pointer;
 
 public class ValueAssignmentParser extends AstParser {
 
