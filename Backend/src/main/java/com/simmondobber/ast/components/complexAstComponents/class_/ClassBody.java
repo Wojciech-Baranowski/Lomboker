@@ -2,7 +2,6 @@ package com.simmondobber.ast.components.complexAstComponents.class_;
 
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
-import com.simmondobber.ast.components.complexAstComponents.class_.classContent.ClassContent;
 import com.simmondobber.ast.components.complexAstComponents.enumValues.EnumValues;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 
@@ -24,6 +23,10 @@ public class ClassBody extends ComplexAstComponent {
 
     @Override
     protected List<AstComponent> getChildAstComponents() {
-        return List.of(this.leftCurly, this.enumValues, this.classContent, this.rightCurly);
+        if (this.enumValues == null) {
+            return List.of(this.leftCurly, this.classContent, this.rightCurly);
+        } else {
+            return List.of(this.leftCurly, this.enumValues, this.classContent, this.rightCurly);
+        }
     }
 }

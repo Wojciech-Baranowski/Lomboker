@@ -17,7 +17,7 @@ public class ArgsParser extends AstParser {
         Character leftBracket = new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
         Listing listing = null;
         if (this.pointer.lookupCharacter() != ')') {
-            listing = new Listing(this.pointer.getInside(')'));
+            listing = new Listing(this.pointer.getUntil(')'));
         }
         Character rightBracket = new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
         return new Args(leftBracket, listing, rightBracket);

@@ -28,11 +28,22 @@ public class Pointer {
     }
 
     public String lookupWord() {
-        int pointer = this.right;
-        while (pointer < this.code.length() - 1 && Character.toString(this.code.charAt(pointer)).matches(WORD_REGEX)) {
-            pointer++;
-        }
-        return this.code.substring(this.right, pointer);
+        String word = getWord();
+        moveBackToCachedIndex();
+        return word;
+    }
+
+    public char lookupCharacterAfterWordAndSeparator() {
+        cacheIndex();
+        omitWord();
+        omitSeparator();
+        char character = lookupCharacter();
+        moveBackToCachedIndex();
+        return character;
+    }
+
+    public int lookupIndexOf(char character) {
+        return this.code.indexOf(character, this.right);
     }
 
     public String getCharacter() {
@@ -64,24 +75,18 @@ public class Pointer {
 
     public String getUntil(char stopCharacter) {
         cacheIndex();
-        omitUntil(stopCharacter, 0);
+        omitUntil(stopCharacter);
         return getBetween();
     }
 
     public String getUntil(String stopCharacters) {
         cacheIndex();
-        omitUntil(stopCharacters, 0);
+        omitUntil(stopCharacters);
         return getBetween();
     }
 
-    public String getInside(char stopCharacter) {
-        cacheIndex();
-        omitUntil(stopCharacter, 1);
-        return getBetween();
-    }
-
-    public String getInsideInclusive(char stopCharacter) {
-        return getInside(stopCharacter) + getCharacter();
+    public String getUntilInclusive(char stopCharacter) {
+        return getUntil(stopCharacter) + getCharacter();
     }
 
     public void omitCharacter() {
@@ -109,9 +114,9 @@ public class Pointer {
         }
     }
 
-    public void omitUntil(char stopCharacter, int initialBalance) {
-        int balance = initialBalance;
-        while (isNotEnd() && (balance != 0 || this.code.charAt(this.right) != stopCharacter)) {
+    public void omitUntil(char stopCharacter) {
+        int balance = 0;
+        while (isNotEnd() && (!isBalanced(balance) || this.code.charAt(this.right) != stopCharacter)) {
             this.right++;
             if (PARENTHESIS.containsKey(this.code.charAt(this.right))) {
                 balance++;
@@ -122,9 +127,9 @@ public class Pointer {
         }
     }
 
-    public void omitUntil(String stopCharacters, int initialBalance) {
-        int balance = initialBalance;
-        while (isNotEnd() && (balance != 0 || !stopCharacters.contains(Character.toString(this.code.charAt(this.right))))) {
+    public void omitUntil(String stopCharacters) {
+        int balance = 0;
+        while (isNotEnd() && (!isBalanced(balance) || !stopCharacters.contains(Character.toString(this.code.charAt(this.right))))) {
             this.right++;
             if (PARENTHESIS.containsKey(this.code.charAt(this.right))) {
                 balance++;
@@ -133,6 +138,14 @@ public class Pointer {
                 balance--;
             }
         }
+    }
+
+    public int getCurrentPosition() {
+        return this.right;
+    }
+
+    public void setCurrentPosition(int index) {
+        this.right = index;
     }
 
     private void omitIdentifier() {
@@ -143,11 +156,29 @@ public class Pointer {
         this.left = this.right;
     }
 
+    private void moveBackToCachedIndex() {
+        this.right = this.left;
+    }
+
     private String getBetween() {
         return this.code.substring(this.left, this.right);
     }
 
-    private boolean isNotEnd() {
+    private boolean isBalanced(int currentBalance) {
+        return (currentBalance == -1 && isCurrentCharacterClosingParenthesis()) ||
+                (currentBalance == 1 && isCurrentCharacterOpeningParenthesis()) ||
+                (currentBalance == 0 && !isCurrentCharacterOpeningParenthesis() && !isCurrentCharacterClosingParenthesis());
+    }
+
+    private boolean isCurrentCharacterOpeningParenthesis() {
+        return PARENTHESIS.containsKey(this.code.charAt(this.right));
+    }
+
+    private boolean isCurrentCharacterClosingParenthesis() {
+        return PARENTHESIS.containsValue(this.code.charAt(this.right));
+    }
+
+    public boolean isNotEnd() {
         return this.right < this.code.length() - 1;
     }
 

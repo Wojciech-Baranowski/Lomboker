@@ -3,14 +3,13 @@ package com.simmondobber.ast.components.complexAstComponents.annotation;
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.complexAstComponents.args.Args;
-import com.simmondobber.ast.components.complexAstComponents.field.preamble.FieldPreambleComponent;
-import com.simmondobber.ast.components.complexAstComponents.method.preamble.MethodPreambleComponent;
+import com.simmondobber.ast.components.complexAstComponents.preamble.PreambleComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
 
 import java.util.List;
 
-public class Annotation extends ComplexAstComponent implements FieldPreambleComponent, MethodPreambleComponent {
+public class Annotation extends ComplexAstComponent implements PreambleComponent {
 
     private final Character at;
     private final Name name;

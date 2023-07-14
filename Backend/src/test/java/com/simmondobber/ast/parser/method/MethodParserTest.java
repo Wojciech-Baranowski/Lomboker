@@ -23,6 +23,21 @@ public class MethodParserTest {
     }
 
     @Test
+    public void parser_should_parse_constructor_method() {
+        //Given
+        String stringToParse = "public Point(int x, int y) {\nthis.x = x;\nthis.y = y;\n}\n next";
+        String correctlyParsedString = "public Point(int x, int y) {\nthis.x = x;\nthis.y = y;\n}\n ";
+        MethodParser methodParser = new MethodParser(new Pointer(stringToParse));
+
+        //When
+        Method parsedMethod = methodParser.parse();
+        String parsedString = parsedMethod.getSyntax();
+
+        //Then
+        Assertions.assertEquals(correctlyParsedString, parsedString);
+    }
+
+    @Test
     public void parser_should_parse_method_with_body() {
         //Given
         String stringToParse = "@Getter\nprivate final @Setter private Point calculate(int x, int y) {\nthis.x = x;\nthis.y = y;\n}\n next";

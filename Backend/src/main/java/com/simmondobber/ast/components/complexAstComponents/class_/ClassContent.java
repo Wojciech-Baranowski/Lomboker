@@ -1,8 +1,7 @@
-package com.simmondobber.ast.components.complexAstComponents.class_.classContent;
+package com.simmondobber.ast.components.complexAstComponents.class_;
 
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
-import com.simmondobber.ast.components.complexAstComponents.class_.Class;
 import com.simmondobber.ast.components.complexAstComponents.field.Field;
 import com.simmondobber.ast.components.complexAstComponents.method.Method;
 

@@ -15,7 +15,7 @@ public class GenericParser extends AstParser {
     @Override
     public Generic parse() {
         Character leftAngle = new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
-        Extension extension = new Extension(this.pointer.getInside('>'));
+        Extension extension = new Extension(this.pointer.getUntil('>'));
         Character rightAngle = new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
         return new Generic(leftAngle, extension, rightAngle);
     }

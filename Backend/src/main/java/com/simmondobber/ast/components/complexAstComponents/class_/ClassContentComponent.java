@@ -1,4 +1,4 @@
-package com.simmondobber.ast.components.complexAstComponents.class_.classContent;
+package com.simmondobber.ast.components.complexAstComponents.class_;
 
 import com.simmondobber.ast.components.AstComponent;
 

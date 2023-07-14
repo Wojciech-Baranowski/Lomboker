@@ -1,19 +1,19 @@
-package com.simmondobber.ast.components.complexAstComponents.method.preamble;
+package com.simmondobber.ast.components.complexAstComponents.preamble;
 
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.complexAstComponents.annotation.Annotation;
 import com.simmondobber.ast.components.complexAstComponents.generic.Generic;
-import com.simmondobber.ast.components.simpleAstComponents.MethodKeyword;
+import com.simmondobber.ast.components.simpleAstComponents.Keyword;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MethodPreamble extends ComplexAstComponent {
+public class Preamble extends ComplexAstComponent {
 
-    private final List<MethodPreambleComponent> preambleComponents;
+    private final List<PreambleComponent> preambleComponents;
 
-    public MethodPreamble(List<MethodPreambleComponent> preambleComponents) {
+    public Preamble(List<PreambleComponent> preambleComponents) {
         this.preambleComponents = preambleComponents;
     }
 
@@ -29,10 +29,10 @@ public class MethodPreamble extends ComplexAstComponent {
                 .toList();
     }
 
-    public List<MethodKeyword> getMethodKeywords() {
+    public List<Keyword> getKeywords() {
         return this.preambleComponents.stream()
-                .filter(component -> component instanceof MethodKeyword)
-                .map(component -> (MethodKeyword) component)
+                .filter(component -> component instanceof Keyword)
+                .map(component -> (Keyword) component)
                 .toList();
     }
 
