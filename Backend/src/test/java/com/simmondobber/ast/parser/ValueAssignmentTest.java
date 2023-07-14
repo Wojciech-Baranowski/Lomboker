@@ -1,9 +1,14 @@
 package com.simmondobber.ast.parser;
 
+import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.complexAstComponents.ValueAssignment;
+import com.simmondobber.ast.components.simpleAstComponents.Character;
+import com.simmondobber.ast.components.simpleAstComponents.Value;
 import com.simmondobber.ast.parser.utils.Pointer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class ValueAssignmentTest {
 
@@ -17,8 +22,14 @@ public class ValueAssignmentTest {
         //When
         ValueAssignment parsedValueAssignment = valueAssignmentParser.parse();
         String parsedString = parsedValueAssignment.getSyntax();
+        List<AstComponent> components = parsedValueAssignment.getChildAstComponents();
 
         //Then
+        Assertions.assertEquals(2, components.size());
+        Assertions.assertInstanceOf(Character.class, components.get(0));
+        Assertions.assertInstanceOf(Value.class, components.get(1));
+        Assertions.assertEquals("= ", components.get(0).getSyntax());
+        Assertions.assertEquals("123", components.get(1).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -32,8 +43,14 @@ public class ValueAssignmentTest {
         //When
         ValueAssignment parsedValueAssignment = valueAssignmentParser.parse();
         String parsedString = parsedValueAssignment.getSyntax();
+        List<AstComponent> components = parsedValueAssignment.getChildAstComponents();
 
         //Then
+        Assertions.assertEquals(2, components.size());
+        Assertions.assertInstanceOf(Character.class, components.get(0));
+        Assertions.assertInstanceOf(Value.class, components.get(1));
+        Assertions.assertEquals("= ", components.get(0).getSyntax());
+        Assertions.assertEquals("123  \n\n `123`\t  ", components.get(1).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 

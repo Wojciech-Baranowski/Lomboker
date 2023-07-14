@@ -1,9 +1,14 @@
 package com.simmondobber.ast.parser;
 
+import com.simmondobber.ast.components.AstComponent;
+import com.simmondobber.ast.components.complexAstComponents.Generic;
 import com.simmondobber.ast.components.complexAstComponents.Type;
+import com.simmondobber.ast.components.simpleAstComponents.Name;
 import com.simmondobber.ast.parser.utils.Pointer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class TypeParserTest {
 
@@ -17,8 +22,12 @@ public class TypeParserTest {
         //When
         Type parsedType = typeParser.parse();
         String parsedString = parsedType.getSyntax();
+        List<AstComponent> components = parsedType.getChildAstComponents();
 
         //Then
+        Assertions.assertEquals(1, components.size());
+        Assertions.assertInstanceOf(Name.class, components.get(0));
+        Assertions.assertEquals("Entity ", components.get(0).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -32,8 +41,14 @@ public class TypeParserTest {
         //When
         Type parsedType = typeParser.parse();
         String parsedString = parsedType.getSyntax();
+        List<AstComponent> components = parsedType.getChildAstComponents();
 
         //Then
+        Assertions.assertEquals(2, components.size());
+        Assertions.assertInstanceOf(Name.class, components.get(0));
+        Assertions.assertInstanceOf(Generic.class, components.get(1));
+        Assertions.assertEquals("List", components.get(0).getSyntax());
+        Assertions.assertEquals("<Long>", components.get(1).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -47,8 +62,14 @@ public class TypeParserTest {
         //When
         Type parsedType = typeParser.parse();
         String parsedString = parsedType.getSyntax();
+        List<AstComponent> components = parsedType.getChildAstComponents();
 
         //Then
+        Assertions.assertEquals(2, components.size());
+        Assertions.assertInstanceOf(Name.class, components.get(0));
+        Assertions.assertInstanceOf(Generic.class, components.get(1));
+        Assertions.assertEquals("List   ", components.get(0).getSyntax());
+        Assertions.assertEquals("<\tLong > \n\n `123`\t  ", components.get(1).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -62,8 +83,14 @@ public class TypeParserTest {
         //When
         Type parsedType = typeParser.parse();
         String parsedString = parsedType.getSyntax();
+        List<AstComponent> components = parsedType.getChildAstComponents();
 
         //Then
+        Assertions.assertEquals(2, components.size());
+        Assertions.assertInstanceOf(Name.class, components.get(0));
+        Assertions.assertInstanceOf(Generic.class, components.get(1));
+        Assertions.assertEquals("List", components.get(0).getSyntax());
+        Assertions.assertEquals("<>", components.get(1).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

@@ -20,7 +20,7 @@ public class Annotation extends ComplexAstComponent implements PreambleComponent
     }
 
     @Override
-    protected List<AstComponent> getChildAstComponents() {
+    public List<AstComponent> getChildAstComponents() {
         if (this.args == null) {
             return List.of(this.at, this.name);
         } else {

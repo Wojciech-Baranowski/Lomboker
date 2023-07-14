@@ -24,7 +24,7 @@ public class FileParser extends AstParser {
             imports.add(new ImportParser(this.pointer).parse());
         }
         while (this.pointer.isNotEnd()) {
-            imports.add(new ImportParser(this.pointer).parse());
+            classes.add(new ClassParser(this.pointer).parse());
         }
         return new File(package_, imports, classes);
     }

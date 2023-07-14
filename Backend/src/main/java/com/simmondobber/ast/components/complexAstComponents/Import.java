@@ -23,7 +23,7 @@ public class Import extends ComplexAstComponent {
     }
 
     @Override
-    protected List<AstComponent> getChildAstComponents() {
+    public List<AstComponent> getChildAstComponents() {
         if (this.staticKeyword == null) {
             return List.of(this.importKeyword, this.path, this.semicolon);
         } else {

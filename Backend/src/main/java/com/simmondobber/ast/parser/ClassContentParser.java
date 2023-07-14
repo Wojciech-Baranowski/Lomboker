@@ -26,7 +26,7 @@ public class ClassContentParser extends AstParser {
                 if (Keyword.CLASS_TYPE_KEYWORDS.contains(this.pointer.lookupWord())) {
                     this.pointer.setCurrentPosition(beforePreamble);
                     classComponents.add(new ClassParser(this.pointer).parse());
-                } else if (this.pointer.lookupIndexOf('(') < this.pointer.lookupIndexOf(';') && this.pointer.lookupIndexOf('(') < this.pointer.lookupIndexOf('=')) {
+                } else if (this.pointer.lookupIndexOf(';') == -1 || (this.pointer.lookupIndexOf('(') < this.pointer.lookupIndexOf(';')) && (this.pointer.lookupIndexOf('=') == -1 || this.pointer.lookupIndexOf('(') < this.pointer.lookupIndexOf('='))) {
                     this.pointer.setCurrentPosition(beforePreamble);
                     classComponents.add(new MethodParser(this.pointer).parse());
                 } else {

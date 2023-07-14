@@ -21,7 +21,7 @@ public class ClassBody extends ComplexAstComponent {
     }
 
     @Override
-    protected List<AstComponent> getChildAstComponents() {
+    public List<AstComponent> getChildAstComponents() {
         if (this.enumValues == null) {
             return List.of(this.leftCurly, this.classContent, this.rightCurly);
         } else {

@@ -2,11 +2,10 @@ package com.simmondobber.ast.parser;
 
 import com.simmondobber.ast.components.complexAstComponents.Class;
 import com.simmondobber.ast.components.complexAstComponents.ClassBody;
-import com.simmondobber.ast.components.complexAstComponents.Generic;
 import com.simmondobber.ast.components.complexAstComponents.Preamble;
+import com.simmondobber.ast.components.complexAstComponents.Type;
 import com.simmondobber.ast.components.simpleAstComponents.Extension;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
-import com.simmondobber.ast.components.simpleAstComponents.Name;
 import com.simmondobber.ast.parser.utils.Pointer;
 
 import java.util.List;
@@ -21,16 +20,12 @@ public class ClassParser extends AstParser {
     public Class parse() {
         Preamble preamble = new PreambleParser(this.pointer).parse();
         Keyword classType = new Keyword(this.pointer.getWord(), this.pointer.getSeparator());
-        Name name = new Name(this.pointer.getWord(), this.pointer.getSeparator());
-        Generic generic = null;
-        if (this.pointer.lookupCharacter() == '<') {
-            generic = new GenericParser(this.pointer).parse();
-        }
+        Type type = new TypeParser(this.pointer).parse();
         Extension extension = null;
         if (List.of("extends", "implements").contains(this.pointer.lookupWord())) {
             extension = new Extension(this.pointer.getUntil("{"));
         }
         ClassBody classBody = new ClassBodyParser(this.pointer).parse();
-        return new Class(preamble, classType, name, generic, extension, classBody);
+        return new Class(preamble, classType, type, extension, classBody);
     }
 }

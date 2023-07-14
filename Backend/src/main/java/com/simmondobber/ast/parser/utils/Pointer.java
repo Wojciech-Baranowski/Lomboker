@@ -8,6 +8,7 @@ public class Pointer {
     private static final String COMPOUND_WORD_REGEX = "[A-Za-z0-9_$.]+";
     private static final String SEPARATOR_REGEX = "[\\s`]+";
     private static final Map<Character, Character> PARENTHESIS = Map.of('(', ')', '{', '}', '<', '>', '[', ']');
+    private static final Map<Character, Character> INSIDE_PARENTHESIS = Map.of('(', ')', '{', '}', '[', ']');
 
     private final String code;
     private int left;
@@ -85,8 +86,10 @@ public class Pointer {
         return getBetween();
     }
 
-    public String getUntilInclusive(char stopCharacter) {
-        return getUntil(stopCharacter) + getCharacter();
+    public String getInside(char stopCharacter) {
+        cacheIndex();
+        omitInside(stopCharacter);
+        return getBetween() + getCharacter();
     }
 
     public void omitCharacter() {
@@ -109,8 +112,9 @@ public class Pointer {
         while (isNotEnd() && Character.toString(this.code.charAt(this.right)).matches(SEPARATOR_REGEX)) {
             if (this.code.charAt(this.right) == '`') {
                 omitIdentifier();
+            } else {
+                this.right++;
             }
-            this.right++;
         }
     }
 
@@ -135,6 +139,19 @@ public class Pointer {
                 balance++;
             }
             if (PARENTHESIS.containsValue(this.code.charAt(this.right))) {
+                balance--;
+            }
+        }
+    }
+
+    public void omitInside(char stopCharacter) {
+        int balance = 0;
+        while (isNotEnd() && (!isBalanced(balance) || this.code.charAt(this.right) != stopCharacter)) {
+            this.right++;
+            if (INSIDE_PARENTHESIS.containsKey(this.code.charAt(this.right))) {
+                balance++;
+            }
+            if (INSIDE_PARENTHESIS.containsValue(this.code.charAt(this.right))) {
                 balance--;
             }
         }

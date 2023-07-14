@@ -31,8 +31,8 @@ public class Method extends ComplexAstComponent implements ClassContentComponent
         if (this.methodBody == null) {
             return List.of(this.preamble, this.type, this.name, this.args, this.semicolon);
         } else {
-            if (this.type == null) {
-                return List.of(this.preamble, this.name, this.args, this.methodBody);
+            if (this.name == null) {
+                return List.of(this.preamble, this.type, this.args, this.methodBody);
             } else {
                 return List.of(this.preamble, this.type, this.name, this.args, this.methodBody);
             }

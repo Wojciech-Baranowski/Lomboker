@@ -18,18 +18,18 @@ public class MethodParser extends AstParser {
     @Override
     public Method parse() {
         Preamble methodPreamble = new PreambleParser(this.pointer).parse();
-        Type type = null;
-        if (this.pointer.lookupCharacterAfterWordAndSeparator() != '(') {
-            type = new TypeParser(this.pointer).parse();
+        Type type = new TypeParser(this.pointer).parse();
+        Name name = null;
+        if (this.pointer.lookupCharacter() != '(') {
+            name = new Name(this.pointer.getWord(), this.pointer.getSeparator());
         }
-        Name name = new Name(this.pointer.getWord(), this.pointer.getSeparator());
         Args args = new ArgsParser(this.pointer).parse();
         MethodBody methodBody = null;
         Character semicolon = null;
         if (this.pointer.lookupCharacter() == ';') {
             semicolon = new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
         } else {
-            methodBody = new MethodBody(this.pointer.getUntilInclusive('}'), this.pointer.getSeparator());
+            methodBody = new MethodBody(this.pointer.getInside('}'), this.pointer.getSeparator());
         }
         return new Method(methodPreamble, type, name, args, methodBody, semicolon);
     }
