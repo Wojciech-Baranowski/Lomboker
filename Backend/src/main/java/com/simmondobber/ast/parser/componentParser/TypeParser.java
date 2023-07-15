@@ -2,7 +2,7 @@ package com.simmondobber.ast.parser.componentParser;
 
 import com.simmondobber.ast.components.complexAstComponents.Generic;
 import com.simmondobber.ast.components.complexAstComponents.Type;
-import com.simmondobber.ast.components.simpleAstComponents.Name;
+import com.simmondobber.ast.components.simpleAstComponents.Path;
 import com.simmondobber.ast.parser.utils.Pointer;
 
 public class TypeParser extends AstParser {
@@ -13,11 +13,11 @@ public class TypeParser extends AstParser {
 
     @Override
     public Type parse() {
-        Name name = new Name(this.pointer.getWord(), this.pointer.getSeparator());
+        Path path = new Path(this.pointer.getCompoundWord(), this.pointer.getSeparator());
         Generic generic = null;
         if (this.pointer.lookupCharacter() == '<') {
             generic = new GenericParser(this.pointer).parse();
         }
-        return new Type(name, generic);
+        return new Type(path, generic);
     }
 }
