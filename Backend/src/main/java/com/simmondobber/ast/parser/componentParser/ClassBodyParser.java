@@ -16,10 +16,13 @@ public class ClassBodyParser extends AstParser {
     public ClassBody parse() {
         Character leftCurly = new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
         EnumValues enumValues = null;
-        if (",;}".contains(java.lang.Character.toString(this.pointer.lookupCharacterAfterWordAndSeparator()))) {
+        if (this.pointer.lookupCharacter() != '}' && ",;}".contains(java.lang.Character.toString(this.pointer.lookupCharacterAfterWordAndOptionalBracket()))) {
             enumValues = new EnumValuesParser(this.pointer).parse();
         }
-        ClassContent classContent = new ClassContentParser(this.pointer).parse();
+        ClassContent classContent = null;
+        if (this.pointer.lookupCharacter() != '}') {
+            classContent = new ClassContentParser(this.pointer).parse();
+        }
         Character rightCurly = new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
         return new ClassBody(leftCurly, enumValues, classContent, rightCurly);
     }

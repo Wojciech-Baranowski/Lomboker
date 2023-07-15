@@ -8,6 +8,8 @@ import com.simmondobber.ast.parser.componentParser.FileParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Ast {
@@ -37,9 +39,18 @@ public class Ast {
 
     private String decompress(String code) {
         String decompressedCode = code;
-        for (String identifier : this.dictionary.keySet()) {
+        List<String> identifiers = new ArrayList<>(this.dictionary.keySet().stream()
+                .sorted(this::compareIdentifiers)
+                .toList());
+        for (String identifier : identifiers) {
             decompressedCode = decompressedCode.replace(identifier, this.dictionary.get(identifier));
         }
         return decompressedCode;
+    }
+
+    private int compareIdentifiers(String id1, String id2) {
+        int intId1 = Integer.decode(id1.substring(1, id1.length() - 1));
+        int intId2 = Integer.decode(id2.substring(1, id2.length() - 1));
+        return Integer.compare(intId2, intId1);
     }
 }

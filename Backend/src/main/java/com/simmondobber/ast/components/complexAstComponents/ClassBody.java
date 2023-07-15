@@ -22,7 +22,11 @@ public class ClassBody extends ComplexAstComponent {
 
     @Override
     public List<AstComponent> getChildAstComponents() {
-        if (this.enumValues == null) {
+        if (this.classContent == null && this.enumValues == null) {
+            return List.of(this.leftCurly, this.rightCurly);
+        } else if (this.classContent == null) {
+            return List.of(this.leftCurly, this.enumValues, this.rightCurly);
+        } else if (this.enumValues == null) {
             return List.of(this.leftCurly, this.classContent, this.rightCurly);
         } else {
             return List.of(this.leftCurly, this.enumValues, this.classContent, this.rightCurly);

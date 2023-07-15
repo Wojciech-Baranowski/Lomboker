@@ -5,10 +5,10 @@ import java.util.Map;
 public class Pointer {
 
     private static final String WORD_REGEX = "[A-Za-z0-9_$]+";
-    private static final String COMPOUND_WORD_REGEX = "[A-Za-z0-9_$.]+";
+    private static final String COMPOUND_WORD_REGEX = "[A-Za-z0-9_$.*]+";
     private static final String SEPARATOR_REGEX = "[\\s`]+";
-    private static final Map<Character, Character> PARENTHESIS = Map.of('(', ')', '{', '}', '<', '>', '[', ']');
-    private static final Map<Character, Character> INSIDE_PARENTHESIS = Map.of('(', ')', '{', '}', '[', ']');
+    private static final Map<Character, Character> PARENTHESIS = Map.of('(', ')', '{', '}', '<', '>');
+    private static final Map<Character, Character> INSIDE_PARENTHESIS = Map.of('(', ')', '{', '}');
 
     private final String code;
     private int left;
@@ -34,9 +34,14 @@ public class Pointer {
         return word;
     }
 
-    public char lookupCharacterAfterWordAndSeparator() {
+    public char lookupCharacterAfterWordAndOptionalBracket() {
         cacheIndex();
         omitWord();
+        omitSeparator();
+        if (lookupCharacter() == '(') {
+            omitUntil(')');
+            omitCharacter();
+        }
         omitSeparator();
         char character = lookupCharacter();
         moveBackToCachedIndex();
@@ -44,7 +49,12 @@ public class Pointer {
     }
 
     public int lookupIndexOf(char character) {
-        return this.code.indexOf(character, this.right);
+        int index = this.code.indexOf(character, this.right);
+        if (index == -1) {
+            return Integer.MAX_VALUE;
+        } else {
+            return this.code.indexOf(character, this.right);
+        }
     }
 
     public String getCharacter() {

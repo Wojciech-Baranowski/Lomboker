@@ -1,9 +1,13 @@
 package com.simmondobber.ast.parser.componentParser;
 
+import com.simmondobber.ast.components.complexAstComponents.ArrayBrackets;
 import com.simmondobber.ast.components.complexAstComponents.Generic;
 import com.simmondobber.ast.components.complexAstComponents.Type;
 import com.simmondobber.ast.components.simpleAstComponents.Path;
 import com.simmondobber.ast.parser.utils.Pointer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TypeParser extends AstParser {
 
@@ -18,6 +22,10 @@ public class TypeParser extends AstParser {
         if (this.pointer.lookupCharacter() == '<') {
             generic = new GenericParser(this.pointer).parse();
         }
-        return new Type(path, generic);
+        List<ArrayBrackets> arrayBrackets = new ArrayList<>();
+        while (this.pointer.lookupCharacter() == '[') {
+            arrayBrackets.add(new ArrayBracketsParser(this.pointer).parse());
+        }
+        return new Type(path, generic, arrayBrackets);
     }
 }

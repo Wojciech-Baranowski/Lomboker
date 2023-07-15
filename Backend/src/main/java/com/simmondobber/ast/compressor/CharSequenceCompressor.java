@@ -10,9 +10,18 @@ public class CharSequenceCompressor implements CodeCompressor {
 
     @Override
     public CompressedCode compress() {
+        compressQuotes();
         compressStrings();
         compressCharacters();
         return this.code;
+    }
+
+    private void compressQuotes() {
+        while (this.code.getCode().contains("\\\"")) {
+            int startOfString = this.code.getCode().indexOf("\\\"");
+            int endOfString = startOfString + 1;
+            this.code.compressFragment(startOfString, endOfString);
+        }
     }
 
     private void compressStrings() {

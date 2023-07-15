@@ -1,6 +1,7 @@
 package com.simmondobber.ast.parser.componentParser;
 
 import com.simmondobber.ast.components.AstComponent;
+import com.simmondobber.ast.components.complexAstComponents.ArrayBrackets;
 import com.simmondobber.ast.components.complexAstComponents.Generic;
 import com.simmondobber.ast.components.complexAstComponents.Type;
 import com.simmondobber.ast.components.simpleAstComponents.Path;
@@ -53,10 +54,10 @@ public class TypeParserTest {
     }
 
     @Test
-    public void parser_should_parse_type_with_separators() {
+    public void parser_should_parse_type_with_array_brackets() {
         //Given
-        String stringToParse = "List   <\tLong > \n\n `123`\t  next";
-        String correctlyParsedString = "List   <\tLong > \n\n `123`\t  ";
+        String stringToParse = "int[10][]";
+        String correctlyParsedString = "int[10][]";
         TypeParser typeParser = new TypeParser(new Pointer(stringToParse));
 
         //When
@@ -65,11 +66,13 @@ public class TypeParserTest {
         List<AstComponent> components = parsedType.getChildAstComponents();
 
         //Then
-        Assertions.assertEquals(2, components.size());
+        Assertions.assertEquals(3, components.size());
         Assertions.assertInstanceOf(Path.class, components.get(0));
-        Assertions.assertInstanceOf(Generic.class, components.get(1));
-        Assertions.assertEquals("List   ", components.get(0).getSyntax());
-        Assertions.assertEquals("<\tLong > \n\n `123`\t  ", components.get(1).getSyntax());
+        Assertions.assertInstanceOf(ArrayBrackets.class, components.get(1));
+        Assertions.assertInstanceOf(ArrayBrackets.class, components.get(2));
+        Assertions.assertEquals("int", components.get(0).getSyntax());
+        Assertions.assertEquals("[10]", components.get(1).getSyntax());
+        Assertions.assertEquals("[]", components.get(2).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -91,6 +94,27 @@ public class TypeParserTest {
         Assertions.assertInstanceOf(Generic.class, components.get(1));
         Assertions.assertEquals("List", components.get(0).getSyntax());
         Assertions.assertEquals("<>", components.get(1).getSyntax());
+        Assertions.assertEquals(correctlyParsedString, parsedString);
+    }
+
+    @Test
+    public void parser_should_parse_type_with_separators() {
+        //Given
+        String stringToParse = "List   <\tLong > \n\n `123`\t  next";
+        String correctlyParsedString = "List   <\tLong > \n\n `123`\t  ";
+        TypeParser typeParser = new TypeParser(new Pointer(stringToParse));
+
+        //When
+        Type parsedType = typeParser.parse();
+        String parsedString = parsedType.getSyntax();
+        List<AstComponent> components = parsedType.getChildAstComponents();
+
+        //Then
+        Assertions.assertEquals(2, components.size());
+        Assertions.assertInstanceOf(Path.class, components.get(0));
+        Assertions.assertInstanceOf(Generic.class, components.get(1));
+        Assertions.assertEquals("List   ", components.get(0).getSyntax());
+        Assertions.assertEquals("<\tLong > \n\n `123`\t  ", components.get(1).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }
