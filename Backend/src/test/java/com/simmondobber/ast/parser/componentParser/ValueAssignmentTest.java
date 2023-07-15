@@ -54,4 +54,25 @@ public class ValueAssignmentTest {
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
+    @Test
+    public void parser_should_parse_lambda_value_assignment() {
+        //Given
+        String stringToParse = "= (x) -> {\nSystem.out.println(x);\n};";
+        String correctlyParsedString = "= (x) -> {\nSystem.out.println(x);\n}";
+        ValueAssignmentParser valueAssignmentParser = new ValueAssignmentParser(new Pointer(stringToParse));
+
+        //When
+        ValueAssignment parsedValueAssignment = valueAssignmentParser.parse();
+        String parsedString = parsedValueAssignment.getSyntax();
+        List<AstComponent> components = parsedValueAssignment.getChildAstComponents();
+
+        //Then
+        Assertions.assertEquals(2, components.size());
+        Assertions.assertInstanceOf(Character.class, components.get(0));
+        Assertions.assertInstanceOf(Value.class, components.get(1));
+        Assertions.assertEquals("= ", components.get(0).getSyntax());
+        Assertions.assertEquals("(x) -> {\nSystem.out.println(x);\n}", components.get(1).getSyntax());
+        Assertions.assertEquals(correctlyParsedString, parsedString);
+    }
+
 }

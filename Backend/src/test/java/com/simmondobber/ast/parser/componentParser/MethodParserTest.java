@@ -1,10 +1,7 @@
 package com.simmondobber.ast.parser.componentParser;
 
 import com.simmondobber.ast.components.AstComponent;
-import com.simmondobber.ast.components.complexAstComponents.Args;
-import com.simmondobber.ast.components.complexAstComponents.Method;
-import com.simmondobber.ast.components.complexAstComponents.Preamble;
-import com.simmondobber.ast.components.complexAstComponents.Type;
+import com.simmondobber.ast.components.complexAstComponents.*;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.MethodBody;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
@@ -92,6 +89,35 @@ public class MethodParserTest {
         Assertions.assertEquals("calculate", components.get(2).getSyntax());
         Assertions.assertEquals("(int x, int y) ", components.get(3).getSyntax());
         Assertions.assertEquals("{\nthis.x = x;\nthis.y = y;\n}\n ", components.get(4).getSyntax());
+        Assertions.assertEquals(correctlyParsedString, parsedString);
+    }
+
+    @Test
+    public void parser_should_parse_method_with_throws() {
+        //Given
+        String stringToParse = "@Getter\nprivate final @Setter private Point calculate(int x, int y) throws NullPointerException, ValidatorException {\nthis.x = x;\nthis.y = y;\n}\n next";
+        String correctlyParsedString = "@Getter\nprivate final @Setter private Point calculate(int x, int y) throws NullPointerException, ValidatorException {\nthis.x = x;\nthis.y = y;\n}\n ";
+        MethodParser methodParser = new MethodParser(new Pointer(stringToParse));
+
+        //When
+        Method parsedMethod = methodParser.parse();
+        String parsedString = parsedMethod.getSyntax();
+        List<AstComponent> components = parsedMethod.getChildAstComponents();
+
+        //Then
+        Assertions.assertEquals(6, components.size());
+        Assertions.assertInstanceOf(Preamble.class, components.get(0));
+        Assertions.assertInstanceOf(Type.class, components.get(1));
+        Assertions.assertInstanceOf(Name.class, components.get(2));
+        Assertions.assertInstanceOf(Args.class, components.get(3));
+        Assertions.assertInstanceOf(Throws.class, components.get(4));
+        Assertions.assertInstanceOf(MethodBody.class, components.get(5));
+        Assertions.assertEquals("@Getter\nprivate final @Setter private ", components.get(0).getSyntax());
+        Assertions.assertEquals("Point ", components.get(1).getSyntax());
+        Assertions.assertEquals("calculate", components.get(2).getSyntax());
+        Assertions.assertEquals("(int x, int y) ", components.get(3).getSyntax());
+        Assertions.assertEquals("throws NullPointerException, ValidatorException ", components.get(4).getSyntax());
+        Assertions.assertEquals("{\nthis.x = x;\nthis.y = y;\n}\n ", components.get(5).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 

@@ -264,6 +264,7 @@ public class AstTest {
                 "        return this.right < this.code.length();\n" +
                 "    }\n" +
                 "}\n";
+
         //When
         Ast ast = new Ast(code);
         String astSyntaxCode = ast.getCode();

@@ -88,13 +88,13 @@ public class Pointer {
 
     public String getInside(char stopCharacter) {
         cacheIndex();
-        omitInside(stopCharacter);
+        omitInside(stopCharacter, false);
         return getBetween();
     }
 
     public String getInsideInclusive(char stopCharacter) {
         cacheIndex();
-        omitInside(stopCharacter);
+        omitInside(stopCharacter, true);
         return getBetween() + getCharacter();
     }
 
@@ -150,8 +150,14 @@ public class Pointer {
         }
     }
 
-    public void omitInside(char stopCharacter) {
+    public void omitInside(char stopCharacter, boolean alreadyInside) {
         int balance = 0;
+        if (!alreadyInside && INSIDE_PARENTHESIS.containsKey(this.code.charAt(this.right))) {
+            balance++;
+        }
+        if (!alreadyInside && INSIDE_PARENTHESIS.containsValue(this.code.charAt(this.right))) {
+            balance--;
+        }
         while (isNotEnd() && (!isBalanced(balance) || this.code.charAt(this.right) != stopCharacter)) {
             this.right++;
             if (INSIDE_PARENTHESIS.containsKey(this.code.charAt(this.right))) {

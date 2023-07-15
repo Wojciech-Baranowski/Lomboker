@@ -30,8 +30,8 @@ public class Ast {
 
     private CompressedCode compressCode(String code) {
         CompressedCode compressedCode = new CompressedCode(code);
-        compressedCode = new CommentCompressor(compressedCode).compress();
         compressedCode = new CharSequenceCompressor(compressedCode).compress();
+        compressedCode = new CommentCompressor(compressedCode).compress();
         return compressedCode;
     }
 

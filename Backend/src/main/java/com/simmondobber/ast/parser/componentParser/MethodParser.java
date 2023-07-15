@@ -1,9 +1,6 @@
 package com.simmondobber.ast.parser.componentParser;
 
-import com.simmondobber.ast.components.complexAstComponents.Args;
-import com.simmondobber.ast.components.complexAstComponents.Method;
-import com.simmondobber.ast.components.complexAstComponents.Preamble;
-import com.simmondobber.ast.components.complexAstComponents.Type;
+import com.simmondobber.ast.components.complexAstComponents.*;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.MethodBody;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
@@ -24,6 +21,10 @@ public class MethodParser extends AstParser {
             name = new Name(this.pointer.getWord(), this.pointer.getSeparator());
         }
         Args args = new ArgsParser(this.pointer).parse();
+        Throws throws_ = null;
+        if (this.pointer.lookupWord().equals("throws")) {
+            throws_ = new ThrowsParser(this.pointer).parse();
+        }
         MethodBody methodBody = null;
         Character semicolon = null;
         if (this.pointer.lookupCharacter() == ';') {
@@ -31,6 +32,6 @@ public class MethodParser extends AstParser {
         } else {
             methodBody = new MethodBody(this.pointer.getInsideInclusive('}'), this.pointer.getSeparator());
         }
-        return new Method(methodPreamble, type, name, args, methodBody, semicolon);
+        return new Method(methodPreamble, type, name, args, throws_, methodBody, semicolon);
     }
 }

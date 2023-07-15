@@ -17,17 +17,17 @@ public class CharSequenceCompressor implements CodeCompressor {
 
     private void compressStrings() {
         while (this.code.getCode().contains("\"")) {
-            int startOfComment = this.code.getCode().indexOf("\"");
-            int endOfComment = this.code.getCode().indexOf("\"", startOfComment + 1);
-            this.code.compressFragment(startOfComment, endOfComment);
+            int startOfString = this.code.getCode().indexOf("\"");
+            int endOfString = this.code.getCode().indexOf("\"", startOfString + 1);
+            this.code.compressFragment(startOfString, endOfString);
         }
     }
 
     private void compressCharacters() {
         while (this.code.getCode().contains("'")) {
-            int startOfComment = this.code.getCode().indexOf("'");
-            int endOfComment = this.code.getCode().indexOf("'", startOfComment + 1);
-            this.code.compressFragment(startOfComment, endOfComment);
+            int startOfCharacter = this.code.getCode().indexOf("'");
+            int endOfCharacter = this.code.getCode().indexOf("'", startOfCharacter + 1);
+            this.code.compressFragment(startOfCharacter, endOfCharacter);
         }
     }
 }
