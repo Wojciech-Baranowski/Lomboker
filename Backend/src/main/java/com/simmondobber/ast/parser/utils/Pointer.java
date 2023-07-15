@@ -89,6 +89,12 @@ public class Pointer {
     public String getInside(char stopCharacter) {
         cacheIndex();
         omitInside(stopCharacter);
+        return getBetween();
+    }
+
+    public String getInsideInclusive(char stopCharacter) {
+        cacheIndex();
+        omitInside(stopCharacter);
         return getBetween() + getCharacter();
     }
 
