@@ -5,6 +5,7 @@ import com.simmondobber.ast.components.complexAstComponents.Import;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
 import com.simmondobber.ast.components.simpleAstComponents.Path;
+import com.simmondobber.ast.parser.complexComponentParser.ImportParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

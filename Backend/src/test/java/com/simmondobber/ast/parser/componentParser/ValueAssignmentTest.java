@@ -4,6 +4,7 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.complexAstComponents.ValueAssignment;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Value;
+import com.simmondobber.ast.parser.complexComponentParser.ValueAssignmentParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

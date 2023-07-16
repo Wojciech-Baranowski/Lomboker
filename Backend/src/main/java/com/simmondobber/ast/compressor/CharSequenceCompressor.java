@@ -1,6 +1,6 @@
 package com.simmondobber.ast.compressor;
 
-public class CharSequenceCompressor implements CodeCompressor {
+public class CharSequenceCompressor {
 
     private final CompressedCode code;
 
@@ -8,7 +8,6 @@ public class CharSequenceCompressor implements CodeCompressor {
         this.code = code;
     }
 
-    @Override
     public CompressedCode compress() {
         compressQuotes();
         compressStrings();
@@ -36,7 +35,7 @@ public class CharSequenceCompressor implements CodeCompressor {
         while (this.code.getCode().contains("'")) {
             int startOfCharacter = this.code.getCode().indexOf("'");
             int endOfCharacter = this.code.getCode().indexOf("'", startOfCharacter + 1);
-            if (-1 == endOfCharacter || endOfCharacter > startOfCharacter + 2) {
+            if (endOfCharacter == -1 || endOfCharacter - startOfCharacter > 2) {
                 endOfCharacter = startOfCharacter;
             }
             this.code.compressFragment(startOfCharacter, endOfCharacter);

@@ -1,9 +1,12 @@
-package com.simmondobber.ast.parser.componentParser;
+package com.simmondobber.ast.parser.complexComponentParser;
 
 import com.simmondobber.ast.components.complexAstComponents.*;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.MethodBody;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
+import com.simmondobber.ast.parser.simpleComponentParser.CharacterParser;
+import com.simmondobber.ast.parser.simpleComponentParser.MethodBodyParser;
+import com.simmondobber.ast.parser.simpleComponentParser.NameParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 
 public class MethodParser extends AstParser {
@@ -18,7 +21,7 @@ public class MethodParser extends AstParser {
         Type type = new TypeParser(this.pointer).parse();
         Name name = null;
         if (this.pointer.lookupCharacter() != '(') {
-            name = new Name(this.pointer.getWord(), this.pointer.getSeparator());
+            name = new NameParser(this.pointer).parse();
         }
         Args args = new ArgsParser(this.pointer).parse();
         Throws throws_ = null;
@@ -28,9 +31,9 @@ public class MethodParser extends AstParser {
         MethodBody methodBody = null;
         Character semicolon = null;
         if (this.pointer.lookupCharacter() == ';') {
-            semicolon = new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
+            semicolon = new CharacterParser(this.pointer).parse();
         } else {
-            methodBody = new MethodBody(this.pointer.getInsideInclusive('}'), this.pointer.getSeparator());
+            methodBody = new MethodBodyParser(this.pointer).parse();
         }
         return new Method(methodPreamble, type, name, args, throws_, methodBody, semicolon);
     }

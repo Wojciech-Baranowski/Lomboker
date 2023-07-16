@@ -2,8 +2,9 @@ package com.simmondobber.ast.parser.componentParser;
 
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.complexAstComponents.Args;
+import com.simmondobber.ast.components.simpleAstComponents.ArgsListing;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
-import com.simmondobber.ast.components.simpleAstComponents.Listing;
+import com.simmondobber.ast.parser.complexComponentParser.ArgsParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class ArgsParserTest {
         //Then
         Assertions.assertEquals(3, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
-        Assertions.assertInstanceOf(Listing.class, components.get(1));
+        Assertions.assertInstanceOf(ArgsListing.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
         Assertions.assertEquals("(", components.get(0).getSyntax());
         Assertions.assertEquals("int x, Point p", components.get(1).getSyntax());
@@ -50,7 +51,7 @@ public class ArgsParserTest {
         //Then
         Assertions.assertEquals(3, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
-        Assertions.assertInstanceOf(Listing.class, components.get(1));
+        Assertions.assertInstanceOf(ArgsListing.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
         Assertions.assertEquals("(   ", components.get(0).getSyntax());
         Assertions.assertEquals("int x, Point p ", components.get(1).getSyntax());

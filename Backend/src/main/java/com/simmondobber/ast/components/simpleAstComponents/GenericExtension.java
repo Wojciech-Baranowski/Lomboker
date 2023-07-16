@@ -2,9 +2,9 @@ package com.simmondobber.ast.components.simpleAstComponents;
 
 import com.simmondobber.ast.components.SimpleAstComponent;
 
-public class Extension extends SimpleAstComponent {
+public class GenericExtension extends SimpleAstComponent {
 
-    public Extension(String syntax) {
+    public GenericExtension(String syntax) {
         super(syntax);
     }
 }

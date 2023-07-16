@@ -2,8 +2,9 @@ package com.simmondobber.ast.parser.componentParser;
 
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.complexAstComponents.ArrayBrackets;
+import com.simmondobber.ast.components.simpleAstComponents.ArraySize;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
-import com.simmondobber.ast.components.simpleAstComponents.Value;
+import com.simmondobber.ast.parser.complexComponentParser.ArrayBracketsParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class ArrayBracketsParserTest {
         //Then
         Assertions.assertEquals(3, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
-        Assertions.assertInstanceOf(Value.class, components.get(1));
+        Assertions.assertInstanceOf(ArraySize.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
         Assertions.assertEquals("[", components.get(0).getSyntax());
         Assertions.assertEquals("10", components.get(1).getSyntax());
@@ -50,7 +51,7 @@ public class ArrayBracketsParserTest {
         //Then
         Assertions.assertEquals(3, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
-        Assertions.assertInstanceOf(Value.class, components.get(1));
+        Assertions.assertInstanceOf(ArraySize.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
         Assertions.assertEquals("[\n", components.get(0).getSyntax());
         Assertions.assertEquals("10   ", components.get(1).getSyntax());

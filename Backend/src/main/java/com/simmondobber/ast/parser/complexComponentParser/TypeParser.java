@@ -1,9 +1,10 @@
-package com.simmondobber.ast.parser.componentParser;
+package com.simmondobber.ast.parser.complexComponentParser;
 
 import com.simmondobber.ast.components.complexAstComponents.ArrayBrackets;
 import com.simmondobber.ast.components.complexAstComponents.Generic;
 import com.simmondobber.ast.components.complexAstComponents.Type;
 import com.simmondobber.ast.components.simpleAstComponents.Path;
+import com.simmondobber.ast.parser.simpleComponentParser.PathParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class TypeParser extends AstParser {
 
     @Override
     public Type parse() {
-        Path path = new Path(this.pointer.getCompoundWord(), this.pointer.getSeparator());
+        Path path = new PathParser(this.pointer).parse();
         Generic generic = null;
         if (this.pointer.lookupCharacter() == '<') {
             generic = new GenericParser(this.pointer).parse();

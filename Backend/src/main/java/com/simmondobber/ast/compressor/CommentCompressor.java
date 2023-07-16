@@ -1,6 +1,6 @@
 package com.simmondobber.ast.compressor;
 
-public class CommentCompressor implements CodeCompressor {
+public class CommentCompressor {
 
     private final CompressedCode code;
 

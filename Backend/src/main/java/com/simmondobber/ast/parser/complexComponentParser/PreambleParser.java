@@ -1,8 +1,9 @@
-package com.simmondobber.ast.parser.componentParser;
+package com.simmondobber.ast.parser.complexComponentParser;
 
 import com.simmondobber.ast.components.complexAstComponents.Preamble;
 import com.simmondobber.ast.components.complexAstComponents.PreambleComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
+import com.simmondobber.ast.parser.simpleComponentParser.KeywordParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class PreambleParser extends AstParser {
             } else if (this.pointer.lookupCharacter() == '<') {
                 preambleComponents.add(new GenericParser(this.pointer).parse());
             } else if (Keyword.PREAMBLE_KEYWORDS.contains(this.pointer.lookupWord())) {
-                preambleComponents.add(new Keyword(this.pointer.getWord(), this.pointer.getSeparator()));
+                preambleComponents.add(new KeywordParser(this.pointer).parse());
             } else {
                 break;
             }

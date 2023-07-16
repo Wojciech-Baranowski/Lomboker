@@ -3,7 +3,8 @@ package com.simmondobber.ast.parser.componentParser;
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.complexAstComponents.Throws;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
-import com.simmondobber.ast.components.simpleAstComponents.Listing;
+import com.simmondobber.ast.components.simpleAstComponents.ThrowsListing;
+import com.simmondobber.ast.parser.complexComponentParser.ThrowsParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ public class ThrowsParserTest {
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Keyword.class, components.get(0));
-        Assertions.assertInstanceOf(Listing.class, components.get(1));
+        Assertions.assertInstanceOf(ThrowsListing.class, components.get(1));
         Assertions.assertEquals("throws ", components.get(0).getSyntax());
         Assertions.assertEquals("NullPointerException, ValidatorException ", components.get(1).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
@@ -48,7 +49,7 @@ public class ThrowsParserTest {
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Keyword.class, components.get(0));
-        Assertions.assertInstanceOf(Listing.class, components.get(1));
+        Assertions.assertInstanceOf(ThrowsListing.class, components.get(1));
         Assertions.assertEquals("throws \n\n  \t ", components.get(0).getSyntax());
         Assertions.assertEquals("NullPointerException, ValidatorException   `123` \t ", components.get(1).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
