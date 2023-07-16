@@ -8,6 +8,13 @@ import java.util.List;
 
 public class ExternalTests {
 
+    /*@Test
+    public void test() {
+        String code = "";
+        Ast ast = new Ast(code);
+        Assertions.assertEquals(code, ast.getCode());
+    }*/
+
     @Test
     public void test() {
         //Given
