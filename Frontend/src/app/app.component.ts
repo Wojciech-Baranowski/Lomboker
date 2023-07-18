@@ -22,8 +22,6 @@ export class AppComponent implements OnInit {
     buttonBackground: string;
     codeToLombokize: string;
     lombokizedCode: string;
-    indentType: number;
-    thisPrefix: boolean;
     getter: boolean;
     setter: boolean;
     noArgsConstructor: boolean;
@@ -42,8 +40,6 @@ export class AppComponent implements OnInit {
         this.buttonBackground = ""
         this.codeToLombokize = "";
         this.lombokizedCode = "";
-        this.indentType = 0;
-        this.thisPrefix = false;
         this.getter = false;
         this.setter = false;
         this.noArgsConstructor = false;
@@ -57,7 +53,7 @@ export class AppComponent implements OnInit {
 
     lombokize(): void {
         let annotationsConfig: AnnotationsConfig = new AnnotationsConfig(this.getter, this.setter, this.noArgsConstructor, this.allArgsConstructor, this.builder, this.superBuilder, this.toBuilder, this.toString, this.callSuper);
-        let lombokizeTO: CodeToLombokizeTO = new CodeToLombokizeTO(this.codeToLombokize, this.indentType, this.thisPrefix, annotationsConfig);
+        let lombokizeTO: CodeToLombokizeTO = new CodeToLombokizeTO(this.codeToLombokize, annotationsConfig);
         this.http.post<LombokizedCodeTO>(this.LOMBOKIZE_URL, lombokizeTO).subscribe((lombokizedCodeTO: LombokizedCodeTO) => {
             this.lombokizedCode = lombokizedCodeTO.lombokizedCode;
         }, (error) => {
@@ -67,7 +63,6 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.initializeBackground();
-        this.initializeOptions();
     }
 
     private initializeBackground(): void {
@@ -79,21 +74,12 @@ export class AppComponent implements OnInit {
         }
     }
 
-    private initializeOptions(): void {
-        this.indentType = Number(this.cookieService.get("indent"));
-        this.thisPrefix = Boolean(Number(this.cookieService.get("thisPrefix")));
-    }
-
     setIndentTypeCookieToSpace(): void {
         this.cookieService.set("indent", "0");
     }
 
     setIndentTypeCookieToTabulator(): void {
         this.cookieService.set("indent", "1");
-    }
-
-    setThisPrefixCookie(): void {
-        this.cookieService.set("thisPrefix", String(Number(!this.thisPrefix)));
     }
 
     excludeBuilder(): void {

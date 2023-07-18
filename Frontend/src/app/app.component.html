@@ -9,25 +9,6 @@
         <div id="optionsBack" [ngClass]="bodyBackground">
             <h2>Options:</h2>
             <div id="options" [ngClass]="sectionBackground">
-                <h3>Indentations:</h3>
-                <div style="display: flex">
-                    <label class="button">
-                        space
-                        <input [(ngModel)]="indentType" [value]="0" (click)="setIndentTypeCookieToSpace()" type="radio" name="indents"/>
-                        <span class="checkmark" [ngClass]="buttonBackground"></span>
-                    </label>
-                    <label class="button">
-                        tabulator
-                        <input [(ngModel)]="indentType" [value]="1" (click)="setIndentTypeCookieToTabulator()" type="radio" name="indents"/>
-                        <span class="checkmark" [ngClass]="buttonBackground"></span>
-                    </label>
-                </div>
-                <h3>Getters structure:</h3>
-                <label class="button">
-                    this.
-                    <input [(ngModel)]="thisPrefix" (click)="setThisPrefixCookie()" type="checkbox" name="thisPrefix"/>
-                    <span class="checkmark" [ngClass]="buttonBackground"></span>
-                </label>
                 <h3>Global annotations:</h3>
                 <label class="button">
                     Getter
