@@ -3,7 +3,7 @@ package com.simmondobber.lomboker.common;
 import lombok.Getter;
 
 @Getter
-public enum Import {
+public enum Imports {
 
     LOMBOK_ALL("import lombok.*"),
     LOMBOK_EXPERIMENTAL_ALL("import lombok.experimental.*"),
@@ -17,7 +17,7 @@ public enum Import {
 
     private final String keyword;
 
-    Import(String keyword) {
+    Imports(String keyword) {
         this.keyword = keyword;
     }
 }
