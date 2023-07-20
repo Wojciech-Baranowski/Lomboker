@@ -16,6 +16,10 @@ public class FieldParser extends AstParser {
         super(pointer);
     }
 
+    public FieldParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Field parse() {
         Preamble preamble = new PreambleParser(this.pointer).parse();

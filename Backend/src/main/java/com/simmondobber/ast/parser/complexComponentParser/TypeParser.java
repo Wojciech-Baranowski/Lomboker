@@ -16,6 +16,10 @@ public class TypeParser extends AstParser {
         super(pointer);
     }
 
+    public TypeParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Type parse() {
         Path path = new PathParser(this.pointer).parse();

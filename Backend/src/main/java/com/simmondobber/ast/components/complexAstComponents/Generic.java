@@ -4,9 +4,11 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.GenericExtension;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class Generic extends ComplexAstComponent implements PreambleComponent {
 
     private final Character leftAngle;

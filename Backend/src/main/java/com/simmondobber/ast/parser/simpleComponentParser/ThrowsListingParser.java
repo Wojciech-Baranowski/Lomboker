@@ -10,6 +10,10 @@ public class ThrowsListingParser extends AstParser {
         super(pointer);
     }
 
+    public ThrowsListingParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public ThrowsListing parse() {
         return new ThrowsListing(this.pointer.getUntil("{;"));

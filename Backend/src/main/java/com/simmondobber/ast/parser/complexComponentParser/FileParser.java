@@ -15,6 +15,10 @@ public class FileParser extends AstParser {
         super(pointer);
     }
 
+    public FileParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public File parse() {
         Package package_ = new PackageParser(this.pointer).parse();

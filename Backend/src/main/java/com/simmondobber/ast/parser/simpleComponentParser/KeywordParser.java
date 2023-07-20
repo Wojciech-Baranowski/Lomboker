@@ -10,6 +10,10 @@ public class KeywordParser extends AstParser {
         super(pointer);
     }
 
+    public KeywordParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Keyword parse() {
         return new Keyword(this.pointer.getWord(), this.pointer.getSeparator());

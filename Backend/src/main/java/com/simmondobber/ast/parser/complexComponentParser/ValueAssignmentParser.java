@@ -13,6 +13,10 @@ public class ValueAssignmentParser extends AstParser {
         super(pointer);
     }
 
+    public ValueAssignmentParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public ValueAssignment parse() {
         Character equals = new CharacterParser(this.pointer).parse();

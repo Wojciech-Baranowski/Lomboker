@@ -13,6 +13,10 @@ public class ArrayBracketsParser extends AstParser {
         super(pointer);
     }
 
+    public ArrayBracketsParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public ArrayBrackets parse() {
         Character leftBracket = new CharacterParser(this.pointer).parse();

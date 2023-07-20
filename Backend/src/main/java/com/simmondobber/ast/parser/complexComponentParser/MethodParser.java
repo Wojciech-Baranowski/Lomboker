@@ -15,6 +15,10 @@ public class MethodParser extends AstParser {
         super(pointer);
     }
 
+    public MethodParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Method parse() {
         Preamble methodPreamble = new PreambleParser(this.pointer).parse();

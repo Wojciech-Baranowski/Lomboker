@@ -14,6 +14,10 @@ public class PackageParser extends AstParser {
         super(pointer);
     }
 
+    public PackageParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Package parse() {
         Keyword keyword = new KeywordParser(this.pointer).parse();

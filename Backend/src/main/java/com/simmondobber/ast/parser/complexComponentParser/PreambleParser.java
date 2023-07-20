@@ -15,6 +15,10 @@ public class PreambleParser extends AstParser {
         super(pointer);
     }
 
+    public PreambleParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Preamble parse() {
         List<PreambleComponent> preambleComponents = new ArrayList<>();

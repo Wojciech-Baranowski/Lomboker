@@ -4,9 +4,11 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
 import com.simmondobber.ast.components.simpleAstComponents.ThrowsListing;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class Throws extends ComplexAstComponent {
 
     private final Keyword keyword;

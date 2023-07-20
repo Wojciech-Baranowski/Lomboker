@@ -4,9 +4,11 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.ArraySize;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class ArrayBrackets extends ComplexAstComponent {
 
     private final Character leftBracket;

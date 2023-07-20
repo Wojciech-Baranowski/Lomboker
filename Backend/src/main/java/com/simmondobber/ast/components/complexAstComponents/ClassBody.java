@@ -3,9 +3,11 @@ package com.simmondobber.ast.components.complexAstComponents;
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class ClassBody extends ComplexAstComponent {
 
     private final Character leftCurly;

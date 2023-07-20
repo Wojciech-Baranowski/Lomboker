@@ -15,6 +15,10 @@ public class ImportParser extends AstParser {
         super(pointer);
     }
 
+    public ImportParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Import parse() {
         Keyword importKeyword = new KeywordParser(this.pointer).parse();

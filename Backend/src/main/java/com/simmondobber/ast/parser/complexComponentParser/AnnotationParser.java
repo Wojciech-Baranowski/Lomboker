@@ -14,6 +14,10 @@ public class AnnotationParser extends AstParser {
         super(pointer);
     }
 
+    public AnnotationParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Annotation parse() {
         Character at = new CharacterParser(this.pointer).parse();

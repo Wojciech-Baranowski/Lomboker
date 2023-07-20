@@ -2,6 +2,8 @@ package com.simmondobber.lomboker.common;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+
 @Getter
 public enum Keywords {
 
@@ -61,5 +63,11 @@ public enum Keywords {
 
     Keywords(String keyword) {
         this.keyword = keyword;
+    }
+
+    public static boolean contains(String keywordCandidate) {
+        return Arrays.stream(Keywords.values())
+                .map(Keywords::getKeyword)
+                .anyMatch(keyword -> keyword.equals(keywordCandidate));
     }
 }

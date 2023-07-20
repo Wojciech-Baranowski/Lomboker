@@ -10,6 +10,10 @@ public class ClassExtensionParser extends AstParser {
         super(pointer);
     }
 
+    public ClassExtensionParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public ClassExtension parse() {
         return new ClassExtension(this.pointer.getUntil("{"));

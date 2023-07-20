@@ -10,6 +10,10 @@ public class CharacterParser extends AstParser {
         super(pointer);
     }
 
+    public CharacterParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Character parse() {
         return new Character(this.pointer.getCharacter(), this.pointer.getSeparator());

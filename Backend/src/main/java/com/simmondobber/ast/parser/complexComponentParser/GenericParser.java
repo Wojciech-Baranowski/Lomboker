@@ -13,6 +13,10 @@ public class GenericParser extends AstParser {
         super(pointer);
     }
 
+    public GenericParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Generic parse() {
         Character leftAngle = new CharacterParser(this.pointer).parse();

@@ -4,9 +4,11 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.EnumValuesListing;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class EnumValues extends ComplexAstComponent {
 
     private final EnumValuesListing enumValuesListing;

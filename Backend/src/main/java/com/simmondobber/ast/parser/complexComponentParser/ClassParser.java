@@ -18,6 +18,10 @@ public class ClassParser extends AstParser {
         super(pointer);
     }
 
+    public ClassParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Class parse() {
         Preamble preamble = new PreambleParser(this.pointer).parse();

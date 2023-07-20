@@ -13,6 +13,10 @@ public class ClassBodyParser extends AstParser {
         super(pointer);
     }
 
+    public ClassBodyParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public ClassBody parse() {
         Character leftCurly = new CharacterParser(this.pointer).parse();

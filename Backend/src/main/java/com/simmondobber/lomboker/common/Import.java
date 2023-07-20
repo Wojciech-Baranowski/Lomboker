@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.enums;
+package com.simmondobber.lomboker.common;
 
 import lombok.Getter;
 

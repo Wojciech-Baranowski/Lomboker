@@ -10,6 +10,10 @@ public class EnumValuesListingParser extends AstParser {
         super(pointer);
     }
 
+    public EnumValuesListingParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public EnumValuesListing parse() {
         return new EnumValuesListing(this.pointer.getUntil(";}"));

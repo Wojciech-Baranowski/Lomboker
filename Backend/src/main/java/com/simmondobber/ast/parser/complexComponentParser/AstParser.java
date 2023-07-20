@@ -8,7 +8,7 @@ public abstract class AstParser {
     protected Pointer pointer;
 
     public AstParser(String stringToParse) {
-        this.pointer = new Pointer(stringToParse);
+        this.pointer = new Pointer(stringToParse + " ");
     }
 
     public AstParser(Pointer pointer) {

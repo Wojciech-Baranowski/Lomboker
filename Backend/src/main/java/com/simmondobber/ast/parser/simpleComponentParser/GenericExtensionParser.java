@@ -10,6 +10,10 @@ public class GenericExtensionParser extends AstParser {
         super(pointer);
     }
 
+    public GenericExtensionParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public GenericExtension parse() {
         return new GenericExtension(this.pointer.getUntil(">"));

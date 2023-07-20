@@ -10,6 +10,10 @@ public class ValueParser extends AstParser {
         super(pointer);
     }
 
+    public ValueParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Value parse() {
         return new Value(this.pointer.getInside(';'));

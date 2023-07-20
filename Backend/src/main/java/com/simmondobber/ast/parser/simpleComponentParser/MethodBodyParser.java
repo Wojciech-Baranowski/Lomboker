@@ -10,6 +10,10 @@ public class MethodBodyParser extends AstParser {
         super(pointer);
     }
 
+    public MethodBodyParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public MethodBody parse() {
         return new MethodBody(this.pointer.getInsideInclusive('}'), this.pointer.getSeparator());

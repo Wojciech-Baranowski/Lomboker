@@ -10,6 +10,10 @@ public class NameParser extends AstParser {
         super(pointer);
     }
 
+    public NameParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Name parse() {
         return new Name(this.pointer.getWord(), this.pointer.getSeparator());

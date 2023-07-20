@@ -13,6 +13,10 @@ public class ThrowsParser extends AstParser {
         super(pointer);
     }
 
+    public ThrowsParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Throws parse() {
         Keyword throwsKeyword = new KeywordParser(this.pointer).parse();

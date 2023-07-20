@@ -5,9 +5,11 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
 import com.simmondobber.ast.components.simpleAstComponents.Path;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class Import extends ComplexAstComponent {
 
     private final Keyword importKeyword;

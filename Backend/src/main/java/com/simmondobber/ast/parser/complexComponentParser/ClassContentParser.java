@@ -14,6 +14,10 @@ public class ClassContentParser extends AstParser {
         super(pointer);
     }
 
+    public ClassContentParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public ClassContent parse() {
         List<ClassContentComponent> classComponents = new ArrayList<>();

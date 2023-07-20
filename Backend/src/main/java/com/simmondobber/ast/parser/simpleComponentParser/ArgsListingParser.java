@@ -10,6 +10,10 @@ public class ArgsListingParser extends AstParser {
         super(pointer);
     }
 
+    public ArgsListingParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public ArgsListing parse() {
         return new ArgsListing(this.pointer.getUntil(')'));

@@ -10,6 +10,10 @@ public class PathParser extends AstParser {
         super(pointer);
     }
 
+    public PathParser(String stringToParse) {
+        super(stringToParse);
+    }
+
     @Override
     public Path parse() {
         return new Path(this.pointer.getCompoundWord(), this.pointer.getSeparator());

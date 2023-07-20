@@ -4,9 +4,11 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.ClassExtension;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class Class extends ComplexAstComponent implements ClassContentComponent {
 
     private final Preamble preamble;
