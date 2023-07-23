@@ -39,9 +39,13 @@ public class GetterFactoryTest {
                 Arguments.of("int", "point", "public int getPoint() {\n\treturn point;\n}\n", "public int getPoint() {\n\treturn this.point;\n}\n"),
                 Arguments.of("int", "aPoint", "public int getAPoint() {\n\treturn aPoint;\n}\n", "public int getAPoint() {\n\treturn this.aPoint;\n}\n"),
                 Arguments.of("int", "isPoint", "public int getIsPoint() {\n\treturn isPoint;\n}\n", "public int getIsPoint() {\n\treturn this.isPoint;\n}\n"),
+                Arguments.of("int", "isPrivate", "public int getIsPrivate() {\n\treturn isPrivate;\n}\n", "public int getIsPrivate() {\n\treturn this.isPrivate;\n}\n"),
+                Arguments.of("int", "isAbstract", "public int getIsAbstract() {\n\treturn isAbstract;\n}\n", "public int getIsAbstract() {\n\treturn this.isAbstract;\n}\n"),
                 Arguments.of("boolean", "point", "public boolean isPoint() {\n\treturn point;\n}\n", "public boolean isPoint() {\n\treturn this.point;\n}\n"),
                 Arguments.of("boolean", "aPoint", "public boolean isAPoint() {\n\treturn aPoint;\n}\n", "public boolean isAPoint() {\n\treturn this.aPoint;\n}\n"),
                 Arguments.of("boolean", "isPoint", "public boolean isPoint() {\n\treturn isPoint;\n}\n", "public boolean isPoint() {\n\treturn this.isPoint;\n}\n"),
+                Arguments.of("boolean", "isPrivate", "public boolean isPrivate() {\n\treturn isPrivate;\n}\n", "public boolean isPrivate() {\n\treturn this.isPrivate;\n}\n"),
+                Arguments.of("boolean", "isAbstract", "public boolean isAbstract() {\n\treturn isAbstract;\n}\n", "public boolean isAbstract() {\n\treturn this.isAbstract;\n}\n"),
                 Arguments.of("List<Integer>", "points", "public List<Integer> getPoints() {\n\treturn points;\n}\n", "public List<Integer> getPoints() {\n\treturn this.points;\n}\n"),
                 Arguments.of("int[]", "points", "public int[] getPoints() {\n\treturn points;\n}\n", "public int[] getPoints() {\n\treturn this.points;\n}\n"),
                 Arguments.of("List<Integer>[]", "points", "public List<Integer>[] getPoints() {\n\treturn points;\n}\n", "public List<Integer>[] getPoints() {\n\treturn this.points;\n}\n")

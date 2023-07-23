@@ -27,9 +27,13 @@ public class GetterNameFactoryTest {
                 Arguments.of("int", "point", "getPoint"),
                 Arguments.of("int", "aPoint", "getAPoint"),
                 Arguments.of("int", "isPoint", "getIsPoint"),
+                Arguments.of("int", "isPrivate", "getIsPrivate"),
+                Arguments.of("int", "isAbstract", "getIsAbstract"),
                 Arguments.of("boolean", "point", "isPoint"),
                 Arguments.of("boolean", "aPoint", "isAPoint"),
                 Arguments.of("boolean", "isPoint", "isPoint"),
+                Arguments.of("boolean", "isPrivate", "isPrivate"),
+                Arguments.of("boolean", "isAbstract", "isAbstract"),
                 Arguments.of("List<Integer>", "points", "getPoints"),
                 Arguments.of("int[]", "points", "getPoints"),
                 Arguments.of("List<Integer>[]", "points", "getPoints")

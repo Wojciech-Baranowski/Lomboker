@@ -22,7 +22,7 @@ public class SetterArgsFactory {
     }
 
     private String createIsPrefixBooleanSetterArgs() {
-        if (Keywords.contains(this.fieldName)) {
+        if (Keywords.contains(StringUtils.uncapitalize(this.fieldName.substring(2)))) {
             return createIsPrefixKeywordBooleanSetterArgs();
         } else {
             return createStandardIsPrefixKeywordBooleanSetterArgs();
@@ -30,7 +30,7 @@ public class SetterArgsFactory {
     }
 
     private String createIsPrefixKeywordBooleanSetterArgs() {
-        if ("aeiou".contains(Character.toString(this.fieldName.charAt(0)))) {
+        if ("aeiou".contains(Character.toString(StringUtils.uncapitalize(this.fieldName.substring(2)).charAt(0)))) {
             return createIsPrefixKeywordVowelBooleanSetterArgs();
         } else {
             return createIsPrefixKeywordConsonantBooleanSetterArgs();
@@ -38,18 +38,18 @@ public class SetterArgsFactory {
     }
 
     private String createStandardSetterArgs() {
-        return this.fieldType + " " + this.fieldName;
+        return "(" + this.fieldType + " " + this.fieldName + ")";
     }
 
     private String createStandardIsPrefixKeywordBooleanSetterArgs() {
-        return this.fieldType + " " + StringUtils.uncapitalize(this.fieldName.substring(2));
+        return "(" + this.fieldType + " " + StringUtils.uncapitalize(this.fieldName.substring(2)) + ")";
     }
 
     private String createIsPrefixKeywordVowelBooleanSetterArgs() {
-        return this.fieldType + " an" + this.fieldName.substring(2);
+        return "(" + this.fieldType + " an" + this.fieldName.substring(2) + ")";
     }
 
     private String createIsPrefixKeywordConsonantBooleanSetterArgs() {
-        return this.fieldType + " a" + this.fieldName.substring(2);
+        return "(" + this.fieldType + " a" + this.fieldName.substring(2) + ")";
     }
 }
