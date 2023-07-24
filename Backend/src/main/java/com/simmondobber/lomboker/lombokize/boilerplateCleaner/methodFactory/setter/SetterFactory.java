@@ -39,7 +39,7 @@ public class SetterFactory {
     }
 
     private Type createType() {
-        return new TypeParser(this.fieldType + " ").parse();
+        return new TypeParser("void ").parse();
     }
 
     private Name createName() {

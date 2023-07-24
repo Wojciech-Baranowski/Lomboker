@@ -2,7 +2,6 @@ package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory;
 
 import com.simmondobber.ast.components.complexAstComponents.Field;
 import com.simmondobber.ast.components.complexAstComponents.Method;
-import com.simmondobber.lomboker.lombokize.AstComponentFilter;
 import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.getter.GetterFactory;
 import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setter.SetterFactory;
 import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
@@ -12,12 +11,6 @@ import java.util.Collection;
 import java.util.List;
 
 public class MethodFactory {
-
-    private final AstComponentFilter astComponentFilter;
-
-    public MethodFactory() {
-        this.astComponentFilter = new AstComponentFilter();
-    }
 
     public List<Method> generateMethodsBasedOnClassFields(List<Field> classFields, AnnotationsConfig annotationsConfig) {
         return classFields.stream()

@@ -6,6 +6,7 @@ import com.simmondobber.ast.components.complexAstComponents.Class;
 import com.simmondobber.ast.components.complexAstComponents.Field;
 import com.simmondobber.ast.components.complexAstComponents.Method;
 import com.simmondobber.lomboker.lombokize.AstComponentFilter;
+import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.MethodComparator;
 import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.MethodFactory;
 import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 
@@ -15,10 +16,12 @@ public class BoilerplateCleaner {
 
     private final AstComponentFilter astComponentFilter;
     private final MethodFactory methodFactory;
+    private final MethodComparator methodComparator;
 
     public BoilerplateCleaner() {
         this.astComponentFilter = new AstComponentFilter();
         this.methodFactory = new MethodFactory();
+        this.methodComparator = new MethodComparator();
     }
 
     public void removeRedundantMethods(Ast ast, AnnotationsConfig annotationsConfig) {
@@ -35,14 +38,6 @@ public class BoilerplateCleaner {
 
     private boolean isMethodGenerated(List<Method> methodsBasedOnFields, Method method) {
         return methodsBasedOnFields.stream()
-                .anyMatch(methodBasedOnField -> areMethodsEqual(methodBasedOnField.getSyntax(), method.getSyntax()));
-    }
-
-    private boolean areMethodsEqual(String methodSyntax1, String methodSyntax2) {
-        methodSyntax1 = methodSyntax1.replaceAll("`.*?`", " ");
-        methodSyntax2 = methodSyntax2.replaceAll("`.*?`", " ");
-        methodSyntax1 = methodSyntax1.replaceAll("\\s+", " ");
-        methodSyntax2 = methodSyntax2.replaceAll("\\s+", " ");
-        return methodSyntax1.equals(methodSyntax2);
+                .anyMatch(methodBasedOnField -> this.methodComparator.areMethodsEqual(methodBasedOnField.getSyntax(), method.getSyntax()));
     }
 }

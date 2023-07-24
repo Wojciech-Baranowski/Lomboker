@@ -1,6 +1,7 @@
 package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.getter;
 
 import com.simmondobber.ast.components.complexAstComponents.Field;
+import com.simmondobber.ast.components.complexAstComponents.Method;
 import com.simmondobber.ast.components.complexAstComponents.Preamble;
 import com.simmondobber.ast.components.complexAstComponents.Type;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
@@ -26,12 +27,12 @@ public class GetterFactoryTest {
         GetterFactory getterFactory = new GetterFactory(field);
 
         //When
-        GetterComponent createdGetterComponent = getterFactory.createGetter();
+        Method getterMethod = getterFactory.createGetter();
+        Method getterMethodWithThis = getterFactory.createGetterWithThis();
 
         //Then
-        Assertions.assertEquals(field, createdGetterComponent.getField());
-        Assertions.assertEquals(expectedMethodSyntax, createdGetterComponent.getMethod().getSyntax());
-        Assertions.assertEquals(expectedMethodWithThisSyntax, createdGetterComponent.getMethodWithThis().getSyntax());
+        Assertions.assertEquals(expectedMethodSyntax, getterMethod.getSyntax());
+        Assertions.assertEquals(expectedMethodWithThisSyntax, getterMethodWithThis.getSyntax());
     }
 
     private static Stream<Arguments> create_getter_test_data_provider() {

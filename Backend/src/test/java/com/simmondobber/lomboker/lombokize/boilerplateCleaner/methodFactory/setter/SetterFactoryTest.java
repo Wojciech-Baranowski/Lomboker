@@ -1,6 +1,7 @@
 package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setter;
 
 import com.simmondobber.ast.components.complexAstComponents.Field;
+import com.simmondobber.ast.components.complexAstComponents.Method;
 import com.simmondobber.ast.components.complexAstComponents.Preamble;
 import com.simmondobber.ast.components.complexAstComponents.Type;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
@@ -26,28 +27,27 @@ public class SetterFactoryTest {
         SetterFactory setterFactory = new SetterFactory(field);
 
         //When
-        SetterComponent createdSetterComponent = setterFactory.createSetter();
+        Method setterMethod = setterFactory.createSetter();
 
         //Then
-        Assertions.assertEquals(field, createdSetterComponent.getField());
-        Assertions.assertEquals(expectedMethodSyntax, createdSetterComponent.getMethod().getSyntax());
+        Assertions.assertEquals(expectedMethodSyntax, setterMethod.getSyntax());
     }
 
     private static Stream<Arguments> create_setter_test_data_provider() {
         return Stream.of(
-                Arguments.of("int", "point", "public int setPoint(int point) {\n\tthis.point = point;\n}\n"),
-                Arguments.of("int", "aPoint", "public int setAPoint(int aPoint) {\n\tthis.aPoint = aPoint;\n}\n"),
-                Arguments.of("int", "isPoint", "public int setIsPoint(int isPoint) {\n\tthis.isPoint = isPoint;\n}\n"),
-                Arguments.of("int", "isPrivate", "public int setIsPrivate(int isPrivate) {\n\tthis.isPrivate = isPrivate;\n}\n"),
-                Arguments.of("int", "isAbstract", "public int setIsAbstract(int isAbstract) {\n\tthis.isAbstract = isAbstract;\n}\n"),
-                Arguments.of("boolean", "point", "public boolean setPoint(boolean point) {\n\tthis.point = point;\n}\n"),
-                Arguments.of("boolean", "aPoint", "public boolean setAPoint(boolean aPoint) {\n\tthis.aPoint = aPoint;\n}\n"),
-                Arguments.of("boolean", "isPoint", "public boolean setPoint(boolean point) {\n\tthis.isPoint = point;\n}\n"),
-                Arguments.of("boolean", "isPrivate", "public boolean setPrivate(boolean aPrivate) {\n\tthis.isPrivate = aPrivate;\n}\n"),
-                Arguments.of("boolean", "isAbstract", "public boolean setAbstract(boolean anAbstract) {\n\tthis.isAbstract = anAbstract;\n}\n"),
-                Arguments.of("List<Integer>", "points", "public List<Integer> setPoints(List<Integer> points) {\n\tthis.points = points;\n}\n"),
-                Arguments.of("int[]", "points", "public int[] setPoints(int[] points) {\n\tthis.points = points;\n}\n"),
-                Arguments.of("List<Integer>[]", "points", "public List<Integer>[] setPoints(List<Integer>[] points) {\n\tthis.points = points;\n}\n")
+                Arguments.of("int", "point", "public void setPoint(int point) {\n\tthis.point = point;\n}\n"),
+                Arguments.of("int", "aPoint", "public void setAPoint(int aPoint) {\n\tthis.aPoint = aPoint;\n}\n"),
+                Arguments.of("int", "isPoint", "public void setIsPoint(int isPoint) {\n\tthis.isPoint = isPoint;\n}\n"),
+                Arguments.of("int", "isPrivate", "public void setIsPrivate(int isPrivate) {\n\tthis.isPrivate = isPrivate;\n}\n"),
+                Arguments.of("int", "isAbstract", "public void setIsAbstract(int isAbstract) {\n\tthis.isAbstract = isAbstract;\n}\n"),
+                Arguments.of("boolean", "point", "public void setPoint(boolean point) {\n\tthis.point = point;\n}\n"),
+                Arguments.of("boolean", "aPoint", "public void setAPoint(boolean aPoint) {\n\tthis.aPoint = aPoint;\n}\n"),
+                Arguments.of("boolean", "isPoint", "public void setPoint(boolean point) {\n\tthis.isPoint = point;\n}\n"),
+                Arguments.of("boolean", "isPrivate", "public void setPrivate(boolean aPrivate) {\n\tthis.isPrivate = aPrivate;\n}\n"),
+                Arguments.of("boolean", "isAbstract", "public void setAbstract(boolean anAbstract) {\n\tthis.isAbstract = anAbstract;\n}\n"),
+                Arguments.of("List<Integer>", "points", "public void setPoints(List<Integer> points) {\n\tthis.points = points;\n}\n"),
+                Arguments.of("int[]", "points", "public void setPoints(int[] points) {\n\tthis.points = points;\n}\n"),
+                Arguments.of("List<Integer>[]", "points", "public void setPoints(List<Integer>[] points) {\n\tthis.points = points;\n}\n")
         );
     }
 
