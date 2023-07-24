@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setter;
+package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setterFactory;
 
 import org.apache.commons.lang3.StringUtils;
 

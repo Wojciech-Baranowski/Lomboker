@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.getter;
+package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setterFactory;
 
 import com.simmondobber.ast.components.complexAstComponents.*;
 import com.simmondobber.ast.components.simpleAstComponents.MethodBody;
@@ -8,32 +8,32 @@ import com.simmondobber.ast.parser.complexComponentParser.PreambleParser;
 import com.simmondobber.ast.parser.complexComponentParser.TypeParser;
 import com.simmondobber.lomboker.common.Trimmer;
 
-public class GetterFactory {
+public class SetterFactory {
 
     private final String fieldType;
     private final String fieldName;
 
-    public GetterFactory(Field field) {
+    public SetterFactory(Field field) {
         this.fieldType = Trimmer.trim(field.getType().getSyntax());
         this.fieldName = Trimmer.trim(field.getName().getSyntax());
     }
 
-    public Method createGetter() {
-        return createGetterMethod(false);
+    public Method createSetter() {
+        return createSetterMethod(false);
     }
 
-    public Method createGetterWithThis() {
-        return createGetterMethod(true);
+    public Method createSetterWithThis() {
+        return createSetterMethod(true);
     }
 
-    private Method createGetterMethod(boolean thisPrefix) {
+    private Method createSetterMethod(boolean thisPrefix) {
         return new Method(
                 createPreamble(),
                 createType(),
                 createName(),
                 createArgs(),
                 null,
-                createMethodBody(thisPrefix),
+                createMethodBody(createArgs(), thisPrefix),
                 null
         );
     }
@@ -43,27 +43,35 @@ public class GetterFactory {
     }
 
     private Type createType() {
-        return new TypeParser(this.fieldType + " ").parse();
+        return new TypeParser("void ").parse();
     }
 
     private Name createName() {
-        String name = new GetterNameFactory(this.fieldType, this.fieldName).createGetterName();
+        String name = new SetterNameFactory(this.fieldType, this.fieldName).createSetterName();
         return new Name(name, "");
     }
 
     private Args createArgs() {
-        return new ArgsParser("()").parse();
+        String args = new SetterArgsFactory(this.fieldType, this.fieldName).createSetterArgs();
+        return new ArgsParser(args).parse();
     }
 
-    private MethodBody createMethodBody(boolean thisPrefix) {
+    private MethodBody createMethodBody(Args args, boolean thisPrefix) {
         String bodySyntax = new StringBuilder()
                 .append(" {\n\t")
-                .append("return ")
                 .append(thisPrefix ? "this." : "")
                 .append(this.fieldName)
+                .append(" = ")
+                .append(getArgName(args))
                 .append(";\n")
                 .append("}\n")
                 .toString();
         return new MethodBody(bodySyntax, "");
+    }
+
+    private String getArgName(Args args) {
+        String listingSyntax = args.getArgsListing().getSyntax();
+        int nameIndex = listingSyntax.indexOf(" ") + 1;
+        return listingSyntax.substring(nameIndex);
     }
 }

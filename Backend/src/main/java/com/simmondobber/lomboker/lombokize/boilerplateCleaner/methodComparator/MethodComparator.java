@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory;
+package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodComparator;
 
 import com.simmondobber.lomboker.common.Trimmer;
 

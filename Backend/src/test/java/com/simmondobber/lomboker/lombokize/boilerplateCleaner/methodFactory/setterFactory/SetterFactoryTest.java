@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setter;
+package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setterFactory;
 
 import com.simmondobber.ast.components.complexAstComponents.Field;
 import com.simmondobber.ast.components.complexAstComponents.Method;

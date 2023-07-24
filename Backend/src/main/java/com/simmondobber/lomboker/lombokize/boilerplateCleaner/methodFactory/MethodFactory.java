@@ -2,8 +2,8 @@ package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory;
 
 import com.simmondobber.ast.components.complexAstComponents.Field;
 import com.simmondobber.ast.components.complexAstComponents.Method;
-import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.getter.GetterFactory;
-import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setter.SetterFactory;
+import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.getterFactory.GetterFactory;
+import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setterFactory.SetterFactory;
 import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 
 import java.util.ArrayList;

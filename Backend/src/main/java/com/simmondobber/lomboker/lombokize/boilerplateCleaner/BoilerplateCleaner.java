@@ -5,8 +5,8 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.complexAstComponents.Class;
 import com.simmondobber.ast.components.complexAstComponents.Field;
 import com.simmondobber.ast.components.complexAstComponents.Method;
-import com.simmondobber.lomboker.lombokize.AstComponentFilter;
-import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.MethodComparator;
+import com.simmondobber.ast.filter.AstComponentFilter;
+import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodComparator.MethodComparator;
 import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.MethodFactory;
 import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 
