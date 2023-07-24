@@ -120,10 +120,10 @@ public class MethodFactoryTest {
 
     private List<String> get_setters_syntax() {
         return List.of(
-                "public void setPoint(int point) {\n\tthis.point = point;\n}\n",
-                "public void setPoint(boolean point) {\n\tthis.point = point;\n}\n",
-                "public void setIsPoint(int isPoint) {\n\tthis.isPoint = isPoint;\n}\n",
-                "public void setPoint(boolean point) {\n\tthis.isPoint = point;\n}\n"
+                "public void setPoint(int point) {\n\tpoint = point;\n}\n", "public void setPoint(int point) {\n\tthis.point = point;\n}\n",
+                "public void setPoint(boolean point) {\n\tpoint = point;\n}\n", "public void setPoint(boolean point) {\n\tthis.point = point;\n}\n",
+                "public void setIsPoint(int isPoint) {\n\tisPoint = isPoint;\n}\n", "public void setIsPoint(int isPoint) {\n\tthis.isPoint = isPoint;\n}\n",
+                "public void setPoint(boolean point) {\n\tisPoint = point;\n}\n", "public void setPoint(boolean point) {\n\tthis.isPoint = point;\n}\n"
         );
     }
 }

@@ -10,18 +10,22 @@ public class CharSequenceCompressorTest {
     @Test
     public void parser_should_compress_strings() {
         //Given
-        String stringToCompress = "public void test(String s) {\n" +
-                "        String str1 = \"21372137\";\n" +
-                "        String str2 = \"f\";\n" +
-                "        char c = \"\";\n" +
-                "        int x = 2 + 2;\n" +
-                "    }";
-        String correctlyCompressedString = "public void test(String s) {\n" +
-                "        String str1 = `0`;\n" +
-                "        String str2 = `1`;\n" +
-                "        char c = `2`;\n" +
-                "        int x = 2 + 2;\n" +
-                "    }";
+        String stringToCompress = """
+                public void test(String s) {
+                    String str1 = "21372137";
+                    String str2 = "f";
+                    char c = "";
+                    int x = 2 + 2;
+                }
+                """;
+        String correctlyCompressedString = """
+                public void test(String s) {
+                    String str1 = `0`;
+                    String str2 = `1`;
+                    char c = `2`;
+                    int x = 2 + 2;
+                }
+                """;
         CompressedCode codeToCompress = new CompressedCode(stringToCompress);
         CharSequenceCompressor compressor = new CharSequenceCompressor(codeToCompress);
 
@@ -44,14 +48,18 @@ public class CharSequenceCompressorTest {
     @Test
     public void parser_should_compress_characters() {
         //Given
-        String stringToCompress = "public void test(String s) {\n" +
-                "        char c1 = '\n';\n" +
-                "        char c2 = 'f';\n" +
-                "    }";
-        String correctlyCompressedString = "public void test(String s) {\n" +
-                "        char c1 = `0`;\n" +
-                "        char c2 = `1`;\n" +
-                "    }";
+        String stringToCompress = """
+                public void test(String s) {
+                    char c1 = '\n';
+                    char c2 = 'f';
+                }
+                """;
+        String correctlyCompressedString = """
+                public void test(String s) {
+                    char c1 = `0`;
+                    char c2 = `1`;
+                }
+                """;
         CompressedCode codeToCompress = new CompressedCode(stringToCompress);
         CharSequenceCompressor compressor = new CharSequenceCompressor(codeToCompress);
 

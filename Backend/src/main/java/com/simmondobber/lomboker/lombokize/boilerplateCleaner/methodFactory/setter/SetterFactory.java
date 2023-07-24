@@ -19,17 +19,21 @@ public class SetterFactory {
     }
 
     public Method createSetter() {
-        return createSetterMethod();
+        return createSetterMethod(false);
     }
 
-    private Method createSetterMethod() {
+    public Method createSetterWithThis() {
+        return createSetterMethod(true);
+    }
+
+    private Method createSetterMethod(boolean thisPrefix) {
         return new Method(
                 createPreamble(),
                 createType(),
                 createName(),
                 createArgs(),
                 null,
-                createMethodBody(createArgs()),
+                createMethodBody(createArgs(), thisPrefix),
                 null
         );
     }
@@ -52,10 +56,10 @@ public class SetterFactory {
         return new ArgsParser(args).parse();
     }
 
-    private MethodBody createMethodBody(Args args) {
+    private MethodBody createMethodBody(Args args, boolean thisPrefix) {
         String bodySyntax = new StringBuilder()
                 .append(" {\n\t")
-                .append("this.")
+                .append(thisPrefix ? "this." : "")
                 .append(this.fieldName)
                 .append(" = ")
                 .append(getArgName(args))

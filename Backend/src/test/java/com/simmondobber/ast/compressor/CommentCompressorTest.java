@@ -10,16 +10,20 @@ public class CommentCompressorTest {
     @Test
     public void parser_should_compress_line_comments() {
         //Given
-        String stringToCompress = "private String generateNextIdentifier() { //generates identifier of dictionary\n" +
-                "        String identifier = Integer.toString(this.sequence); //get as string\n" +
-                "        this.sequence++; //increments sequence\n" +
-                "        return \"`\" + identifier + '`'; //adds ` prefix and suffix (\\n\\n\\n)\n" +
-                "    }";
-        String correctlyCompressedString = "private String generateNextIdentifier() { `0`\n" +
-                "        String identifier = Integer.toString(this.sequence); `1`\n" +
-                "        this.sequence++; `2`\n" +
-                "        return \"`\" + identifier + '`'; `3`\n" +
-                "    }";
+        String stringToCompress = """
+                private String generateNextIdentifier() { //generates identifier of dictionary
+                    String identifier = Integer.toString(this.sequence); //get as string
+                    this.sequence++; //increments sequence
+                    return "`" + identifier + '`'; //adds ` prefix and suffix (\\n\\n\\n)
+                }
+                """;
+        String correctlyCompressedString = """
+                private String generateNextIdentifier() { `0`
+                    String identifier = Integer.toString(this.sequence); `1`
+                    this.sequence++; `2`
+                    return "`" + identifier + '`'; `3`
+                }
+                """;
         CompressedCode codeToCompress = new CompressedCode(stringToCompress);
         CommentCompressor compressor = new CommentCompressor(codeToCompress);
 
@@ -44,16 +48,20 @@ public class CommentCompressorTest {
     @Test
     public void parser_should_compress_block_comments() {
         //Given
-        String stringToCompress = "private String generateNextIdentifier() { /*generates identifier of dictionary*/\n" +
-                "        String identifier = Integer.toString(this.sequence); /*get as string*/\n" +
-                "        this.sequence++; /*increments sequence*/\n" +
-                "        return \"`\" + identifier + '`'; /*adds ` prefix and suffix (\\n\\n\\n)*/\n" +
-                "    }";
-        String correctlyCompressedString = "private String generateNextIdentifier() { `0`\n" +
-                "        String identifier = Integer.toString(this.sequence); `1`\n" +
-                "        this.sequence++; `2`\n" +
-                "        return \"`\" + identifier + '`'; `3`\n" +
-                "    }";
+        String stringToCompress = """
+                private String generateNextIdentifier() { /*generates identifier of dictionary*/
+                    String identifier = Integer.toString(this.sequence); /*get as string*/
+                    this.sequence++; /*increments sequence*/
+                    return "`" + identifier + '`'; /*adds ` prefix and suffix (\\n\\n\\n)*/
+                }
+                """;
+        String correctlyCompressedString = """
+                private String generateNextIdentifier() { `0`
+                    String identifier = Integer.toString(this.sequence); `1`
+                    this.sequence++; `2`
+                    return "`" + identifier + '`'; `3`
+                }
+                """;
         CompressedCode codeToCompress = new CompressedCode(stringToCompress);
         CommentCompressor compressor = new CommentCompressor(codeToCompress);
 
@@ -78,16 +86,20 @@ public class CommentCompressorTest {
     @Test
     public void parser_should_parse_docs_comments() {
         //Given
-        String stringToCompress = "private String generateNextIdentifier() { /**generates identifier of dictionary**/\n" +
-                "        String identifier = Integer.toString(this.sequence); /**get as string**/\n" +
-                "        this.sequence++; /**increments sequence**/\n" +
-                "        return \"`\" + identifier + '`'; /**adds ` prefix and suffix (\\n\\n\\n)**/\n" +
-                "    }";
-        String correctlyCompressedString = "private String generateNextIdentifier() { `0`\n" +
-                "        String identifier = Integer.toString(this.sequence); `1`\n" +
-                "        this.sequence++; `2`\n" +
-                "        return \"`\" + identifier + '`'; `3`\n" +
-                "    }";
+        String stringToCompress = """
+                private String generateNextIdentifier() { /**generates identifier of dictionary**/
+                    String identifier = Integer.toString(this.sequence); /**get as string**/
+                    this.sequence++; /**increments sequence**/
+                    return "`" + identifier + '`'; /**adds ` prefix and suffix (\\n\\n\\n)**/
+                }
+                """;
+        String correctlyCompressedString = """
+                private String generateNextIdentifier() { `0`
+                    String identifier = Integer.toString(this.sequence); `1`
+                    this.sequence++; `2`
+                    return "`" + identifier + '`'; `3`
+                }
+                """;
         CompressedCode codeToCompress = new CompressedCode(stringToCompress);
         CommentCompressor compressor = new CommentCompressor(codeToCompress);
 

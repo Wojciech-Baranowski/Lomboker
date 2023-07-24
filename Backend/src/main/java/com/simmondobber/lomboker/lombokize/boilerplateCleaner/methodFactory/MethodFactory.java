@@ -37,6 +37,6 @@ public class MethodFactory {
 
     private List<Method> generateSetters(Field field) {
         SetterFactory setterFactory = new SetterFactory(field);
-        return List.of(setterFactory.createSetter());
+        return List.of(setterFactory.createSetter(), setterFactory.createSetterWithThis());
     }
 }
