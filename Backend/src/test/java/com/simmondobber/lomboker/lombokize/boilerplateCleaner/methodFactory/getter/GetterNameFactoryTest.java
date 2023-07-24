@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.boilerplateCleaner.getter;
+package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.getter;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;

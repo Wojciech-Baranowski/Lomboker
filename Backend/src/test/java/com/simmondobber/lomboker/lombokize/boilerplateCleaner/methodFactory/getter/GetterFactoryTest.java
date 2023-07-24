@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.boilerplateCleaner.getter;
+package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.getter;
 
 import com.simmondobber.ast.components.complexAstComponents.Field;
 import com.simmondobber.ast.components.complexAstComponents.Preamble;

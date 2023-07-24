@@ -49,5 +49,4 @@ public class AstComponentFilter {
         }
         return fields;
     }
-
 }

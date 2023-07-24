@@ -61,7 +61,7 @@ public class AnnotationParserTest {
     }
 
     @Test
-    public void parser_should_parse_annotation_without_args() {
+    public void parser_should_parse_annotation_with_empty_args() {
         //Given
         String stringToParse = "@Getter()";
         String correctlyParsedString = "@Getter()";
@@ -80,6 +80,27 @@ public class AnnotationParserTest {
         Assertions.assertEquals("@", components.get(0).getSyntax());
         Assertions.assertEquals("Getter", components.get(1).getSyntax());
         Assertions.assertEquals("()", components.get(2).getSyntax());
+        Assertions.assertEquals(correctlyParsedString, parsedString);
+    }
+
+    @Test
+    public void parser_should_parse_annotation_without_args() {
+        //Given
+        String stringToParse = "@Getter next";
+        String correctlyParsedString = "@Getter ";
+        AnnotationParser annotationParser = new AnnotationParser(new Pointer(stringToParse));
+
+        //When
+        Annotation parsedAnnotation = annotationParser.parse();
+        String parsedString = parsedAnnotation.getSyntax();
+        List<AstComponent> components = parsedAnnotation.getChildAstComponents();
+
+        //Then
+        Assertions.assertEquals(2, components.size());
+        Assertions.assertInstanceOf(Character.class, components.get(0));
+        Assertions.assertInstanceOf(Name.class, components.get(1));
+        Assertions.assertEquals("@", components.get(0).getSyntax());
+        Assertions.assertEquals("Getter ", components.get(1).getSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

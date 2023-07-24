@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.boilerplateCleaner.getter;
+package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.getter;
 
 import com.simmondobber.ast.components.complexAstComponents.*;
 import com.simmondobber.ast.components.simpleAstComponents.MethodBody;
@@ -10,20 +10,20 @@ import com.simmondobber.lomboker.common.Trimmer;
 
 public class GetterFactory {
 
-    private final Field field;
     private final String fieldType;
     private final String fieldName;
 
     public GetterFactory(Field field) {
-        this.field = field;
         this.fieldType = Trimmer.trim(field.getType().getSyntax());
         this.fieldName = Trimmer.trim(field.getName().getSyntax());
     }
 
-    public GetterComponent createGetter() {
-        Method getterMethod = createGetterMethod(false);
-        Method getterMethodWithThis = createGetterMethod(true);
-        return new GetterComponent(this.field, getterMethod, getterMethodWithThis);
+    public Method createGetter() {
+        return createGetterMethod(false);
+    }
+
+    public Method createGetterWithThis() {
+        return createGetterMethod(true);
     }
 
     private Method createGetterMethod(boolean thisPrefix) {

@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.boilerplateCleaner.setter;
+package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setter;
 
 import com.simmondobber.ast.components.complexAstComponents.*;
 import com.simmondobber.ast.components.simpleAstComponents.MethodBody;
@@ -10,19 +10,16 @@ import com.simmondobber.lomboker.common.Trimmer;
 
 public class SetterFactory {
 
-    private final Field field;
     private final String fieldType;
     private final String fieldName;
 
     public SetterFactory(Field field) {
-        this.field = field;
         this.fieldType = Trimmer.trim(field.getType().getSyntax());
         this.fieldName = Trimmer.trim(field.getName().getSyntax());
     }
 
-    public SetterComponent createSetter() {
-        Method setterMethod = createSetterMethod();
-        return new SetterComponent(this.field, setterMethod);
+    public Method createSetter() {
+        return createSetterMethod();
     }
 
     private Method createSetterMethod() {
