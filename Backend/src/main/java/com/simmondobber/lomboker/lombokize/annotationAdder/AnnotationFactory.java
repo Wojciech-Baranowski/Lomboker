@@ -48,7 +48,7 @@ public class AnnotationFactory {
         return annotations;
     }
 
-    public List<Annotation> createMethodAnnotationsBasedOnConfig(AnnotationsConfig annotationsConfig) {
+    public List<Annotation> createFieldAnnotationsBasedOnConfig(AnnotationsConfig annotationsConfig) {
         List<Annotation> annotations = new ArrayList<>();
         if (!annotationsConfig.isGetter()) {
             annotations.add(createGetterAnnotation());
@@ -60,52 +60,52 @@ public class AnnotationFactory {
     }
 
     public Annotation createGetterAnnotation() {
-        String getterAnnotationCode = AnnotationKeywords.GETTER.getKeyword();
+        String getterAnnotationCode = AnnotationKeywords.GETTER.getKeyword() + "\n";
         return new AnnotationParser(getterAnnotationCode).parse();
     }
 
     public Annotation createSetterAnnotation() {
-        String setterAnnotationCode = AnnotationKeywords.SETTER.getKeyword();
+        String setterAnnotationCode = AnnotationKeywords.SETTER.getKeyword() + "\n";
         return new AnnotationParser(setterAnnotationCode).parse();
     }
 
     public Annotation createNoArgsConstructorAnnotation() {
-        String noArgsConstructorAnnotationCode = AnnotationKeywords.NO_ARGS_CONSTRUCTOR.getKeyword();
+        String noArgsConstructorAnnotationCode = AnnotationKeywords.NO_ARGS_CONSTRUCTOR.getKeyword() + "\n";
         return new AnnotationParser(noArgsConstructorAnnotationCode).parse();
     }
 
     public Annotation createAllArgsConstructorAnnotation() {
-        String allArgsConstructorAnnotationCode = AnnotationKeywords.ALL_ARGS_CONSTRUCTOR.getKeyword();
+        String allArgsConstructorAnnotationCode = AnnotationKeywords.ALL_ARGS_CONSTRUCTOR.getKeyword() + "\n";
         return new AnnotationParser(allArgsConstructorAnnotationCode).parse();
     }
 
     public Annotation createBuilderAnnotation() {
-        String builderAnnotationCode = AnnotationKeywords.BUILDER.getKeyword();
+        String builderAnnotationCode = AnnotationKeywords.BUILDER.getKeyword() + "\n";
         return new AnnotationParser(builderAnnotationCode).parse();
     }
 
     public Annotation createSuperBuilderAnnotation() {
-        String superBuilderAnnotationCode = AnnotationKeywords.SUPER_BUILDER.getKeyword();
+        String superBuilderAnnotationCode = AnnotationKeywords.SUPER_BUILDER.getKeyword() + "\n";
         return new AnnotationParser(superBuilderAnnotationCode).parse();
     }
 
     public Annotation createBuilderWithToBuilderAnnotation() {
-        String builderWithToBuilderAnnotationCode = AnnotationKeywords.BUILDER.getKeyword() + AnnotationKeywords.TO_BUILDER.getKeyword();
+        String builderWithToBuilderAnnotationCode = AnnotationKeywords.BUILDER.getKeyword() + AnnotationKeywords.TO_BUILDER.getKeyword() + "\n";
         return new AnnotationParser(builderWithToBuilderAnnotationCode).parse();
     }
 
     public Annotation createSuperBuilderWithToBuilderAnnotation() {
-        String superBuilderWithToBuilderAnnotationCode = AnnotationKeywords.SUPER_BUILDER.getKeyword() + AnnotationKeywords.TO_BUILDER.getKeyword();
+        String superBuilderWithToBuilderAnnotationCode = AnnotationKeywords.SUPER_BUILDER.getKeyword() + AnnotationKeywords.TO_BUILDER.getKeyword() + "\n";
         return new AnnotationParser(superBuilderWithToBuilderAnnotationCode).parse();
     }
 
     public Annotation createToStringAnnotation() {
-        String toStringAnnotationCode = AnnotationKeywords.TO_STRING.getKeyword();
+        String toStringAnnotationCode = AnnotationKeywords.TO_STRING.getKeyword() + "\n";
         return new AnnotationParser(toStringAnnotationCode).parse();
     }
 
     public Annotation createToStringWithCallSuperAnnotation() {
-        String toStringWithCallSuperAnnotationCode = AnnotationKeywords.TO_STRING.getKeyword() + AnnotationKeywords.CALL_SUPER.getKeyword();
+        String toStringWithCallSuperAnnotationCode = AnnotationKeywords.TO_STRING.getKeyword() + AnnotationKeywords.CALL_SUPER.getKeyword() + "\n";
         return new AnnotationParser(toStringWithCallSuperAnnotationCode).parse();
     }
 }

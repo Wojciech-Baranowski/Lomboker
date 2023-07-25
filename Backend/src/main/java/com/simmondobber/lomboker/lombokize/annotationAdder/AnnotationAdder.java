@@ -3,13 +3,12 @@ package com.simmondobber.lomboker.lombokize.annotationAdder;
 import com.simmondobber.ast.Ast;
 import com.simmondobber.ast.comparator.AstComparator;
 import com.simmondobber.ast.components.ComplexAstComponent;
-import com.simmondobber.ast.components.complexAstComponents.Annotation;
 import com.simmondobber.ast.components.complexAstComponents.Class;
-import com.simmondobber.ast.components.complexAstComponents.Method;
-import com.simmondobber.ast.components.complexAstComponents.Preamble;
+import com.simmondobber.ast.components.complexAstComponents.*;
 import com.simmondobber.ast.filter.AstComponentFilter;
 import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnnotationAdder {
@@ -26,7 +25,7 @@ public class AnnotationAdder {
 
     public void addAnnotations(Ast ast, AnnotationsConfig annotationsConfig) {
         addAnnotationsToClasses(ast, annotationsConfig);
-        addAnnotationsToMethods(ast, annotationsConfig);
+        addAnnotationsToFields(ast, annotationsConfig);
     }
 
     private void addAnnotationsToClasses(Ast ast, AnnotationsConfig annotationsConfig) {
@@ -35,34 +34,42 @@ public class AnnotationAdder {
                 .forEach(preamble -> addAnnotationsToClassPreamble(preamble, annotationsConfig));
     }
 
-    private void addAnnotationsToMethods(Ast ast, AnnotationsConfig annotationsConfig) {
-        this.astComponentFilter.getMethodListFromAstComponent((ComplexAstComponent) ast.getAstRoot()).stream()
-                .map(Method::getPreamble)
-                .forEach(preamble -> addAnnotationsToMethodPreamble(preamble, annotationsConfig));
+    private void addAnnotationsToFields(Ast ast, AnnotationsConfig annotationsConfig) {
+        this.astComponentFilter.getFieldListFromAstComponent((ComplexAstComponent) ast.getAstRoot()).stream()
+                .map(Field::getPreamble)
+                .forEach(preamble -> addAnnotationsToFieldPreamble(preamble, annotationsConfig));
     }
 
     private void addAnnotationsToClassPreamble(Preamble preamble, AnnotationsConfig annotationsConfig) {
         List<Annotation> containedAnnotations = preamble.getAnnotations();
         List<Annotation> annotationsToContain = this.annotationFactory.createClassAnnotationsBasedOnConfig(annotationsConfig);
         List<Annotation> annotationToAdd = getAnnotationsToAdd(containedAnnotations, annotationsToContain);
-        preamble.getPreambleComponents().addAll(annotationToAdd);
+        addAnnotationsToPreamble(preamble, annotationToAdd);
     }
 
-    private void addAnnotationsToMethodPreamble(Preamble preamble, AnnotationsConfig annotationsConfig) {
+    private void addAnnotationsToFieldPreamble(Preamble preamble, AnnotationsConfig annotationsConfig) {
         List<Annotation> containedAnnotations = preamble.getAnnotations();
-        List<Annotation> annotationsToContain = this.annotationFactory.createMethodAnnotationsBasedOnConfig(annotationsConfig);
+        List<Annotation> annotationsToContain = this.annotationFactory.createFieldAnnotationsBasedOnConfig(annotationsConfig);
         List<Annotation> annotationToAdd = getAnnotationsToAdd(containedAnnotations, annotationsToContain);
-        preamble.getPreambleComponents().addAll(annotationToAdd);
+        addAnnotationsToPreamble(preamble, annotationToAdd);
     }
 
     private List<Annotation> getAnnotationsToAdd(List<Annotation> containedAnnotations, List<Annotation> annotationsToContain) {
         return annotationsToContain.stream()
-                .filter(annotationToContain -> isAnnotationAlreadyContained(containedAnnotations, annotationToContain))
+                .filter(annotationToContain -> !isAnnotationAlreadyContained(containedAnnotations, annotationToContain))
                 .toList();
     }
 
     private boolean isAnnotationAlreadyContained(List<Annotation> containedAnnotations, Annotation annotationToContain) {
         return containedAnnotations.stream()
-                .anyMatch(containedAnnotation -> this.astComparator.areMethodsEqual(containedAnnotation.getSyntax(), annotationToContain.getSyntax()));
+                .anyMatch(containedAnnotation -> this.astComparator.areAnnotationsEqual(containedAnnotation.getSyntax(), annotationToContain.getSyntax()));
+    }
+
+    private void addAnnotationsToPreamble(Preamble preamble, List<Annotation> annotationsToAdd) {
+        List<PreambleComponent> preambleComponentsWithAddedAnnotations = new ArrayList<>();
+        preambleComponentsWithAddedAnnotations.addAll(annotationsToAdd);
+        preambleComponentsWithAddedAnnotations.addAll(preamble.getPreambleComponents());
+        preamble.getPreambleComponents().clear();
+        preamble.getPreambleComponents().addAll(preambleComponentsWithAddedAnnotations);
     }
 }

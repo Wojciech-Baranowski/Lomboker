@@ -13,17 +13,17 @@ public class BoilerplateCleanerTest {
 
     @ParameterizedTest
     @MethodSource("remove_redundant_methods_provider")
-    public void remove_redundant_methods_test(String classCode, String correctlyCleanedClassCode) {
+    public void remove_redundant_methods_test(String codeToClean, String correctlyCleanedCode) {
         //Given
         BoilerplateCleaner boilerplateCleaner = new BoilerplateCleaner();
 
         //When
-        Ast ast = new Ast(classCode);
+        Ast ast = new Ast(codeToClean);
         boilerplateCleaner.removeRedundantMethods(ast);
-        String cleanedClassCode = ast.getCode();
+        String cleanedCode = ast.getCode();
 
         //Then
-        Assertions.assertEquals(Trimmer.compressSeparators(correctlyCleanedClassCode), Trimmer.compressSeparators(cleanedClassCode));
+        Assertions.assertEquals(Trimmer.compressSeparators(correctlyCleanedCode), Trimmer.compressSeparators(cleanedCode));
     }
 
     private static Stream<Arguments> remove_redundant_methods_provider() {

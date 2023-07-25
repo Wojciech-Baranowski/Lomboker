@@ -10,7 +10,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_getter_annotation_test() {
         //Given
-        String expectedGetterSyntax = "@Getter";
+        String expectedGetterSyntax = "@Getter\n";
 
         //When
         String actualGetterSyntax = this.annotationFactory.createGetterAnnotation().getSyntax();
@@ -22,7 +22,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_setter_annotation_test() {
         //Given
-        String expectedSetterSyntax = "@Setter";
+        String expectedSetterSyntax = "@Setter\n";
 
         //When
         String actualSetterSyntax = this.annotationFactory.createSetterAnnotation().getSyntax();
@@ -34,7 +34,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_no_args_constructor_annotation_test() {
         //Given
-        String expectedNoArgsConstructorSyntax = "@NoArgsConstructor";
+        String expectedNoArgsConstructorSyntax = "@NoArgsConstructor\n";
 
         //When
         String actualNoArgsConstructorSyntax = this.annotationFactory.createNoArgsConstructorAnnotation().getSyntax();
@@ -46,7 +46,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_all_args_constructor_annotation_test() {
         //Given
-        String expectedAllArgsConstructorSyntax = "@AllArgsConstructor";
+        String expectedAllArgsConstructorSyntax = "@AllArgsConstructor\n";
 
         //When
         String actualAllArgsConstructorSyntax = this.annotationFactory.createAllArgsConstructorAnnotation().getSyntax();
@@ -58,7 +58,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_builder_annotation_test() {
         //Given
-        String expectedBuilderSyntax = "@Builder";
+        String expectedBuilderSyntax = "@Builder\n";
 
         //When
         String actualBuilderSyntax = this.annotationFactory.createBuilderAnnotation().getSyntax();
@@ -70,7 +70,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_super_builder_annotation_test() {
         //Given
-        String expectedSuperBuilderSyntax = "@SuperBuilder";
+        String expectedSuperBuilderSyntax = "@SuperBuilder\n";
 
         //When
         String actualSuperBuilderSyntax = this.annotationFactory.createSuperBuilderAnnotation().getSyntax();
@@ -82,7 +82,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_builder_with_to_builder_annotation_test() {
         //Given
-        String expectedBuilderWithToBuilderSyntax = "@Builder(toBuilder = true)";
+        String expectedBuilderWithToBuilderSyntax = "@Builder(toBuilder = true)\n";
 
         //When
         String actualBuilderWithToBuilderSyntax = this.annotationFactory.createBuilderWithToBuilderAnnotation().getSyntax();
@@ -94,7 +94,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_super_builder_with_to_builder_annotation_test() {
         //Given
-        String expectedSuperBuilderWithToBuilderSyntax = "@SuperBuilder(toBuilder = true)";
+        String expectedSuperBuilderWithToBuilderSyntax = "@SuperBuilder(toBuilder = true)\n";
 
         //When
         String actualSuperBuilderWithToBuilderSyntax = this.annotationFactory.createSuperBuilderWithToBuilderAnnotation().getSyntax();
@@ -106,7 +106,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_to_string_annotation_test() {
         //Given
-        String expectedToStringSyntax = "@ToString";
+        String expectedToStringSyntax = "@ToString\n";
 
         //When
         String actualToStringSyntax = this.annotationFactory.createToStringAnnotation().getSyntax();
@@ -118,7 +118,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_to_string_with_call_super_annotation_test() {
         //Given
-        String expectedToStringWithCallSuperSyntax = "@ToString(callSuper = true)";
+        String expectedToStringWithCallSuperSyntax = "@ToString(callSuper = true)\n";
 
         //When
         String actualToStringWithCallSuperSyntax = this.annotationFactory.createToStringWithCallSuperAnnotation().getSyntax();
