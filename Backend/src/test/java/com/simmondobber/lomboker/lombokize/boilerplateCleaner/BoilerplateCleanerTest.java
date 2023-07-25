@@ -1,7 +1,6 @@
 package com.simmondobber.lomboker.lombokize.boilerplateCleaner;
 
 import com.simmondobber.ast.Ast;
-import com.simmondobber.lomboker.common.Trimmer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -23,7 +22,7 @@ public class BoilerplateCleanerTest {
         String cleanedCode = ast.getCode();
 
         //Then
-        Assertions.assertEquals(Trimmer.compressSeparators(correctlyCleanedCode), Trimmer.compressSeparators(cleanedCode));
+        Assertions.assertEquals(correctlyCleanedCode, cleanedCode);
     }
 
     private static Stream<Arguments> remove_redundant_methods_provider() {

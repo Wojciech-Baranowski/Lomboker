@@ -16,6 +16,6 @@ public class CharacterParser extends AstParser {
 
     @Override
     public Character parse() {
-        return new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
+        return new Character(this.pointer.getCharacter(), this.pointer.getLastSeparator(), this.pointer.getSeparator());
     }
 }

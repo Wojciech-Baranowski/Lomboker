@@ -16,6 +16,6 @@ public class KeywordParser extends AstParser {
 
     @Override
     public Keyword parse() {
-        return new Keyword(this.pointer.getWord(), this.pointer.getSeparator());
+        return new Keyword(this.pointer.getWord(), this.pointer.getLastSeparator(), this.pointer.getSeparator());
     }
 }

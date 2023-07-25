@@ -41,15 +41,17 @@ public class AnnotationAdder {
     }
 
     private void addAnnotationsToClassPreamble(Preamble preamble, AnnotationsConfig annotationsConfig) {
+        String frontSeparator = getFrontSeparator(preamble);
         List<Annotation> containedAnnotations = preamble.getAnnotations();
-        List<Annotation> annotationsToContain = this.annotationFactory.createClassAnnotationsBasedOnConfig(annotationsConfig);
+        List<Annotation> annotationsToContain = this.annotationFactory.createClassAnnotationsBasedOnConfig(annotationsConfig, frontSeparator);
         List<Annotation> annotationToAdd = getAnnotationsToAdd(containedAnnotations, annotationsToContain);
         addAnnotationsToPreamble(preamble, annotationToAdd);
     }
 
     private void addAnnotationsToFieldPreamble(Preamble preamble, AnnotationsConfig annotationsConfig) {
+        String frontSeparator = getFrontSeparator(preamble);
         List<Annotation> containedAnnotations = preamble.getAnnotations();
-        List<Annotation> annotationsToContain = this.annotationFactory.createFieldAnnotationsBasedOnConfig(annotationsConfig);
+        List<Annotation> annotationsToContain = this.annotationFactory.createFieldAnnotationsBasedOnConfig(annotationsConfig, frontSeparator);
         List<Annotation> annotationToAdd = getAnnotationsToAdd(containedAnnotations, annotationsToContain);
         addAnnotationsToPreamble(preamble, annotationToAdd);
     }
@@ -71,5 +73,15 @@ public class AnnotationAdder {
         preambleComponentsWithAddedAnnotations.addAll(preamble.getPreambleComponents());
         preamble.getPreambleComponents().clear();
         preamble.getPreambleComponents().addAll(preambleComponentsWithAddedAnnotations);
+    }
+
+    private String getFrontSeparator(Preamble preamble) {
+        String preambleFrontSeparator = preamble.getFrontSeparator();
+        int lastNewlineIndex = preambleFrontSeparator.lastIndexOf("\n");
+        if (lastNewlineIndex == -1) {
+            return preambleFrontSeparator;
+        } else {
+            return preambleFrontSeparator.substring(lastNewlineIndex);
+        }
     }
 }

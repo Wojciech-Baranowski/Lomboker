@@ -23,4 +23,14 @@ public class ValueAssignment extends ComplexAstComponent {
     public List<AstComponent> getChildAstComponents() {
         return List.of(this.equals, this.value);
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.equals.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        return this.value.getBackSeparator();
+    }
 }

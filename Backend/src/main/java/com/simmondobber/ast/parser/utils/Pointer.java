@@ -13,11 +13,22 @@ public class Pointer {
     private final String code;
     private int left;
     private int right;
+    private int rightCache;
+    private String lastSeparator;
+    private String lastSeparatorCache;
 
     public Pointer(String code) {
         this.code = code;
         this.left = 0;
         this.right = 0;
+        this.lastSeparator = "";
+    }
+
+    public Pointer(String code, String lastSeparator) {
+        this.code = code;
+        this.left = 0;
+        this.right = 0;
+        this.lastSeparator = lastSeparator;
     }
 
     public char lookupCharacter() {
@@ -81,7 +92,8 @@ public class Pointer {
     public String getSeparator() {
         cacheIndex();
         omitSeparator();
-        return getBetween();
+        this.lastSeparator = getBetween();
+        return this.lastSeparator;
     }
 
     public String getUntil(char stopCharacter) {
@@ -179,12 +191,18 @@ public class Pointer {
         }
     }
 
-    public int getCurrentPosition() {
-        return this.right;
+    public String getLastSeparator() {
+        return this.lastSeparator;
     }
 
-    public void setCurrentPosition(int index) {
-        this.right = index;
+    public void cacheCurrentState() {
+        this.rightCache = this.right;
+        this.lastSeparatorCache = this.lastSeparator;
+    }
+
+    public void restoreCurrentState() {
+        this.right = this.rightCache;
+        this.lastSeparator = this.lastSeparatorCache;
     }
 
     private void omitIdentifier() {

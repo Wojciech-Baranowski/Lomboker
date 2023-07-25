@@ -10,12 +10,12 @@ import java.util.List;
 @Getter
 public class File extends ComplexAstComponent {
 
-    private final Package aPackage;
+    private final Package package_;
     private final List<Import> imports;
     private final List<Class> classes;
 
-    public File(Package aPackage, List<Import> imports, List<Class> classes) {
-        this.aPackage = aPackage;
+    public File(Package package_, List<Import> imports, List<Class> classes) {
+        this.package_ = package_;
         this.imports = imports;
         this.classes = classes;
     }
@@ -23,9 +23,19 @@ public class File extends ComplexAstComponent {
     @Override
     public List<AstComponent> getChildAstComponents() {
         List<AstComponent> childComponents = new ArrayList<>();
-        childComponents.add(this.aPackage);
+        childComponents.add(this.package_);
         childComponents.addAll(this.imports);
         childComponents.addAll(this.classes);
         return childComponents;
+    }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.package_.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        return this.classes.get(this.classes.size() - 1).getBackSeparator();
     }
 }

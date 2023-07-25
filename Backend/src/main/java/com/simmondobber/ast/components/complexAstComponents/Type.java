@@ -33,4 +33,22 @@ public class Type extends ComplexAstComponent {
         }
         return components;
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.path.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        if (this.arrayBrackets.isEmpty()) {
+            if (this.generic == null) {
+                return this.path.getBackSeparator();
+            } else {
+                return this.generic.getBackSeparator();
+            }
+        } else {
+            return this.arrayBrackets.get(this.arrayBrackets.size() - 1).getBackSeparator();
+        }
+    }
 }

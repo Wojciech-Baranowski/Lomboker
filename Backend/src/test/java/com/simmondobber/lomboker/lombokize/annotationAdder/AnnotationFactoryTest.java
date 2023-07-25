@@ -13,7 +13,7 @@ public class AnnotationFactoryTest {
         String expectedGetterSyntax = "@Getter\n";
 
         //When
-        String actualGetterSyntax = this.annotationFactory.createGetterAnnotation().getSyntax();
+        String actualGetterSyntax = this.annotationFactory.createGetterAnnotation("\n").getSyntax();
 
         //Then
         Assertions.assertEquals(expectedGetterSyntax, actualGetterSyntax);
@@ -25,7 +25,7 @@ public class AnnotationFactoryTest {
         String expectedSetterSyntax = "@Setter\n";
 
         //When
-        String actualSetterSyntax = this.annotationFactory.createSetterAnnotation().getSyntax();
+        String actualSetterSyntax = this.annotationFactory.createSetterAnnotation("\n").getSyntax();
 
         //Then
         Assertions.assertEquals(expectedSetterSyntax, actualSetterSyntax);
@@ -37,7 +37,7 @@ public class AnnotationFactoryTest {
         String expectedNoArgsConstructorSyntax = "@NoArgsConstructor\n";
 
         //When
-        String actualNoArgsConstructorSyntax = this.annotationFactory.createNoArgsConstructorAnnotation().getSyntax();
+        String actualNoArgsConstructorSyntax = this.annotationFactory.createNoArgsConstructorAnnotation("\n").getSyntax();
 
         //Then
         Assertions.assertEquals(expectedNoArgsConstructorSyntax, actualNoArgsConstructorSyntax);
@@ -49,7 +49,7 @@ public class AnnotationFactoryTest {
         String expectedAllArgsConstructorSyntax = "@AllArgsConstructor\n";
 
         //When
-        String actualAllArgsConstructorSyntax = this.annotationFactory.createAllArgsConstructorAnnotation().getSyntax();
+        String actualAllArgsConstructorSyntax = this.annotationFactory.createAllArgsConstructorAnnotation("\n").getSyntax();
 
         //Then
         Assertions.assertEquals(expectedAllArgsConstructorSyntax, actualAllArgsConstructorSyntax);
@@ -61,7 +61,7 @@ public class AnnotationFactoryTest {
         String expectedBuilderSyntax = "@Builder\n";
 
         //When
-        String actualBuilderSyntax = this.annotationFactory.createBuilderAnnotation().getSyntax();
+        String actualBuilderSyntax = this.annotationFactory.createBuilderAnnotation("\n").getSyntax();
 
         //Then
         Assertions.assertEquals(expectedBuilderSyntax, actualBuilderSyntax);
@@ -73,7 +73,7 @@ public class AnnotationFactoryTest {
         String expectedSuperBuilderSyntax = "@SuperBuilder\n";
 
         //When
-        String actualSuperBuilderSyntax = this.annotationFactory.createSuperBuilderAnnotation().getSyntax();
+        String actualSuperBuilderSyntax = this.annotationFactory.createSuperBuilderAnnotation("\n").getSyntax();
 
         //Then
         Assertions.assertEquals(expectedSuperBuilderSyntax, actualSuperBuilderSyntax);
@@ -85,7 +85,7 @@ public class AnnotationFactoryTest {
         String expectedBuilderWithToBuilderSyntax = "@Builder(toBuilder = true)\n";
 
         //When
-        String actualBuilderWithToBuilderSyntax = this.annotationFactory.createBuilderWithToBuilderAnnotation().getSyntax();
+        String actualBuilderWithToBuilderSyntax = this.annotationFactory.createBuilderWithToBuilderAnnotation("\n").getSyntax();
 
         //Then
         Assertions.assertEquals(expectedBuilderWithToBuilderSyntax, actualBuilderWithToBuilderSyntax);
@@ -97,7 +97,7 @@ public class AnnotationFactoryTest {
         String expectedSuperBuilderWithToBuilderSyntax = "@SuperBuilder(toBuilder = true)\n";
 
         //When
-        String actualSuperBuilderWithToBuilderSyntax = this.annotationFactory.createSuperBuilderWithToBuilderAnnotation().getSyntax();
+        String actualSuperBuilderWithToBuilderSyntax = this.annotationFactory.createSuperBuilderWithToBuilderAnnotation("\n").getSyntax();
 
         //Then
         Assertions.assertEquals(expectedSuperBuilderWithToBuilderSyntax, actualSuperBuilderWithToBuilderSyntax);
@@ -109,7 +109,7 @@ public class AnnotationFactoryTest {
         String expectedToStringSyntax = "@ToString\n";
 
         //When
-        String actualToStringSyntax = this.annotationFactory.createToStringAnnotation().getSyntax();
+        String actualToStringSyntax = this.annotationFactory.createToStringAnnotation("\n").getSyntax();
 
         //Then
         Assertions.assertEquals(expectedToStringSyntax, actualToStringSyntax);
@@ -121,7 +121,7 @@ public class AnnotationFactoryTest {
         String expectedToStringWithCallSuperSyntax = "@ToString(callSuper = true)\n";
 
         //When
-        String actualToStringWithCallSuperSyntax = this.annotationFactory.createToStringWithCallSuperAnnotation().getSyntax();
+        String actualToStringWithCallSuperSyntax = this.annotationFactory.createToStringWithCallSuperAnnotation("\n").getSyntax();
 
         //Then
         Assertions.assertEquals(expectedToStringWithCallSuperSyntax, actualToStringWithCallSuperSyntax);

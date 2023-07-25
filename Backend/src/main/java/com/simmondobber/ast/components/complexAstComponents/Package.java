@@ -28,4 +28,14 @@ public class Package extends ComplexAstComponent {
     public List<AstComponent> getChildAstComponents() {
         return List.of(this.keyword, this.path, this.semicolon);
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.keyword.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        return this.semicolon.getBackSeparator();
+    }
 }

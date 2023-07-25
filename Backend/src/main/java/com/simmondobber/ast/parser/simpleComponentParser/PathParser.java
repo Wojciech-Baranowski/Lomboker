@@ -16,6 +16,6 @@ public class PathParser extends AstParser {
 
     @Override
     public Path parse() {
-        return new Path(this.pointer.getCompoundWord(), this.pointer.getSeparator());
+        return new Path(this.pointer.getCompoundWord(), this.pointer.getLastSeparator(), this.pointer.getSeparator());
     }
 }

@@ -41,4 +41,20 @@ public class ClassContent extends ComplexAstComponent {
                 .map(component -> (Class) component)
                 .toList();
     }
+
+    @Override
+    public String getFrontSeparator() {
+        if (this.classContentComponents.isEmpty()) {
+            return "";
+        }
+        return this.classContentComponents.get(0).getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        if (this.classContentComponents.isEmpty()) {
+            return "";
+        }
+        return this.classContentComponents.get(this.classContentComponents.size() - 1).getBackSeparator();
+    }
 }

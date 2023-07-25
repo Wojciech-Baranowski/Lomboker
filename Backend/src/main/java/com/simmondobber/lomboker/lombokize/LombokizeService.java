@@ -24,8 +24,8 @@ public class LombokizeService {
         try {
             Ast ast = new Ast(codeToLombokize.getCodeToLombokize());
             AnnotationsConfig annotationsConfig = codeToLombokize.getAnnotationsConfig();
-            this.boilerplateCleaner.removeRedundantMethods(ast);
             this.annotationAdder.addAnnotations(ast, annotationsConfig);
+            this.boilerplateCleaner.removeRedundantMethods(ast);
             return new LombokizedCodeTO(ast.getCode());
         } catch (Exception e) {
             throw new LombokizeException("Lombokize process has failed.", e);

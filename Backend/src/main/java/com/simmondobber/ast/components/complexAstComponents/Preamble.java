@@ -43,4 +43,20 @@ public class Preamble extends ComplexAstComponent {
                 .findAny()
                 .orElse(null);
     }
+
+    @Override
+    public String getFrontSeparator() {
+        if (this.preambleComponents.isEmpty()) {
+            return "";
+        }
+        return this.preambleComponents.get(0).getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        if (this.preambleComponents.isEmpty()) {
+            return "";
+        }
+        return this.preambleComponents.get(this.preambleComponents.size() - 1).getBackSeparator();
+    }
 }

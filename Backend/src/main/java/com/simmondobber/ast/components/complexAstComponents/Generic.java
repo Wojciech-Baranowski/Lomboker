@@ -25,4 +25,14 @@ public class Generic extends ComplexAstComponent implements PreambleComponent {
     public List<AstComponent> getChildAstComponents() {
         return List.of(this.leftAngle, this.genericExtension, this.rightAngle);
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.leftAngle.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        return this.rightAngle.getBackSeparator();
+    }
 }

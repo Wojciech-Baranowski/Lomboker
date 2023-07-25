@@ -51,4 +51,18 @@ public class Method extends ComplexAstComponent implements ClassContentComponent
         }
         return childComponents;
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.preamble.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        if (this.methodBody == null) {
+            return this.semicolon.getBackSeparator();
+        } else {
+            return this.methodBody.getBackSeparator();
+        }
+    }
 }

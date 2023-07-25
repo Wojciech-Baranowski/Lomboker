@@ -33,4 +33,14 @@ public class Class extends ComplexAstComponent implements ClassContentComponent 
             return List.of(this.preamble, this.classTypeKeyword, this.type, this.classExtension, this.classBody);
         }
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.preamble.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        return this.classBody.getBackSeparator();
+    }
 }

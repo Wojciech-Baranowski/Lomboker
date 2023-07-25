@@ -15,7 +15,11 @@ public class Keyword extends SimpleAstComponent implements PreambleComponent {
     public final static List<String> CLASS_TYPE_KEYWORDS = List.of("class", "interface", "enum", "record", "@interface");
     public final static List<String> PREAMBLE_KEYWORDS = Stream.of(FIELD_KEYWORDS, METHOD_KEYWORDS, CLASS_KEYWORDS).flatMap(Collection::stream).toList();
 
-    public Keyword(String syntax, String separator) {
-        super(syntax, separator);
+    public Keyword(String syntax, String backSeparator) {
+        super(syntax, "", backSeparator);
+    }
+
+    public Keyword(String syntax, String frontSeparator, String backSeparator) {
+        super(syntax, frontSeparator, backSeparator);
     }
 }

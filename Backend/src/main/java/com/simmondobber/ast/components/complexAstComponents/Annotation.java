@@ -29,4 +29,18 @@ public class Annotation extends ComplexAstComponent implements PreambleComponent
             return List.of(this.at, this.name, this.args);
         }
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.at.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        if (this.args == null) {
+            return this.name.getBackSeparator();
+        } else {
+            return this.args.getBackSeparator();
+        }
+    }
 }

@@ -23,4 +23,14 @@ public class Throws extends ComplexAstComponent {
     public List<AstComponent> getChildAstComponents() {
         return List.of(this.keyword, this.throwsListing);
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.keyword.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        return this.throwsListing.getBackSeparator();
+    }
 }

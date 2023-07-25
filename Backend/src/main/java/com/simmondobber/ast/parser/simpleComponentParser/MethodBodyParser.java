@@ -16,6 +16,6 @@ public class MethodBodyParser extends AstParser {
 
     @Override
     public MethodBody parse() {
-        return new MethodBody(this.pointer.getInsideInclusive('}'), this.pointer.getSeparator());
+        return new MethodBody(this.pointer.getInsideInclusive('}'), this.pointer.getLastSeparator(), this.pointer.getSeparator());
     }
 }

@@ -16,6 +16,6 @@ public class ArraySizeParser extends AstParser {
 
     @Override
     public ArraySize parse() {
-        return new ArraySize(this.pointer.getUntil(']'), this.pointer.getSeparator());
+        return new ArraySize(this.pointer.getUntil(']'), this.pointer.getLastSeparator(), this.pointer.getSeparator());
     }
 }

@@ -29,4 +29,14 @@ public class Args extends ComplexAstComponent {
             return List.of(this.leftBracket, this.argsListing, this.rightBracket);
         }
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.leftBracket.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        return this.rightBracket.getBackSeparator();
+    }
 }

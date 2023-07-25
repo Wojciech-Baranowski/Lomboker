@@ -16,6 +16,6 @@ public class NameParser extends AstParser {
 
     @Override
     public Name parse() {
-        return new Name(this.pointer.getWord(), this.pointer.getSeparator());
+        return new Name(this.pointer.getWord(), this.pointer.getLastSeparator(), this.pointer.getSeparator());
     }
 }

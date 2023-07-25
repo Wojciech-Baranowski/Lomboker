@@ -32,4 +32,14 @@ public class Import extends ComplexAstComponent {
             return List.of(this.importKeyword, this.staticKeyword, this.path, this.semicolon);
         }
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.importKeyword.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        return this.semicolon.getBackSeparator();
+    }
 }

@@ -29,4 +29,14 @@ public class ArrayBrackets extends ComplexAstComponent {
             return List.of(this.leftBracket, this.arraySize, this.rightBracket);
         }
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.leftBracket.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        return this.rightBracket.getBackSeparator();
+    }
 }

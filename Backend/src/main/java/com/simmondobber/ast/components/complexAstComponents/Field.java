@@ -33,4 +33,14 @@ public class Field extends ComplexAstComponent implements ClassContentComponent 
             return List.of(this.preamble, this.type, this.name, this.valueAssignment, this.semicolon);
         }
     }
+
+    @Override
+    public String getFrontSeparator() {
+        return this.preamble.getFrontSeparator();
+    }
+
+    @Override
+    public String getBackSeparator() {
+        return this.semicolon.getBackSeparator();
+    }
 }

@@ -25,16 +25,16 @@ public class ClassContentParser extends AstParser {
             if (this.pointer.lookupCharacter() == '}') {
                 break;
             } else {
-                int beforePreamble = this.pointer.getCurrentPosition();
+                this.pointer.cacheCurrentState();
                 new PreambleParser(this.pointer).parse();
                 if (Keyword.CLASS_TYPE_KEYWORDS.contains(this.pointer.lookupWord())) {
-                    this.pointer.setCurrentPosition(beforePreamble);
+                    this.pointer.restoreCurrentState();
                     classComponents.add(new ClassParser(this.pointer).parse());
                 } else if ((this.pointer.lookupIndexOf('(') < this.pointer.lookupIndexOf(';')) && (this.pointer.lookupIndexOf('(') < this.pointer.lookupIndexOf('='))) {
-                    this.pointer.setCurrentPosition(beforePreamble);
+                    this.pointer.restoreCurrentState();
                     classComponents.add(new MethodParser(this.pointer).parse());
                 } else {
-                    this.pointer.setCurrentPosition(beforePreamble);
+                    this.pointer.restoreCurrentState();
                     classComponents.add(new FieldParser(this.pointer).parse());
                 }
             }
