@@ -4,7 +4,6 @@ import com.simmondobber.ast.components.complexAstComponents.Field;
 import com.simmondobber.ast.components.complexAstComponents.Method;
 import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.getterFactory.GetterFactory;
 import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setterFactory.SetterFactory;
-import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,21 +11,17 @@ import java.util.List;
 
 public class MethodFactory {
 
-    public List<Method> generateMethodsBasedOnClassFields(List<Field> classFields, AnnotationsConfig annotationsConfig) {
+    public List<Method> generateMethodsBasedOnClassFields(List<Field> classFields) {
         return classFields.stream()
-                .map(field -> generateMethodsBasedOnField(field, annotationsConfig))
+                .map(this::generateMethodsBasedOnField)
                 .flatMap(Collection::stream)
                 .toList();
     }
 
-    private List<Method> generateMethodsBasedOnField(Field field, AnnotationsConfig annotationsConfig) {
+    private List<Method> generateMethodsBasedOnField(Field field) {
         List<Method> generatedMethods = new ArrayList<>();
-        if (annotationsConfig.isGetter()) {
-            generatedMethods.addAll(generateGetters(field));
-        }
-        if (annotationsConfig.isSetter()) {
-            generatedMethods.addAll(generateSetters(field));
-        }
+        generatedMethods.addAll(generateGetters(field));
+        generatedMethods.addAll(generateSetters(field));
         return generatedMethods;
     }
 

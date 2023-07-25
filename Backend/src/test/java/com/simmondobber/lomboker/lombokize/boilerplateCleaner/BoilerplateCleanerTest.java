@@ -2,7 +2,6 @@ package com.simmondobber.lomboker.lombokize.boilerplateCleaner;
 
 import com.simmondobber.ast.Ast;
 import com.simmondobber.lomboker.common.Trimmer;
-import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,7 +19,7 @@ public class BoilerplateCleanerTest {
 
         //When
         Ast ast = new Ast(classCode);
-        boilerplateCleaner.removeRedundantMethods(ast, create_annotation_config());
+        boilerplateCleaner.removeRedundantMethods(ast);
         String cleanedClassCode = ast.getCode();
 
         //Then
@@ -380,9 +379,5 @@ public class BoilerplateCleanerTest {
                         """
                 )
         );
-    }
-
-    private AnnotationsConfig create_annotation_config() {
-        return new AnnotationsConfig(true, true, false, false, false, false, false, false, false);
     }
 }

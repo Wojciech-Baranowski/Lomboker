@@ -3,7 +3,7 @@ package com.simmondobber.lomboker.common;
 import lombok.Getter;
 
 @Getter
-public enum Imports {
+public enum AnnotationImports {
 
     LOMBOK_ALL("import lombok.*"),
     LOMBOK_EXPERIMENTAL_ALL("import lombok.experimental.*"),
@@ -15,9 +15,9 @@ public enum Imports {
     SUPER_BUILDER("import lombok.experimental.SuperBuilder;"),
     TO_STRING("import lombok.ToString;");
 
-    private final String keyword;
+    private final String path;
 
-    Imports(String keyword) {
-        this.keyword = keyword;
+    AnnotationImports(String path) {
+        this.path = path;
     }
 }

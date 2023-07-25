@@ -23,56 +23,11 @@ public class MethodFactoryTest {
     public void create_all_methods_based_on_field_test() {
         //Given
         List<Field> classFields = create_class_field_list();
-        AnnotationsConfig annotationsConfig = create_annotation_config(true, true);
         MethodFactory methodFactory = new MethodFactory();
         List<String> methodsSyntax = get_methods_syntax().stream().sorted().toList();
 
         //When
-        List<Method> generatedMethods = methodFactory.generateMethodsBasedOnClassFields(classFields, annotationsConfig);
-        List<String> generatedMethodsSyntax = generatedMethods.stream()
-                .map(Method::getSyntax)
-                .sorted()
-                .toList();
-
-        //Then
-        Assertions.assertEquals(methodsSyntax.size(), generatedMethods.size());
-        for (int i = 0; i < generatedMethodsSyntax.size(); i++) {
-            Assertions.assertEquals(methodsSyntax.get(i), generatedMethodsSyntax.get(i));
-        }
-    }
-
-    @Test
-    public void create_only_getter_methods_based_on_field_test() {
-        //Given
-        List<Field> classFields = create_class_field_list();
-        AnnotationsConfig annotationsConfig = create_annotation_config(true, false);
-        MethodFactory methodFactory = new MethodFactory();
-        List<String> methodsSyntax = get_getters_syntax().stream().sorted().toList();
-
-        //When
-        List<Method> generatedMethods = methodFactory.generateMethodsBasedOnClassFields(classFields, annotationsConfig);
-        List<String> generatedMethodsSyntax = generatedMethods.stream()
-                .map(Method::getSyntax)
-                .sorted()
-                .toList();
-
-        //Then
-        Assertions.assertEquals(methodsSyntax.size(), generatedMethods.size());
-        for (int i = 0; i < generatedMethodsSyntax.size(); i++) {
-            Assertions.assertEquals(methodsSyntax.get(i), generatedMethodsSyntax.get(i));
-        }
-    }
-
-    @Test
-    public void create_only_setter_methods_based_on_field_test() {
-        //Given
-        List<Field> classFields = create_class_field_list();
-        AnnotationsConfig annotationsConfig = create_annotation_config(false, true);
-        MethodFactory methodFactory = new MethodFactory();
-        List<String> methodsSyntax = get_setters_syntax().stream().sorted().toList();
-
-        //When
-        List<Method> generatedMethods = methodFactory.generateMethodsBasedOnClassFields(classFields, annotationsConfig);
+        List<Method> generatedMethods = methodFactory.generateMethodsBasedOnClassFields(classFields);
         List<String> generatedMethodsSyntax = generatedMethods.stream()
                 .map(Method::getSyntax)
                 .sorted()
