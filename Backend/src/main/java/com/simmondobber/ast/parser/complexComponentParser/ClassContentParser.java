@@ -22,7 +22,7 @@ public class ClassContentParser extends AstParser {
     public ClassContent parse() {
         List<ClassContentComponent> classComponents = new ArrayList<>();
         while (true) {
-            if (this.pointer.lookupCharacter() == '}') {
+            if (this.pointer.lookupCharacter() == '}' || this.pointer.lookupCharacter() == '$') {
                 break;
             } else {
                 this.pointer.cacheCurrentState();

@@ -6,6 +6,7 @@ import com.simmondobber.ast.compressor.CodeDecompressor;
 import com.simmondobber.ast.compressor.CompressedCode;
 import com.simmondobber.ast.parser.complexComponentParser.FileParser;
 import com.simmondobber.ast.parser.utils.Pointer;
+import com.simmondobber.lomboker.common.Trimmer;
 import lombok.Getter;
 
 import java.util.Map;
@@ -17,6 +18,7 @@ public class Ast {
     private final Map<String, String> dictionary;
 
     public Ast(String code) {
+        code = Trimmer.adjustIndents(code);
         CompressedCode codeToCompress = compressCode(code + "$");
         Pointer pointer = new Pointer(codeToCompress.getCode());
         this.dictionary = codeToCompress.getDictionary();
