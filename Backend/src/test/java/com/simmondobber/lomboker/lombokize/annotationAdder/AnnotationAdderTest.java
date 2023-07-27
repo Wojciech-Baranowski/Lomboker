@@ -32,12 +32,14 @@ public class AnnotationAdderTest {
         //When
         Ast ast = new Ast(codeToExtend);
         annotationAdder.addAnnotations(ast, annotationsConfig);
+
+        //Then
         List<Class> classes = ((File) (ast.getAstRoot())).getClasses();
         for (Class clazz : classes) {
             List<PreambleComponent> actualPreambleComponents = clazz.getPreamble().getPreambleComponents().stream()
                     .sorted(Comparator.comparing(PreambleComponent::getSyntax))
                     .toList();
-            //Then
+
             Assertions.assertEquals(expectedPreambleComponents.size(), actualPreambleComponents.size());
             for (int i = 0; i < expectedPreambleComponents.size(); i++) {
                 Assertions.assertEquals(Trimmer.compressSeparators(expectedPreambleComponents.get(i).getSyntax()), Trimmer.compressSeparators(actualPreambleComponents.get(i).getSyntax()));
@@ -165,6 +167,43 @@ public class AnnotationAdderTest {
                                                 
                             private CoordinateX x;
                             private CoordinateY y;
+                        }
+                        """
+                ), Arguments.of("""
+                        package com.simmondobber.lomboker.lombokize.annotationAdder;
+                                                
+                        import lombok.Getter;
+                        import lombok.Setter;
+                                                
+                        @Getter
+                        @Setter
+                        public class Point {
+                                                
+                            @Getter
+                            private int x;
+                            @Getter
+                            private int y;
+                        }
+                        """, new AnnotationsConfig(true, true, true, true, false, false, false, false, false), """
+                        @Getter
+                        @Setter
+                        @NoArgsConstructor
+                        @AllArgsConstructor
+                        public
+                        """, """
+                        package com.simmondobber.lomboker.lombokize.annotationAdder;
+                                                
+                        import lombok.Getter;
+                        import lombok.Setter;
+                                                
+                        @Getter
+                        @Setter
+                        @NoArgsConstructor
+                        @AllArgsConstructor
+                        public class Point {
+                                                
+                            private int x;
+                            private int y;
                         }
                         """
                 )

@@ -24,8 +24,32 @@ public class AnnotationAdder {
     }
 
     public void addAnnotations(Ast ast, AnnotationsConfig annotationsConfig) {
+        removeAnnotationsFromClasses(ast, annotationsConfig);
+        removeAnnotationsFromFields(ast, annotationsConfig);
         addAnnotationsToClasses(ast, annotationsConfig);
         addAnnotationsToFields(ast, annotationsConfig);
+    }
+
+    private void removeAnnotationsFromClasses(Ast ast, AnnotationsConfig annotationsConfig) {
+        this.astComponentFilter.getClassListFromAstComponent((ComplexAstComponent) ast.getAstRoot()).stream()
+                .map(Class::getPreamble)
+                .forEach(preamble -> removeAnnotationsFromPreamble(preamble, annotationsConfig));
+    }
+
+    private void removeAnnotationsFromFields(Ast ast, AnnotationsConfig annotationsConfig) {
+        this.astComponentFilter.getFieldListFromAstComponent((ComplexAstComponent) ast.getAstRoot()).stream()
+                .map(Field::getPreamble)
+                .forEach(preamble -> removeAnnotationsFromPreamble(preamble, annotationsConfig));
+    }
+
+    private void removeAnnotationsFromPreamble(Preamble preamble, AnnotationsConfig annotationsConfig) {
+        List<String> annotationsToRemoveNamesSyntax = this.annotationFactory.createClassAnnotationsBasedOnConfig(annotationsConfig, "").stream()
+                .map(annotation -> annotation.getName().getSyntax().trim())
+                .toList();
+        List<Annotation> preambleAnnotationsToRemove = preamble.getAnnotations().stream()
+                .filter(annotation -> annotationsToRemoveNamesSyntax.contains(annotation.getName().getSyntax().trim()))
+                .toList();
+        preamble.getPreambleComponents().removeAll(preambleAnnotationsToRemove);
     }
 
     private void addAnnotationsToClasses(Ast ast, AnnotationsConfig annotationsConfig) {

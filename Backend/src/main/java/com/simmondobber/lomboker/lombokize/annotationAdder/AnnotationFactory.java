@@ -100,7 +100,7 @@ public class AnnotationFactory {
     }
 
     public Annotation createToStringAnnotation(String separator) {
-        String toStringAnnotationCode = AnnotationKeywords.TO_STRING.getKeyword() + "\n";
+        String toStringAnnotationCode = AnnotationKeywords.TO_STRING.getKeyword() + separator;
         return new AnnotationParser(toStringAnnotationCode).parse();
     }
 
