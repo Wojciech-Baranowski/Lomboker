@@ -534,6 +534,19 @@ public class BoilerplateCleanerTest {
                             }
                         }
                         """
+                ), Arguments.of("""
+                        package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory;
+                                                
+                        public enum Point {
+                            XX, XY, YX, YY
+                        }
+                        """, """
+                        package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory;
+                                                
+                        public enum Point {
+                            XX, XY, YX, YY
+                        }
+                        """
                 )
         );
     }
