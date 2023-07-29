@@ -2,9 +2,11 @@ version: '3.8'
 services:
     lombokerFrontend:
         image: simmondobber/lombokerfrontend
+        build: ./Frontend
         ports:
-            - "3721:3721"
+            - "3721:80"
     lombokerBackend:
         image: simmondobber/lombokerbackend
+        build: ./Backend
         ports:
             - "3821:3821"

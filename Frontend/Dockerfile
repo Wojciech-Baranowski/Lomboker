@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:16-alpine as build
 
 WORKDIR /app
 
@@ -10,4 +10,8 @@ COPY . .
 
 RUN npm run build
 
-CMD ["npm", "start"]
+FROM nginx:latest
+
+WORKDIR /usr/share/nginx/html
+
+COPY --from=build /app/dist/frontend .
