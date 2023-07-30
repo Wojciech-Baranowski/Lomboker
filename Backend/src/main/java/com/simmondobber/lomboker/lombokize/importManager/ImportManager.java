@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.importAdder;
+package com.simmondobber.lomboker.lombokize.importManager;
 
 import com.simmondobber.ast.Ast;
 import com.simmondobber.ast.components.complexAstComponents.File;
@@ -8,11 +8,11 @@ import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 
 import java.util.List;
 
-public class ImportAdder {
+public class ImportManager {
 
     private final ImportFactory importFactory;
 
-    public ImportAdder() {
+    public ImportManager() {
         this.importFactory = new ImportFactory();
     }
 

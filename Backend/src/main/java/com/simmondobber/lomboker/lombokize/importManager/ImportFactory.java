@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.importAdder;
+package com.simmondobber.lomboker.lombokize.importManager;
 
 import com.simmondobber.ast.components.complexAstComponents.Import;
 import com.simmondobber.ast.parser.complexComponentParser.ImportParser;

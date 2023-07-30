@@ -1,7 +1,11 @@
-package com.simmondobber.lomboker.lombokize.annotationAdder;
+package com.simmondobber.lomboker.lombokize.annotationManager;
 
+import com.simmondobber.ast.components.complexAstComponents.Annotation;
+import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class AnnotationFactoryTest {
 
@@ -125,5 +129,64 @@ public class AnnotationFactoryTest {
 
         //Then
         Assertions.assertEquals(expectedToStringWithCallSuperSyntax, actualToStringWithCallSuperSyntax);
+    }
+
+    @Test
+    public void create_field_annotations_based_on_config_test() {
+        //Given
+        AnnotationsConfig annotationsConfig = new AnnotationsConfig(false, false, false, true, true, false, true, false, true);
+        List<Annotation> expectedListOfAnnotations = List.of(
+                this.annotationFactory.createGetterAnnotation(""),
+                this.annotationFactory.createSetterAnnotation("")
+        );
+
+        //When
+        List<Annotation> actualListOfAnnotations = this.annotationFactory.createFieldAnnotationsBasedOnConfig(annotationsConfig, "");
+
+        //Then
+        Assertions.assertEquals(expectedListOfAnnotations.size(), actualListOfAnnotations.size());
+        for (int i = 0; i < expectedListOfAnnotations.size(); i++) {
+            Assertions.assertEquals(expectedListOfAnnotations.get(i).getSyntax(), actualListOfAnnotations.get(i).getSyntax());
+        }
+    }
+
+    @Test
+    public void create_class_annotations_based_on_config_test() {
+        //Given
+        AnnotationsConfig annotationsConfig = new AnnotationsConfig(true, true, false, true, true, false, true, false, true);
+        List<Annotation> expectedListOfAnnotations = List.of(
+                this.annotationFactory.createGetterAnnotation(""),
+                this.annotationFactory.createSetterAnnotation(""),
+                this.annotationFactory.createAllArgsConstructorAnnotation(""),
+                this.annotationFactory.createBuilderWithToBuilderAnnotation("")
+        );
+
+        //When
+        List<Annotation> actualListOfAnnotations = this.annotationFactory.createClassAnnotationsBasedOnConfig(annotationsConfig, "");
+
+        //Then
+        Assertions.assertEquals(expectedListOfAnnotations.size(), actualListOfAnnotations.size());
+        for (int i = 0; i < expectedListOfAnnotations.size(); i++) {
+            Assertions.assertEquals(expectedListOfAnnotations.get(i).getSyntax(), actualListOfAnnotations.get(i).getSyntax());
+        }
+    }
+
+    @Test
+    public void create_enum_annotations_based_on_config_test() {
+        //Given
+        AnnotationsConfig annotationsConfig = new AnnotationsConfig(true, true, false, true, true, false, true, false, true);
+        List<Annotation> expectedListOfAnnotations = List.of(
+                this.annotationFactory.createGetterAnnotation(""),
+                this.annotationFactory.createAllArgsConstructorAnnotation("")
+        );
+
+        //When
+        List<Annotation> actualListOfAnnotations = this.annotationFactory.createEnumAnnotationsBasedOnConfig(annotationsConfig, "");
+
+        //Then
+        Assertions.assertEquals(expectedListOfAnnotations.size(), actualListOfAnnotations.size());
+        for (int i = 0; i < expectedListOfAnnotations.size(); i++) {
+            Assertions.assertEquals(expectedListOfAnnotations.get(i).getSyntax(), actualListOfAnnotations.get(i).getSyntax());
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.annotationAdder;
+package com.simmondobber.lomboker.lombokize.annotationManager;
 
 import com.simmondobber.ast.components.complexAstComponents.Annotation;
 import com.simmondobber.ast.parser.complexComponentParser.AnnotationParser;
@@ -9,6 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnnotationFactory {
+
+    public List<Annotation> createAllAnnotations() {
+        List<Annotation> annotations = new ArrayList<>();
+        annotations.add(createGetterAnnotation(""));
+        annotations.add(createSetterAnnotation(""));
+        annotations.add(createNoArgsConstructorAnnotation(""));
+        annotations.add(createAllArgsConstructorAnnotation(""));
+        annotations.add(createBuilderAnnotation(""));
+        annotations.add(createSuperBuilderAnnotation(""));
+        annotations.add(createBuilderWithToBuilderAnnotation(""));
+        annotations.add(createSuperBuilderWithToBuilderAnnotation(""));
+        annotations.add(createToStringAnnotation(""));
+        annotations.add(createToStringWithCallSuperAnnotation(""));
+        return annotations;
+    }
 
     public List<Annotation> createClassAnnotationsBasedOnConfig(AnnotationsConfig annotationsConfig, String separator) {
         List<Annotation> annotations = new ArrayList<>();
@@ -37,6 +52,27 @@ public class AnnotationFactory {
             } else {
                 annotations.add(createSuperBuilderAnnotation(separator));
             }
+        }
+        if (annotationsConfig.isToString()) {
+            if (annotationsConfig.isCallSuper()) {
+                annotations.add(createToStringWithCallSuperAnnotation(separator));
+            } else {
+                annotations.add(createToStringAnnotation(separator));
+            }
+        }
+        return annotations;
+    }
+
+    public List<Annotation> createEnumAnnotationsBasedOnConfig(AnnotationsConfig annotationsConfig, String separator) {
+        List<Annotation> annotations = new ArrayList<>();
+        if (annotationsConfig.isGetter()) {
+            annotations.add(createGetterAnnotation(separator));
+        }
+        if (annotationsConfig.isNoArgsConstructor()) {
+            annotations.add(createNoArgsConstructorAnnotation(separator));
+        }
+        if (annotationsConfig.isAllArgsConstructor()) {
+            annotations.add(createAllArgsConstructorAnnotation(separator));
         }
         if (annotationsConfig.isToString()) {
             if (annotationsConfig.isCallSuper()) {

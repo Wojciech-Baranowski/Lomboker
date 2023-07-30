@@ -30,10 +30,10 @@ public class BoilerplateCleaner {
     public void removeRedundantMethods(Ast ast) {
         List<Class> classList = this.astComponentFilter.getClassListFromAstComponent((ComplexAstComponent) ast.getAstRoot());
         Collections.reverse(classList);
-        classList.forEach(this::removeRedundantMethodsFromClass);
+        classList.forEach(this::removeRedundantClassMethods);
     }
 
-    private void removeRedundantMethodsFromClass(Class clazz) {
+    private void removeRedundantClassMethods(Class clazz) {
         List<Field> classFields = this.astComponentFilter.getFieldListFromAstComponent(clazz);
         List<Method> classMethod = this.astComponentFilter.getMethodListFromAstComponent(clazz);
         List<Method> methodsBasedOnClassFields = this.methodFactory.generateMethodsBasedOnClassFields(classFields);

@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.importAdder;
+package com.simmondobber.lomboker.lombokize.importManager;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

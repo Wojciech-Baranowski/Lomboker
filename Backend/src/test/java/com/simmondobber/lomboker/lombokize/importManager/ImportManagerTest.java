@@ -1,4 +1,4 @@
-package com.simmondobber.lomboker.lombokize.importAdder;
+package com.simmondobber.lomboker.lombokize.importManager;
 
 import com.simmondobber.ast.Ast;
 import com.simmondobber.ast.components.complexAstComponents.File;
@@ -15,20 +15,20 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ImportAdderTest {
+public class ImportManagerTest {
 
     @ParameterizedTest
     @MethodSource("add_imports_provider")
     public void add_imports_test(String codeToExtend, AnnotationsConfig annotationsConfig, String importsCode, String codeAfterExtension) {
         //Given
-        ImportAdder importAdder = new ImportAdder();
+        ImportManager importManager = new ImportManager();
         List<Import> expectedImports = new FileParser("package dummy;\n" + importsCode + "\n class Dummy dummy {}").parse().getImports().stream()
                 .sorted(Comparator.comparing(Import::getSyntax))
                 .toList();
 
         //When
         Ast ast = new Ast(codeToExtend);
-        importAdder.addImports(ast, annotationsConfig);
+        importManager.addImports(ast, annotationsConfig);
 
         //Then
         List<Import> actualImports = ((File) ast.getAstRoot()).getImports().stream()
