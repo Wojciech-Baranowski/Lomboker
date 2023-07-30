@@ -35,13 +35,13 @@ public class BoilerplateCleaner {
 
     private void removeRedundantClassMethods(Class clazz) {
         List<Field> classFields = this.astComponentFilter.getFieldListFromAstComponent(clazz);
-        List<Method> classMethod = this.astComponentFilter.getMethodListFromAstComponent(clazz);
+        List<Method> classMethods = this.astComponentFilter.getMethodListFromAstComponent(clazz);
         List<Method> methodsBasedOnClassFields = this.methodFactory.generateMethodsBasedOnClassFields(classFields);
-        List<Method> methodsToRemove = filterMethodsToRemove(classMethod, methodsBasedOnClassFields);
+        List<Method> methodsToRemove = getMethodsToRemove(classMethods, methodsBasedOnClassFields);
         removeMethods(clazz.getClassBody().getClassContent(), methodsToRemove);
     }
 
-    private List<Method> filterMethodsToRemove(List<Method> classMethods, List<Method> methodsBasedOnClassFields) {
+    private List<Method> getMethodsToRemove(List<Method> classMethods, List<Method> methodsBasedOnClassFields) {
         return classMethods.stream()
                 .filter(method -> isMethodGenerated(methodsBasedOnClassFields, method))
                 .toList();
