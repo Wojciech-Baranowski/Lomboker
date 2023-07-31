@@ -26,7 +26,7 @@ public class Ast {
     }
 
     public String getCode() {
-        String astSyntax = this.astRoot.getSyntax();
+        String astSyntax = this.astRoot.getFullSyntax();
         return decompress(astSyntax);
     }
 

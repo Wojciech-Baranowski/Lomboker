@@ -5,15 +5,17 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.ArgsListing;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class Args extends ComplexAstComponent {
 
-    private final Character leftBracket;
-    private final ArgsListing argsListing;
-    private final Character rightBracket;
+    private Character leftBracket;
+    private ArgsListing argsListing;
+    private Character rightBracket;
 
     public Args(Character leftBracket, ArgsListing argsListing, Character rightBracket) {
         this.leftBracket = leftBracket;

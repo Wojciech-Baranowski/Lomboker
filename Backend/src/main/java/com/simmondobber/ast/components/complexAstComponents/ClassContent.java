@@ -3,14 +3,16 @@ package com.simmondobber.ast.components.complexAstComponents;
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 public class ClassContent extends ComplexAstComponent {
 
-    private final List<ClassContentComponent> classContentComponents;
+    private List<ClassContentComponent> classContentComponents;
 
     public ClassContent(List<ClassContentComponent> classContentComponents) {
         this.classContentComponents = classContentComponents;

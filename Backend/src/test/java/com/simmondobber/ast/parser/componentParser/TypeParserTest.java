@@ -23,13 +23,13 @@ public class TypeParserTest {
 
         //When
         Type parsedType = typeParser.parse();
-        String parsedString = parsedType.getSyntax();
+        String parsedString = parsedType.getFullSyntax();
         List<AstComponent> components = parsedType.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(1, components.size());
         Assertions.assertInstanceOf(Path.class, components.get(0));
-        Assertions.assertEquals("Entity ", components.get(0).getSyntax());
+        Assertions.assertEquals("Entity ", components.get(0).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -42,15 +42,15 @@ public class TypeParserTest {
 
         //When
         Type parsedType = typeParser.parse();
-        String parsedString = parsedType.getSyntax();
+        String parsedString = parsedType.getFullSyntax();
         List<AstComponent> components = parsedType.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Path.class, components.get(0));
         Assertions.assertInstanceOf(Generic.class, components.get(1));
-        Assertions.assertEquals("List", components.get(0).getSyntax());
-        Assertions.assertEquals("<Long>", components.get(1).getSyntax());
+        Assertions.assertEquals("List", components.get(0).getFullSyntax());
+        Assertions.assertEquals("<Long>", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -63,7 +63,7 @@ public class TypeParserTest {
 
         //When
         Type parsedType = typeParser.parse();
-        String parsedString = parsedType.getSyntax();
+        String parsedString = parsedType.getFullSyntax();
         List<AstComponent> components = parsedType.getChildAstComponents();
 
         //Then
@@ -71,9 +71,9 @@ public class TypeParserTest {
         Assertions.assertInstanceOf(Path.class, components.get(0));
         Assertions.assertInstanceOf(ArrayBrackets.class, components.get(1));
         Assertions.assertInstanceOf(ArrayBrackets.class, components.get(2));
-        Assertions.assertEquals("int", components.get(0).getSyntax());
-        Assertions.assertEquals("[10]", components.get(1).getSyntax());
-        Assertions.assertEquals("[]", components.get(2).getSyntax());
+        Assertions.assertEquals("int", components.get(0).getFullSyntax());
+        Assertions.assertEquals("[10]", components.get(1).getFullSyntax());
+        Assertions.assertEquals("[]", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -86,15 +86,15 @@ public class TypeParserTest {
 
         //When
         Type parsedType = typeParser.parse();
-        String parsedString = parsedType.getSyntax();
+        String parsedString = parsedType.getFullSyntax();
         List<AstComponent> components = parsedType.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Path.class, components.get(0));
         Assertions.assertInstanceOf(Generic.class, components.get(1));
-        Assertions.assertEquals("List", components.get(0).getSyntax());
-        Assertions.assertEquals("<>", components.get(1).getSyntax());
+        Assertions.assertEquals("List", components.get(0).getFullSyntax());
+        Assertions.assertEquals("<>", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -107,15 +107,15 @@ public class TypeParserTest {
 
         //When
         Type parsedType = typeParser.parse();
-        String parsedString = parsedType.getSyntax();
+        String parsedString = parsedType.getFullSyntax();
         List<AstComponent> components = parsedType.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Path.class, components.get(0));
         Assertions.assertInstanceOf(Generic.class, components.get(1));
-        Assertions.assertEquals("List   ", components.get(0).getSyntax());
-        Assertions.assertEquals("<\tLong > \n\n `123`\t  ", components.get(1).getSyntax());
+        Assertions.assertEquals("List   ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("<\tLong > \n\n `123`\t  ", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

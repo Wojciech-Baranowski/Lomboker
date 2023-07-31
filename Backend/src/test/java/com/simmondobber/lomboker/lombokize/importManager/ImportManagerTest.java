@@ -23,7 +23,7 @@ public class ImportManagerTest {
         //Given
         ImportManager importManager = new ImportManager();
         List<Import> expectedImports = new FileParser("package dummy;\n" + importsCode + "\n class Dummy dummy {}").parse().getImports().stream()
-                .sorted(Comparator.comparing(Import::getSyntax))
+                .sorted(Comparator.comparing(Import::getFullSyntax))
                 .toList();
 
         //When
@@ -32,11 +32,11 @@ public class ImportManagerTest {
 
         //Then
         List<Import> actualImports = ((File) ast.getAstRoot()).getImports().stream()
-                .sorted(Comparator.comparing(Import::getSyntax))
+                .sorted(Comparator.comparing(Import::getFullSyntax))
                 .toList();
         Assertions.assertEquals(expectedImports.size(), actualImports.size());
         for (int i = 0; i < expectedImports.size(); i++) {
-            Assertions.assertEquals(Trimmer.compressSeparators(expectedImports.get(i).getSyntax()), Trimmer.compressSeparators((actualImports.get(i).getSyntax())));
+            Assertions.assertEquals(Trimmer.compressSeparators(expectedImports.get(i).getFullSyntax()), Trimmer.compressSeparators((actualImports.get(i).getFullSyntax())));
         }
         Assertions.assertEquals(codeAfterExtension, ast.getCode());
     }

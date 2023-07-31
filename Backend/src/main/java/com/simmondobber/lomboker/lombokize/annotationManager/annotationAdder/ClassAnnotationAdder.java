@@ -26,9 +26,9 @@ public class ClassAnnotationAdder extends AnnotationAdder {
 
     private List<Annotation> createAnnotationsToContain(Preamble preamble, Keyword classType, AnnotationsConfig annotationsConfig) {
         String frontSeparator = getFrontSeparator(preamble);
-        if (classType.getSyntax().trim().equals("class")) {
+        if (classType.getFullSyntax().trim().equals("class")) {
             return this.annotationFactory.createClassAnnotationsBasedOnConfig(annotationsConfig, frontSeparator);
-        } else if (classType.getSyntax().trim().equals("enum")) {
+        } else if (classType.getFullSyntax().trim().equals("enum")) {
             return this.annotationFactory.createEnumAnnotationsBasedOnConfig(annotationsConfig, frontSeparator);
         } else {
             return new ArrayList<>();

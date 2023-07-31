@@ -31,8 +31,8 @@ public class SetterFactoryTest {
         Method setterMethodWithThis = setterFactory.createSetterWithThis();
 
         //Then
-        Assertions.assertEquals(expectedMethodSyntax, setterMethod.getSyntax());
-        Assertions.assertEquals(expectedMethodWithThisSyntax, setterMethodWithThis.getSyntax());
+        Assertions.assertEquals(expectedMethodSyntax, setterMethod.getFullSyntax());
+        Assertions.assertEquals(expectedMethodWithThisSyntax, setterMethodWithThis.getFullSyntax());
     }
 
     private static Stream<Arguments> create_setter_test_data_provider() {

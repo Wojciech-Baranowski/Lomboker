@@ -22,7 +22,7 @@ public class GenericParserTest {
 
         //When
         Generic parsedGeneric = genericParser.parse();
-        String parsedString = parsedGeneric.getSyntax();
+        String parsedString = parsedGeneric.getFullSyntax();
         List<AstComponent> components = parsedGeneric.getChildAstComponents();
 
         //Then
@@ -30,9 +30,9 @@ public class GenericParserTest {
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(GenericExtension.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("<", components.get(0).getSyntax());
-        Assertions.assertEquals("T extends BaseEntity", components.get(1).getSyntax());
-        Assertions.assertEquals(">", components.get(2).getSyntax());
+        Assertions.assertEquals("<", components.get(0).getFullSyntax());
+        Assertions.assertEquals("T extends BaseEntity", components.get(1).getFullSyntax());
+        Assertions.assertEquals(">", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -45,7 +45,7 @@ public class GenericParserTest {
 
         //When
         Generic parsedGeneric = genericParser.parse();
-        String parsedString = parsedGeneric.getSyntax();
+        String parsedString = parsedGeneric.getFullSyntax();
         List<AstComponent> components = parsedGeneric.getChildAstComponents();
 
         //Then
@@ -53,9 +53,9 @@ public class GenericParserTest {
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(GenericExtension.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("< \n\n `123`\t   ", components.get(0).getSyntax());
-        Assertions.assertEquals("T extends BaseEntity\t", components.get(1).getSyntax());
-        Assertions.assertEquals(">  ", components.get(2).getSyntax());
+        Assertions.assertEquals("< \n\n `123`\t   ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("T extends BaseEntity\t", components.get(1).getFullSyntax());
+        Assertions.assertEquals(">  ", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -68,7 +68,7 @@ public class GenericParserTest {
 
         //When
         Generic parsedGeneric = genericParser.parse();
-        String parsedString = parsedGeneric.getSyntax();
+        String parsedString = parsedGeneric.getFullSyntax();
         List<AstComponent> components = parsedGeneric.getChildAstComponents();
 
         //Then
@@ -76,9 +76,9 @@ public class GenericParserTest {
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(GenericExtension.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("<", components.get(0).getSyntax());
-        Assertions.assertEquals("", components.get(1).getSyntax());
-        Assertions.assertEquals(">", components.get(2).getSyntax());
+        Assertions.assertEquals("<", components.get(0).getFullSyntax());
+        Assertions.assertEquals("", components.get(1).getFullSyntax());
+        Assertions.assertEquals(">", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -91,7 +91,7 @@ public class GenericParserTest {
 
         //When
         Generic parsedGeneric = genericParser.parse();
-        String parsedString = parsedGeneric.getSyntax();
+        String parsedString = parsedGeneric.getFullSyntax();
         List<AstComponent> components = parsedGeneric.getChildAstComponents();
 
         //Then
@@ -99,9 +99,9 @@ public class GenericParserTest {
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(GenericExtension.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("<", components.get(0).getSyntax());
-        Assertions.assertEquals("T extends List<Long>", components.get(1).getSyntax());
-        Assertions.assertEquals(">", components.get(2).getSyntax());
+        Assertions.assertEquals("<", components.get(0).getFullSyntax());
+        Assertions.assertEquals("T extends List<Long>", components.get(1).getFullSyntax());
+        Assertions.assertEquals(">", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

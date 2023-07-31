@@ -111,7 +111,7 @@ public class ImportFactory {
 
     private void addNewlineToTheLastImport(List<Import> imports) {
         if (!imports.isEmpty()) {
-            Import lastImportWithNewline = new ImportParser(imports.get(imports.size() - 1).getSyntax() + "\n").parse();
+            Import lastImportWithNewline = new ImportParser(imports.get(imports.size() - 1).getFullSyntax() + "\n").parse();
             imports.set(imports.size() - 1, lastImportWithNewline);
         }
     }

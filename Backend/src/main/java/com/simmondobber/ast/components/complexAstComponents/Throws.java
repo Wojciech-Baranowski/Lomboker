@@ -5,14 +5,16 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
 import com.simmondobber.ast.components.simpleAstComponents.ThrowsListing;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class Throws extends ComplexAstComponent {
 
-    private final Keyword keyword;
-    private final ThrowsListing throwsListing;
+    private Keyword keyword;
+    private ThrowsListing throwsListing;
 
     public Throws(Keyword keyword, ThrowsListing throwsListing) {
         this.keyword = keyword;

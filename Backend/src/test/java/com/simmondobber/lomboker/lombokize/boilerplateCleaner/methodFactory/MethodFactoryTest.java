@@ -29,7 +29,7 @@ public class MethodFactoryTest {
         //When
         List<Method> generatedMethods = methodFactory.generateMethodsBasedOnClassFields(classFields);
         List<String> generatedMethodsSyntax = generatedMethods.stream()
-                .map(Method::getSyntax)
+                .map(Method::getFullSyntax)
                 .sorted()
                 .toList();
 

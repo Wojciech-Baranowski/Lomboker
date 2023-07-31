@@ -6,16 +6,18 @@ import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
 import com.simmondobber.ast.components.simpleAstComponents.Path;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class Import extends ComplexAstComponent {
 
-    private final Keyword importKeyword;
-    private final Keyword staticKeyword;
-    private final Path path;
-    private final Character semicolon;
+    private Keyword importKeyword;
+    private Keyword staticKeyword;
+    private Path path;
+    private Character semicolon;
 
     public Import(Keyword importKeyword, Keyword staticKeyword, Path path, Character semicolon) {
         this.importKeyword = importKeyword;

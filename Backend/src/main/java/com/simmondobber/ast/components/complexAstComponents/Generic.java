@@ -5,15 +5,17 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.GenericExtension;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class Generic extends ComplexAstComponent implements PreambleComponent {
 
-    private final Character leftAngle;
-    private final GenericExtension genericExtension;
-    private final Character rightAngle;
+    private Character leftAngle;
+    private GenericExtension genericExtension;
+    private Character rightAngle;
 
     public Generic(Character leftAngle, GenericExtension genericExtension, Character rightAngle) {
         this.leftAngle = leftAngle;

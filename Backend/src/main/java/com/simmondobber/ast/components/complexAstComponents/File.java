@@ -3,16 +3,18 @@ package com.simmondobber.ast.components.complexAstComponents;
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 public class File extends ComplexAstComponent {
 
-    private final Package package_;
-    private final List<Import> imports;
-    private final List<Class> classes;
+    private Package package_;
+    private List<Import> imports;
+    private List<Class> classes;
 
     public File(Package package_, List<Import> imports, List<Class> classes) {
         this.package_ = package_;

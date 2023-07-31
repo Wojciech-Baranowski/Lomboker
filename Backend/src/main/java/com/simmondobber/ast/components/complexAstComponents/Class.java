@@ -5,17 +5,19 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.ClassExtension;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class Class extends ComplexAstComponent implements ClassContentComponent {
 
-    private final Preamble preamble;
-    private final Keyword classTypeKeyword;
-    private final Type type;
-    private final ClassExtension classExtension;
-    private final ClassBody classBody;
+    private Preamble preamble;
+    private Keyword classTypeKeyword;
+    private Type type;
+    private ClassExtension classExtension;
+    private ClassBody classBody;
 
     public Class(Preamble preamble, Keyword classTypeKeyword, Type type, ClassExtension classExtension, ClassBody classBody) {
         this.preamble = preamble;

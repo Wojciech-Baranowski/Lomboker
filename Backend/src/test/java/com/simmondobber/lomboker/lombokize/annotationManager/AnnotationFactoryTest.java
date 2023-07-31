@@ -17,7 +17,7 @@ public class AnnotationFactoryTest {
         String expectedGetterSyntax = "@Getter\n";
 
         //When
-        String actualGetterSyntax = this.annotationFactory.createGetterAnnotation("\n").getSyntax();
+        String actualGetterSyntax = this.annotationFactory.createGetterAnnotation("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedGetterSyntax, actualGetterSyntax);
@@ -29,7 +29,7 @@ public class AnnotationFactoryTest {
         String expectedSetterSyntax = "@Setter\n";
 
         //When
-        String actualSetterSyntax = this.annotationFactory.createSetterAnnotation("\n").getSyntax();
+        String actualSetterSyntax = this.annotationFactory.createSetterAnnotation("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedSetterSyntax, actualSetterSyntax);
@@ -41,7 +41,7 @@ public class AnnotationFactoryTest {
         String expectedNoArgsConstructorSyntax = "@NoArgsConstructor\n";
 
         //When
-        String actualNoArgsConstructorSyntax = this.annotationFactory.createNoArgsConstructorAnnotation("\n").getSyntax();
+        String actualNoArgsConstructorSyntax = this.annotationFactory.createNoArgsConstructorAnnotation("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedNoArgsConstructorSyntax, actualNoArgsConstructorSyntax);
@@ -53,7 +53,7 @@ public class AnnotationFactoryTest {
         String expectedAllArgsConstructorSyntax = "@AllArgsConstructor\n";
 
         //When
-        String actualAllArgsConstructorSyntax = this.annotationFactory.createAllArgsConstructorAnnotation("\n").getSyntax();
+        String actualAllArgsConstructorSyntax = this.annotationFactory.createAllArgsConstructorAnnotation("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedAllArgsConstructorSyntax, actualAllArgsConstructorSyntax);
@@ -65,7 +65,7 @@ public class AnnotationFactoryTest {
         String expectedBuilderSyntax = "@Builder\n";
 
         //When
-        String actualBuilderSyntax = this.annotationFactory.createBuilderAnnotation("\n").getSyntax();
+        String actualBuilderSyntax = this.annotationFactory.createBuilderAnnotation("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedBuilderSyntax, actualBuilderSyntax);
@@ -77,7 +77,7 @@ public class AnnotationFactoryTest {
         String expectedSuperBuilderSyntax = "@SuperBuilder\n";
 
         //When
-        String actualSuperBuilderSyntax = this.annotationFactory.createSuperBuilderAnnotation("\n").getSyntax();
+        String actualSuperBuilderSyntax = this.annotationFactory.createSuperBuilderAnnotation("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedSuperBuilderSyntax, actualSuperBuilderSyntax);
@@ -89,7 +89,7 @@ public class AnnotationFactoryTest {
         String expectedBuilderWithToBuilderSyntax = "@Builder(toBuilder = true)\n";
 
         //When
-        String actualBuilderWithToBuilderSyntax = this.annotationFactory.createBuilderWithToBuilderAnnotation("\n").getSyntax();
+        String actualBuilderWithToBuilderSyntax = this.annotationFactory.createBuilderWithToBuilderAnnotation("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedBuilderWithToBuilderSyntax, actualBuilderWithToBuilderSyntax);
@@ -101,7 +101,7 @@ public class AnnotationFactoryTest {
         String expectedSuperBuilderWithToBuilderSyntax = "@SuperBuilder(toBuilder = true)\n";
 
         //When
-        String actualSuperBuilderWithToBuilderSyntax = this.annotationFactory.createSuperBuilderWithToBuilderAnnotation("\n").getSyntax();
+        String actualSuperBuilderWithToBuilderSyntax = this.annotationFactory.createSuperBuilderWithToBuilderAnnotation("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedSuperBuilderWithToBuilderSyntax, actualSuperBuilderWithToBuilderSyntax);
@@ -113,7 +113,7 @@ public class AnnotationFactoryTest {
         String expectedToStringSyntax = "@ToString\n";
 
         //When
-        String actualToStringSyntax = this.annotationFactory.createToStringAnnotation("\n").getSyntax();
+        String actualToStringSyntax = this.annotationFactory.createToStringAnnotation("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedToStringSyntax, actualToStringSyntax);
@@ -125,7 +125,7 @@ public class AnnotationFactoryTest {
         String expectedToStringWithCallSuperSyntax = "@ToString(callSuper = true)\n";
 
         //When
-        String actualToStringWithCallSuperSyntax = this.annotationFactory.createToStringWithCallSuperAnnotation("\n").getSyntax();
+        String actualToStringWithCallSuperSyntax = this.annotationFactory.createToStringWithCallSuperAnnotation("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedToStringWithCallSuperSyntax, actualToStringWithCallSuperSyntax);
@@ -146,7 +146,7 @@ public class AnnotationFactoryTest {
         //Then
         Assertions.assertEquals(expectedListOfAnnotations.size(), actualListOfAnnotations.size());
         for (int i = 0; i < expectedListOfAnnotations.size(); i++) {
-            Assertions.assertEquals(expectedListOfAnnotations.get(i).getSyntax(), actualListOfAnnotations.get(i).getSyntax());
+            Assertions.assertEquals(expectedListOfAnnotations.get(i).getFullSyntax(), actualListOfAnnotations.get(i).getFullSyntax());
         }
     }
 
@@ -167,7 +167,7 @@ public class AnnotationFactoryTest {
         //Then
         Assertions.assertEquals(expectedListOfAnnotations.size(), actualListOfAnnotations.size());
         for (int i = 0; i < expectedListOfAnnotations.size(); i++) {
-            Assertions.assertEquals(expectedListOfAnnotations.get(i).getSyntax(), actualListOfAnnotations.get(i).getSyntax());
+            Assertions.assertEquals(expectedListOfAnnotations.get(i).getFullSyntax(), actualListOfAnnotations.get(i).getFullSyntax());
         }
     }
 
@@ -186,7 +186,7 @@ public class AnnotationFactoryTest {
         //Then
         Assertions.assertEquals(expectedListOfAnnotations.size(), actualListOfAnnotations.size());
         for (int i = 0; i < expectedListOfAnnotations.size(); i++) {
-            Assertions.assertEquals(expectedListOfAnnotations.get(i).getSyntax(), actualListOfAnnotations.get(i).getSyntax());
+            Assertions.assertEquals(expectedListOfAnnotations.get(i).getFullSyntax(), actualListOfAnnotations.get(i).getFullSyntax());
         }
     }
 }

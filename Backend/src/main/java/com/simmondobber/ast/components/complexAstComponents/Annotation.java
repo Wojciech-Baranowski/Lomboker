@@ -5,15 +5,17 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class Annotation extends ComplexAstComponent implements PreambleComponent {
 
-    private final Character at;
-    private final Name name;
-    private final Args args;
+    private Character at;
+    private Name name;
+    private Args args;
 
     public Annotation(Character at, Name name, Args args) {
         this.at = at;

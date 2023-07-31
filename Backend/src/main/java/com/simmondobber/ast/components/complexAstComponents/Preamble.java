@@ -4,14 +4,16 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 public class Preamble extends ComplexAstComponent {
 
-    private final List<PreambleComponent> preambleComponents;
+    private List<PreambleComponent> preambleComponents;
 
     public Preamble(List<PreambleComponent> preambleComponents) {
         this.preambleComponents = preambleComponents;

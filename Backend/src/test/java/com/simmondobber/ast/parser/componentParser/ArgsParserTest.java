@@ -22,7 +22,7 @@ public class ArgsParserTest {
 
         //When
         Args parsedArgs = argsParser.parse();
-        String parsedString = parsedArgs.getSyntax();
+        String parsedString = parsedArgs.getFullSyntax();
         List<AstComponent> components = parsedArgs.getChildAstComponents();
 
         //Then
@@ -30,9 +30,9 @@ public class ArgsParserTest {
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(ArgsListing.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("(", components.get(0).getSyntax());
-        Assertions.assertEquals("int x, Point p", components.get(1).getSyntax());
-        Assertions.assertEquals(")", components.get(2).getSyntax());
+        Assertions.assertEquals("(", components.get(0).getFullSyntax());
+        Assertions.assertEquals("int x, Point p", components.get(1).getFullSyntax());
+        Assertions.assertEquals(")", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -45,7 +45,7 @@ public class ArgsParserTest {
 
         //When
         Args parsedArgs = argsParser.parse();
-        String parsedString = parsedArgs.getSyntax();
+        String parsedString = parsedArgs.getFullSyntax();
         List<AstComponent> components = parsedArgs.getChildAstComponents();
 
         //Then
@@ -53,9 +53,9 @@ public class ArgsParserTest {
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(ArgsListing.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("(   ", components.get(0).getSyntax());
-        Assertions.assertEquals("int x, Point p ", components.get(1).getSyntax());
-        Assertions.assertEquals(")  \n\n `123`\t  ", components.get(2).getSyntax());
+        Assertions.assertEquals("(   ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("int x, Point p ", components.get(1).getFullSyntax());
+        Assertions.assertEquals(")  \n\n `123`\t  ", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -68,15 +68,15 @@ public class ArgsParserTest {
 
         //When
         Args parsedArgs = argsParser.parse();
-        String parsedString = parsedArgs.getSyntax();
+        String parsedString = parsedArgs.getFullSyntax();
         List<AstComponent> components = parsedArgs.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(Character.class, components.get(1));
-        Assertions.assertEquals("(", components.get(0).getSyntax());
-        Assertions.assertEquals(")", components.get(1).getSyntax());
+        Assertions.assertEquals("(", components.get(0).getFullSyntax());
+        Assertions.assertEquals(")", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

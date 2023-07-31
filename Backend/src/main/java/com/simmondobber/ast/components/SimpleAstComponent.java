@@ -1,14 +1,15 @@
 package com.simmondobber.ast.components;
 
 import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public abstract class SimpleAstComponent implements AstComponent {
 
-    private final String syntax;
-    @Getter
-    private final String frontSeparator;
-    @Getter
-    private final String backSeparator;
+    private String syntax;
+    private String frontSeparator;
+    private String backSeparator;
 
     public SimpleAstComponent(String syntax) {
         this.syntax = syntax;
@@ -22,8 +23,7 @@ public abstract class SimpleAstComponent implements AstComponent {
         this.backSeparator = backSeparator;
     }
 
-    @Override
-    public String getSyntax() {
+    public String getFullSyntax() {
         return this.syntax + this.backSeparator;
     }
 }

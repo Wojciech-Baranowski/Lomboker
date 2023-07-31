@@ -31,8 +31,8 @@ public class GetterFactoryTest {
         Method getterMethodWithThis = getterFactory.createGetterWithThis();
 
         //Then
-        Assertions.assertEquals(expectedMethodSyntax, getterMethod.getSyntax());
-        Assertions.assertEquals(expectedMethodWithThisSyntax, getterMethodWithThis.getSyntax());
+        Assertions.assertEquals(expectedMethodSyntax, getterMethod.getFullSyntax());
+        Assertions.assertEquals(expectedMethodWithThisSyntax, getterMethodWithThis.getFullSyntax());
     }
 
     private static Stream<Arguments> create_getter_test_data_provider() {

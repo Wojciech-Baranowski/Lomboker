@@ -23,7 +23,7 @@ public class AnnotationParserTest {
 
         //When
         Annotation parsedAnnotation = annotationParser.parse();
-        String parsedString = parsedAnnotation.getSyntax();
+        String parsedString = parsedAnnotation.getFullSyntax();
         List<AstComponent> components = parsedAnnotation.getChildAstComponents();
 
         //Then
@@ -31,9 +31,9 @@ public class AnnotationParserTest {
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(Name.class, components.get(1));
         Assertions.assertInstanceOf(Args.class, components.get(2));
-        Assertions.assertEquals("@", components.get(0).getSyntax());
-        Assertions.assertEquals("Getter", components.get(1).getSyntax());
-        Assertions.assertEquals("(value = AccessLevel.NONE)", components.get(2).getSyntax());
+        Assertions.assertEquals("@", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Getter", components.get(1).getFullSyntax());
+        Assertions.assertEquals("(value = AccessLevel.NONE)", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -46,7 +46,7 @@ public class AnnotationParserTest {
 
         //When
         Annotation parsedAnnotation = annotationParser.parse();
-        String parsedString = parsedAnnotation.getSyntax();
+        String parsedString = parsedAnnotation.getFullSyntax();
         List<AstComponent> components = parsedAnnotation.getChildAstComponents();
 
         //Then
@@ -54,9 +54,9 @@ public class AnnotationParserTest {
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(Name.class, components.get(1));
         Assertions.assertInstanceOf(Args.class, components.get(2));
-        Assertions.assertEquals("@\n\t ", components.get(0).getSyntax());
-        Assertions.assertEquals("Getter  \n\n `123`\t", components.get(1).getSyntax());
-        Assertions.assertEquals("(value = AccessLevel.NONE)  \t ", components.get(2).getSyntax());
+        Assertions.assertEquals("@\n\t ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Getter  \n\n `123`\t", components.get(1).getFullSyntax());
+        Assertions.assertEquals("(value = AccessLevel.NONE)  \t ", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -69,7 +69,7 @@ public class AnnotationParserTest {
 
         //When
         Annotation parsedAnnotation = annotationParser.parse();
-        String parsedString = parsedAnnotation.getSyntax();
+        String parsedString = parsedAnnotation.getFullSyntax();
         List<AstComponent> components = parsedAnnotation.getChildAstComponents();
 
         //Then
@@ -77,9 +77,9 @@ public class AnnotationParserTest {
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(Name.class, components.get(1));
         Assertions.assertInstanceOf(Args.class, components.get(2));
-        Assertions.assertEquals("@", components.get(0).getSyntax());
-        Assertions.assertEquals("Getter", components.get(1).getSyntax());
-        Assertions.assertEquals("()", components.get(2).getSyntax());
+        Assertions.assertEquals("@", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Getter", components.get(1).getFullSyntax());
+        Assertions.assertEquals("()", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -92,15 +92,15 @@ public class AnnotationParserTest {
 
         //When
         Annotation parsedAnnotation = annotationParser.parse();
-        String parsedString = parsedAnnotation.getSyntax();
+        String parsedString = parsedAnnotation.getFullSyntax();
         List<AstComponent> components = parsedAnnotation.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(Name.class, components.get(1));
-        Assertions.assertEquals("@", components.get(0).getSyntax());
-        Assertions.assertEquals("Getter ", components.get(1).getSyntax());
+        Assertions.assertEquals("@", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Getter ", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

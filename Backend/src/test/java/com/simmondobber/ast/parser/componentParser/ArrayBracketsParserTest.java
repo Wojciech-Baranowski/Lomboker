@@ -22,7 +22,7 @@ public class ArrayBracketsParserTest {
 
         //When
         ArrayBrackets parsedArrayBrackets = arrayBracketsParser.parse();
-        String parsedString = parsedArrayBrackets.getSyntax();
+        String parsedString = parsedArrayBrackets.getFullSyntax();
         List<AstComponent> components = parsedArrayBrackets.getChildAstComponents();
 
         //Then
@@ -30,9 +30,9 @@ public class ArrayBracketsParserTest {
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(ArraySize.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("[", components.get(0).getSyntax());
-        Assertions.assertEquals("10", components.get(1).getSyntax());
-        Assertions.assertEquals("]", components.get(2).getSyntax());
+        Assertions.assertEquals("[", components.get(0).getFullSyntax());
+        Assertions.assertEquals("10", components.get(1).getFullSyntax());
+        Assertions.assertEquals("]", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -45,7 +45,7 @@ public class ArrayBracketsParserTest {
 
         //When
         ArrayBrackets parsedArrayBrackets = arrayBracketsParser.parse();
-        String parsedString = parsedArrayBrackets.getSyntax();
+        String parsedString = parsedArrayBrackets.getFullSyntax();
         List<AstComponent> components = parsedArrayBrackets.getChildAstComponents();
 
         //Then
@@ -53,9 +53,9 @@ public class ArrayBracketsParserTest {
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(ArraySize.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("[\n", components.get(0).getSyntax());
-        Assertions.assertEquals("10   ", components.get(1).getSyntax());
-        Assertions.assertEquals("]\t`1`", components.get(2).getSyntax());
+        Assertions.assertEquals("[\n", components.get(0).getFullSyntax());
+        Assertions.assertEquals("10   ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("]\t`1`", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

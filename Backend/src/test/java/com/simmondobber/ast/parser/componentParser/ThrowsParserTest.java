@@ -22,15 +22,15 @@ public class ThrowsParserTest {
 
         //When
         Throws parsedThrows = throwsParser.parse();
-        String parsedString = parsedThrows.getSyntax();
+        String parsedString = parsedThrows.getFullSyntax();
         List<AstComponent> components = parsedThrows.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Keyword.class, components.get(0));
         Assertions.assertInstanceOf(ThrowsListing.class, components.get(1));
-        Assertions.assertEquals("throws ", components.get(0).getSyntax());
-        Assertions.assertEquals("NullPointerException, ValidatorException ", components.get(1).getSyntax());
+        Assertions.assertEquals("throws ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("NullPointerException, ValidatorException ", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -43,15 +43,15 @@ public class ThrowsParserTest {
 
         //When
         Throws parsedThrows = throwsParser.parse();
-        String parsedString = parsedThrows.getSyntax();
+        String parsedString = parsedThrows.getFullSyntax();
         List<AstComponent> components = parsedThrows.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Keyword.class, components.get(0));
         Assertions.assertInstanceOf(ThrowsListing.class, components.get(1));
-        Assertions.assertEquals("throws \n\n  \t ", components.get(0).getSyntax());
-        Assertions.assertEquals("NullPointerException, ValidatorException   `123` \t ", components.get(1).getSyntax());
+        Assertions.assertEquals("throws \n\n  \t ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("NullPointerException, ValidatorException   `123` \t ", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

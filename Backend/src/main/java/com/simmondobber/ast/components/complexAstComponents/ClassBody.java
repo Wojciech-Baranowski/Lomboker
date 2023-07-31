@@ -4,16 +4,18 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class ClassBody extends ComplexAstComponent {
 
-    private final Character leftCurly;
-    private final EnumValues enumValues;
-    private final ClassContent classContent;
-    private final Character rightCurly;
+    private Character leftCurly;
+    private EnumValues enumValues;
+    private ClassContent classContent;
+    private Character rightCurly;
 
     public ClassBody(Character leftCurly, EnumValues enumValues, ClassContent classContent, Character rightCurly) {
         this.leftCurly = leftCurly;

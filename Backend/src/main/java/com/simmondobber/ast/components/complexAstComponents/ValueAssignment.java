@@ -5,14 +5,16 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Value;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class ValueAssignment extends ComplexAstComponent {
 
-    private final Character equals;
-    private final Value value;
+    private Character equals;
+    private Value value;
 
     public ValueAssignment(Character equals, Value value) {
         this.equals = equals;

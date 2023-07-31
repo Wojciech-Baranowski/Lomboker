@@ -23,7 +23,7 @@ public class MethodParserTest {
 
         //When
         Method parsedMethod = methodParser.parse();
-        String parsedString = parsedMethod.getSyntax();
+        String parsedString = parsedMethod.getFullSyntax();
         List<AstComponent> components = parsedMethod.getChildAstComponents();
 
         //Then
@@ -33,11 +33,11 @@ public class MethodParserTest {
         Assertions.assertInstanceOf(Name.class, components.get(2));
         Assertions.assertInstanceOf(Args.class, components.get(3));
         Assertions.assertInstanceOf(Character.class, components.get(4));
-        Assertions.assertEquals("@Getter\nprivate final @Setter private ", components.get(0).getSyntax());
-        Assertions.assertEquals("Point ", components.get(1).getSyntax());
-        Assertions.assertEquals("calculate", components.get(2).getSyntax());
-        Assertions.assertEquals("(int x, int y)", components.get(3).getSyntax());
-        Assertions.assertEquals(";", components.get(4).getSyntax());
+        Assertions.assertEquals("@Getter\nprivate final @Setter private ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Point ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("calculate", components.get(2).getFullSyntax());
+        Assertions.assertEquals("(int x, int y)", components.get(3).getFullSyntax());
+        Assertions.assertEquals(";", components.get(4).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -50,7 +50,7 @@ public class MethodParserTest {
 
         //When
         Method parsedMethod = methodParser.parse();
-        String parsedString = parsedMethod.getSyntax();
+        String parsedString = parsedMethod.getFullSyntax();
         List<AstComponent> components = parsedMethod.getChildAstComponents();
 
         //Then
@@ -59,10 +59,10 @@ public class MethodParserTest {
         Assertions.assertInstanceOf(Type.class, components.get(1));
         Assertions.assertInstanceOf(Args.class, components.get(2));
         Assertions.assertInstanceOf(MethodBody.class, components.get(3));
-        Assertions.assertEquals("public ", components.get(0).getSyntax());
-        Assertions.assertEquals("Point", components.get(1).getSyntax());
-        Assertions.assertEquals("(int x, int y) ", components.get(2).getSyntax());
-        Assertions.assertEquals("{\nthis.x = x;\nthis.y = y;\n}\n ", components.get(3).getSyntax());
+        Assertions.assertEquals("public ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Point", components.get(1).getFullSyntax());
+        Assertions.assertEquals("(int x, int y) ", components.get(2).getFullSyntax());
+        Assertions.assertEquals("{\nthis.x = x;\nthis.y = y;\n}\n ", components.get(3).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -75,7 +75,7 @@ public class MethodParserTest {
 
         //When
         Method parsedMethod = methodParser.parse();
-        String parsedString = parsedMethod.getSyntax();
+        String parsedString = parsedMethod.getFullSyntax();
         List<AstComponent> components = parsedMethod.getChildAstComponents();
 
         //Then
@@ -85,11 +85,11 @@ public class MethodParserTest {
         Assertions.assertInstanceOf(Name.class, components.get(2));
         Assertions.assertInstanceOf(Args.class, components.get(3));
         Assertions.assertInstanceOf(MethodBody.class, components.get(4));
-        Assertions.assertEquals("@Getter\nprivate final @Setter private ", components.get(0).getSyntax());
-        Assertions.assertEquals("Point ", components.get(1).getSyntax());
-        Assertions.assertEquals("calculate", components.get(2).getSyntax());
-        Assertions.assertEquals("(int x, int y) ", components.get(3).getSyntax());
-        Assertions.assertEquals("{\nthis.x = x;\nthis.y = y;\n}\n ", components.get(4).getSyntax());
+        Assertions.assertEquals("@Getter\nprivate final @Setter private ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Point ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("calculate", components.get(2).getFullSyntax());
+        Assertions.assertEquals("(int x, int y) ", components.get(3).getFullSyntax());
+        Assertions.assertEquals("{\nthis.x = x;\nthis.y = y;\n}\n ", components.get(4).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -102,7 +102,7 @@ public class MethodParserTest {
 
         //When
         Method parsedMethod = methodParser.parse();
-        String parsedString = parsedMethod.getSyntax();
+        String parsedString = parsedMethod.getFullSyntax();
         List<AstComponent> components = parsedMethod.getChildAstComponents();
 
         //Then
@@ -113,12 +113,12 @@ public class MethodParserTest {
         Assertions.assertInstanceOf(Args.class, components.get(3));
         Assertions.assertInstanceOf(Throws.class, components.get(4));
         Assertions.assertInstanceOf(MethodBody.class, components.get(5));
-        Assertions.assertEquals("@Getter\nprivate final @Setter private ", components.get(0).getSyntax());
-        Assertions.assertEquals("Point ", components.get(1).getSyntax());
-        Assertions.assertEquals("calculate", components.get(2).getSyntax());
-        Assertions.assertEquals("(int x, int y) ", components.get(3).getSyntax());
-        Assertions.assertEquals("throws NullPointerException, ValidatorException ", components.get(4).getSyntax());
-        Assertions.assertEquals("{\nthis.x = x;\nthis.y = y;\n}\n ", components.get(5).getSyntax());
+        Assertions.assertEquals("@Getter\nprivate final @Setter private ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Point ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("calculate", components.get(2).getFullSyntax());
+        Assertions.assertEquals("(int x, int y) ", components.get(3).getFullSyntax());
+        Assertions.assertEquals("throws NullPointerException, ValidatorException ", components.get(4).getFullSyntax());
+        Assertions.assertEquals("{\nthis.x = x;\nthis.y = y;\n}\n ", components.get(5).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -131,7 +131,7 @@ public class MethodParserTest {
 
         //When
         Method parsedMethod = methodParser.parse();
-        String parsedString = parsedMethod.getSyntax();
+        String parsedString = parsedMethod.getFullSyntax();
         List<AstComponent> components = parsedMethod.getChildAstComponents();
 
         //Then
@@ -141,11 +141,11 @@ public class MethodParserTest {
         Assertions.assertInstanceOf(Name.class, components.get(2));
         Assertions.assertInstanceOf(Args.class, components.get(3));
         Assertions.assertInstanceOf(MethodBody.class, components.get(4));
-        Assertions.assertEquals("@Getter\nprivate final @Setter\t private ", components.get(0).getSyntax());
-        Assertions.assertEquals("Point\n ", components.get(1).getSyntax());
-        Assertions.assertEquals("calculate ", components.get(2).getSyntax());
-        Assertions.assertEquals("(int x  , int y ) `123`\t ", components.get(3).getSyntax());
-        Assertions.assertEquals("{\nthis.x = x;\nthis.y = y;\n}\t\n ", components.get(4).getSyntax());
+        Assertions.assertEquals("@Getter\nprivate final @Setter\t private ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Point\n ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("calculate ", components.get(2).getFullSyntax());
+        Assertions.assertEquals("(int x  , int y ) `123`\t ", components.get(3).getFullSyntax());
+        Assertions.assertEquals("{\nthis.x = x;\nthis.y = y;\n}\t\n ", components.get(4).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

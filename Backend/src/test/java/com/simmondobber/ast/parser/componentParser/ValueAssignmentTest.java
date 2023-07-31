@@ -22,15 +22,15 @@ public class ValueAssignmentTest {
 
         //When
         ValueAssignment parsedValueAssignment = valueAssignmentParser.parse();
-        String parsedString = parsedValueAssignment.getSyntax();
+        String parsedString = parsedValueAssignment.getFullSyntax();
         List<AstComponent> components = parsedValueAssignment.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(Value.class, components.get(1));
-        Assertions.assertEquals("= ", components.get(0).getSyntax());
-        Assertions.assertEquals("123", components.get(1).getSyntax());
+        Assertions.assertEquals("= ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("123", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -43,15 +43,15 @@ public class ValueAssignmentTest {
 
         //When
         ValueAssignment parsedValueAssignment = valueAssignmentParser.parse();
-        String parsedString = parsedValueAssignment.getSyntax();
+        String parsedString = parsedValueAssignment.getFullSyntax();
         List<AstComponent> components = parsedValueAssignment.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(Value.class, components.get(1));
-        Assertions.assertEquals("= ", components.get(0).getSyntax());
-        Assertions.assertEquals("123  \n\n `123`\t  ", components.get(1).getSyntax());
+        Assertions.assertEquals("= ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("123  \n\n `123`\t  ", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -64,15 +64,15 @@ public class ValueAssignmentTest {
 
         //When
         ValueAssignment parsedValueAssignment = valueAssignmentParser.parse();
-        String parsedString = parsedValueAssignment.getSyntax();
+        String parsedString = parsedValueAssignment.getFullSyntax();
         List<AstComponent> components = parsedValueAssignment.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
         Assertions.assertInstanceOf(Value.class, components.get(1));
-        Assertions.assertEquals("= ", components.get(0).getSyntax());
-        Assertions.assertEquals("(x) -> {\nSystem.out.println(x);\n}", components.get(1).getSyntax());
+        Assertions.assertEquals("= ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("(x) -> {\nSystem.out.println(x);\n}", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 

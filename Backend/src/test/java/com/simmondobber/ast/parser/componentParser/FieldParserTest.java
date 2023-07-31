@@ -25,7 +25,7 @@ public class FieldParserTest {
 
         //When
         Field parsedField = fieldParser.parse();
-        String parsedString = parsedField.getSyntax();
+        String parsedString = parsedField.getFullSyntax();
         List<AstComponent> components = parsedField.getChildAstComponents();
 
         //Then
@@ -34,10 +34,10 @@ public class FieldParserTest {
         Assertions.assertInstanceOf(Type.class, components.get(1));
         Assertions.assertInstanceOf(Name.class, components.get(2));
         Assertions.assertInstanceOf(Character.class, components.get(3));
-        Assertions.assertEquals("@Getter\nprivate final @Setter private ", components.get(0).getSyntax());
-        Assertions.assertEquals("Point ", components.get(1).getSyntax());
-        Assertions.assertEquals("p", components.get(2).getSyntax());
-        Assertions.assertEquals(";", components.get(3).getSyntax());
+        Assertions.assertEquals("@Getter\nprivate final @Setter private ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Point ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("p", components.get(2).getFullSyntax());
+        Assertions.assertEquals(";", components.get(3).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -50,7 +50,7 @@ public class FieldParserTest {
 
         //When
         Field parsedField = fieldParser.parse();
-        String parsedString = parsedField.getSyntax();
+        String parsedString = parsedField.getFullSyntax();
         List<AstComponent> components = parsedField.getChildAstComponents();
 
         //Then
@@ -60,11 +60,11 @@ public class FieldParserTest {
         Assertions.assertInstanceOf(Name.class, components.get(2));
         Assertions.assertInstanceOf(ValueAssignment.class, components.get(3));
         Assertions.assertInstanceOf(Character.class, components.get(4));
-        Assertions.assertEquals("@Getter\nprivate final @Setter private ", components.get(0).getSyntax());
-        Assertions.assertEquals("Point ", components.get(1).getSyntax());
-        Assertions.assertEquals("p ", components.get(2).getSyntax());
-        Assertions.assertEquals("= new Point(1, 1)", components.get(3).getSyntax());
-        Assertions.assertEquals(";", components.get(4).getSyntax());
+        Assertions.assertEquals("@Getter\nprivate final @Setter private ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Point ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("p ", components.get(2).getFullSyntax());
+        Assertions.assertEquals("= new Point(1, 1)", components.get(3).getFullSyntax());
+        Assertions.assertEquals(";", components.get(4).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -77,7 +77,7 @@ public class FieldParserTest {
 
         //When
         Field parsedField = fieldParser.parse();
-        String parsedString = parsedField.getSyntax();
+        String parsedString = parsedField.getFullSyntax();
         List<AstComponent> components = parsedField.getChildAstComponents();
 
         //Then
@@ -87,11 +87,11 @@ public class FieldParserTest {
         Assertions.assertInstanceOf(Name.class, components.get(2));
         Assertions.assertInstanceOf(ValueAssignment.class, components.get(3));
         Assertions.assertInstanceOf(Character.class, components.get(4));
-        Assertions.assertEquals("@Getter\nprivate\t\t final @Setter private   ", components.get(0).getSyntax());
-        Assertions.assertEquals("Point \n\n\n", components.get(1).getSyntax());
-        Assertions.assertEquals("pp", components.get(2).getSyntax());
-        Assertions.assertEquals("=new    Point(1, 1)   `123`", components.get(3).getSyntax());
-        Assertions.assertEquals(";  ", components.get(4).getSyntax());
+        Assertions.assertEquals("@Getter\nprivate\t\t final @Setter private   ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("Point \n\n\n", components.get(1).getFullSyntax());
+        Assertions.assertEquals("pp", components.get(2).getFullSyntax());
+        Assertions.assertEquals("=new    Point(1, 1)   `123`", components.get(3).getFullSyntax());
+        Assertions.assertEquals(";  ", components.get(4).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

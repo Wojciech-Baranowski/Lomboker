@@ -49,7 +49,7 @@ public class BoilerplateCleaner {
 
     private boolean isMethodGenerated(List<Method> methodsBasedOnFields, Method method) {
         return methodsBasedOnFields.stream()
-                .anyMatch(methodBasedOnField -> this.astComparator.areMethodsEqual(methodBasedOnField.getSyntax(), method.getSyntax()));
+                .anyMatch(methodBasedOnField -> this.astComparator.areMethodsEqual(methodBasedOnField.getFullSyntax(), method.getFullSyntax()));
     }
 
     private void removeMethods(ClassContent classContent, List<Method> methodsToRemove) {
@@ -63,7 +63,7 @@ public class BoilerplateCleaner {
     private void restoreSeparator(ClassContent classContent, String lastClassContentSeparator) {
         int indexOfLastComponent = classContent.getClassContentComponents().size() - 1;
         ClassContentComponent lastComponent = classContent.getClassContentComponents().get(indexOfLastComponent);
-        String lastComponentSyntax = StringUtils.removeEnd(lastComponent.getSyntax(), classContent.getBackSeparator()) + lastClassContentSeparator;
+        String lastComponentSyntax = StringUtils.removeEnd(lastComponent.getFullSyntax(), classContent.getBackSeparator()) + lastClassContentSeparator;
         if (lastComponent instanceof Field) {
             classContent.getClassContentComponents().set(indexOfLastComponent, new FieldParser(lastComponentSyntax).parse());
         } else if (lastComponent instanceof Method) {

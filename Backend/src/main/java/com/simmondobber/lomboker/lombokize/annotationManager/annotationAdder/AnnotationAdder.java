@@ -38,7 +38,7 @@ public abstract class AnnotationAdder {
 
     private boolean isAnnotationAlreadyContained(List<Annotation> containedAnnotations, Annotation annotationToContain) {
         return containedAnnotations.stream()
-                .anyMatch(containedAnnotation -> this.astComparator.areAnnotationsEqual(containedAnnotation.getSyntax(), annotationToContain.getSyntax()));
+                .anyMatch(containedAnnotation -> this.astComparator.areAnnotationsEqual(containedAnnotation.getFullSyntax(), annotationToContain.getFullSyntax()));
     }
 
     protected String getFrontSeparator(Preamble preamble) {

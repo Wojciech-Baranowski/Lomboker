@@ -14,8 +14,8 @@ public class SetterFactory {
     private final String fieldName;
 
     public SetterFactory(Field field) {
-        this.fieldType = Trimmer.trim(field.getType().getSyntax());
-        this.fieldName = Trimmer.trim(field.getName().getSyntax());
+        this.fieldType = Trimmer.trim(field.getType().getFullSyntax());
+        this.fieldName = Trimmer.trim(field.getName().getFullSyntax());
     }
 
     public Method createSetter() {
@@ -70,7 +70,7 @@ public class SetterFactory {
     }
 
     private String getArgName(Args args) {
-        String listingSyntax = args.getArgsListing().getSyntax();
+        String listingSyntax = args.getArgsListing().getFullSyntax();
         int nameIndex = listingSyntax.indexOf(" ") + 1;
         return listingSyntax.substring(nameIndex);
     }

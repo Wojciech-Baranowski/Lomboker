@@ -23,7 +23,7 @@ public class PackageParserTest {
 
         //When
         Package parsedPackage = packageParser.parse();
-        String parsedString = parsedPackage.getSyntax();
+        String parsedString = parsedPackage.getFullSyntax();
         List<AstComponent> components = parsedPackage.getChildAstComponents();
 
         //Then
@@ -31,9 +31,9 @@ public class PackageParserTest {
         Assertions.assertInstanceOf(Keyword.class, components.get(0));
         Assertions.assertInstanceOf(Path.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("package ", components.get(0).getSyntax());
-        Assertions.assertEquals("com.simmondobber.ast.parser.package_", components.get(1).getSyntax());
-        Assertions.assertEquals(";", components.get(2).getSyntax());
+        Assertions.assertEquals("package ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("com.simmondobber.ast.parser.package_", components.get(1).getFullSyntax());
+        Assertions.assertEquals(";", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -46,7 +46,7 @@ public class PackageParserTest {
 
         //When
         Package parsedPackage = packageParser.parse();
-        String parsedString = parsedPackage.getSyntax();
+        String parsedString = parsedPackage.getFullSyntax();
         List<AstComponent> components = parsedPackage.getChildAstComponents();
 
         //Then
@@ -54,9 +54,9 @@ public class PackageParserTest {
         Assertions.assertInstanceOf(Keyword.class, components.get(0));
         Assertions.assertInstanceOf(Path.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("package \n\n `123`\t ", components.get(0).getSyntax());
-        Assertions.assertEquals("com.simmondobber.ast.parser.package_   ", components.get(1).getSyntax());
-        Assertions.assertEquals(";\t ", components.get(2).getSyntax());
+        Assertions.assertEquals("package \n\n `123`\t ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("com.simmondobber.ast.parser.package_   ", components.get(1).getFullSyntax());
+        Assertions.assertEquals(";\t ", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

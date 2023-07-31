@@ -25,7 +25,7 @@ public class ClassParserTest {
 
         //When
         Class parsedClass = classParser.parse();
-        String parsedString = parsedClass.getSyntax();
+        String parsedString = parsedClass.getFullSyntax();
         List<AstComponent> components = parsedClass.getChildAstComponents();
 
         //Then
@@ -35,11 +35,11 @@ public class ClassParserTest {
         Assertions.assertInstanceOf(Type.class, components.get(2));
         Assertions.assertInstanceOf(ClassExtension.class, components.get(3));
         Assertions.assertInstanceOf(ClassBody.class, components.get(4));
-        Assertions.assertEquals("public ", components.get(0).getSyntax());
-        Assertions.assertEquals("class ", components.get(1).getSyntax());
-        Assertions.assertEquals("Point<int, int> ", components.get(2).getSyntax());
-        Assertions.assertEquals("extends GraphicsObject ", components.get(3).getSyntax());
-        Assertions.assertEquals("{VALUE;public Point(int x, int y) {this.x = x;this.y = y;}private int x;private int y;public int getX() {return x;}public void setX(int x) {this.x = x;}}", components.get(4).getSyntax());
+        Assertions.assertEquals("public ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("class ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("Point<int, int> ", components.get(2).getFullSyntax());
+        Assertions.assertEquals("extends GraphicsObject ", components.get(3).getFullSyntax());
+        Assertions.assertEquals("{VALUE;public Point(int x, int y) {this.x = x;this.y = y;}private int x;private int y;public int getX() {return x;}public void setX(int x) {this.x = x;}}", components.get(4).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -52,7 +52,7 @@ public class ClassParserTest {
 
         //When
         Class parsedClass = classParser.parse();
-        String parsedString = parsedClass.getSyntax();
+        String parsedString = parsedClass.getFullSyntax();
         List<AstComponent> components = parsedClass.getChildAstComponents();
 
         //Then
@@ -62,11 +62,11 @@ public class ClassParserTest {
         Assertions.assertInstanceOf(Type.class, components.get(2));
         Assertions.assertInstanceOf(ClassExtension.class, components.get(3));
         Assertions.assertInstanceOf(ClassBody.class, components.get(4));
-        Assertions.assertEquals("public \t \t", components.get(0).getSyntax());
-        Assertions.assertEquals("class`1234` ", components.get(1).getSyntax());
-        Assertions.assertEquals("Point<int, int>    ", components.get(2).getSyntax());
-        Assertions.assertEquals("extends GraphicsObject \t\t", components.get(3).getSyntax());
-        Assertions.assertEquals("{VALUE;public Point(int x, int y) {this.x = x;this.y = y;}private int x;private int y;public int getX() {return x;}public void setX(int x) {this.x = x;}}\t\t\n\t ", components.get(4).getSyntax());
+        Assertions.assertEquals("public \t \t", components.get(0).getFullSyntax());
+        Assertions.assertEquals("class`1234` ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("Point<int, int>    ", components.get(2).getFullSyntax());
+        Assertions.assertEquals("extends GraphicsObject \t\t", components.get(3).getFullSyntax());
+        Assertions.assertEquals("{VALUE;public Point(int x, int y) {this.x = x;this.y = y;}private int x;private int y;public int getX() {return x;}public void setX(int x) {this.x = x;}}\t\t\n\t ", components.get(4).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

@@ -23,7 +23,7 @@ public class PreambleParserTest {
 
         //When
         Preamble parsedPreamble = preambleParser.parse();
-        String parsedString = parsedPreamble.getSyntax();
+        String parsedString = parsedPreamble.getFullSyntax();
         List<AstComponent> components = parsedPreamble.getChildAstComponents();
 
         //Then
@@ -33,11 +33,11 @@ public class PreambleParserTest {
         Assertions.assertInstanceOf(Keyword.class, components.get(2));
         Assertions.assertInstanceOf(Generic.class, components.get(3));
         Assertions.assertInstanceOf(Annotation.class, components.get(4));
-        Assertions.assertEquals("@Getter\n", components.get(0).getSyntax());
-        Assertions.assertEquals("private ", components.get(1).getSyntax());
-        Assertions.assertEquals("final ", components.get(2).getSyntax());
-        Assertions.assertEquals("<T extends BaseEntity> ", components.get(3).getSyntax());
-        Assertions.assertEquals("@Setter ", components.get(4).getSyntax());
+        Assertions.assertEquals("@Getter\n", components.get(0).getFullSyntax());
+        Assertions.assertEquals("private ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("final ", components.get(2).getFullSyntax());
+        Assertions.assertEquals("<T extends BaseEntity> ", components.get(3).getFullSyntax());
+        Assertions.assertEquals("@Setter ", components.get(4).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -50,7 +50,7 @@ public class PreambleParserTest {
 
         //When
         Preamble parsedPreamble = preambleParser.parse();
-        String parsedString = parsedPreamble.getSyntax();
+        String parsedString = parsedPreamble.getFullSyntax();
         List<AstComponent> components = parsedPreamble.getChildAstComponents();
 
         //Then
@@ -60,11 +60,11 @@ public class PreambleParserTest {
         Assertions.assertInstanceOf(Keyword.class, components.get(2));
         Assertions.assertInstanceOf(Generic.class, components.get(3));
         Assertions.assertInstanceOf(Annotation.class, components.get(4));
-        Assertions.assertEquals("@Getter \n", components.get(0).getSyntax());
-        Assertions.assertEquals("private \n\n `123`\t ", components.get(1).getSyntax());
-        Assertions.assertEquals("final ", components.get(2).getSyntax());
-        Assertions.assertEquals("<T extends BaseEntity>  ", components.get(3).getSyntax());
-        Assertions.assertEquals("@Setter \t", components.get(4).getSyntax());
+        Assertions.assertEquals("@Getter \n", components.get(0).getFullSyntax());
+        Assertions.assertEquals("private \n\n `123`\t ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("final ", components.get(2).getFullSyntax());
+        Assertions.assertEquals("<T extends BaseEntity>  ", components.get(3).getFullSyntax());
+        Assertions.assertEquals("@Setter \t", components.get(4).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -77,7 +77,7 @@ public class PreambleParserTest {
 
         //When
         Preamble parsedPreamble = preambleParser.parse();
-        String parsedString = parsedPreamble.getSyntax();
+        String parsedString = parsedPreamble.getFullSyntax();
         List<AstComponent> components = parsedPreamble.getChildAstComponents();
 
         //Then

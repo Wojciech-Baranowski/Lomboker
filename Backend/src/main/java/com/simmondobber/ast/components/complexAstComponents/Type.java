@@ -4,16 +4,18 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Path;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 public class Type extends ComplexAstComponent {
 
-    private final Path path;
-    private final Generic generic;
-    private final List<ArrayBrackets> arrayBrackets;
+    private Path path;
+    private Generic generic;
+    private List<ArrayBrackets> arrayBrackets;
 
     public Type(Path path, Generic generic, List<ArrayBrackets> arrayBrackets) {
         this.path = path;

@@ -23,7 +23,7 @@ public class ImportManager {
     }
 
     private void removeCurrentLombokerImports(List<Import> imports) {
-        imports.removeIf(import_ -> ImportKeywords.contains(import_.getPath().getSyntax().trim()));
+        imports.removeIf(import_ -> ImportKeywords.contains(import_.getPath().getFullSyntax().trim()));
     }
 
     private void addLombokImports(List<Import> containedImports, AnnotationsConfig annotationsConfig) {

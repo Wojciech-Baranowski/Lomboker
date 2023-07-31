@@ -13,7 +13,7 @@ public class ImportFactoryTest {
         String expectedLombokAllSyntax = "import lombok.*;\n";
 
         //When
-        String actualLombokAllSyntax = this.importFactory.createLombokAllImport("\n").getSyntax();
+        String actualLombokAllSyntax = this.importFactory.createLombokAllImport("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedLombokAllSyntax, actualLombokAllSyntax);
@@ -25,7 +25,7 @@ public class ImportFactoryTest {
         String expectedLombokExperimentalAllSyntax = "import lombok.experimental.*;\n";
 
         //When
-        String actualLombokExperimentalAllSyntax = this.importFactory.createLombokExperimentalAllImport("\n").getSyntax();
+        String actualLombokExperimentalAllSyntax = this.importFactory.createLombokExperimentalAllImport("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedLombokExperimentalAllSyntax, actualLombokExperimentalAllSyntax);
@@ -37,7 +37,7 @@ public class ImportFactoryTest {
         String expectedGetterSyntax = "import lombok.Getter;\n";
 
         //When
-        String actualGetterSyntax = this.importFactory.createGetterImport("\n").getSyntax();
+        String actualGetterSyntax = this.importFactory.createGetterImport("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedGetterSyntax, actualGetterSyntax);
@@ -49,7 +49,7 @@ public class ImportFactoryTest {
         String expectedSetterSyntax = "import lombok.Setter;\n";
 
         //When
-        String actualSetterSyntax = this.importFactory.createSetterImport("\n").getSyntax();
+        String actualSetterSyntax = this.importFactory.createSetterImport("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedSetterSyntax, actualSetterSyntax);
@@ -61,7 +61,7 @@ public class ImportFactoryTest {
         String expectedNoArgsConstructorSyntax = "import lombok.NoArgsConstructor;\n";
 
         //When
-        String actualNoArgsConstructorSyntax = this.importFactory.createNoArgsConstructorImport("\n").getSyntax();
+        String actualNoArgsConstructorSyntax = this.importFactory.createNoArgsConstructorImport("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedNoArgsConstructorSyntax, actualNoArgsConstructorSyntax);
@@ -73,7 +73,7 @@ public class ImportFactoryTest {
         String expectedAllArgsConstructorSyntax = "import lombok.AllArgsConstructor;\n";
 
         //When
-        String actualAllArgsConstructorSyntax = this.importFactory.createAllArgsConstructorImport("\n").getSyntax();
+        String actualAllArgsConstructorSyntax = this.importFactory.createAllArgsConstructorImport("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedAllArgsConstructorSyntax, actualAllArgsConstructorSyntax);
@@ -85,7 +85,7 @@ public class ImportFactoryTest {
         String expectedBuilderSyntax = "import lombok.Builder;\n";
 
         //When
-        String actualBuilderSyntax = this.importFactory.createBuilderImport("\n").getSyntax();
+        String actualBuilderSyntax = this.importFactory.createBuilderImport("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedBuilderSyntax, actualBuilderSyntax);
@@ -97,7 +97,7 @@ public class ImportFactoryTest {
         String expectedSuperBuilderSyntax = "import lombok.experimental.SuperBuilder;\n";
 
         //When
-        String actualSuperBuilderSyntax = this.importFactory.createSuperBuilderImport("\n").getSyntax();
+        String actualSuperBuilderSyntax = this.importFactory.createSuperBuilderImport("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedSuperBuilderSyntax, actualSuperBuilderSyntax);
@@ -109,7 +109,7 @@ public class ImportFactoryTest {
         String expectedToStringSyntax = "import lombok.ToString;\n";
 
         //When
-        String actualToStringSyntax = this.importFactory.createToStringImport("\n").getSyntax();
+        String actualToStringSyntax = this.importFactory.createToStringImport("\n").getFullSyntax();
 
         //Then
         Assertions.assertEquals(expectedToStringSyntax, actualToStringSyntax);

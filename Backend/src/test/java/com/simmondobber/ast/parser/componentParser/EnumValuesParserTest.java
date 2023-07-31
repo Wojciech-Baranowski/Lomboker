@@ -22,15 +22,15 @@ public class EnumValuesParserTest {
 
         //When
         EnumValues parsedEnumValues = enumValuesParser.parse();
-        String parsedString = parsedEnumValues.getSyntax();
+        String parsedString = parsedEnumValues.getFullSyntax();
         List<AstComponent> components = parsedEnumValues.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(EnumValuesListing.class, components.get(0));
         Assertions.assertInstanceOf(Character.class, components.get(1));
-        Assertions.assertEquals("VAL1, VAL2, VAL3,\nVAL4, VAL5", components.get(0).getSyntax());
-        Assertions.assertEquals(";", components.get(1).getSyntax());
+        Assertions.assertEquals("VAL1, VAL2, VAL3,\nVAL4, VAL5", components.get(0).getFullSyntax());
+        Assertions.assertEquals(";", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -43,13 +43,13 @@ public class EnumValuesParserTest {
 
         //When
         EnumValues parsedEnumValues = enumValuesParser.parse();
-        String parsedString = parsedEnumValues.getSyntax();
+        String parsedString = parsedEnumValues.getFullSyntax();
         List<AstComponent> components = parsedEnumValues.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(1, components.size());
         Assertions.assertInstanceOf(EnumValuesListing.class, components.get(0));
-        Assertions.assertEquals("VAL1, VAL2, VAL3,\nVAL4, VAL5\n", components.get(0).getSyntax());
+        Assertions.assertEquals("VAL1, VAL2, VAL3,\nVAL4, VAL5\n", components.get(0).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -62,15 +62,15 @@ public class EnumValuesParserTest {
 
         //When
         EnumValues parsedEnumValues = enumValuesParser.parse();
-        String parsedString = parsedEnumValues.getSyntax();
+        String parsedString = parsedEnumValues.getFullSyntax();
         List<AstComponent> components = parsedEnumValues.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(EnumValuesListing.class, components.get(0));
         Assertions.assertInstanceOf(Character.class, components.get(1));
-        Assertions.assertEquals("VAL1, VAL2, VAL3,\nVAL4, VAL5  \t", components.get(0).getSyntax());
-        Assertions.assertEquals(";  \n\n `123`\t ", components.get(1).getSyntax());
+        Assertions.assertEquals("VAL1, VAL2, VAL3,\nVAL4, VAL5  \t", components.get(0).getFullSyntax());
+        Assertions.assertEquals(";  \n\n `123`\t ", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -83,13 +83,13 @@ public class EnumValuesParserTest {
 
         //When
         EnumValues parsedEnumValues = enumValuesParser.parse();
-        String parsedString = parsedEnumValues.getSyntax();
+        String parsedString = parsedEnumValues.getFullSyntax();
         List<AstComponent> components = parsedEnumValues.getChildAstComponents();
 
         //Then
         Assertions.assertEquals(1, components.size());
         Assertions.assertInstanceOf(EnumValuesListing.class, components.get(0));
-        Assertions.assertEquals("VAL1, VAL2, VAL3,\nVAL4, VAL5\n  \n\n `123`\t", components.get(0).getSyntax());
+        Assertions.assertEquals("VAL1, VAL2, VAL3,\nVAL4, VAL5\n  \n\n `123`\t", components.get(0).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

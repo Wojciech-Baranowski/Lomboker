@@ -23,7 +23,7 @@ public class ImportParserTest {
 
         //When
         Import parsedImport = importParser.parse();
-        String parsedString = parsedImport.getSyntax();
+        String parsedString = parsedImport.getFullSyntax();
         List<AstComponent> components = parsedImport.getChildAstComponents();
 
         //Then
@@ -31,9 +31,9 @@ public class ImportParserTest {
         Assertions.assertInstanceOf(Keyword.class, components.get(0));
         Assertions.assertInstanceOf(Path.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("import ", components.get(0).getSyntax());
-        Assertions.assertEquals("com.simmondobber.ast.components.complexAstComponents.Import", components.get(1).getSyntax());
-        Assertions.assertEquals(";", components.get(2).getSyntax());
+        Assertions.assertEquals("import ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("com.simmondobber.ast.components.complexAstComponents.Import", components.get(1).getFullSyntax());
+        Assertions.assertEquals(";", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -46,7 +46,7 @@ public class ImportParserTest {
 
         //When
         Import parsedImport = importParser.parse();
-        String parsedString = parsedImport.getSyntax();
+        String parsedString = parsedImport.getFullSyntax();
         List<AstComponent> components = parsedImport.getChildAstComponents();
 
         //Then
@@ -55,10 +55,10 @@ public class ImportParserTest {
         Assertions.assertInstanceOf(Keyword.class, components.get(1));
         Assertions.assertInstanceOf(Path.class, components.get(2));
         Assertions.assertInstanceOf(Character.class, components.get(3));
-        Assertions.assertEquals("import ", components.get(0).getSyntax());
-        Assertions.assertEquals("static ", components.get(1).getSyntax());
-        Assertions.assertEquals("com.simmondobber.ast.components.complexAstComponents.Import", components.get(2).getSyntax());
-        Assertions.assertEquals(";", components.get(3).getSyntax());
+        Assertions.assertEquals("import ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("static ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("com.simmondobber.ast.components.complexAstComponents.Import", components.get(2).getFullSyntax());
+        Assertions.assertEquals(";", components.get(3).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -71,7 +71,7 @@ public class ImportParserTest {
 
         //When
         Import parsedImport = importParser.parse();
-        String parsedString = parsedImport.getSyntax();
+        String parsedString = parsedImport.getFullSyntax();
         List<AstComponent> components = parsedImport.getChildAstComponents();
 
         //Then
@@ -79,9 +79,9 @@ public class ImportParserTest {
         Assertions.assertInstanceOf(Keyword.class, components.get(0));
         Assertions.assertInstanceOf(Path.class, components.get(1));
         Assertions.assertInstanceOf(Character.class, components.get(2));
-        Assertions.assertEquals("import \n\n `123`\t ", components.get(0).getSyntax());
-        Assertions.assertEquals("com.simmondobber.ast.components.complexAstComponents.Import   ", components.get(1).getSyntax());
-        Assertions.assertEquals(";\t ", components.get(2).getSyntax());
+        Assertions.assertEquals("import \n\n `123`\t ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("com.simmondobber.ast.components.complexAstComponents.Import   ", components.get(1).getFullSyntax());
+        Assertions.assertEquals(";\t ", components.get(2).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -94,7 +94,7 @@ public class ImportParserTest {
 
         //When
         Import parsedImport = importParser.parse();
-        String parsedString = parsedImport.getSyntax();
+        String parsedString = parsedImport.getFullSyntax();
         List<AstComponent> components = parsedImport.getChildAstComponents();
 
         //Then
@@ -103,10 +103,10 @@ public class ImportParserTest {
         Assertions.assertInstanceOf(Keyword.class, components.get(1));
         Assertions.assertInstanceOf(Path.class, components.get(2));
         Assertions.assertInstanceOf(Character.class, components.get(3));
-        Assertions.assertEquals("import  \t  ", components.get(0).getSyntax());
-        Assertions.assertEquals("static\n\n `123`\t ", components.get(1).getSyntax());
-        Assertions.assertEquals("com.simmondobber.ast.components.complexAstComponents.Import   ", components.get(2).getSyntax());
-        Assertions.assertEquals(";\t ", components.get(3).getSyntax());
+        Assertions.assertEquals("import  \t  ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("static\n\n `123`\t ", components.get(1).getFullSyntax());
+        Assertions.assertEquals("com.simmondobber.ast.components.complexAstComponents.Import   ", components.get(2).getFullSyntax());
+        Assertions.assertEquals(";\t ", components.get(3).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

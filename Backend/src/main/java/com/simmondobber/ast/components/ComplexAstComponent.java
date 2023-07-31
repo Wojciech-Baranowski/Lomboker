@@ -9,10 +9,10 @@ public abstract class ComplexAstComponent implements AstComponent {
     public abstract List<AstComponent> getChildAstComponents();
 
     @Override
-    public String getSyntax() {
+    public String getFullSyntax() {
         return getChildAstComponents().stream()
                 .filter(Objects::nonNull)
-                .map(AstComponent::getSyntax)
+                .map(AstComponent::getFullSyntax)
                 .collect(Collectors.joining());
     }
 }

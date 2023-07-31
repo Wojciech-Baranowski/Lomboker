@@ -23,7 +23,7 @@ public class FileParserTest {
 
         //When
         File parsedFile = fileParser.parse();
-        String parsedString = parsedFile.getSyntax();
+        String parsedString = parsedFile.getFullSyntax();
         List<AstComponent> components = parsedFile.getChildAstComponents();
 
         //Then
@@ -32,10 +32,10 @@ public class FileParserTest {
         Assertions.assertInstanceOf(Import.class, components.get(1));
         Assertions.assertInstanceOf(Import.class, components.get(2));
         Assertions.assertInstanceOf(Class.class, components.get(3));
-        Assertions.assertEquals("package com.simmondobber.ast.parser.file;\n", components.get(0).getSyntax());
-        Assertions.assertEquals("import org.junit.jupiter.api.Assertions;\n", components.get(1).getSyntax());
-        Assertions.assertEquals("import org.junit.jupiter.api.Test;\n", components.get(2).getSyntax());
-        Assertions.assertEquals("public class Point<int, int> extends GraphicsObject {VALUE;public Point(int x, int y) {this.x = x;this.y = y;}private int x;private int y;public int getX() {return x;}public void setX(int x) {this.x = x;}}", components.get(3).getSyntax());
+        Assertions.assertEquals("package com.simmondobber.ast.parser.file;\n", components.get(0).getFullSyntax());
+        Assertions.assertEquals("import org.junit.jupiter.api.Assertions;\n", components.get(1).getFullSyntax());
+        Assertions.assertEquals("import org.junit.jupiter.api.Test;\n", components.get(2).getFullSyntax());
+        Assertions.assertEquals("public class Point<int, int> extends GraphicsObject {VALUE;public Point(int x, int y) {this.x = x;this.y = y;}private int x;private int y;public int getX() {return x;}public void setX(int x) {this.x = x;}}", components.get(3).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 
@@ -48,7 +48,7 @@ public class FileParserTest {
 
         //When
         File parsedFile = fileParser.parse();
-        String parsedString = parsedFile.getSyntax();
+        String parsedString = parsedFile.getFullSyntax();
         List<AstComponent> components = parsedFile.getChildAstComponents();
 
         //Then
@@ -57,10 +57,10 @@ public class FileParserTest {
         Assertions.assertInstanceOf(Import.class, components.get(1));
         Assertions.assertInstanceOf(Import.class, components.get(2));
         Assertions.assertInstanceOf(Class.class, components.get(3));
-        Assertions.assertEquals("package com.simmondobber.ast.parser.file;\n\t\t ", components.get(0).getSyntax());
-        Assertions.assertEquals("import org.junit.jupiter.api.Assertions;   \n", components.get(1).getSyntax());
-        Assertions.assertEquals("import org.junit.jupiter.api.Test;`123`\n", components.get(2).getSyntax());
-        Assertions.assertEquals("public class Point<int, int> extends GraphicsObject {VALUE;public Point(int x, int y) {this.x = x;this.y = y;}private int x;private int y;public int getX() {return x;}public void setX(int x) {this.x = x;}}", components.get(3).getSyntax());
+        Assertions.assertEquals("package com.simmondobber.ast.parser.file;\n\t\t ", components.get(0).getFullSyntax());
+        Assertions.assertEquals("import org.junit.jupiter.api.Assertions;   \n", components.get(1).getFullSyntax());
+        Assertions.assertEquals("import org.junit.jupiter.api.Test;`123`\n", components.get(2).getFullSyntax());
+        Assertions.assertEquals("public class Point<int, int> extends GraphicsObject {VALUE;public Point(int x, int y) {this.x = x;this.y = y;}private int x;private int y;public int getX() {return x;}public void setX(int x) {this.x = x;}}", components.get(3).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);
     }
 }

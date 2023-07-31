@@ -6,17 +6,19 @@ import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Keyword;
 import com.simmondobber.ast.components.simpleAstComponents.Path;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class Package extends ComplexAstComponent {
 
     private static final String PACKAGE_KEYWORD = "package";
 
-    private final Keyword keyword;
-    private final Path path;
-    private final Character semicolon;
+    private Keyword keyword;
+    private Path path;
+    private Character semicolon;
 
     public Package(Keyword keyword, Path path, Character semicolon) {
         this.keyword = keyword;

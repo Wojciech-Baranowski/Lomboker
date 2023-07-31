@@ -39,10 +39,10 @@ public class AnnotationCleaner {
 
     private void removeAnnotationsFromPreamble(Preamble preamble) {
         List<String> annotationsToRemoveNamesSyntax = this.annotationFactory.createAllAnnotations().stream()
-                .map(annotation -> annotation.getName().getSyntax().trim())
+                .map(annotation -> annotation.getName().getFullSyntax().trim())
                 .toList();
         List<Annotation> preambleAnnotationsToRemove = preamble.getAnnotations().stream()
-                .filter(annotation -> annotationsToRemoveNamesSyntax.contains(annotation.getName().getSyntax().trim()))
+                .filter(annotation -> annotationsToRemoveNamesSyntax.contains(annotation.getName().getFullSyntax().trim()))
                 .toList();
         preamble.getPreambleComponents().removeAll(preambleAnnotationsToRemove);
     }

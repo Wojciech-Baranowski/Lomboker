@@ -5,17 +5,19 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class Field extends ComplexAstComponent implements ClassContentComponent {
 
-    private final Preamble preamble;
-    private final Type type;
-    private final Name name;
-    private final ValueAssignment valueAssignment;
-    private final Character semicolon;
+    private Preamble preamble;
+    private Type type;
+    private Name name;
+    private ValueAssignment valueAssignment;
+    private Character semicolon;
 
     public Field(Preamble preamble, Type type, Name name, ValueAssignment valueAssignment, Character semicolon) {
         this.preamble = preamble;

@@ -5,14 +5,16 @@ import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.EnumValuesListing;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
+@Setter
 public class EnumValues extends ComplexAstComponent {
 
-    private final EnumValuesListing enumValuesListing;
-    private final Character semicolon;
+    private EnumValuesListing enumValuesListing;
+    private Character semicolon;
 
     public EnumValues(EnumValuesListing enumValuesListing, Character semicolon) {
         this.enumValuesListing = enumValuesListing;

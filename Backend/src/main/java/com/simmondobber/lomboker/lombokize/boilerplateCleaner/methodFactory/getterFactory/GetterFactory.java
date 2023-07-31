@@ -14,8 +14,8 @@ public class GetterFactory {
     private final String fieldName;
 
     public GetterFactory(Field field) {
-        this.fieldType = Trimmer.trim(field.getType().getSyntax());
-        this.fieldName = Trimmer.trim(field.getName().getSyntax());
+        this.fieldType = Trimmer.trim(field.getType().getFullSyntax());
+        this.fieldName = Trimmer.trim(field.getName().getFullSyntax());
     }
 
     public Method createGetter() {

@@ -6,20 +6,22 @@ import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.MethodBody;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@Setter
 public class Method extends ComplexAstComponent implements ClassContentComponent {
 
-    private final Preamble preamble;
-    private final Type type;
-    private final Name name;
-    private final Args args;
-    private final Throws throws_;
-    private final MethodBody methodBody;
-    private final Character semicolon;
+    private Preamble preamble;
+    private Type type;
+    private Name name;
+    private Args args;
+    private Throws throws_;
+    private MethodBody methodBody;
+    private Character semicolon;
 
     public Method(Preamble preamble, Type type, Name name, Args args, Throws throws_, MethodBody methodBody, Character semicolon) {
         this.preamble = preamble;
