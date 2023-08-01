@@ -3,7 +3,7 @@ package com.simmondobber.ast.components.complexAstComponents;
 import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.ClassExtension;
-import com.simmondobber.ast.components.simpleAstComponents.Keyword;
+import com.simmondobber.ast.components.simpleAstComponents.ClassTypeKeyword;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,12 +14,12 @@ import java.util.List;
 public class Class extends ComplexAstComponent implements ClassContentComponent {
 
     private Preamble preamble;
-    private Keyword classTypeKeyword;
+    private ClassTypeKeyword classTypeKeyword;
     private Type type;
     private ClassExtension classExtension;
     private ClassBody classBody;
 
-    public Class(Preamble preamble, Keyword classTypeKeyword, Type type, ClassExtension classExtension, ClassBody classBody) {
+    public Class(Preamble preamble, ClassTypeKeyword classTypeKeyword, Type type, ClassExtension classExtension, ClassBody classBody) {
         this.preamble = preamble;
         this.classTypeKeyword = classTypeKeyword;
         this.type = type;

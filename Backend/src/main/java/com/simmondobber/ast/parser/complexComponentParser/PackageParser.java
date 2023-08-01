@@ -21,7 +21,7 @@ public class PackageParser extends AstParser {
     @Override
     public Package parse() {
         Keyword keyword = new KeywordParser(this.pointer).parse();
-        Path path = new Path(this.pointer.getCompoundWord(), this.pointer.getSeparator());
+        Path path = new Path(this.pointer.getCompoundWord(), this.pointer.getLastSeparator(), this.pointer.getSeparator());
         Character semicolon = new CharacterParser(this.pointer).parse();
         return new Package(keyword, path, semicolon);
     }

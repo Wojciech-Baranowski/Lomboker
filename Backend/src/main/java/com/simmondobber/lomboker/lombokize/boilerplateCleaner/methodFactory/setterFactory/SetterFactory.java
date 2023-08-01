@@ -48,7 +48,7 @@ public class SetterFactory {
 
     private Name createName() {
         String name = new SetterNameFactory(this.fieldType, this.fieldName).createSetterName();
-        return new Name(name, "");
+        return new Name(name);
     }
 
     private Args createArgs() {
@@ -66,7 +66,7 @@ public class SetterFactory {
                 .append(";\n")
                 .append("}\n")
                 .toString();
-        return new MethodBody(bodySyntax, "");
+        return new MethodBody(bodySyntax);
     }
 
     private String getArgName(Args args) {

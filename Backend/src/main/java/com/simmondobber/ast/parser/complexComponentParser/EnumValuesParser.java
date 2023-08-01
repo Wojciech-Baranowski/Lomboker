@@ -21,7 +21,7 @@ public class EnumValuesParser extends AstParser {
         EnumValuesListing enumValuesListing = new EnumValuesListingParser(this.pointer).parse();
         Character semicolon = null;
         if (this.pointer.lookupCharacter() == ';') {
-            semicolon = new Character(this.pointer.getCharacter(), this.pointer.getSeparator());
+            semicolon = new Character(this.pointer.getCharacter(), this.pointer.getLastSeparator(), this.pointer.getSeparator());
         }
         return new EnumValues(enumValuesListing, semicolon);
     }

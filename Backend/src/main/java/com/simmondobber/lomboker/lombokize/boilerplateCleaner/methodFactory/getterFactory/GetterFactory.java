@@ -48,7 +48,7 @@ public class GetterFactory {
 
     private Name createName() {
         String name = new GetterNameFactory(this.fieldType, this.fieldName).createGetterName();
-        return new Name(name, "");
+        return new Name(name);
     }
 
     private Args createArgs() {
@@ -64,6 +64,6 @@ public class GetterFactory {
                 .append(";\n")
                 .append("}\n")
                 .toString();
-        return new MethodBody(bodySyntax, "");
+        return new MethodBody(bodySyntax);
     }
 }

@@ -1,7 +1,6 @@
 package com.simmondobber.lomboker.lombokize.boilerplateCleaner;
 
 import com.simmondobber.ast.Ast;
-import com.simmondobber.ast.comparator.AstComparator;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.complexAstComponents.Class;
 import com.simmondobber.ast.components.complexAstComponents.*;
@@ -9,6 +8,7 @@ import com.simmondobber.ast.filter.AstComponentFilter;
 import com.simmondobber.ast.parser.complexComponentParser.ClassParser;
 import com.simmondobber.ast.parser.complexComponentParser.FieldParser;
 import com.simmondobber.ast.parser.complexComponentParser.MethodParser;
+import com.simmondobber.lomboker.common.Trimmer;
 import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.MethodFactory;
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,12 +19,10 @@ public class BoilerplateCleaner {
 
     private final AstComponentFilter astComponentFilter;
     private final MethodFactory methodFactory;
-    private final AstComparator astComparator;
 
     public BoilerplateCleaner() {
         this.astComponentFilter = new AstComponentFilter();
         this.methodFactory = new MethodFactory();
-        this.astComparator = new AstComparator();
     }
 
     public void removeRedundantMethods(Ast ast) {
@@ -49,7 +47,13 @@ public class BoilerplateCleaner {
 
     private boolean isMethodGenerated(List<Method> methodsBasedOnFields, Method method) {
         return methodsBasedOnFields.stream()
-                .anyMatch(methodBasedOnField -> this.astComparator.areMethodsEqual(methodBasedOnField.getFullSyntax(), method.getFullSyntax()));
+                .anyMatch(methodBasedOnField -> areMethodsEqual(methodBasedOnField.getFullSyntax(), method.getFullSyntax()));
+    }
+
+    private boolean areMethodsEqual(String methodSyntax1, String methodSyntax2) {
+        String trimmedMethodSyntax1 = Trimmer.compressSeparators(methodSyntax1);
+        String trimmedMethodSyntax2 = Trimmer.compressSeparators(methodSyntax2);
+        return trimmedMethodSyntax1.equals(trimmedMethodSyntax2);
     }
 
     private void removeMethods(ClassContent classContent, List<Method> methodsToRemove) {

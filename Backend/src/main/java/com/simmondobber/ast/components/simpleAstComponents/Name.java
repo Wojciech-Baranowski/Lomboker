@@ -4,8 +4,8 @@ import com.simmondobber.ast.components.SimpleAstComponent;
 
 public class Name extends SimpleAstComponent {
 
-    public Name(String syntax, String backSeparator) {
-        super(syntax, "", backSeparator);
+    public Name(String syntax) {
+        super(syntax);
     }
 
     public Name(String syntax, String frontSeparator, String backSeparator) {

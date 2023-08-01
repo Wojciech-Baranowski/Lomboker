@@ -6,7 +6,7 @@ import com.simmondobber.ast.components.complexAstComponents.ClassBody;
 import com.simmondobber.ast.components.complexAstComponents.Preamble;
 import com.simmondobber.ast.components.complexAstComponents.Type;
 import com.simmondobber.ast.components.simpleAstComponents.ClassExtension;
-import com.simmondobber.ast.components.simpleAstComponents.Keyword;
+import com.simmondobber.ast.components.simpleAstComponents.ClassTypeKeyword;
 import com.simmondobber.ast.parser.complexComponentParser.ClassParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 import org.junit.jupiter.api.Assertions;
@@ -31,7 +31,7 @@ public class ClassParserTest {
         //Then
         Assertions.assertEquals(5, components.size());
         Assertions.assertInstanceOf(Preamble.class, components.get(0));
-        Assertions.assertInstanceOf(Keyword.class, components.get(1));
+        Assertions.assertInstanceOf(ClassTypeKeyword.class, components.get(1));
         Assertions.assertInstanceOf(Type.class, components.get(2));
         Assertions.assertInstanceOf(ClassExtension.class, components.get(3));
         Assertions.assertInstanceOf(ClassBody.class, components.get(4));
@@ -58,7 +58,7 @@ public class ClassParserTest {
         //Then
         Assertions.assertEquals(5, components.size());
         Assertions.assertInstanceOf(Preamble.class, components.get(0));
-        Assertions.assertInstanceOf(Keyword.class, components.get(1));
+        Assertions.assertInstanceOf(ClassTypeKeyword.class, components.get(1));
         Assertions.assertInstanceOf(Type.class, components.get(2));
         Assertions.assertInstanceOf(ClassExtension.class, components.get(3));
         Assertions.assertInstanceOf(ClassBody.class, components.get(4));
