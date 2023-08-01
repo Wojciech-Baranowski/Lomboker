@@ -17,8 +17,8 @@ public class AnnotationManager {
         this.fieldAnnotationAdder = new FieldAnnotationAdder();
     }
 
-    public void cleanAndAddRequiredAnnotations(Ast ast, AnnotationsConfig annotationsConfig) {
-        this.annotationCleaner.removeAnnotations(ast);
+    public void cleanAndAddRequiredLombokAnnotations(Ast ast, AnnotationsConfig annotationsConfig) {
+        this.annotationCleaner.removeLombokAnnotations(ast);
         this.classAnnotationAdder.addAnnotationsToClasses(ast, annotationsConfig);
         this.fieldAnnotationAdder.addAnnotationsToFields(ast, annotationsConfig);
     }

@@ -28,7 +28,7 @@ public class ImportManagerTest {
 
         //When
         Ast ast = new Ast(codeToExtend);
-        importManager.addImports(ast, annotationsConfig);
+        importManager.addAndReorganizeLombokImports(ast, annotationsConfig);
 
         //Then
         List<Import> actualImports = ((File) ast.getAstRoot()).getImports().stream()

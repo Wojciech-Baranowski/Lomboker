@@ -32,7 +32,17 @@ public class Throws extends ComplexAstComponent {
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.keyword.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         return this.throwsListing.getBackSeparator();
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        this.throwsListing.setBackSeparator(separator);
     }
 }

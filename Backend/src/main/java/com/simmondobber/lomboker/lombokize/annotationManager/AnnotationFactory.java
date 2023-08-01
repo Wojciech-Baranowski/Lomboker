@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AnnotationFactory {
 
-    public List<Annotation> createAllAnnotations() {
+    public List<Annotation> createAllLombokAnnotations() {
         List<Annotation> annotations = new ArrayList<>();
         annotations.add(createGetterAnnotation(""));
         annotations.add(createSetterAnnotation(""));
@@ -25,7 +25,7 @@ public class AnnotationFactory {
         return annotations;
     }
 
-    public List<Annotation> createClassAnnotationsBasedOnConfig(AnnotationsConfig annotationsConfig, String separator) {
+    public List<Annotation> createClassLombokAnnotations(AnnotationsConfig annotationsConfig, String separator) {
         List<Annotation> annotations = new ArrayList<>();
         if (annotationsConfig.isGetter()) {
             annotations.add(createGetterAnnotation(separator));
@@ -63,7 +63,7 @@ public class AnnotationFactory {
         return annotations;
     }
 
-    public List<Annotation> createEnumAnnotationsBasedOnConfig(AnnotationsConfig annotationsConfig, String separator) {
+    public List<Annotation> createEnumLombokAnnotations(AnnotationsConfig annotationsConfig, String separator) {
         List<Annotation> annotations = new ArrayList<>();
         if (annotationsConfig.isGetter()) {
             annotations.add(createGetterAnnotation(separator));
@@ -84,7 +84,7 @@ public class AnnotationFactory {
         return annotations;
     }
 
-    public List<Annotation> createFieldAnnotationsBasedOnConfig(AnnotationsConfig annotationsConfig, String separator) {
+    public List<Annotation> createFieldLombokAnnotations(AnnotationsConfig annotationsConfig, String separator) {
         List<Annotation> annotations = new ArrayList<>();
         if (!annotationsConfig.isGetter()) {
             annotations.add(createGetterAnnotation(separator));

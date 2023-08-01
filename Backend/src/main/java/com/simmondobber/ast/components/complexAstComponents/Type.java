@@ -42,6 +42,11 @@ public class Type extends ComplexAstComponent {
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.path.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         if (this.arrayBrackets.isEmpty()) {
             if (this.generic == null) {
@@ -51,6 +56,19 @@ public class Type extends ComplexAstComponent {
             }
         } else {
             return this.arrayBrackets.get(this.arrayBrackets.size() - 1).getBackSeparator();
+        }
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        if (this.arrayBrackets.isEmpty()) {
+            if (this.generic == null) {
+                this.path.setBackSeparator(separator);
+            } else {
+                this.generic.setBackSeparator(separator);
+            }
+        } else {
+            this.arrayBrackets.get(this.arrayBrackets.size() - 1).setBackSeparator(separator);
         }
     }
 }

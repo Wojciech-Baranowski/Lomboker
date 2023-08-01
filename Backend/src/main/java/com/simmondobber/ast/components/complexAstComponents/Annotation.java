@@ -38,11 +38,25 @@ public class Annotation extends ComplexAstComponent implements PreambleComponent
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.at.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         if (this.args == null) {
             return this.name.getBackSeparator();
         } else {
             return this.args.getBackSeparator();
+        }
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        if (this.args == null) {
+            this.name.setBackSeparator(separator);
+        } else {
+            this.args.setBackSeparator(separator);
         }
     }
 }

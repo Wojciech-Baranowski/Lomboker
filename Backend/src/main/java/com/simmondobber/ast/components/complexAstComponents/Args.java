@@ -38,7 +38,17 @@ public class Args extends ComplexAstComponent {
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.leftBracket.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         return this.rightBracket.getBackSeparator();
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        this.rightBracket.setBackSeparator(separator);
     }
 }

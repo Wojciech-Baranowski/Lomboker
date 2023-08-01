@@ -60,11 +60,25 @@ public class Method extends ComplexAstComponent implements ClassContentComponent
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.preamble.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         if (this.methodBody == null) {
             return this.semicolon.getBackSeparator();
         } else {
             return this.methodBody.getBackSeparator();
+        }
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        if (this.methodBody == null) {
+            this.semicolon.setBackSeparator(separator);
+        } else {
+            this.methodBody.setBackSeparator(separator);
         }
     }
 }

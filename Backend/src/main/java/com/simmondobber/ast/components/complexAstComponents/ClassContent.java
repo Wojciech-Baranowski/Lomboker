@@ -53,10 +53,24 @@ public class ClassContent extends ComplexAstComponent {
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        if (!this.classContentComponents.isEmpty()) {
+            this.classContentComponents.get(0).setFrontSeparator(separator);
+        }
+    }
+
+    @Override
     public String getBackSeparator() {
         if (this.classContentComponents.isEmpty()) {
             return "";
         }
         return this.classContentComponents.get(this.classContentComponents.size() - 1).getBackSeparator();
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        if (!this.classContentComponents.isEmpty()) {
+            this.classContentComponents.get(this.classContentComponents.size() - 1).setBackSeparator(separator);
+        }
     }
 }

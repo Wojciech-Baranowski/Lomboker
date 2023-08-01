@@ -55,10 +55,24 @@ public class Preamble extends ComplexAstComponent {
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        if (!this.preambleComponents.isEmpty()) {
+            this.preambleComponents.get(0).setFrontSeparator(separator);
+        }
+    }
+
+    @Override
     public String getBackSeparator() {
         if (this.preambleComponents.isEmpty()) {
             return "";
         }
         return this.preambleComponents.get(this.preambleComponents.size() - 1).getBackSeparator();
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        if (!this.preambleComponents.isEmpty()) {
+            this.preambleComponents.get(this.preambleComponents.size() - 1).setBackSeparator(separator);
+        }
     }
 }

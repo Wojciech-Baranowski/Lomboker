@@ -43,7 +43,17 @@ public class ClassBody extends ComplexAstComponent {
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.leftCurly.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         return this.rightCurly.getBackSeparator();
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        this.rightCurly.setBackSeparator(separator);
     }
 }

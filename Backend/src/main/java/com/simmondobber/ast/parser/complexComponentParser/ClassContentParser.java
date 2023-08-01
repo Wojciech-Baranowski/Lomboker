@@ -2,7 +2,7 @@ package com.simmondobber.ast.parser.complexComponentParser;
 
 import com.simmondobber.ast.components.complexAstComponents.ClassContent;
 import com.simmondobber.ast.components.complexAstComponents.ClassContentComponent;
-import com.simmondobber.ast.components.simpleAstComponents.Keyword;
+import com.simmondobber.ast.components.simpleAstComponents.ClassTypeKeyword;
 import com.simmondobber.ast.parser.utils.Pointer;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class ClassContentParser extends AstParser {
             } else {
                 this.pointer.cacheCurrentState();
                 new PreambleParser(this.pointer).parse();
-                if (Keyword.CLASS_TYPE_KEYWORDS.contains(this.pointer.lookupWord())) {
+                if (ClassTypeKeyword.CLASS_TYPE_KEYWORDS.contains(this.pointer.lookupWord())) {
                     this.pointer.restoreCurrentState();
                     classComponents.add(new ClassParser(this.pointer).parse());
                 } else if ((this.pointer.lookupIndexOf('(') < this.pointer.lookupIndexOf(';')) && (this.pointer.lookupIndexOf('(') < this.pointer.lookupIndexOf('='))) {

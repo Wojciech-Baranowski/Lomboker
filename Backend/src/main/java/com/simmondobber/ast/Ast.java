@@ -1,19 +1,18 @@
 package com.simmondobber.ast;
 
 import com.simmondobber.ast.components.AstComponent;
+import com.simmondobber.ast.components.complexAstComponents.File;
 import com.simmondobber.ast.compressor.CodeCompressor;
 import com.simmondobber.ast.compressor.CodeDecompressor;
 import com.simmondobber.ast.compressor.CompressedCode;
 import com.simmondobber.ast.parser.complexComponentParser.FileParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 import com.simmondobber.lomboker.common.Trimmer;
-import lombok.Getter;
 
 import java.util.Map;
 
 public class Ast {
 
-    @Getter
     private final AstComponent astRoot;
     private final Map<String, String> dictionary;
 
@@ -23,6 +22,10 @@ public class Ast {
         Pointer pointer = new Pointer(codeToCompress.getCode());
         this.dictionary = codeToCompress.getDictionary();
         this.astRoot = new FileParser(pointer).parse();
+    }
+
+    public File getAstRoot() {
+        return (File) this.astRoot;
     }
 
     public String getCode() {

@@ -37,7 +37,17 @@ public class File extends ComplexAstComponent {
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.package_.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         return this.classes.get(this.classes.size() - 1).getBackSeparator();
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        this.classes.get(this.classes.size() - 1).setBackSeparator(separator);
     }
 }

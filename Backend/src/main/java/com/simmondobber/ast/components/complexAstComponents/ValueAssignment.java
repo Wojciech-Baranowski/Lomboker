@@ -32,7 +32,17 @@ public class ValueAssignment extends ComplexAstComponent {
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.equals.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         return this.value.getBackSeparator();
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        this.value.setBackSeparator(separator);
     }
 }

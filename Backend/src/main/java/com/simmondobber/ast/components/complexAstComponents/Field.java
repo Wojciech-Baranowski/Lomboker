@@ -42,7 +42,17 @@ public class Field extends ComplexAstComponent implements ClassContentComponent 
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.preamble.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         return this.semicolon.getBackSeparator();
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        this.semicolon.setBackSeparator(separator);
     }
 }

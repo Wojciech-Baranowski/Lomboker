@@ -25,9 +25,9 @@ public class ClassAnnotationAdder extends AnnotationAdder {
 
     private List<Annotation> createAnnotationsClassPreambleHasToContain(Preamble preamble, ClassTypeKeyword classType, AnnotationsConfig annotationsConfig) {
         if (List.of(ClassTypeKeywords.CLASS.getKeyword(), ClassTypeKeywords.RECORD.getKeyword()).contains(classType.getSyntax())) {
-            return this.annotationFactory.createClassAnnotationsBasedOnConfig(annotationsConfig, getPreambleFrontSeparatorFromLastNewline(preamble));
+            return this.annotationFactory.createClassLombokAnnotations(annotationsConfig, getPreambleFrontSeparatorFromLastNewline(preamble));
         } else if (classType.getSyntax().equals(ClassTypeKeywords.ENUM.getKeyword())) {
-            return this.annotationFactory.createEnumAnnotationsBasedOnConfig(annotationsConfig, getPreambleFrontSeparatorFromLastNewline(preamble));
+            return this.annotationFactory.createEnumLombokAnnotations(annotationsConfig, getPreambleFrontSeparatorFromLastNewline(preamble));
         } else if (List.of(ClassTypeKeywords.INTERFACE.getKeyword(), ClassTypeKeywords.ANNOTATION.getKeyword()).contains(classType.getSyntax())) {
             return new ArrayList<>();
         }

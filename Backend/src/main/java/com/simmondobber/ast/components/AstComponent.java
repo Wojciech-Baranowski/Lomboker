@@ -7,4 +7,8 @@ public interface AstComponent {
     String getFrontSeparator();
 
     String getBackSeparator();
+
+    void setFrontSeparator(String separator);
+
+    void setBackSeparator(String separator);
 }

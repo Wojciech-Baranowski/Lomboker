@@ -34,7 +34,17 @@ public class Generic extends ComplexAstComponent implements PreambleComponent {
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.leftAngle.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         return this.rightAngle.getBackSeparator();
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        this.rightAngle.setBackSeparator(separator);
     }
 }

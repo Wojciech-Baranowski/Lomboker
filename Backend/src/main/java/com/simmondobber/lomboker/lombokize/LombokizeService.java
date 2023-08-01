@@ -27,8 +27,8 @@ public class LombokizeService {
         try {
             Ast ast = new Ast(codeToLombokize.getCodeToLombokize());
             AnnotationsConfig annotationsConfig = codeToLombokize.getAnnotationsConfig();
-            this.importManager.addImports(ast, annotationsConfig);
-            this.annotationManager.cleanAndAddRequiredAnnotations(ast, annotationsConfig);
+            this.importManager.addAndReorganizeLombokImports(ast, annotationsConfig);
+            this.annotationManager.cleanAndAddRequiredLombokAnnotations(ast, annotationsConfig);
             this.boilerplateCleaner.removeRedundantMethods(ast);
             return new LombokizedCodeTO(ast.getCode());
         } catch (Exception e) {

@@ -141,7 +141,7 @@ public class AnnotationFactoryTest {
         );
 
         //When
-        List<Annotation> actualListOfAnnotations = this.annotationFactory.createFieldAnnotationsBasedOnConfig(annotationsConfig, "");
+        List<Annotation> actualListOfAnnotations = this.annotationFactory.createFieldLombokAnnotations(annotationsConfig, "");
 
         //Then
         Assertions.assertEquals(expectedListOfAnnotations.size(), actualListOfAnnotations.size());
@@ -162,7 +162,7 @@ public class AnnotationFactoryTest {
         );
 
         //When
-        List<Annotation> actualListOfAnnotations = this.annotationFactory.createClassAnnotationsBasedOnConfig(annotationsConfig, "");
+        List<Annotation> actualListOfAnnotations = this.annotationFactory.createClassLombokAnnotations(annotationsConfig, "");
 
         //Then
         Assertions.assertEquals(expectedListOfAnnotations.size(), actualListOfAnnotations.size());
@@ -181,7 +181,7 @@ public class AnnotationFactoryTest {
         );
 
         //When
-        List<Annotation> actualListOfAnnotations = this.annotationFactory.createEnumAnnotationsBasedOnConfig(annotationsConfig, "");
+        List<Annotation> actualListOfAnnotations = this.annotationFactory.createEnumLombokAnnotations(annotationsConfig, "");
 
         //Then
         Assertions.assertEquals(expectedListOfAnnotations.size(), actualListOfAnnotations.size());

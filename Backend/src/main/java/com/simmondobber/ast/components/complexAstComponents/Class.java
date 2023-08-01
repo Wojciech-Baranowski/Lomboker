@@ -42,7 +42,17 @@ public class Class extends ComplexAstComponent implements ClassContentComponent 
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.preamble.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         return this.classBody.getBackSeparator();
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        this.classBody.setBackSeparator(separator);
     }
 }

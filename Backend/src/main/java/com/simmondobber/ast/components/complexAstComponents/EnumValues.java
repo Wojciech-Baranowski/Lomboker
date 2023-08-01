@@ -36,11 +36,25 @@ public class EnumValues extends ComplexAstComponent {
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.enumValuesListing.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         if (this.semicolon == null) {
             return this.enumValuesListing.getBackSeparator();
         } else {
             return this.semicolon.getBackSeparator();
+        }
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        if (this.semicolon == null) {
+            this.enumValuesListing.setBackSeparator(separator);
+        } else {
+            this.semicolon.setBackSeparator(separator);
         }
     }
 }

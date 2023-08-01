@@ -16,7 +16,7 @@ public class FieldAnnotationAdder extends AnnotationAdder {
     }
 
     private void addAnnotationsToFieldPreamble(Preamble preamble, AnnotationsConfig annotationsConfig) {
-        List<Annotation> annotationsPreambleHasToContain = this.annotationFactory.createFieldAnnotationsBasedOnConfig(annotationsConfig, getPreambleFrontSeparatorFromLastNewline(preamble));
+        List<Annotation> annotationsPreambleHasToContain = this.annotationFactory.createFieldLombokAnnotations(annotationsConfig, getPreambleFrontSeparatorFromLastNewline(preamble));
         addAnnotationsToPreamble(preamble, annotationsPreambleHasToContain);
     }
 }

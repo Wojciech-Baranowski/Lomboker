@@ -37,6 +37,7 @@ public class ImportFactory {
         if (annotationsConfig.isSuperBuilder()) {
             imports.add(createSuperBuilderImport(separator));
         }
+        imports.get(imports.size() - 1).getSemicolon().setBackSeparator("\n");
         addNewlineToTheLastImport(imports);
         return imports;
     }
@@ -111,8 +112,8 @@ public class ImportFactory {
 
     private void addNewlineToTheLastImport(List<Import> imports) {
         if (!imports.isEmpty()) {
-            Import lastImportWithNewline = new ImportParser(imports.get(imports.size() - 1).getFullSyntax() + "\n").parse();
-            imports.set(imports.size() - 1, lastImportWithNewline);
+            Import lastImport = imports.get(imports.size() - 1);
+            lastImport.setBackSeparator(lastImport.getBackSeparator() + "\n");
         }
     }
 }

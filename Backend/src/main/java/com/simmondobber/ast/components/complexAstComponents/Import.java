@@ -41,7 +41,17 @@ public class Import extends ComplexAstComponent {
     }
 
     @Override
+    public void setFrontSeparator(String separator) {
+        this.importKeyword.setFrontSeparator(separator);
+    }
+
+    @Override
     public String getBackSeparator() {
         return this.semicolon.getBackSeparator();
+    }
+
+    @Override
+    public void setBackSeparator(String separator) {
+        this.semicolon.setBackSeparator(separator);
     }
 }
