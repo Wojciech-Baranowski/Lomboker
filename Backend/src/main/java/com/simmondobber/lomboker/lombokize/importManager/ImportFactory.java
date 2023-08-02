@@ -15,12 +15,8 @@ public class ImportFactory {
         if (areMoreThanFourAnnotations(annotationsConfig)) {
             imports.add(createLombokAllImport(separator));
         } else {
-            if (annotationsConfig.isGetter()) {
-                imports.add(createGetterImport(separator));
-            }
-            if (annotationsConfig.isSetter()) {
-                imports.add(createSetterImport(separator));
-            }
+            imports.add(createGetterImport(separator));
+            imports.add(createSetterImport(separator));
             if (annotationsConfig.isNoArgsConstructor()) {
                 imports.add(createNoArgsConstructorImport(separator));
             }
