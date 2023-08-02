@@ -70,7 +70,7 @@ public class SetterFactory {
     }
 
     private String getArgName(Args args) {
-        String listingSyntax = args.getArgsListing().getFullSyntax();
+        String listingSyntax = args.getArgsListing().getSyntax();
         int nameIndex = listingSyntax.indexOf(" ") + 1;
         return listingSyntax.substring(nameIndex);
     }

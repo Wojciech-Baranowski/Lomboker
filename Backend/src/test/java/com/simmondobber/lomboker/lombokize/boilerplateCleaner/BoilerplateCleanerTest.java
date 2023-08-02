@@ -18,7 +18,7 @@ public class BoilerplateCleanerTest {
 
         //When
         Ast ast = new Ast(codeToClean);
-        boilerplateCleaner.removeRedundantMethods(ast);
+        boilerplateCleaner.removeDefaultMethodsFromAst(ast);
         String cleanedCode = ast.getCode();
 
         //Then

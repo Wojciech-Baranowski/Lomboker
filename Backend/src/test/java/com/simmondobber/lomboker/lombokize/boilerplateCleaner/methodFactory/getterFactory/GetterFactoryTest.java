@@ -28,7 +28,7 @@ public class GetterFactoryTest {
 
         //When
         Method getterMethod = getterFactory.createGetter();
-        Method getterMethodWithThis = getterFactory.createGetterWithThis();
+        Method getterMethodWithThis = getterFactory.createGetterWithThisPrefix();
 
         //Then
         Assertions.assertEquals(expectedMethodSyntax, getterMethod.getFullSyntax());

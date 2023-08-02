@@ -22,7 +22,7 @@ public class GetterFactory {
         return createGetterMethod(false);
     }
 
-    public Method createGetterWithThis() {
+    public Method createGetterWithThisPrefix() {
         return createGetterMethod(true);
     }
 

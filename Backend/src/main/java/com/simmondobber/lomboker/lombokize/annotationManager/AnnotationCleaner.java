@@ -23,12 +23,12 @@ public class AnnotationCleaner {
     }
 
     private void removeLombokAnnotationsFromClasses(Ast ast) {
-        this.astComponentFilter.getClassListFromAstComponent(ast.getAstRoot())
+        this.astComponentFilter.extractClassesFromGivenAstComponent(ast.getAstRoot())
                 .forEach(clazz -> removeLombokAnnotationsFromPreamble(clazz.getPreamble()));
     }
 
     private void removeLombokAnnotationsFromFields(Ast ast) {
-        this.astComponentFilter.getFieldListFromAstComponent(ast.getAstRoot())
+        this.astComponentFilter.extractFieldsFromGivenAstComponent(ast.getAstRoot())
                 .forEach(clazz -> removeLombokAnnotationsFromPreamble(clazz.getPreamble()));
     }
 

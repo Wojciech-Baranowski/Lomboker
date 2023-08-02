@@ -11,7 +11,7 @@ import java.util.List;
 public class FieldAnnotationAdder extends AnnotationAdder {
 
     public void addAnnotationsToFields(Ast ast, AnnotationsConfig annotationsConfig) {
-        this.astComponentFilter.getFieldListFromAstComponent((ComplexAstComponent) ast.getAstRoot())
+        this.astComponentFilter.extractFieldsFromGivenAstComponent((ComplexAstComponent) ast.getAstRoot())
                 .forEach(field -> addAnnotationsToFieldPreamble(field.getPreamble(), annotationsConfig));
     }
 

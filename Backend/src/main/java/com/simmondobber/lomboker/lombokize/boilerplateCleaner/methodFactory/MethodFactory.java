@@ -27,7 +27,7 @@ public class MethodFactory {
 
     private List<Method> generateGetters(Field field) {
         GetterFactory getterFactory = new GetterFactory(field);
-        return List.of(getterFactory.createGetter(), getterFactory.createGetterWithThis());
+        return List.of(getterFactory.createGetter(), getterFactory.createGetterWithThisPrefix());
     }
 
     private List<Method> generateSetters(Field field) {

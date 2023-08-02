@@ -14,7 +14,7 @@ import java.util.List;
 public class ClassAnnotationAdder extends AnnotationAdder {
 
     public void addAnnotationsToClasses(Ast ast, AnnotationsConfig annotationsConfig) {
-        this.astComponentFilter.getClassListFromAstComponent((ComplexAstComponent) ast.getAstRoot())
+        this.astComponentFilter.extractClassesFromGivenAstComponent((ComplexAstComponent) ast.getAstRoot())
                 .forEach(clazz -> addAnnotationsToClassPreamble(clazz.getPreamble(), clazz.getClassTypeKeyword(), annotationsConfig));
     }
 

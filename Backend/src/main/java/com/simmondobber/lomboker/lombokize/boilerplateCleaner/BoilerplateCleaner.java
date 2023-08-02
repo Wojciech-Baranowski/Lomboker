@@ -1,18 +1,14 @@
 package com.simmondobber.lomboker.lombokize.boilerplateCleaner;
 
 import com.simmondobber.ast.Ast;
-import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.complexAstComponents.Class;
-import com.simmondobber.ast.components.complexAstComponents.*;
+import com.simmondobber.ast.components.complexAstComponents.ClassContent;
+import com.simmondobber.ast.components.complexAstComponents.Field;
+import com.simmondobber.ast.components.complexAstComponents.Method;
 import com.simmondobber.ast.filter.AstComponentFilter;
-import com.simmondobber.ast.parser.complexComponentParser.ClassParser;
-import com.simmondobber.ast.parser.complexComponentParser.FieldParser;
-import com.simmondobber.ast.parser.complexComponentParser.MethodParser;
 import com.simmondobber.lomboker.common.Trimmer;
 import com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.MethodFactory;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.Collections;
 import java.util.List;
 
 public class BoilerplateCleaner {
@@ -25,55 +21,49 @@ public class BoilerplateCleaner {
         this.methodFactory = new MethodFactory();
     }
 
-    public void removeRedundantMethods(Ast ast) {
-        List<Class> classList = this.astComponentFilter.getClassListFromAstComponent((ComplexAstComponent) ast.getAstRoot());
-        Collections.reverse(classList);
-        classList.forEach(this::removeRedundantClassMethods);
+    public void removeDefaultMethodsFromAst(Ast ast) {
+        List<Class> astClasses = this.astComponentFilter.extractClassesFromGivenAstComponent(ast.getAstRoot());
+        astClasses.forEach(this::removeDefaultMethodsFromClass);
     }
 
-    private void removeRedundantClassMethods(Class clazz) {
-        List<Field> classFields = this.astComponentFilter.getFieldListFromAstComponent(clazz);
-        List<Method> classMethods = this.astComponentFilter.getMethodListFromAstComponent(clazz);
-        List<Method> methodsBasedOnClassFields = this.methodFactory.generateMethodsBasedOnClassFields(classFields);
-        List<Method> methodsToRemove = getMethodsToRemove(classMethods, methodsBasedOnClassFields);
-        removeMethods(clazz.getClassBody().getClassContent(), methodsToRemove);
+    private void removeDefaultMethodsFromClass(Class clazz) {
+        List<Method> methodsToRemove = getClassMethodsToRemove(clazz);
+        methodsToRemove.forEach(method -> removeMethod(method, clazz.getClassBody().getClassContent()));
     }
 
-    private List<Method> getMethodsToRemove(List<Method> classMethods, List<Method> methodsBasedOnClassFields) {
-        return classMethods.stream()
-                .filter(method -> isMethodGenerated(methodsBasedOnClassFields, method))
+    private List<Method> getClassMethodsToRemove(Class clazz) {
+        List<Method> defaultMethodsBasedOnClassFields = getDefaultMethodsBasedOnClassFields(clazz);
+        return this.astComponentFilter.extractMethodsFromGivenAstComponent(clazz).stream()
+                .filter(methodToCheck -> isMethodDefault(methodToCheck, defaultMethodsBasedOnClassFields))
                 .toList();
     }
 
-    private boolean isMethodGenerated(List<Method> methodsBasedOnFields, Method method) {
-        return methodsBasedOnFields.stream()
-                .anyMatch(methodBasedOnField -> areMethodsEqual(methodBasedOnField.getFullSyntax(), method.getFullSyntax()));
+    private List<Method> getDefaultMethodsBasedOnClassFields(Class clazz) {
+        List<Field> classFields = this.astComponentFilter.extractFieldsFromGivenAstComponent(clazz);
+        return this.methodFactory.generateMethodsBasedOnClassFields(classFields);
     }
 
-    private boolean areMethodsEqual(String methodSyntax1, String methodSyntax2) {
-        String trimmedMethodSyntax1 = Trimmer.compressSeparators(methodSyntax1);
-        String trimmedMethodSyntax2 = Trimmer.compressSeparators(methodSyntax2);
+    private boolean isMethodDefault(Method methodToCheck, List<Method> defaultMethodsBasedOnFields) {
+        return defaultMethodsBasedOnFields.stream()
+                .anyMatch(methodBasedOnField -> areMethodsSyntacticallyEqual(methodBasedOnField.getFullSyntax(), methodToCheck.getFullSyntax()));
+    }
+
+    private boolean areMethodsSyntacticallyEqual(String firstMethodSyntax, String secondMethodSyntax) {
+        String trimmedMethodSyntax1 = Trimmer.compressSeparators(firstMethodSyntax);
+        String trimmedMethodSyntax2 = Trimmer.compressSeparators(secondMethodSyntax);
         return trimmedMethodSyntax1.equals(trimmedMethodSyntax2);
     }
 
-    private void removeMethods(ClassContent classContent, List<Method> methodsToRemove) {
-        String lastClassContentSeparator = classContent.getBackSeparator();
-        classContent.getClassContentComponents().removeAll(methodsToRemove);
-        if (!classContent.getBackSeparator().equals(lastClassContentSeparator)) {
-            restoreSeparator(classContent, lastClassContentSeparator);
-        }
+    private void removeMethod(Method methodToRemove, ClassContent classContent) {
+        updateSeparatorsOfRemovedMethodNeighbours(methodToRemove, classContent);
+        classContent.getClassContentComponents().remove(methodToRemove);
     }
 
-    private void restoreSeparator(ClassContent classContent, String lastClassContentSeparator) {
-        int indexOfLastComponent = classContent.getClassContentComponents().size() - 1;
-        ClassContentComponent lastComponent = classContent.getClassContentComponents().get(indexOfLastComponent);
-        String lastComponentSyntax = StringUtils.removeEnd(lastComponent.getFullSyntax(), classContent.getBackSeparator()) + lastClassContentSeparator;
-        if (lastComponent instanceof Field) {
-            classContent.getClassContentComponents().set(indexOfLastComponent, new FieldParser(lastComponentSyntax).parse());
-        } else if (lastComponent instanceof Method) {
-            classContent.getClassContentComponents().set(indexOfLastComponent, new MethodParser(lastComponentSyntax).parse());
-        } else if (lastComponent instanceof Class) {
-            classContent.getClassContentComponents().set(indexOfLastComponent, new ClassParser(lastComponentSyntax).parse());
+    private void updateSeparatorsOfRemovedMethodNeighbours(Method methodToRemove, ClassContent classContent) {
+        int indexOfRemovedMethod = classContent.getClassContentComponents().indexOf(methodToRemove);
+        if (indexOfRemovedMethod > 0) {
+            String backSeparatorOfRemovedMethod = methodToRemove.getBackSeparator();
+            classContent.getClassContentComponents().get(indexOfRemovedMethod - 1).setBackSeparator(backSeparatorOfRemovedMethod);
         }
     }
 }
