@@ -40,13 +40,13 @@ public class AnnotationCleaner {
     private List<Annotation> getLombokAnnotationsToRemove(Preamble preamble) {
         List<String> namesOfAnnotationsToRemove = getNamesOfLombokAnnotationsToRemove();
         return preamble.getAnnotations().stream()
-                .filter(annotation -> namesOfAnnotationsToRemove.contains(annotation.getName().getSyntax()))
+                .filter(annotation -> namesOfAnnotationsToRemove.contains(annotation.getPath().getSyntax()))
                 .toList();
     }
 
     private List<String> getNamesOfLombokAnnotationsToRemove() {
         return this.annotationFactory.createAllLombokAnnotations().stream()
-                .map(annotation -> annotation.getName().getSyntax())
+                .map(annotation -> annotation.getPath().getSyntax())
                 .toList();
     }
 }

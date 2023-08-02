@@ -34,6 +34,10 @@ public abstract class AnnotationAdder {
     protected String getPreambleFrontSeparatorFromLastNewline(Preamble preamble) {
         String preambleFrontSeparator = preamble.getFrontSeparator();
         int lastNewlineIndex = preambleFrontSeparator.lastIndexOf("\n");
-        return preambleFrontSeparator.substring(lastNewlineIndex);
+        if(lastNewlineIndex != -1) {
+            return preambleFrontSeparator.substring(lastNewlineIndex);
+        } else {
+            return "";
+        }
     }
 }

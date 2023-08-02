@@ -5,6 +5,7 @@ import com.simmondobber.ast.components.complexAstComponents.Annotation;
 import com.simmondobber.ast.components.complexAstComponents.Args;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
+import com.simmondobber.ast.components.simpleAstComponents.Path;
 import com.simmondobber.ast.parser.complexComponentParser.AnnotationParser;
 import com.simmondobber.ast.parser.utils.Pointer;
 import org.junit.jupiter.api.Assertions;
@@ -29,7 +30,7 @@ public class AnnotationParserTest {
         //Then
         Assertions.assertEquals(3, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
-        Assertions.assertInstanceOf(Name.class, components.get(1));
+        Assertions.assertInstanceOf(Path.class, components.get(1));
         Assertions.assertInstanceOf(Args.class, components.get(2));
         Assertions.assertEquals("@", components.get(0).getFullSyntax());
         Assertions.assertEquals("Getter", components.get(1).getFullSyntax());
@@ -52,7 +53,7 @@ public class AnnotationParserTest {
         //Then
         Assertions.assertEquals(3, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
-        Assertions.assertInstanceOf(Name.class, components.get(1));
+        Assertions.assertInstanceOf(Path.class, components.get(1));
         Assertions.assertInstanceOf(Args.class, components.get(2));
         Assertions.assertEquals("@\n\t ", components.get(0).getFullSyntax());
         Assertions.assertEquals("Getter  \n\n `123`\t", components.get(1).getFullSyntax());
@@ -75,7 +76,7 @@ public class AnnotationParserTest {
         //Then
         Assertions.assertEquals(3, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
-        Assertions.assertInstanceOf(Name.class, components.get(1));
+        Assertions.assertInstanceOf(Path.class, components.get(1));
         Assertions.assertInstanceOf(Args.class, components.get(2));
         Assertions.assertEquals("@", components.get(0).getFullSyntax());
         Assertions.assertEquals("Getter", components.get(1).getFullSyntax());
@@ -98,7 +99,7 @@ public class AnnotationParserTest {
         //Then
         Assertions.assertEquals(2, components.size());
         Assertions.assertInstanceOf(Character.class, components.get(0));
-        Assertions.assertInstanceOf(Name.class, components.get(1));
+        Assertions.assertInstanceOf(Path.class, components.get(1));
         Assertions.assertEquals("@", components.get(0).getFullSyntax());
         Assertions.assertEquals("Getter ", components.get(1).getFullSyntax());
         Assertions.assertEquals(correctlyParsedString, parsedString);

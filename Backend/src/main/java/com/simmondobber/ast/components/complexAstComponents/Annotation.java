@@ -4,6 +4,7 @@ import com.simmondobber.ast.components.AstComponent;
 import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.simpleAstComponents.Character;
 import com.simmondobber.ast.components.simpleAstComponents.Name;
+import com.simmondobber.ast.components.simpleAstComponents.Path;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,21 +15,21 @@ import java.util.List;
 public class Annotation extends ComplexAstComponent implements PreambleComponent {
 
     private Character at;
-    private Name name;
+    private Path path;
     private Args args;
 
-    public Annotation(Character at, Name name, Args args) {
+    public Annotation(Character at, Path path, Args args) {
         this.at = at;
-        this.name = name;
+        this.path = path;
         this.args = args;
     }
 
     @Override
     public List<AstComponent> getChildAstComponents() {
         if (this.args == null) {
-            return List.of(this.at, this.name);
+            return List.of(this.at, this.path);
         } else {
-            return List.of(this.at, this.name, this.args);
+            return List.of(this.at, this.path, this.args);
         }
     }
 
@@ -45,7 +46,7 @@ public class Annotation extends ComplexAstComponent implements PreambleComponent
     @Override
     public String getBackSeparator() {
         if (this.args == null) {
-            return this.name.getBackSeparator();
+            return this.path.getBackSeparator();
         } else {
             return this.args.getBackSeparator();
         }
@@ -54,7 +55,7 @@ public class Annotation extends ComplexAstComponent implements PreambleComponent
     @Override
     public void setBackSeparator(String separator) {
         if (this.args == null) {
-            this.name.setBackSeparator(separator);
+            this.path.setBackSeparator(separator);
         } else {
             this.args.setBackSeparator(separator);
         }
