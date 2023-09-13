@@ -2,6 +2,7 @@ name: Docker push
 
 on:
   release:
+    types: [published]
 
 jobs:
   release:
@@ -10,22 +11,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Login to DockerHub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Test echo
+        run: echo WORKS!
 
-      - name: Build the stack
-          run: docker-compose build
+    #  - name: Login to DockerHub
+    #    uses: docker/login-action@v2
+    #    with:
+    #      username: ${{ secrets.DOCKERHUB_USERNAME }}
+    #      password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Tag containers
-        run: |
-          docker tag simmondobber/lombokerfrontend:latest simmondobber/lombokerfrontend:${{ vars.FRONTEND_VERSION }}
-          docker tag simmondobber/lombokerbackend:latest simmondobber/lombokerbackend:${{ vars.BACKEND_VERSION }}
+    #  - name: Build the stack
+    #      run: docker-compose build
 
-      - name: Push to registry
-        run: |
-          docker push simmondobber/lombokerfrontend:${{ vars.FRONTEND_VERSION }}
-          docker push simmondobber/lombokerbackend:${{ vars.BACKEND_VERSION }}
+    #  - name: Tag containers
+    #    run: |
+    #      docker tag simmondobber/lombokerfrontend:latest simmondobber/lombokerfrontend:${{ vars.FRONTEND_VERSION }}
+    #      docker tag simmondobber/lombokerbackend:latest simmondobber/lombokerbackend:${{ vars.BACKEND_VERSION }}
+
+    #  - name: Push to registry
+    #    run: |
+    #      docker push simmondobber/lombokerfrontend:${{ vars.FRONTEND_VERSION }}
+    #      docker push simmondobber/lombokerbackend:${{ vars.BACKEND_VERSION }}
           
