@@ -18,7 +18,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build the stack
-          run: docker-compose build
+        run: docker-compose build
 
       - name: Tag containers
         run: |
