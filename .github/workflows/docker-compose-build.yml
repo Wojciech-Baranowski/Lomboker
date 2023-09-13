@@ -1,15 +1,15 @@
-#name: Docker Compose build
-#
-#on:
-#  push:
-#  pull_request:
-#
-#jobs:
-#  build:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#
-#      - name: Build the stack
-#        run: docker-compose build
+name: Docker Compose build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build the stack
+        run: docker-compose build
