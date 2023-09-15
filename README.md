@@ -8,8 +8,7 @@ Works by pasting the code into textarea, selecting desired options and copying c
 
 **Setup**
 
-Run docker-compose up in the same directory where docker-compose.yaml is located.
-For latest version run docker-compose pull in the same directory where docker-compose.yaml is located.
+Run docker-compose up --build in the same directory where docker-compose.yaml is located.
 
 **Ports:**
 
