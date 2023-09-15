@@ -13,5 +13,4 @@ For latest version run docker-compose pull in the same directory where docker-co
 
 **Ports:**
 
-- Backend on 3821
-- Frontend on 3721
+- Frontend on 80
