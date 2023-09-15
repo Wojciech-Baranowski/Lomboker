@@ -23,10 +23,12 @@ jobs:
       - name: Tag containers
         run: |
           docker tag simmondobber/lombokerfrontend:latest simmondobber/lombokerfrontend:${{ vars.FRONTEND_VERSION }}
+          docker tag simmondobber/lombokernginx:latest simmondobber/lombokernginx:${{ vars.NGINX_VERSION }}
           docker tag simmondobber/lombokerbackend:latest simmondobber/lombokerbackend:${{ vars.BACKEND_VERSION }}
 
       - name: Push to registry
         run: |
           docker push simmondobber/lombokerfrontend:${{ vars.FRONTEND_VERSION }}
+          docker push simmondobber/lombokernginx:${{ vars.NGINX_VERSION }}
           docker push simmondobber/lombokerbackend:${{ vars.BACKEND_VERSION }}
           
