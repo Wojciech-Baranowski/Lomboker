@@ -10,6 +10,8 @@ FROM eclipse-temurin:17-jdk-focal
 
 WORKDIR /app
 
+ENV JAVA_OPTS=""
+
 COPY --from=build /app/target/Backend-0.0.1-SNAPSHOT.jar lombokerBackend.jar
 
-ENTRYPOINT ["java","-jar","lombokerBackend.jar"]
+ENTRYPOINT java -jar ${JAVA_OPTS} lombokerBackend.jar
