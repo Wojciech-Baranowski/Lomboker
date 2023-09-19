@@ -12,4 +12,4 @@ Run docker-compose up --build in the same directory where docker-compose.yaml is
 
 **Ports:**
 
-- Frontend on 80
+- Frontend on 3721
