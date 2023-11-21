@@ -10,7 +10,6 @@ import com.simmondobber.ast.parser.complexComponentParser.PreambleParser;
 import com.simmondobber.ast.parser.complexComponentParser.TypeParser;
 import com.simmondobber.ast.parser.simpleComponentParser.CharacterParser;
 import com.simmondobber.ast.parser.simpleComponentParser.NameParser;
-import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -46,10 +45,6 @@ public class MethodFactoryTest {
         Name name = new NameParser(fieldName).parse();
         Character semicolon = new CharacterParser(";").parse();
         return new Field(preamble, type, name, null, semicolon);
-    }
-
-    private AnnotationsConfig create_annotation_config(boolean getter, boolean setter) {
-        return new AnnotationsConfig(getter, setter, false, false, false, false, false, false, false);
     }
 
     private List<String> get_methods_syntax() {

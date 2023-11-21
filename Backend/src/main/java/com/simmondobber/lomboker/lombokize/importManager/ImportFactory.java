@@ -29,6 +29,9 @@ public class ImportFactory {
             if (annotationsConfig.isToString()) {
                 imports.add(createToStringImport(separator));
             }
+            if (annotationsConfig.isEqualsAndHashCode()) {
+                imports.add(createEqualsAndHashCodeImport(separator));
+            }
         }
         if (annotationsConfig.isSuperBuilder()) {
             imports.add(createSuperBuilderImport(separator));
@@ -81,6 +84,11 @@ public class ImportFactory {
     public Import createToStringImport(String separator) {
         String toStringImportCode = "import " + ImportKeywords.TO_STRING.getPath() + ";" + separator;
         return new ImportParser(toStringImportCode).parse();
+    }
+
+    public Import createEqualsAndHashCodeImport(String separator) {
+        String equalsAndHashcodeImportCode = "import " + ImportKeywords.EQUALS_AND_HASH_CODE.getPath() + ";" + separator;
+        return new ImportParser(equalsAndHashcodeImportCode).parse();
     }
 
     private boolean areMoreThanFourAnnotations(AnnotationsConfig annotationsConfig) {

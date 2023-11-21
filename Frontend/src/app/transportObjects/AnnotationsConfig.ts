@@ -9,8 +9,9 @@ export class AnnotationsConfig {
     toBuilder: boolean;
     toString: boolean;
     callSuper: boolean;
+    equalsAndHashCode: boolean;
 
-    constructor(getter: boolean, setter: boolean, noArgsConstructor: boolean, allArgsConstructor: boolean, builder: boolean, superBuilder: boolean, toBuilder: boolean, toString: boolean, callSuper: boolean) {
+    constructor(getter: boolean, setter: boolean, noArgsConstructor: boolean, allArgsConstructor: boolean, builder: boolean, superBuilder: boolean, toBuilder: boolean, toString: boolean, callSuper: boolean, equalsAndHashCode: boolean) {
         this.getter = getter;
         this.setter = setter;
         this.noArgsConstructor = noArgsConstructor;
@@ -20,5 +21,6 @@ export class AnnotationsConfig {
         this.toBuilder = toBuilder;
         this.toString = toString;
         this.callSuper = callSuper;
+        this.equalsAndHashCode = equalsAndHashCode;
     }
 }

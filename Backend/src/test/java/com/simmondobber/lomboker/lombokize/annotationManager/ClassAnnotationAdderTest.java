@@ -39,7 +39,7 @@ public class ClassAnnotationAdderTest {
                             private int x;
                             private int y;
                         }
-                        """, new AnnotationsConfig(true, true, true, true, false, true, true, true, true), """
+                        """, new AnnotationsConfig(true, true, true, true, false, true, true, true, true, false), """
                         package com.simmondobber.lomboker.lombokize.annotationAdder;
                                                 
                         import lombok.*;
@@ -78,7 +78,7 @@ public class ClassAnnotationAdderTest {
                             private CoordinateX x;
                             private CoordinateY y;
                         }
-                        """, new AnnotationsConfig(true, true, false, false, false, false, false, false, false), """
+                        """, new AnnotationsConfig(true, true, false, false, false, false, false, false, false, false), """
                         package com.simmondobber.lomboker.lombokize.annotationAdder;
                                                 
                         import lombok.*;
@@ -114,7 +114,7 @@ public class ClassAnnotationAdderTest {
                         public enum Point {
                             X, Y
                         }
-                        """, new AnnotationsConfig(true, true, true, true, true, false, false, true, false), """
+                        """, new AnnotationsConfig(true, true, true, true, true, false, false, true, false, false), """
                         package com.simmondobber.lomboker.lombokize.importManager;
                                                 
                         import lombok.*;
@@ -135,7 +135,7 @@ public class ClassAnnotationAdderTest {
                             int getX();
                             int getY();
                         }
-                        """, new AnnotationsConfig(true, true, true, true, true, false, false, true, false), """
+                        """, new AnnotationsConfig(true, true, true, true, true, false, false, true, false, false), """
                         package com.simmondobber.lomboker.lombokize.importManager;
                                                 
                         public interface Point {

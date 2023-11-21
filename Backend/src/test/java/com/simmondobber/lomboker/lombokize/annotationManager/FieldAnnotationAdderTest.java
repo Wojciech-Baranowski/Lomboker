@@ -39,7 +39,7 @@ public class FieldAnnotationAdderTest {
                             private int x;
                             private int y;
                         }
-                        """, new AnnotationsConfig(false, false, false, false, false, false, false, false, false), """
+                        """, new AnnotationsConfig(false, false, false, false, false, false, false, false, false, false), """
                         package com.simmondobber.lomboker.lombokize.annotationAdder;
                                                 
                         import lombok.*;
@@ -76,7 +76,7 @@ public class FieldAnnotationAdderTest {
                             private CoordinateX x;
                             private CoordinateY y;
                         }
-                        """, new AnnotationsConfig(false, false, false, false, false, false, false, false, false), """
+                        """, new AnnotationsConfig(false, false, false, false, false, false, false, false, false, false), """
                         package com.simmondobber.lomboker.lombokize.annotationAdder;
                                                 
                         import lombok.*;

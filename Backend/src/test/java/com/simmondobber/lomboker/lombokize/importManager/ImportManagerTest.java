@@ -53,7 +53,7 @@ public class ImportManagerTest {
                             private int x;
                             private int y;
                         }
-                        """, new AnnotationsConfig(true, true, false, false, false, true, false, true, false), """
+                        """, new AnnotationsConfig(true, true, false, false, false, true, false, true, false, false), """
                         import java.util.List;
                         import lombok.Getter;
                         import lombok.Setter;
@@ -88,7 +88,7 @@ public class ImportManagerTest {
                             private int x;
                             private int y;
                         }
-                        """, new AnnotationsConfig(true, true, false, false, false, true, false, true, false), """
+                        """, new AnnotationsConfig(true, true, false, false, false, true, false, true, false, false), """
                         import lombok.Getter;
                         import lombok.Setter;
                         import lombok.ToString;
@@ -126,7 +126,7 @@ public class ImportManagerTest {
                             private int x;
                             private int y;
                         }
-                        """, new AnnotationsConfig(true, true, true, true, false, false, false, false, false), """
+                        """, new AnnotationsConfig(true, true, true, true, false, false, false, false, false, false), """
                         import lombok.AllArgsConstructor;
                         import lombok.Getter;
                         import lombok.NoArgsConstructor;

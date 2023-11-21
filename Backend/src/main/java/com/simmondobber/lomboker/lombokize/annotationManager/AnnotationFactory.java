@@ -22,6 +22,7 @@ public class AnnotationFactory {
         annotations.add(createSuperBuilderWithToBuilderAnnotation(""));
         annotations.add(createToStringAnnotation(""));
         annotations.add(createToStringWithCallSuperAnnotation(""));
+        annotations.add(createEqualsAndHashCodeAnnotation(""));
         return annotations;
     }
 
@@ -59,6 +60,9 @@ public class AnnotationFactory {
             } else {
                 annotations.add(createToStringAnnotation(separator));
             }
+        }
+        if (annotationsConfig.isEqualsAndHashCode()) {
+            annotations.add(createEqualsAndHashCodeAnnotation(separator));
         }
         return annotations;
     }
@@ -143,5 +147,10 @@ public class AnnotationFactory {
     public Annotation createToStringWithCallSuperAnnotation(String separator) {
         String toStringWithCallSuperAnnotationCode = AnnotationKeywords.TO_STRING.getKeyword() + AnnotationKeywords.CALL_SUPER.getKeyword() + separator;
         return new AnnotationParser(toStringWithCallSuperAnnotationCode).parse();
+    }
+
+    public Annotation createEqualsAndHashCodeAnnotation(String separator) {
+        String equalsAndHashCodeAnnotation = AnnotationKeywords.EQUALS_AND_HASH_CODE.getKeyword() + separator;
+        return new AnnotationParser(equalsAndHashCodeAnnotation).parse();
     }
 }

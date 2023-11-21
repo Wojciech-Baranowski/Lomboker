@@ -15,7 +15,8 @@ public enum ImportKeywords {
     ALL_ARGS_CONSTRUCTOR("lombok.AllArgsConstructor"),
     BUILDER("lombok.Builder"),
     SUPER_BUILDER("lombok.experimental.SuperBuilder"),
-    TO_STRING("lombok.ToString");
+    TO_STRING("lombok.ToString"),
+    EQUALS_AND_HASH_CODE("lombok.EqualsAndHashCode");
 
     private final String path;
 

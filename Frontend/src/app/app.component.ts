@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
     toBuilder: boolean;
     toString: boolean;
     callSuper: boolean;
+    equalsAndHashCode: boolean;
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
         this.backgroundName = "";
@@ -49,10 +50,11 @@ export class AppComponent implements OnInit {
         this.toBuilder = false;
         this.toString = false;
         this.callSuper = false;
+        this.equalsAndHashCode = false;
     }
 
     lombokize(): void {
-        let annotationsConfig: AnnotationsConfig = new AnnotationsConfig(this.getter, this.setter, this.noArgsConstructor, this.allArgsConstructor, this.builder, this.superBuilder, this.toBuilder, this.toString, this.callSuper);
+        let annotationsConfig: AnnotationsConfig = new AnnotationsConfig(this.getter, this.setter, this.noArgsConstructor, this.allArgsConstructor, this.builder, this.superBuilder, this.toBuilder, this.toString, this.callSuper, this.equalsAndHashCode);
         let lombokizeTO: CodeToLombokizeTO = new CodeToLombokizeTO(this.codeToLombokize, annotationsConfig);
         this.http.post<LombokizedCodeTO>(this.LOMBOKIZE_URL, lombokizeTO).subscribe((lombokizedCodeTO: LombokizedCodeTO) => {
             this.lombokizedCode = lombokizedCodeTO.lombokizedCode;
@@ -72,14 +74,6 @@ export class AppComponent implements OnInit {
         } else {
             this.changeBackgroundToCreamCookie();
         }
-    }
-
-    setIndentTypeCookieToSpace(): void {
-        this.cookieService.set("indent", "0");
-    }
-
-    setIndentTypeCookieToTabulator(): void {
-        this.cookieService.set("indent", "1");
     }
 
     excludeBuilder(): void {

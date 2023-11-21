@@ -59,6 +59,13 @@
                         <span class="checkmark" [ngClass]="buttonBackground"></span>
                     </label>
                 </div>
+                <div style="display: flex">
+                    <label class="button">
+                        EqualsAndHashCode
+                        <input [(ngModel)]="equalsAndHashCode" type="checkbox" name="equalsAndHashCode"/>
+                        <span class="checkmark" [ngClass]="buttonBackground"></span>
+                    </label>
+                </div>
                 <input (click)="lombokize()" type="submit" value="LOMBOKIZE!" name="submit" class="submitButton" [ngClass]="buttonBackground">
             </div>
         </div>

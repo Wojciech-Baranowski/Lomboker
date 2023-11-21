@@ -134,7 +134,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_field_annotations_based_on_config_test() {
         //Given
-        AnnotationsConfig annotationsConfig = new AnnotationsConfig(false, false, false, true, true, false, true, false, true);
+        AnnotationsConfig annotationsConfig = new AnnotationsConfig(false, false, false, true, true, false, true, false, true, false);
         List<Annotation> expectedListOfAnnotations = List.of(
                 this.annotationFactory.createGetterAnnotation(""),
                 this.annotationFactory.createSetterAnnotation("")
@@ -153,7 +153,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_class_annotations_based_on_config_test() {
         //Given
-        AnnotationsConfig annotationsConfig = new AnnotationsConfig(true, true, false, true, true, false, true, false, true);
+        AnnotationsConfig annotationsConfig = new AnnotationsConfig(true, true, false, true, true, false, true, false, true, false);
         List<Annotation> expectedListOfAnnotations = List.of(
                 this.annotationFactory.createGetterAnnotation(""),
                 this.annotationFactory.createSetterAnnotation(""),
@@ -174,7 +174,7 @@ public class AnnotationFactoryTest {
     @Test
     public void create_enum_annotations_based_on_config_test() {
         //Given
-        AnnotationsConfig annotationsConfig = new AnnotationsConfig(true, true, false, true, true, false, true, false, true);
+        AnnotationsConfig annotationsConfig = new AnnotationsConfig(true, true, false, true, true, false, true, false, true, false);
         List<Annotation> expectedListOfAnnotations = List.of(
                 this.annotationFactory.createGetterAnnotation(""),
                 this.annotationFactory.createAllArgsConstructorAnnotation("")

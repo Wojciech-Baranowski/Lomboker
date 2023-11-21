@@ -13,7 +13,8 @@ public enum AnnotationKeywords {
     SUPER_BUILDER("@SuperBuilder"),
     TO_STRING("@ToString"),
     TO_BUILDER("(toBuilder = true)"),
-    CALL_SUPER("(callSuper = true)");
+    CALL_SUPER("(callSuper = true)"),
+    EQUALS_AND_HASH_CODE("@EqualsAndHashCode");
 
     private final String keyword;
 

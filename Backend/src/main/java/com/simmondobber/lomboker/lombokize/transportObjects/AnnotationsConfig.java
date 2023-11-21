@@ -18,4 +18,5 @@ public class AnnotationsConfig {
     private boolean toBuilder;
     private boolean toString;
     private boolean callSuper;
+    private boolean equalsAndHashCode;
 }
