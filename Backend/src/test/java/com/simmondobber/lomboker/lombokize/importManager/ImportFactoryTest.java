@@ -1,117 +1,53 @@
 package com.simmondobber.lomboker.lombokize.importManager;
 
+import com.simmondobber.ast.components.complexAstComponents.Import;
+import com.simmondobber.lomboker.common.AnnotationData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 public class ImportFactoryTest {
 
     private final ImportFactory importFactory = new ImportFactory();
 
     @Test
-    public void create_lombok_all_import_test() {
+    public void create_all_lombok_import_test() {
         //Given
-        String expectedLombokAllSyntax = "import lombok.*;\n";
+        String expectedImportSyntax = "import lombok.*;\n";
 
         //When
-        String actualLombokAllSyntax = this.importFactory.createLombokAllImport("\n").getFullSyntax();
+        Import _import = importFactory.createLombokAllImport("\n");
+        String actualImportSyntax = _import.getFullSyntax();
 
         //Then
-        Assertions.assertEquals(expectedLombokAllSyntax, actualLombokAllSyntax);
+        Assertions.assertEquals(expectedImportSyntax, actualImportSyntax);
     }
 
-    @Test
-    public void create_lombok_experimental_all_import_test() {
-        //Given
-        String expectedLombokExperimentalAllSyntax = "import lombok.experimental.*;\n";
-
+    @ParameterizedTest
+    @MethodSource("create_annotation_provider")
+    public void create_imports_based_on_annotation_test(AnnotationData annotationData, String expectedImportSyntax) {
         //When
-        String actualLombokExperimentalAllSyntax = this.importFactory.createLombokExperimentalAllImport("\n").getFullSyntax();
+        Import _import = importFactory.createImportForAnnotation(annotationData, "\n");
+        String actualImportSyntax = _import.getFullSyntax();
 
         //Then
-        Assertions.assertEquals(expectedLombokExperimentalAllSyntax, actualLombokExperimentalAllSyntax);
+        Assertions.assertEquals(expectedImportSyntax, actualImportSyntax);
     }
 
-    @Test
-    public void create_getter_import_test() {
-        //Given
-        String expectedGetterSyntax = "import lombok.Getter;\n";
-
-        //When
-        String actualGetterSyntax = this.importFactory.createGetterImport("\n").getFullSyntax();
-
-        //Then
-        Assertions.assertEquals(expectedGetterSyntax, actualGetterSyntax);
-    }
-
-    @Test
-    public void create_setter_import_test() {
-        //Given
-        String expectedSetterSyntax = "import lombok.Setter;\n";
-
-        //When
-        String actualSetterSyntax = this.importFactory.createSetterImport("\n").getFullSyntax();
-
-        //Then
-        Assertions.assertEquals(expectedSetterSyntax, actualSetterSyntax);
-    }
-
-    @Test
-    public void create_no_args_constructor_import_test() {
-        //Given
-        String expectedNoArgsConstructorSyntax = "import lombok.NoArgsConstructor;\n";
-
-        //When
-        String actualNoArgsConstructorSyntax = this.importFactory.createNoArgsConstructorImport("\n").getFullSyntax();
-
-        //Then
-        Assertions.assertEquals(expectedNoArgsConstructorSyntax, actualNoArgsConstructorSyntax);
-    }
-
-    @Test
-    public void create_all_args_constructor_import_test() {
-        //Given
-        String expectedAllArgsConstructorSyntax = "import lombok.AllArgsConstructor;\n";
-
-        //When
-        String actualAllArgsConstructorSyntax = this.importFactory.createAllArgsConstructorImport("\n").getFullSyntax();
-
-        //Then
-        Assertions.assertEquals(expectedAllArgsConstructorSyntax, actualAllArgsConstructorSyntax);
-    }
-
-    @Test
-    public void create_builder_import_test() {
-        //Given
-        String expectedBuilderSyntax = "import lombok.Builder;\n";
-
-        //When
-        String actualBuilderSyntax = this.importFactory.createBuilderImport("\n").getFullSyntax();
-
-        //Then
-        Assertions.assertEquals(expectedBuilderSyntax, actualBuilderSyntax);
-    }
-
-    @Test
-    public void create_super_builder_import_test() {
-        //Given
-        String expectedSuperBuilderSyntax = "import lombok.experimental.SuperBuilder;\n";
-
-        //When
-        String actualSuperBuilderSyntax = this.importFactory.createSuperBuilderImport("\n").getFullSyntax();
-
-        //Then
-        Assertions.assertEquals(expectedSuperBuilderSyntax, actualSuperBuilderSyntax);
-    }
-
-    @Test
-    public void create_to_string_builder_import_test() {
-        //Given
-        String expectedToStringSyntax = "import lombok.ToString;\n";
-
-        //When
-        String actualToStringSyntax = this.importFactory.createToStringImport("\n").getFullSyntax();
-
-        //Then
-        Assertions.assertEquals(expectedToStringSyntax, actualToStringSyntax);
+    private static Stream<Arguments> create_annotation_provider() {
+        return Stream.of(
+                Arguments.of(AnnotationData.GETTER, "import lombok.Getter;\n"),
+                Arguments.of(AnnotationData.SETTER, "import lombok.Setter;\n"),
+                Arguments.of(AnnotationData.NO_ARGS_CONSTRUCTOR, "import lombok.NoArgsConstructor;\n"),
+                Arguments.of(AnnotationData.ALL_ARGS_CONSTRUCTOR, "import lombok.AllArgsConstructor;\n"),
+                Arguments.of(AnnotationData.BUILDER, "import lombok.Builder;\n"),
+                Arguments.of(AnnotationData.SUPER_BUILDER, "import lombok.experimental.SuperBuilder;\n"),
+                Arguments.of(AnnotationData.TO_STRING, "import lombok.ToString;\n"),
+                Arguments.of(AnnotationData.EQUALS_AND_HASH_CODE, "import lombok.EqualsAndHashCode;\n")
+        );
     }
 }

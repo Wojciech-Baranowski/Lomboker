@@ -3,7 +3,7 @@ package com.simmondobber.lomboker.common;
 import lombok.Getter;
 
 @Getter
-public enum ClassTypeKeywords {
+public enum ClassTypeKeywordData {
 
     CLASS("class"),
     ENUM("enum"),
@@ -13,7 +13,7 @@ public enum ClassTypeKeywords {
 
     private final String keyword;
 
-    ClassTypeKeywords(String keyword) {
+    ClassTypeKeywordData(String keyword) {
         this.keyword = keyword;
     }
 }

@@ -1,22 +1,21 @@
 package com.simmondobber.lomboker.lombokize.annotationManager.annotationAdder;
 
 import com.simmondobber.ast.Ast;
-import com.simmondobber.ast.components.ComplexAstComponent;
 import com.simmondobber.ast.components.complexAstComponents.Annotation;
 import com.simmondobber.ast.components.complexAstComponents.Preamble;
-import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
+import com.simmondobber.lomboker.common.AnnotationData;
 
 import java.util.List;
 
 public class FieldAnnotationAdder extends AnnotationAdder {
 
-    public void addAnnotationsToFields(Ast ast, AnnotationsConfig annotationsConfig) {
-        this.astComponentFilter.extractFieldsFromGivenAstComponent((ComplexAstComponent) ast.getAstRoot())
-                .forEach(field -> addAnnotationsToFieldPreamble(field.getPreamble(), annotationsConfig));
+    public void addAnnotationsToFields(Ast ast, List<AnnotationData> annotationsData) {
+        this.astComponentFilter.extractFieldsFromGivenAstComponent(ast.getAstRoot())
+                .forEach(field -> addAnnotationsToFieldPreamble(field.getPreamble(), annotationsData));
     }
 
-    private void addAnnotationsToFieldPreamble(Preamble preamble, AnnotationsConfig annotationsConfig) {
-        List<Annotation> annotationsPreambleHasToContain = this.annotationFactory.createFieldLombokAnnotations(annotationsConfig, getPreambleFrontSeparatorFromLastNewline(preamble));
+    private void addAnnotationsToFieldPreamble(Preamble preamble, List<AnnotationData> annotationsData) {
+        List<Annotation> annotationsPreambleHasToContain = this.annotationFactory.createFieldLombokAnnotations(annotationsData, getPreambleFrontSeparatorFromLastNewline(preamble));
         addAnnotationsToPreamble(preamble, annotationsPreambleHasToContain);
     }
 }

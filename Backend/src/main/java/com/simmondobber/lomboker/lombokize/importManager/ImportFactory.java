@@ -2,39 +2,30 @@ package com.simmondobber.lomboker.lombokize.importManager;
 
 import com.simmondobber.ast.components.complexAstComponents.Import;
 import com.simmondobber.ast.parser.complexComponentParser.ImportParser;
-import com.simmondobber.lomboker.common.ImportKeywords;
-import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
+import com.simmondobber.lomboker.common.AnnotationData;
+import com.simmondobber.lomboker.common.ImportKeywordData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ImportFactory {
 
-    public List<Import> createImportsBasedOnConfig(AnnotationsConfig annotationsConfig, String separator) {
+    private static final List<AnnotationData> annotationsToIgnoreDuringStandardProcessing = List.of(AnnotationData.GETTER, AnnotationData.SETTER, AnnotationData.SUPER_BUILDER, AnnotationData.SUPER_BUILDER_TO_BUILDER);
+    private static final List<AnnotationData> annotationsToIgnoreDuringCounting = List.of(AnnotationData.SUPER_BUILDER, AnnotationData.SUPER_BUILDER_TO_BUILDER);
+
+    public List<Import> createImportsBasedOnAnnotationsData(List<AnnotationData> annotationsData, String separator) {
         List<Import> imports = new ArrayList<>();
-        if (areMoreThanFourAnnotations(annotationsConfig)) {
+        if (areMoreThanFourAnnotations(annotationsData)) {
             imports.add(createLombokAllImport(separator));
         } else {
-            imports.add(createGetterImport(separator));
-            imports.add(createSetterImport(separator));
-            if (annotationsConfig.isNoArgsConstructor()) {
-                imports.add(createNoArgsConstructorImport(separator));
-            }
-            if (annotationsConfig.isAllArgsConstructor()) {
-                imports.add(createAllArgsConstructorImport(separator));
-            }
-            if (annotationsConfig.isBuilder()) {
-                imports.add(createBuilderImport(separator));
-            }
-            if (annotationsConfig.isToString()) {
-                imports.add(createToStringImport(separator));
-            }
-            if (annotationsConfig.isEqualsAndHashCode()) {
-                imports.add(createEqualsAndHashCodeImport(separator));
-            }
+            imports.add(createImportForAnnotation(AnnotationData.GETTER, separator));
+            imports.add(createImportForAnnotation(AnnotationData.SETTER, separator));
+            annotationsData.stream()
+                    .filter(annotationData -> !annotationsToIgnoreDuringStandardProcessing.contains(annotationData))
+                    .forEach(annotation -> imports.add(createImportForAnnotation(annotation, separator)));
         }
-        if (annotationsConfig.isSuperBuilder()) {
-            imports.add(createSuperBuilderImport(separator));
+        if (annotationsData.contains(AnnotationData.SUPER_BUILDER) || annotationsData.contains(AnnotationData.SUPER_BUILDER_TO_BUILDER)) {
+            imports.add(createImportForAnnotation(AnnotationData.SUPER_BUILDER, separator));
         }
         imports.get(imports.size() - 1).getSemicolon().setBackSeparator("\n");
         addNewlineToTheLastImport(imports);
@@ -42,75 +33,19 @@ public class ImportFactory {
     }
 
     public Import createLombokAllImport(String separator) {
-        String lombokAllImportCode = "import " + ImportKeywords.LOMBOK_ALL.getPath() + ";" + separator;
+        String lombokAllImportCode = "import " + ImportKeywordData.LOMBOK_ALL.getPath() + ";" + separator;
         return new ImportParser(lombokAllImportCode).parse();
     }
 
-    public Import createLombokExperimentalAllImport(String separator) {
-        String lombokExperimentalAllImportCode = "import " + ImportKeywords.LOMBOK_EXPERIMENTAL_ALL.getPath() + ";" + separator;
-        return new ImportParser(lombokExperimentalAllImportCode).parse();
-    }
-
-    public Import createGetterImport(String separator) {
-        String getterImportCode = "import " + ImportKeywords.GETTER.getPath() + ";" + separator;
+    public Import createImportForAnnotation(AnnotationData annotationData, String separator) {
+        String getterImportCode = "import " + annotationData.getImportKeywordData().getPath() + ";" + separator;
         return new ImportParser(getterImportCode).parse();
     }
 
-    public Import createSetterImport(String separator) {
-        String setterImportCode = "import " + ImportKeywords.SETTER.getPath() + ";" + separator;
-        return new ImportParser(setterImportCode).parse();
-    }
-
-    public Import createNoArgsConstructorImport(String separator) {
-        String noArgsConstructorImportCode = "import " + ImportKeywords.NO_ARGS_CONSTRUCTOR.getPath() + ";" + separator;
-        return new ImportParser(noArgsConstructorImportCode).parse();
-    }
-
-    public Import createAllArgsConstructorImport(String separator) {
-        String allArgsConstructorImportCode = "import " + ImportKeywords.ALL_ARGS_CONSTRUCTOR.getPath() + ";" + separator;
-        return new ImportParser(allArgsConstructorImportCode).parse();
-    }
-
-    public Import createBuilderImport(String separator) {
-        String builderImportCode = "import " + ImportKeywords.BUILDER.getPath() + ";" + separator;
-        return new ImportParser(builderImportCode).parse();
-    }
-
-    public Import createSuperBuilderImport(String separator) {
-        String superBuilderImportCode = "import " + ImportKeywords.SUPER_BUILDER.getPath() + ";" + separator;
-        return new ImportParser(superBuilderImportCode).parse();
-    }
-
-    public Import createToStringImport(String separator) {
-        String toStringImportCode = "import " + ImportKeywords.TO_STRING.getPath() + ";" + separator;
-        return new ImportParser(toStringImportCode).parse();
-    }
-
-    public Import createEqualsAndHashCodeImport(String separator) {
-        String equalsAndHashcodeImportCode = "import " + ImportKeywords.EQUALS_AND_HASH_CODE.getPath() + ";" + separator;
-        return new ImportParser(equalsAndHashcodeImportCode).parse();
-    }
-
-    private boolean areMoreThanFourAnnotations(AnnotationsConfig annotationsConfig) {
-        int numberOfAnnotations = 0;
-        if (annotationsConfig.isGetter()) {
-            numberOfAnnotations++;
-        }
-        if (annotationsConfig.isSetter()) {
-            numberOfAnnotations++;
-        }
-        if (annotationsConfig.isNoArgsConstructor()) {
-            numberOfAnnotations++;
-        }
-        if (annotationsConfig.isAllArgsConstructor()) {
-            numberOfAnnotations++;
-        }
-        if (annotationsConfig.isBuilder()) {
-            numberOfAnnotations++;
-        }
-        if (annotationsConfig.isToString()) {
-            numberOfAnnotations++;
-        }
+    private boolean areMoreThanFourAnnotations(List<AnnotationData> annotationsData) {
+        int numberOfAnnotations = (int) annotationsData.stream()
+                .filter(annotation -> !annotationsToIgnoreDuringCounting.contains(annotation))
+                .count();
         return numberOfAnnotations > 4;
     }
 

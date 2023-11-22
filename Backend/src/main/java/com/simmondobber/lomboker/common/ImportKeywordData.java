@@ -5,10 +5,9 @@ import lombok.Getter;
 import java.util.Arrays;
 
 @Getter
-public enum ImportKeywords {
+public enum ImportKeywordData {
 
     LOMBOK_ALL("lombok.*"),
-    LOMBOK_EXPERIMENTAL_ALL("lombok.experimental.*"),
     GETTER("lombok.Getter"),
     SETTER("lombok.Setter"),
     NO_ARGS_CONSTRUCTOR("lombok.NoArgsConstructor"),
@@ -20,13 +19,13 @@ public enum ImportKeywords {
 
     private final String path;
 
-    ImportKeywords(String path) {
+    ImportKeywordData(String path) {
         this.path = path;
     }
 
     public static boolean contains(String importCandidate) {
-        return Arrays.stream(ImportKeywords.values())
-                .map(ImportKeywords::getPath)
+        return Arrays.stream(ImportKeywordData.values())
+                .map(ImportKeywordData::getPath)
                 .anyMatch(path -> path.equals(importCandidate));
     }
 }

@@ -1,26 +1,27 @@
 package com.simmondobber.lomboker.lombokize.annotationManager;
 
 import com.simmondobber.ast.Ast;
+import com.simmondobber.lomboker.common.AnnotationData;
 import com.simmondobber.lomboker.lombokize.annotationManager.annotationAdder.ClassAnnotationAdder;
-import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 public class ClassAnnotationAdderTest {
 
     @ParameterizedTest
     @MethodSource("add_annotations_to_classes_provider")
-    public void add_annotations_to_classes_test(String codeToExtend, AnnotationsConfig annotationsConfig, String codeAfterExtension) {
+    public void add_annotations_to_classes_test(String codeToExtend, List<AnnotationData> annotationsData, String codeAfterExtension) {
         //Given
         ClassAnnotationAdder classAnnotationAdder = new ClassAnnotationAdder();
 
         //When
         Ast ast = new Ast(codeToExtend);
-        classAnnotationAdder.addAnnotationsToClasses(ast, annotationsConfig);
+        classAnnotationAdder.addAnnotationsToClasses(ast, annotationsData);
 
         //Then
         Assertions.assertEquals(codeAfterExtension, ast.getCode());
@@ -39,7 +40,7 @@ public class ClassAnnotationAdderTest {
                             private int x;
                             private int y;
                         }
-                        """, new AnnotationsConfig(true, true, true, true, false, true, true, true, true, false), """
+                        """, List.of(AnnotationData.GETTER, AnnotationData.SETTER, AnnotationData.ALL_ARGS_CONSTRUCTOR, AnnotationData.SUPER_BUILDER_TO_BUILDER, AnnotationData.TO_STRING_CALL_SUPER), """
                         package com.simmondobber.lomboker.lombokize.annotationAdder;
                                                 
                         import lombok.*;
@@ -47,7 +48,6 @@ public class ClassAnnotationAdderTest {
                                                 
                         @Getter
                         @Setter
-                        @NoArgsConstructor
                         @AllArgsConstructor
                         @SuperBuilder(toBuilder = true)
                         @ToString(callSuper = true)
@@ -78,7 +78,7 @@ public class ClassAnnotationAdderTest {
                             private CoordinateX x;
                             private CoordinateY y;
                         }
-                        """, new AnnotationsConfig(true, true, false, false, false, false, false, false, false, false), """
+                        """, List.of(AnnotationData.GETTER, AnnotationData.SETTER), """
                         package com.simmondobber.lomboker.lombokize.annotationAdder;
                                                 
                         import lombok.*;
@@ -114,7 +114,7 @@ public class ClassAnnotationAdderTest {
                         public enum Point {
                             X, Y
                         }
-                        """, new AnnotationsConfig(true, true, true, true, true, false, false, true, false, false), """
+                        """, List.of(AnnotationData.GETTER, AnnotationData.SETTER, AnnotationData.NO_ARGS_CONSTRUCTOR, AnnotationData.ALL_ARGS_CONSTRUCTOR, AnnotationData.BUILDER, AnnotationData.TO_STRING), """
                         package com.simmondobber.lomboker.lombokize.importManager;
                                                 
                         import lombok.*;
@@ -135,7 +135,7 @@ public class ClassAnnotationAdderTest {
                             int getX();
                             int getY();
                         }
-                        """, new AnnotationsConfig(true, true, true, true, true, false, false, true, false, false), """
+                        """, List.of(AnnotationData.GETTER, AnnotationData.SETTER, AnnotationData.NO_ARGS_CONSTRUCTOR, AnnotationData.ALL_ARGS_CONSTRUCTOR, AnnotationData.BUILDER), """
                         package com.simmondobber.lomboker.lombokize.importManager;
                                                 
                         public interface Point {

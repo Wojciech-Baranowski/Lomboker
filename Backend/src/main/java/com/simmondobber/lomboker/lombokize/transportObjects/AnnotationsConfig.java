@@ -1,22 +1,24 @@
 package com.simmondobber.lomboker.lombokize.transportObjects;
 
+import com.simmondobber.lomboker.common.AnnotationData;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
 public class AnnotationsConfig {
 
-    private boolean getter;
-    private boolean setter;
-    private boolean noArgsConstructor;
-    private boolean allArgsConstructor;
-    private boolean builder;
-    private boolean superBuilder;
-    private boolean toBuilder;
-    private boolean toString;
-    private boolean callSuper;
-    private boolean equalsAndHashCode;
+    private List<AnnotationData> annotationsData;
+
+    public List<AnnotationData> parse() {
+        return this.annotationsData.stream()
+                .map(annotationTO -> AnnotationData.valueOf(annotationTO.name()))
+                .toList();
+    }
 }

@@ -1,9 +1,11 @@
 package com.simmondobber.lomboker.lombokize.annotationManager;
 
 import com.simmondobber.ast.Ast;
+import com.simmondobber.lomboker.common.AnnotationData;
 import com.simmondobber.lomboker.lombokize.annotationManager.annotationAdder.ClassAnnotationAdder;
 import com.simmondobber.lomboker.lombokize.annotationManager.annotationAdder.FieldAnnotationAdder;
-import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
+
+import java.util.List;
 
 public class AnnotationManager {
 
@@ -17,9 +19,9 @@ public class AnnotationManager {
         this.fieldAnnotationAdder = new FieldAnnotationAdder();
     }
 
-    public void cleanAndAddRequiredLombokAnnotations(Ast ast, AnnotationsConfig annotationsConfig) {
+    public void cleanAndAddRequiredLombokAnnotations(Ast ast, List<AnnotationData> annotationsData) {
         this.annotationCleaner.removeLombokAnnotations(ast);
-        this.classAnnotationAdder.addAnnotationsToClasses(ast, annotationsConfig);
-        this.fieldAnnotationAdder.addAnnotationsToFields(ast, annotationsConfig);
+        this.classAnnotationAdder.addAnnotationsToClasses(ast, annotationsData);
+        this.fieldAnnotationAdder.addAnnotationsToFields(ast, annotationsData);
     }
 }

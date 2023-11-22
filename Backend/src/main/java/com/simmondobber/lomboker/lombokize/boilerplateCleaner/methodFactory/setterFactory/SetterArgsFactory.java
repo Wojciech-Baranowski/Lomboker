@@ -1,6 +1,6 @@
 package com.simmondobber.lomboker.lombokize.boilerplateCleaner.methodFactory.setterFactory;
 
-import com.simmondobber.lomboker.common.Keywords;
+import com.simmondobber.lomboker.common.Keyword;
 import org.apache.commons.lang3.StringUtils;
 
 public class SetterArgsFactory {
@@ -22,7 +22,7 @@ public class SetterArgsFactory {
     }
 
     private String createIsPrefixBooleanSetterArgs() {
-        if (Keywords.contains(StringUtils.uncapitalize(this.fieldName.substring(2)))) {
+        if (Keyword.contains(StringUtils.uncapitalize(this.fieldName.substring(2)))) {
             return createIsPrefixKeywordBooleanSetterArgs();
         } else {
             return createStandardIsPrefixKeywordBooleanSetterArgs();

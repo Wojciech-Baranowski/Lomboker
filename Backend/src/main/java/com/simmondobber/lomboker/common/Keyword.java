@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.util.Arrays;
 
 @Getter
-public enum Keywords {
+public enum Keyword {
 
     ABSTRACT("abstract"),
     ASSERT("assert"),
@@ -61,13 +61,13 @@ public enum Keywords {
 
     private final String keyword;
 
-    Keywords(String keyword) {
+    Keyword(String keyword) {
         this.keyword = keyword;
     }
 
     public static boolean contains(String keywordCandidate) {
-        return Arrays.stream(Keywords.values())
-                .map(Keywords::getKeyword)
+        return Arrays.stream(Keyword.values())
+                .map(Keyword::getKeyword)
                 .anyMatch(keyword -> keyword.equals(keywordCandidate));
     }
 }

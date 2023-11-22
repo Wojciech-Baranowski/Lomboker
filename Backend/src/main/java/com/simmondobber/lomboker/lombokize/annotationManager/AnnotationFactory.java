@@ -2,155 +2,48 @@ package com.simmondobber.lomboker.lombokize.annotationManager;
 
 import com.simmondobber.ast.components.complexAstComponents.Annotation;
 import com.simmondobber.ast.parser.complexComponentParser.AnnotationParser;
-import com.simmondobber.lomboker.common.AnnotationKeywords;
-import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
+import com.simmondobber.lomboker.common.AnnotationData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AnnotationFactory {
 
+    public final List<AnnotationData> annotationsExcludedForEnum = List.of(AnnotationData.SETTER, AnnotationData.BUILDER, AnnotationData.BUILDER_TO_BUILDER, AnnotationData.SUPER_BUILDER, AnnotationData.SUPER_BUILDER_TO_BUILDER);
+
     public List<Annotation> createAllLombokAnnotations() {
-        List<Annotation> annotations = new ArrayList<>();
-        annotations.add(createGetterAnnotation(""));
-        annotations.add(createSetterAnnotation(""));
-        annotations.add(createNoArgsConstructorAnnotation(""));
-        annotations.add(createAllArgsConstructorAnnotation(""));
-        annotations.add(createBuilderAnnotation(""));
-        annotations.add(createSuperBuilderAnnotation(""));
-        annotations.add(createBuilderWithToBuilderAnnotation(""));
-        annotations.add(createSuperBuilderWithToBuilderAnnotation(""));
-        annotations.add(createToStringAnnotation(""));
-        annotations.add(createToStringWithCallSuperAnnotation(""));
-        annotations.add(createEqualsAndHashCodeAnnotation(""));
-        return annotations;
+        return Arrays.stream(AnnotationData.values())
+                .map(annotationData -> createAnnotation(annotationData, ""))
+                .toList();
     }
 
-    public List<Annotation> createClassLombokAnnotations(AnnotationsConfig annotationsConfig, String separator) {
+    public List<Annotation> createClassLombokAnnotations(List<AnnotationData> annotationsData, String separator) {
+        return annotationsData.stream()
+                .map(annotationData -> createAnnotation(annotationData, separator))
+                .toList();
+    }
+
+    public List<Annotation> createEnumLombokAnnotations(List<AnnotationData> annotationsData, String separator) {
+        return annotationsData.stream()
+                .filter(annotationData -> !annotationsExcludedForEnum.contains(annotationData))
+                .map(annotationData -> createAnnotation(annotationData, separator))
+                .toList();
+    }
+
+    public List<Annotation> createFieldLombokAnnotations(List<AnnotationData> annotationsData, String separator) {
         List<Annotation> annotations = new ArrayList<>();
-        if (annotationsConfig.isGetter()) {
-            annotations.add(createGetterAnnotation(separator));
+        if (!annotationsData.contains(AnnotationData.GETTER)) {
+            annotations.add(createAnnotation(AnnotationData.GETTER, separator));
         }
-        if (annotationsConfig.isSetter()) {
-            annotations.add(createSetterAnnotation(separator));
-        }
-        if (annotationsConfig.isNoArgsConstructor()) {
-            annotations.add(createNoArgsConstructorAnnotation(separator));
-        }
-        if (annotationsConfig.isAllArgsConstructor()) {
-            annotations.add(createAllArgsConstructorAnnotation(separator));
-        }
-        if (annotationsConfig.isBuilder()) {
-            if (annotationsConfig.isToBuilder()) {
-                annotations.add(createBuilderWithToBuilderAnnotation(separator));
-            } else {
-                annotations.add(createBuilderAnnotation(separator));
-            }
-        }
-        if (annotationsConfig.isSuperBuilder()) {
-            if (annotationsConfig.isToBuilder()) {
-                annotations.add(createSuperBuilderWithToBuilderAnnotation(separator));
-            } else {
-                annotations.add(createSuperBuilderAnnotation(separator));
-            }
-        }
-        if (annotationsConfig.isToString()) {
-            if (annotationsConfig.isCallSuper()) {
-                annotations.add(createToStringWithCallSuperAnnotation(separator));
-            } else {
-                annotations.add(createToStringAnnotation(separator));
-            }
-        }
-        if (annotationsConfig.isEqualsAndHashCode()) {
-            annotations.add(createEqualsAndHashCodeAnnotation(separator));
+        if (!annotationsData.contains(AnnotationData.SETTER)) {
+            annotations.add(createAnnotation(AnnotationData.SETTER, separator));
         }
         return annotations;
     }
 
-    public List<Annotation> createEnumLombokAnnotations(AnnotationsConfig annotationsConfig, String separator) {
-        List<Annotation> annotations = new ArrayList<>();
-        if (annotationsConfig.isGetter()) {
-            annotations.add(createGetterAnnotation(separator));
-        }
-        if (annotationsConfig.isNoArgsConstructor()) {
-            annotations.add(createNoArgsConstructorAnnotation(separator));
-        }
-        if (annotationsConfig.isAllArgsConstructor()) {
-            annotations.add(createAllArgsConstructorAnnotation(separator));
-        }
-        if (annotationsConfig.isToString()) {
-            if (annotationsConfig.isCallSuper()) {
-                annotations.add(createToStringWithCallSuperAnnotation(separator));
-            } else {
-                annotations.add(createToStringAnnotation(separator));
-            }
-        }
-        return annotations;
-    }
-
-    public List<Annotation> createFieldLombokAnnotations(AnnotationsConfig annotationsConfig, String separator) {
-        List<Annotation> annotations = new ArrayList<>();
-        if (!annotationsConfig.isGetter()) {
-            annotations.add(createGetterAnnotation(separator));
-        }
-        if (!annotationsConfig.isSetter()) {
-            annotations.add(createSetterAnnotation(separator));
-        }
-        return annotations;
-    }
-
-    public Annotation createGetterAnnotation(String separator) {
-        String getterAnnotationCode = AnnotationKeywords.GETTER.getKeyword() + separator;
-        return new AnnotationParser(getterAnnotationCode).parse();
-    }
-
-    public Annotation createSetterAnnotation(String separator) {
-        String setterAnnotationCode = AnnotationKeywords.SETTER.getKeyword() + separator;
-        return new AnnotationParser(setterAnnotationCode).parse();
-    }
-
-    public Annotation createNoArgsConstructorAnnotation(String separator) {
-        String noArgsConstructorAnnotationCode = AnnotationKeywords.NO_ARGS_CONSTRUCTOR.getKeyword() + separator;
-        return new AnnotationParser(noArgsConstructorAnnotationCode).parse();
-    }
-
-    public Annotation createAllArgsConstructorAnnotation(String separator) {
-        String allArgsConstructorAnnotationCode = AnnotationKeywords.ALL_ARGS_CONSTRUCTOR.getKeyword() + separator;
-        return new AnnotationParser(allArgsConstructorAnnotationCode).parse();
-    }
-
-    public Annotation createBuilderAnnotation(String separator) {
-        String builderAnnotationCode = AnnotationKeywords.BUILDER.getKeyword() + separator;
-        return new AnnotationParser(builderAnnotationCode).parse();
-    }
-
-    public Annotation createSuperBuilderAnnotation(String separator) {
-        String superBuilderAnnotationCode = AnnotationKeywords.SUPER_BUILDER.getKeyword() + separator;
-        return new AnnotationParser(superBuilderAnnotationCode).parse();
-    }
-
-    public Annotation createBuilderWithToBuilderAnnotation(String separator) {
-        String builderWithToBuilderAnnotationCode = AnnotationKeywords.BUILDER.getKeyword() + AnnotationKeywords.TO_BUILDER.getKeyword() + separator;
-        return new AnnotationParser(builderWithToBuilderAnnotationCode).parse();
-    }
-
-    public Annotation createSuperBuilderWithToBuilderAnnotation(String separator) {
-        String superBuilderWithToBuilderAnnotationCode = AnnotationKeywords.SUPER_BUILDER.getKeyword() + AnnotationKeywords.TO_BUILDER.getKeyword() + separator;
-        return new AnnotationParser(superBuilderWithToBuilderAnnotationCode).parse();
-    }
-
-    public Annotation createToStringAnnotation(String separator) {
-        String toStringAnnotationCode = AnnotationKeywords.TO_STRING.getKeyword() + separator;
-        return new AnnotationParser(toStringAnnotationCode).parse();
-    }
-
-    public Annotation createToStringWithCallSuperAnnotation(String separator) {
-        String toStringWithCallSuperAnnotationCode = AnnotationKeywords.TO_STRING.getKeyword() + AnnotationKeywords.CALL_SUPER.getKeyword() + separator;
-        return new AnnotationParser(toStringWithCallSuperAnnotationCode).parse();
-    }
-
-    public Annotation createEqualsAndHashCodeAnnotation(String separator) {
-        String equalsAndHashCodeAnnotation = AnnotationKeywords.EQUALS_AND_HASH_CODE.getKeyword() + separator;
-        return new AnnotationParser(equalsAndHashCodeAnnotation).parse();
+    public Annotation createAnnotation(AnnotationData annotationData, String separator) {
+        String annotationCode = annotationData.getKeyword() + separator;
+        return new AnnotationParser(annotationCode).parse();
     }
 }

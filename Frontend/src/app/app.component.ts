@@ -4,6 +4,7 @@ import {CodeToLombokizeTO} from "./transportObjects/CodeToLombokizeTO";
 import {LombokizedCodeTO} from "./transportObjects/LombokizedCodeTO";
 import {AnnotationsConfig} from "./transportObjects/AnnotationsConfig";
 import {CookieService} from "ngx-cookie-service";
+import {AnnotationDataTO} from "./transportObjects/AnnotationDataTO";
 
 @Component({
     selector: 'app-root',
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
     buttonBackground: string;
     codeToLombokize: string;
     lombokizedCode: string;
+
     getter: boolean;
     setter: boolean;
     noArgsConstructor: boolean;
@@ -41,6 +43,7 @@ export class AppComponent implements OnInit {
         this.buttonBackground = ""
         this.codeToLombokize = "";
         this.lombokizedCode = "";
+
         this.getter = false;
         this.setter = false;
         this.noArgsConstructor = false;
@@ -54,7 +57,8 @@ export class AppComponent implements OnInit {
     }
 
     lombokize(): void {
-        let annotationsConfig: AnnotationsConfig = new AnnotationsConfig(this.getter, this.setter, this.noArgsConstructor, this.allArgsConstructor, this.builder, this.superBuilder, this.toBuilder, this.toString, this.callSuper, this.equalsAndHashCode);
+        let annotationsData: AnnotationDataTO[] = this.parseCheckboxesToEnumValues();
+        let annotationsConfig: AnnotationsConfig = new AnnotationsConfig(annotationsData);
         let lombokizeTO: CodeToLombokizeTO = new CodeToLombokizeTO(this.codeToLombokize, annotationsConfig);
         this.http.post<LombokizedCodeTO>(this.LOMBOKIZE_URL, lombokizeTO).subscribe((lombokizedCodeTO: LombokizedCodeTO) => {
             this.lombokizedCode = lombokizedCodeTO.lombokizedCode;
@@ -65,6 +69,22 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.initializeBackground();
+    }
+
+    private parseCheckboxesToEnumValues(): AnnotationDataTO[] {
+        let annotationsData: AnnotationDataTO[] = [];
+        if (this.getter) annotationsData.push(AnnotationDataTO.GETTER);
+        if (this.setter) annotationsData.push(AnnotationDataTO.SETTER);
+        if (this.noArgsConstructor) annotationsData.push(AnnotationDataTO.NO_ARGS_CONSTRUCTOR);
+        if (this.allArgsConstructor) annotationsData.push(AnnotationDataTO.ALL_ARGS_CONSTRUCTOR);
+        if (this.builder && !this.toBuilder) annotationsData.push(AnnotationDataTO.BUILDER);
+        if (this.builder && this.toBuilder) annotationsData.push(AnnotationDataTO.BUILDER_TO_BUILDER);
+        if (this.superBuilder && !this.toBuilder) annotationsData.push(AnnotationDataTO.SUPER_BUILDER);
+        if (this.superBuilder && this.toBuilder) annotationsData.push(AnnotationDataTO.SUPER_BUILDER_TO_BUILDER);
+        if (this.toString && !this.callSuper) annotationsData.push(AnnotationDataTO.TO_STRING);
+        if (this.toString && this.callSuper) annotationsData.push(AnnotationDataTO.TO_STRING_CALL_SUPER);
+        if (this.equalsAndHashCode) annotationsData.push(AnnotationDataTO.EQUALS_AND_HASH_CODE);
+        return annotationsData;
     }
 
     private initializeBackground(): void {
