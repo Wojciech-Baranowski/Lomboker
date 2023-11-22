@@ -6,15 +6,16 @@ import com.simmondobber.ast.components.complexAstComponents.Preamble;
 import com.simmondobber.ast.components.simpleAstComponents.ClassTypeKeyword;
 import com.simmondobber.lomboker.common.AnnotationData;
 import com.simmondobber.lomboker.common.ClassTypeKeywordData;
+import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClassAnnotationAdder extends AnnotationAdder {
 
-    public void addAnnotationsToClasses(Ast ast, List<AnnotationData> annotationsData) {
-        this.astComponentFilter.extractClassesFromGivenAstComponent(ast.getAstRoot())
-                .forEach(clazz -> addAnnotationsToClassPreamble(clazz.getPreamble(), clazz.getClassTypeKeyword(), annotationsData));
+    public void addAnnotationsToClasses(Ast ast, AnnotationsConfig annotationsConfig) {
+        this.astComponentFilter.extractClassesFromGivenAstComponent(ast.getAstRoot(), annotationsConfig.isActOnInnerClasses())
+                .forEach(clazz -> addAnnotationsToClassPreamble(clazz.getPreamble(), clazz.getClassTypeKeyword(), annotationsConfig.getAnnotationsData()));
     }
 
     private void addAnnotationsToClassPreamble(Preamble preamble, ClassTypeKeyword classType, List<AnnotationData> annotationsData) {

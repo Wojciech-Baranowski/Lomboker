@@ -12,13 +12,13 @@ public class BoilerplateCleanerTest {
 
     @ParameterizedTest
     @MethodSource("remove_redundant_methods_provider")
-    public void remove_redundant_methods_test(String codeToClean, String correctlyCleanedCode) {
+    public void remove_redundant_methods_test(String codeToClean, boolean actOnInnerClasses, String correctlyCleanedCode) {
         //Given
         BoilerplateCleaner boilerplateCleaner = new BoilerplateCleaner();
 
         //When
         Ast ast = new Ast(codeToClean);
-        boilerplateCleaner.removeDefaultMethodsFromAst(ast);
+        boilerplateCleaner.removeDefaultMethodsFromAst(ast, actOnInnerClasses);
         String cleanedCode = ast.getCode();
 
         //Then
@@ -68,7 +68,7 @@ public class BoilerplateCleanerTest {
                                 this.y = y;
                             }
                         }
-                        """, """
+                        """, false, """
                         package com.simmondobber.Point;
                                                         
                         import java.util.ArrayList;
@@ -186,7 +186,7 @@ public class BoilerplateCleanerTest {
                                 this.points = points;
                             }
                         }
-                        """, """
+                        """, false, """
                         package com.simmondobber.lomboker.common;
                                                 
                         import java.util.List;
@@ -319,7 +319,7 @@ public class BoilerplateCleanerTest {
                                 isElse = anElse;
                             }
                         }
-                        """, """
+                        """, false, """
                         package com.simmondobber.lomboker.common;
                                                 
                         import java.util.ArrayList;
@@ -497,7 +497,7 @@ public class BoilerplateCleanerTest {
                                 }
                             }
                         }
-                        """, """
+                        """, true, """
                         package com.simmondobber.lomboker.lombokize.transportObjects;
                                                 
                         import com.simmondobber.lomboker.lombokize.enums.IndentType;
@@ -531,6 +531,200 @@ public class BoilerplateCleanerTest {
                                                 
                                 private String codeToLombokize2;
                                 private IndentType indentType2;
+                            }
+                        }
+                        """
+                ),
+                Arguments.of("""
+                        package com.simmondobber.lomboker.lombokize.transportObjects;
+                                                
+                        import com.simmondobber.lomboker.lombokize.enums.IndentType;
+                                                
+                        public class Class1 {
+                                                
+                            private String codeToLombokize;
+                            private IndentType indentType;
+                            private AnnotationsConfig annotationsConfig;
+                                                
+                            public String getCodeToLombokize() {
+                                return codeToLombokize;
+                            }
+                                                
+                            public void setCodeToLombokize(String codeToLombokize) {
+                                this.codeToLombokize = codeToLombokize;
+                            }
+                                                
+                            public IndentType getIndentType() {
+                                return indentType;
+                            }
+                                                
+                            public void setIndentType(IndentType indentType) {
+                                this.indentType = indentType;
+                            }
+                                                
+                            public AnnotationsConfig getAnnotationsConfig() {
+                                return annotationsConfig;
+                            }
+                                                
+                            public void setAnnotationsConfig(AnnotationsConfig annotationsConfig) {
+                                this.annotationsConfig = annotationsConfig;
+                            }
+                                                
+                            public class Class2 {
+                                                
+                                private String codeToLombokize2;
+                                private IndentType indentType2;
+                                                
+                                public class Class3 {
+                                                
+                                    private String codeToLombokize2;
+                                    private IndentType indentType2;
+                                                
+                                    public String getCodeToLombokize2() {
+                                        return codeToLombokize2;
+                                    }
+                                }
+                                                
+                                public String getCodeToLombokize2() {
+                                    return codeToLombokize2;
+                                }
+                                                
+                                public void setCodeToLombokize2(String codeToLombokize2) {
+                                    this.codeToLombokize2 = codeToLombokize2;
+                                }
+                                                
+                                public IndentType getIndentType2() {
+                                    return indentType2;
+                                }
+                                                
+                                public void setIndentType2(IndentType indentType2) {
+                                    this.indentType2 = indentType2;
+                                }
+                            }
+                        }
+                                                
+                        public class Class4 {
+                                                
+                            private String codeToLombokize;
+                            private IndentType indentType;
+                            private AnnotationsConfig annotationsConfig;
+                                                
+                            public String getCodeToLombokize() {
+                                return codeToLombokize;
+                            }
+                                                
+                            public void setCodeToLombokize(String codeToLombokize) {
+                                this.codeToLombokize = codeToLombokize;
+                            }
+                                                
+                            public IndentType getIndentType() {
+                                return indentType;
+                            }
+                                                
+                            public void setIndentType(IndentType indentType) {
+                                this.indentType = indentType;
+                            }
+                                                
+                            public AnnotationsConfig getAnnotationsConfig() {
+                                return annotationsConfig;
+                            }
+                                                
+                            public void setAnnotationsConfig(AnnotationsConfig annotationsConfig) {
+                                this.annotationsConfig = annotationsConfig;
+                            }
+                                                
+                            public class Class5 {
+                                                
+                                private String codeToLombokize2;
+                                private IndentType indentType2;
+                                                
+                                public String getCodeToLombokize2() {
+                                    return codeToLombokize2;
+                                }
+                                                
+                                public void setCodeToLombokize2(String codeToLombokize2) {
+                                    this.codeToLombokize2 = codeToLombokize2;
+                                }
+                                                
+                                public IndentType getIndentType2() {
+                                    return indentType2;
+                                }
+                                                
+                                public void setIndentType2(IndentType indentType2) {
+                                    this.indentType2 = indentType2;
+                                }
+                            }
+                        }
+                        """, false, """
+                        package com.simmondobber.lomboker.lombokize.transportObjects;
+                                                
+                        import com.simmondobber.lomboker.lombokize.enums.IndentType;
+                                                
+                        public class Class1 {
+                                                
+                            private String codeToLombokize;
+                            private IndentType indentType;
+                            private AnnotationsConfig annotationsConfig;
+                                                
+                            public class Class2 {
+                                                
+                                private String codeToLombokize2;
+                                private IndentType indentType2;
+                                                
+                                public class Class3 {
+                                                
+                                    private String codeToLombokize2;
+                                    private IndentType indentType2;
+                                                
+                                    public String getCodeToLombokize2() {
+                                        return codeToLombokize2;
+                                    }
+                                }
+                                                
+                                public String getCodeToLombokize2() {
+                                    return codeToLombokize2;
+                                }
+                                                
+                                public void setCodeToLombokize2(String codeToLombokize2) {
+                                    this.codeToLombokize2 = codeToLombokize2;
+                                }
+                                                
+                                public IndentType getIndentType2() {
+                                    return indentType2;
+                                }
+                                                
+                                public void setIndentType2(IndentType indentType2) {
+                                    this.indentType2 = indentType2;
+                                }
+                            }
+                        }
+                                                
+                        public class Class4 {
+                                                
+                            private String codeToLombokize;
+                            private IndentType indentType;
+                            private AnnotationsConfig annotationsConfig;
+                                                
+                            public class Class5 {
+                                                
+                                private String codeToLombokize2;
+                                private IndentType indentType2;
+                                                
+                                public String getCodeToLombokize2() {
+                                    return codeToLombokize2;
+                                }
+                                                
+                                public void setCodeToLombokize2(String codeToLombokize2) {
+                                    this.codeToLombokize2 = codeToLombokize2;
+                                }
+                                                
+                                public IndentType getIndentType2() {
+                                    return indentType2;
+                                }
+                                                
+                                public void setIndentType2(IndentType indentType2) {
+                                    this.indentType2 = indentType2;
+                                }
                             }
                         }
                         """

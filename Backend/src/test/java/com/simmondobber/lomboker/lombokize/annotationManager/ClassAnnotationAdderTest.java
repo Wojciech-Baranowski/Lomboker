@@ -3,6 +3,7 @@ package com.simmondobber.lomboker.lombokize.annotationManager;
 import com.simmondobber.ast.Ast;
 import com.simmondobber.lomboker.common.AnnotationData;
 import com.simmondobber.lomboker.lombokize.annotationManager.annotationAdder.ClassAnnotationAdder;
+import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -21,7 +22,7 @@ public class ClassAnnotationAdderTest {
 
         //When
         Ast ast = new Ast(codeToExtend);
-        classAnnotationAdder.addAnnotationsToClasses(ast, annotationsData);
+        classAnnotationAdder.addAnnotationsToClasses(ast, new AnnotationsConfig(annotationsData, true));
 
         //Then
         Assertions.assertEquals(codeAfterExtension, ast.getCode());

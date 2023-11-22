@@ -2,12 +2,13 @@ package com.simmondobber.lomboker.lombokize.annotationManager;
 
 import com.simmondobber.ast.Ast;
 import com.simmondobber.lomboker.lombokize.annotationManager.annotationAdder.FieldAnnotationAdder;
+import com.simmondobber.lomboker.lombokize.transportObjects.AnnotationsConfig;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Stream;
 
 public class FieldAnnotationAdderTest {
@@ -20,7 +21,7 @@ public class FieldAnnotationAdderTest {
 
         //When
         Ast ast = new Ast(codeToExtend);
-        fieldAnnotationAdder.addAnnotationsToFields(ast, List.of());
+        fieldAnnotationAdder.addAnnotationsToFields(ast, new AnnotationsConfig(new ArrayList<>(), true));
 
         //Then
         Assertions.assertEquals(codeAfterExtension, ast.getCode());

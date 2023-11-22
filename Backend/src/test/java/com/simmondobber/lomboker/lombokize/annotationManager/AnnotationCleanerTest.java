@@ -18,7 +18,7 @@ public class AnnotationCleanerTest {
 
         //When
         Ast ast = new Ast(codeToClean);
-        annotationCleaner.removeLombokAnnotations(ast);
+        annotationCleaner.removeLombokAnnotations(ast, true);
 
         //Then
         Assertions.assertEquals(codeAfterCleaning, ast.getCode());

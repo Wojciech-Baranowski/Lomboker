@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
     getter: boolean;
     setter: boolean;
     noArgsConstructor: boolean;
+    requiredArgsConstructor: boolean;
     allArgsConstructor: boolean;
     builder: boolean;
     superBuilder: boolean;
@@ -34,6 +35,7 @@ export class AppComponent implements OnInit {
     toString: boolean;
     callSuper: boolean;
     equalsAndHashCode: boolean;
+    actOnInnerClasses: boolean;
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
         this.backgroundName = "";
@@ -47,6 +49,7 @@ export class AppComponent implements OnInit {
         this.getter = false;
         this.setter = false;
         this.noArgsConstructor = false;
+        this.requiredArgsConstructor = false;
         this.allArgsConstructor = false;
         this.builder = false;
         this.superBuilder = false;
@@ -54,11 +57,12 @@ export class AppComponent implements OnInit {
         this.toString = false;
         this.callSuper = false;
         this.equalsAndHashCode = false;
+        this.actOnInnerClasses = false;
     }
 
     lombokize(): void {
         let annotationsData: AnnotationDataTO[] = this.parseCheckboxesToEnumValues();
-        let annotationsConfig: AnnotationsConfig = new AnnotationsConfig(annotationsData);
+        let annotationsConfig: AnnotationsConfig = new AnnotationsConfig(annotationsData, this.actOnInnerClasses);
         let lombokizeTO: CodeToLombokizeTO = new CodeToLombokizeTO(this.codeToLombokize, annotationsConfig);
         this.http.post<LombokizedCodeTO>(this.LOMBOKIZE_URL, lombokizeTO).subscribe((lombokizedCodeTO: LombokizedCodeTO) => {
             this.lombokizedCode = lombokizedCodeTO.lombokizedCode;
@@ -76,6 +80,7 @@ export class AppComponent implements OnInit {
         if (this.getter) annotationsData.push(AnnotationDataTO.GETTER);
         if (this.setter) annotationsData.push(AnnotationDataTO.SETTER);
         if (this.noArgsConstructor) annotationsData.push(AnnotationDataTO.NO_ARGS_CONSTRUCTOR);
+        if (this.requiredArgsConstructor) annotationsData.push(AnnotationDataTO.REQUIRED_ARGS_CONSTRUCTOR);
         if (this.allArgsConstructor) annotationsData.push(AnnotationDataTO.ALL_ARGS_CONSTRUCTOR);
         if (this.builder && !this.toBuilder) annotationsData.push(AnnotationDataTO.BUILDER);
         if (this.builder && this.toBuilder) annotationsData.push(AnnotationDataTO.BUILDER_TO_BUILDER);
@@ -94,6 +99,14 @@ export class AppComponent implements OnInit {
         } else {
             this.changeBackgroundToCreamCookie();
         }
+    }
+
+    excludeNoArgsConstructor(): void {
+        this.noArgsConstructor = false;
+    }
+
+    excludeRequiredArgsConstructor(): void {
+        this.requiredArgsConstructor = false;
     }
 
     excludeBuilder(): void {

@@ -11,6 +11,7 @@ public enum ImportKeywordData {
     GETTER("lombok.Getter"),
     SETTER("lombok.Setter"),
     NO_ARGS_CONSTRUCTOR("lombok.NoArgsConstructor"),
+    REQUIRED_ARGS_CONSTRUCTOR("lombok.RequiredArgsConstructor"),
     ALL_ARGS_CONSTRUCTOR("lombok.AllArgsConstructor"),
     BUILDER("lombok.Builder"),
     SUPER_BUILDER("lombok.experimental.SuperBuilder"),

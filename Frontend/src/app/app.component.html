@@ -9,7 +9,7 @@
         <div id="optionsBack" [ngClass]="bodyBackground">
             <h2>Options:</h2>
             <div id="options" [ngClass]="sectionBackground">
-                <h3>Global annotationData:</h3>
+                <h3>Global annotations:</h3>
                 <label class="button">
                     Getter
                     <input [(ngModel)]="getter" type="checkbox" name="getter"/>
@@ -20,11 +20,18 @@
                     <input [(ngModel)]="setter" type="checkbox" name="setter"/>
                     <span class="checkmark" [ngClass]="buttonBackground"></span>
                 </label>
-                <label class="button">
-                    NoArgsConstructor
-                    <input [(ngModel)]="noArgsConstructor" type="checkbox" name="noArgsConstructor"/>
-                    <span class="checkmark" [ngClass]="buttonBackground"></span>
-                </label>
+                <div style="display: flex">
+                    <label class="button">
+                        NoArgsConstructor
+                        <input [(ngModel)]="noArgsConstructor" (click)="excludeRequiredArgsConstructor()" type="checkbox" name="noArgsConstructor"/>
+                        <span class="checkmark" [ngClass]="buttonBackground"></span>
+                    </label>
+                    <label class="button">
+                        RequiredArgsConstructor
+                        <input [(ngModel)]="requiredArgsConstructor" (click)="excludeNoArgsConstructor()" type="checkbox" name="requiredArgsConstructor"/>
+                        <span class="checkmark" [ngClass]="buttonBackground"></span>
+                    </label>
+                </div>
                 <label class="button">
                     AllArgsConstructor
                     <input [(ngModel)]="allArgsConstructor" type="checkbox" name="allArgsConstructor"/>
@@ -66,6 +73,12 @@
                         <span class="checkmark" [ngClass]="buttonBackground"></span>
                     </label>
                 </div>
+                <h3>Other settings:</h3>
+                <label class="button">
+                    Act on inner classes
+                    <input [(ngModel)]="actOnInnerClasses" type="checkbox" name="actOnInnerClasses"/>
+                    <span class="checkmark" [ngClass]="buttonBackground"></span>
+                </label>
                 <input (click)="lombokize()" type="submit" value="LOMBOKIZE!" name="submit" class="submitButton" [ngClass]="buttonBackground">
             </div>
         </div>

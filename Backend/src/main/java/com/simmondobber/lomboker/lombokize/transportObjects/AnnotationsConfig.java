@@ -15,10 +15,5 @@ import java.util.List;
 public class AnnotationsConfig {
 
     private List<AnnotationData> annotationsData;
-
-    public List<AnnotationData> parse() {
-        return this.annotationsData.stream()
-                .map(annotationTO -> AnnotationData.valueOf(annotationTO.name()))
-                .toList();
-    }
+    private boolean actOnInnerClasses;
 }

@@ -5,6 +5,7 @@ import com.simmondobber.ast.components.complexAstComponents.Import;
 import com.simmondobber.lomboker.common.AnnotationData;
 import com.simmondobber.lomboker.common.ImportKeywordData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ImportManager {
@@ -17,7 +18,7 @@ public class ImportManager {
 
     public void addAndReorganizeLombokImports(Ast ast, List<AnnotationData> annotationsData) {
         List<Import> importsContainedByFile = ast.getAstRoot().getImports();
-        List<Import> lombokImportsBasedOnConfig = this.importFactory.createImportsBasedOnAnnotationsData(annotationsData, "\n");
+        List<Import> lombokImportsBasedOnConfig = this.importFactory.createImportsBasedOnAnnotationsData(new ArrayList<>(annotationsData), "\n");
         importsContainedByFile.removeIf(import_ -> ImportKeywordData.contains(import_.getPath().getSyntax()));
         importsContainedByFile.addAll(lombokImportsBasedOnConfig);
     }

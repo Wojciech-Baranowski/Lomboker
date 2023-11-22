@@ -17,18 +17,18 @@ public class AnnotationCleaner {
         this.annotationFactory = new AnnotationFactory();
     }
 
-    public void removeLombokAnnotations(Ast ast) {
-        removeLombokAnnotationsFromClasses(ast);
-        removeLombokAnnotationsFromFields(ast);
+    public void removeLombokAnnotations(Ast ast, boolean actOnInnerClasses) {
+        removeLombokAnnotationsFromClasses(ast, actOnInnerClasses);
+        removeLombokAnnotationsFromFields(ast, actOnInnerClasses);
     }
 
-    private void removeLombokAnnotationsFromClasses(Ast ast) {
-        this.astComponentFilter.extractClassesFromGivenAstComponent(ast.getAstRoot())
+    private void removeLombokAnnotationsFromClasses(Ast ast, boolean actOnInnerClasses) {
+        this.astComponentFilter.extractClassesFromGivenAstComponent(ast.getAstRoot(), actOnInnerClasses)
                 .forEach(clazz -> removeLombokAnnotationsFromPreamble(clazz.getPreamble()));
     }
 
-    private void removeLombokAnnotationsFromFields(Ast ast) {
-        this.astComponentFilter.extractFieldsFromGivenAstComponent(ast.getAstRoot())
+    private void removeLombokAnnotationsFromFields(Ast ast, boolean actOnInnerClasses) {
+        this.astComponentFilter.extractFieldsFromGivenAstComponent(ast.getAstRoot(), actOnInnerClasses)
                 .forEach(clazz -> removeLombokAnnotationsFromPreamble(clazz.getPreamble()));
     }
 

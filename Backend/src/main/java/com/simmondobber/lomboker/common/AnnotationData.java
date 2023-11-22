@@ -8,6 +8,7 @@ public enum AnnotationData {
     GETTER("@Getter", ImportKeywordData.GETTER),
     SETTER("@Setter", ImportKeywordData.SETTER),
     NO_ARGS_CONSTRUCTOR("@NoArgsConstructor", ImportKeywordData.NO_ARGS_CONSTRUCTOR),
+    REQUIRED_ARGS_CONSTRUCTOR("@RequiredArgsConstructor", ImportKeywordData.REQUIRED_ARGS_CONSTRUCTOR),
     ALL_ARGS_CONSTRUCTOR("@AllArgsConstructor", ImportKeywordData.ALL_ARGS_CONSTRUCTOR),
     BUILDER("@Builder", ImportKeywordData.BUILDER),
     BUILDER_TO_BUILDER("@Builder(toBuilder = true)", ImportKeywordData.BUILDER),
