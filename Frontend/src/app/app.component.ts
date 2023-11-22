@@ -36,6 +36,7 @@ export class AppComponent implements OnInit {
     callSuper: boolean;
     equalsAndHashCode: boolean;
     actOnInnerClasses: boolean;
+    ignoreMethodAnnotations: boolean;
 
     constructor(private http: HttpClient, private cookieService: CookieService) {
         this.backgroundName = "";
@@ -58,11 +59,12 @@ export class AppComponent implements OnInit {
         this.callSuper = false;
         this.equalsAndHashCode = false;
         this.actOnInnerClasses = false;
+        this.ignoreMethodAnnotations = false;
     }
 
     lombokize(): void {
         let annotationsData: AnnotationDataTO[] = this.parseCheckboxesToEnumValues();
-        let annotationsConfig: AnnotationsConfig = new AnnotationsConfig(annotationsData, this.actOnInnerClasses);
+        let annotationsConfig: AnnotationsConfig = new AnnotationsConfig(annotationsData, this.actOnInnerClasses, this.ignoreMethodAnnotations);
         let lombokizeTO: CodeToLombokizeTO = new CodeToLombokizeTO(this.codeToLombokize, annotationsConfig);
         this.http.post<LombokizedCodeTO>(this.LOMBOKIZE_URL, lombokizeTO).subscribe((lombokizedCodeTO: LombokizedCodeTO) => {
             this.lombokizedCode = lombokizedCodeTO.lombokizedCode;

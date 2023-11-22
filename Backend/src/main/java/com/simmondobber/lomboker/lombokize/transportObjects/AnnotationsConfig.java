@@ -16,4 +16,5 @@ public class AnnotationsConfig {
 
     private List<AnnotationData> annotationsData;
     private boolean actOnInnerClasses;
+    private boolean ignoreMethodAnnotations;
 }

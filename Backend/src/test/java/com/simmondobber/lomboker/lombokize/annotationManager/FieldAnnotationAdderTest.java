@@ -21,7 +21,7 @@ public class FieldAnnotationAdderTest {
 
         //When
         Ast ast = new Ast(codeToExtend);
-        fieldAnnotationAdder.addAnnotationsToFields(ast, new AnnotationsConfig(new ArrayList<>(), true));
+        fieldAnnotationAdder.addAnnotationsToFields(ast, new AnnotationsConfig(new ArrayList<>(), true, false));
 
         //Then
         Assertions.assertEquals(codeAfterExtension, ast.getCode());

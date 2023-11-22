@@ -22,7 +22,7 @@ public class ClassAnnotationAdderTest {
 
         //When
         Ast ast = new Ast(codeToExtend);
-        classAnnotationAdder.addAnnotationsToClasses(ast, new AnnotationsConfig(annotationsData, true));
+        classAnnotationAdder.addAnnotationsToClasses(ast, new AnnotationsConfig(annotationsData, true, false));
 
         //Then
         Assertions.assertEquals(codeAfterExtension, ast.getCode());

@@ -21,20 +21,20 @@ public class BoilerplateCleaner {
         this.methodFactory = new MethodFactory();
     }
 
-    public void removeDefaultMethodsFromAst(Ast ast, boolean actOnInnerClasses) {
+    public void removeDefaultMethodsFromAst(Ast ast, boolean actOnInnerClasses, boolean ignoreMethodAnnotations) {
         List<Class> astClasses = this.astComponentFilter.extractClassesFromGivenAstComponent(ast.getAstRoot(), actOnInnerClasses);
-        astClasses.forEach(clazz -> removeDefaultMethodsFromClass(clazz, actOnInnerClasses));
+        astClasses.forEach(clazz -> removeDefaultMethodsFromClass(clazz, actOnInnerClasses, ignoreMethodAnnotations));
     }
 
-    private void removeDefaultMethodsFromClass(Class clazz, boolean actOnInnerClasses) {
-        List<Method> methodsToRemove = getClassMethodsToRemove(clazz, actOnInnerClasses);
+    private void removeDefaultMethodsFromClass(Class clazz, boolean actOnInnerClasses, boolean ignoreMethodAnnotations) {
+        List<Method> methodsToRemove = getClassMethodsToRemove(clazz, actOnInnerClasses, ignoreMethodAnnotations);
         methodsToRemove.forEach(method -> removeMethod(method, clazz.getClassBody().getClassContent()));
     }
 
-    private List<Method> getClassMethodsToRemove(Class clazz, boolean actOnInnerClasses) {
+    private List<Method> getClassMethodsToRemove(Class clazz, boolean actOnInnerClasses, boolean ignoreMethodAnnotations) {
         List<Method> defaultMethodsBasedOnClassFields = getDefaultMethodsBasedOnClassFields(clazz, actOnInnerClasses);
         return this.astComponentFilter.extractMethodsFromGivenAstComponent(clazz, actOnInnerClasses).stream()
-                .filter(methodToCheck -> isMethodDefault(methodToCheck, defaultMethodsBasedOnClassFields))
+                .filter(methodToCheck -> isMethodDefault(methodToCheck, defaultMethodsBasedOnClassFields, ignoreMethodAnnotations))
                 .toList();
     }
 
@@ -43,7 +43,10 @@ public class BoilerplateCleaner {
         return this.methodFactory.generateMethodsBasedOnClassFields(classFields);
     }
 
-    private boolean isMethodDefault(Method methodToCheck, List<Method> defaultMethodsBasedOnFields) {
+    private boolean isMethodDefault(Method methodToCheck, List<Method> defaultMethodsBasedOnFields, boolean ignoreMethodAnnotations) {
+        if (ignoreMethodAnnotations) {
+            methodToCheck.getPreamble().getPreambleComponents().removeAll(methodToCheck.getPreamble().getAnnotations());
+        }
         return defaultMethodsBasedOnFields.stream()
                 .anyMatch(methodBasedOnField -> areMethodsSyntacticallyEqual(methodBasedOnField.getFullSyntax(), methodToCheck.getFullSyntax()));
     }

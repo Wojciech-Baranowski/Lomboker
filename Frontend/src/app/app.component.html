@@ -79,6 +79,11 @@
                     <input [(ngModel)]="actOnInnerClasses" type="checkbox" name="actOnInnerClasses"/>
                     <span class="checkmark" [ngClass]="buttonBackground"></span>
                 </label>
+                <label class="button">
+                    Ignore method annotations
+                    <input [(ngModel)]="ignoreMethodAnnotations" type="checkbox" name="ignoreMethodAnnotations"/>
+                    <span class="checkmark" [ngClass]="buttonBackground"></span>
+                </label>
                 <input (click)="lombokize()" type="submit" value="LOMBOKIZE!" name="submit" class="submitButton" [ngClass]="buttonBackground">
             </div>
         </div>

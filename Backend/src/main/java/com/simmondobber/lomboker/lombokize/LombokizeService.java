@@ -29,7 +29,7 @@ public class LombokizeService {
             AnnotationsConfig annotationsConfig = codeToLombokize.getAnnotationsConfig();
             this.importManager.addAndReorganizeLombokImports(ast, annotationsConfig.getAnnotationsData());
             this.annotationManager.cleanAndAddRequiredLombokAnnotations(ast, codeToLombokize.getAnnotationsConfig());
-            this.boilerplateCleaner.removeDefaultMethodsFromAst(ast, annotationsConfig.isActOnInnerClasses());
+            this.boilerplateCleaner.removeDefaultMethodsFromAst(ast, annotationsConfig.isActOnInnerClasses(), annotationsConfig.isIgnoreMethodAnnotations());
             return new LombokizedCodeTO(ast.getCode());
         } catch (Exception e) {
             throw new LombokizeException("Lombokize process has failed.", e);
